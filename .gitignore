@@ -1,0 +1,57 @@
+# Vivado
+*.jou
+*.log
+*.str
+.Xil/
+*.runs/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.gen/
+*.srcs/
+vivado*.backup*
+*.xpr
+*.bit
+*.bin
+*.mcs
+*.ltx
+*.dcp
+
+# OCaml / dune
+_build/
+_opam/
+*.install
+.merlin
+
+# KiCad
+*-backups/
+*.kicad_prl
+*.kicad_pcb-bak
+*.kicad_sch-bak
+_autosave-*
+fp-info-cache
+*.bak
+*~
+
+# CAD
+*.FCBak
+*.FCStd1
+*.stl.bak
+
+# Python
+__pycache__/
+.venv/
+*.pyc
+
+# Data (large; keep download scripts, not downloads)
+benchmarks/data/
+benchmarks/results/*.jsonl
+*.pod5
+*.fast5
+*.parquet
+docs/photos/*.heic
+
+# Third-party checkouts
+driver/third_party/
+bay/lib/
