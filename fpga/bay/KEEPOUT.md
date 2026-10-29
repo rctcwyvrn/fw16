@@ -119,3 +119,97 @@ Bottom-side parts are limited to passives of about 1 mm, and nothing goes behind
 - Nothing above accounts for tolerance, screw heads, foam or flex. Take margin off when allocating.
 - v2 must measure, with calipers on the real laptop: the front and middle ceilings, the floor gap, and the
   rear bracket height.
+
+## Proposed v1.1 (2026-10-29, Path 1 scripts; not yet accepted)
+
+Everything below is proposed, not adopted. It comes from `bay/tools/card_zones.py` (1 mm ray grid,
+`bay/cad/card-zones-{top,bottom}.dxf`), `fan_probe.py` and `step_section.py`. Where it disagrees with
+v1 above, v1 stands until the user decides.
+
+### Height zones (card_zones.py)
+
+`card-zones-top.dxf` has 106 rectangles and `card-zones-bottom.dxf` has 57, in the card/KiCad frame.
+Each label is the gap floored to a design class (0, 0.5, 1, 1.4, 1.85, 2.5, 3.5, 4.5, 5.5, 6.5, 7.8,
+8.65). Each cell takes the minimum of its 3 × 3 neighbourhood, so every rectangle is safe at any point
+inside it, and obstacles grow by 1 mm. Raw gaps, X −50…50, by Z row:
+
+| Z | Top (raw) | Bottom (raw) |
+| --- | --- | --- |
+| 4 – 11 | 13.55 to the chassis (0 at the standoffs and the rear-notch block) | 0.10 |
+| 11 – 14 | steps 13.0 → 10.25 → 8.45 | 0.10 |
+| 14 – 15 | 8.65 | 0.10 |
+| 15 – 18 | 8.65 | 0.6 – 1.4, mixed |
+| 18 – 23 | 8.65 (9.75 under grille holes) | **0.30** |
+| 23 – 44 | 8.65 (9.75 under grille holes) | 1.40 |
+| 44 – 47 | 7.8 | 1.40 |
+| 47 – 60 | 8.55 between ribs, 7.8 on ribs | 1.40 |
+| 60 – 68.5 | 7.8 / 8.55; 0 at standoffs, bosses and the interposer | 1.40, 0 at bosses |
+| 68.5 – 76.5 | 0 – 8.55 (interposer, tabs) | **0.30** (0 at the inserts) |
+
+Differences from v1:
+- **Rear strip, top.** v1's "rear bracket at Y −7.6, 1.85 mm above the board, X −58…62, Z 2–15" is a
+  solid in the *shell* file (`FW_UMA_MODULE_REF_0.stp`: X −57.65…58.0, Y −10.75…−7.65, Z 2.7…14.7)
+  that occupies the board's own volume (Y −10.65…−9.45). It is absent from `PCB_REF__0807`, where a
+  board is fitted. It looks like a no-card filler, not a part that is present with a card. In PCB_REF
+  the only things above the strip are the rear wall (Z < 1.6), the standoffs, and the block at
+  X 0–6.5, Z 1.6–8.2. Calipers decide; until then the DXF caps the strip at the 8.65 class.
+- **Bottom, rear.** Bottom parts are blocked from Z 4 to Z **23**, not Z 15: the gap is 0.10 to Z 15,
+  then 0.30 over Z 18–23.
+- **Bottom, front tabs.** Z 68.5–76.5 has 0.30 below the board across the tabs, not 1.4.
+- **Front ceiling.** Rib pitch is visible: 7.8 on the ribs, 8.55 between them, from Z 47. The DXF floors
+  all of it to 7.8.
+- **Middle ceiling.** v1's "9.75 mm in a grid of pockets" are holes in a perforated plate: Y −0.80…0,
+  Z 14–44, full width, holes about 0.9 mm on a 1.6 mm X pitch, staggered. A solid 1 mm deck lies above at
+  Y 0.30…1.30, so the holes are 1.1 mm dimples, not vents, in this model. Design to the plate (8.65).
+
+### Fans and airflow (fan_probe.py, step_section.py)
+
+- **Blower outlets face outboard.** Each fan is a scroll blower, impeller axis X ±102.88, Z 35.16. The
+  scroll gap grows from the tongue (1.5 mm at 204° on the left fan, 336° on the right), round through
+  the rear and the inboard side, to the outlet. The outlet opens between about 144° and 198° (left
+  fan, toward −X) and 342° to 36° (right fan, toward +X). That is a mouth on the housing's outboard
+  face at X ≈ ±133…142, Z ≈ 22…77, the same at every height from Y −10.9 to −5.5.
+- **Exhaust is through the laptop's side walls.** At X ≈ ±177, the full-laptop model has slotted side
+  vents at fan height (Y −11…−4.2): 5 mm slots at Z 21–25, 28–32, 34–38, 40–44, 52–56, 58–62, 65–69,
+  and 71–75, with 1–2 mm ribs between them and a 7 mm web at Z 45–51. Outlet rays pass through these
+  slots.
+- **The card bay is walled off from the fans up to fan-top height.** Rays from X ±50 outward hit a wall
+  at X ±65.9 (Y −10.9…−7.6) and ±67.2 (Y −5.5…−4.2) at every Z 15–75. The housing on its inboard side is
+  1.5–4.9 mm from the impeller tips, and closed.
+- **Above the fan tops it is open.** Between the fan top (Y −3.7) and the ceiling (Y −1.65 front,
+  −0.80 middle) nothing stands between the card bay and the side walls: rays at Y −3.5, −3.0 and −2.5
+  run from X ±50 to X ±175.8 at all Z ≥ 15. At Y −1.0 the front-zone ribs (X ±52…60) appear.
+- **Inlets: unresolved.** With the impeller excluded, rays from the fan mid-plane show a top cover at
+  Y −4.5 with openings near r ≈ 18 mm that reach the ceiling plate (runs of 6.8–8.3 mm). They also show
+  bottom openings at r ≤ 12 where nothing is hit below, even the laptop's bottom cover. Either the
+  model leaves out the bottom cover's grille, or there is a bottom intake. If the top-cover openings are
+  real, the fans draw a little air from the ~2.9 mm band above the card bay walls. That is the only
+  path for forced air over the card, and it runs along ±X.
+
+### Heatsink envelope over the FPGA (middle zone)
+
+Y stack, from KEEPOUT numbers and the PCB path's FFVB676 data:
+
+| Item | Y | Note |
+| --- | --- | --- |
+| Board top | −9.45 | |
+| Package lid top | −5.93 | 3.52 mm seated maximum (3.31 nominal) |
+| Thermal pad | 0.30 | heatsink base at **−5.63** |
+| Ceiling plate underside | −0.80 | middle zone, Z 14–44 |
+| Margin | 0.50 | heatsink top at **−1.30** |
+| **Heatsink height** | **4.33 mm** | base to top |
+
+- **Footprint, full height:** Z 15–43 (1 mm inside the 8.65 band), any X on the board (−57.45…61.20).
+  For a 27 × 27 mm package centred at Z 30, the package covers Z 16.5–43.5, which fits.
+- **Forward extension, reduced height:** Z 44–63 under the 7.8 ceiling: top ≤ −2.15, which leaves
+  3.48 mm. Stop by Z 63, because the interposer fields start at Z 65.3 and the mated connector top
+  (Y −5.0) sits above the heatsink base (−5.63).
+- **No rearward extension** until the rear-strip question is settled. If v1's 1.85 mm holds, nothing
+  taller than 1.85 mm goes behind Z 15.
+- **Clearance over parts:** a 3 mm inductor tops out at Y −6.45, 0.82 mm under the base, so the base can
+  overhang the middle-zone inductors. No standoffs fall within Z 15–43.
+- **Underneath:** any backplate or screw head sits in the 1.40 mm floor gap, only within Z 23–68.5. With
+  0.5 mm margin that is ≤ 0.9 mm. Nothing goes under the card behind Z 23.
+- **Fins:** if any forced air reaches the card, it moves along ±X toward the fans, over the bay walls,
+  between Y −3.7 and the ceiling. Fins should run along X. Only the top ~2.4 mm of a 4.33 mm fin
+  (Y −3.7…−1.30) sits in that band.
