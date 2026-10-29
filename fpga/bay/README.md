@@ -56,6 +56,43 @@ From the FW16 ("lotus") EC source, `FrameworkComputer/EmbeddedController` branch
 - **Open:** whether PEX_TX/RX are named from the host or the module side (README marks PEX_TX as a module
   *input*; community thread t/75786 unresolved). Settle it from the GPU board PDFs on ExpansionBay branch
   `gpu_design` before S3. Also open: BIOS bifurcation for the accessory vendor, and Dual M.2 power tree.
+  **PEX naming resolved 2026-10-29: host side** — see the next section.
+
+## PEX_TX/RX direction (research 2026-10-29)
+
+**PEX_TX/RX are named from the host side.** PEX_TXn is the laptop's transmitter and enters the card;
+PEX_RXn is the card's transmitter. Confidence: medium-high (three independent sources agree, none is a
+Framework schematic).
+
+For the fpga sheet and the Path 3 XDC:
+
+| Interposer net | Card end | AC coupling on the card |
+| --- | --- | --- |
+| PEX_TXn / PEX_TXn# | GTH **RX** (MGTHRXP/N) of lane n | none (the host's TX caps sit on the mainboard) |
+| PEX_RXn / PEX_RXn# | GTH **TX** (MGTHTXP/N) of lane n | series cap, placed near the interposer |
+
+Evidence:
+- **The GPU board PDFs cannot answer it.** `Graphics Module Reference Design/AMD_7700S_GPU_Board.pdf` and
+  `Nvidia_5070_GPU_Board.pdf` (6 sheets each) are mechanical drawings: part list, height zones, outline
+  dimensions, FXBeam pad detail (sheet 4, Detail A) and paint lines. They show no components and no net
+  names, so AC-cap placement is not visible. `Dual SSD Reference Design/fw_ssd_pcb_ref_design_0.pdf` is
+  also mechanical; its sheet 1 has only a pin table.
+- **Electrical README I/O column**, which is written from the module's side throughout (VSYS_GPU, Fan*_PWM,
+  PWR_EN = I; Fan*_SPEED, PWR_GOOD, PEX_CLK_REQ# = O): PEX_TX0–7 = **I** (signal pins 2–24),
+  PEX_RX0–7 = **O** (pins 26–48). The one row that breaks the convention is PEX_REFCLK = O (pins 50/51),
+  which must be a typo, since the clock comes from the host.
+- **XPModder's IO module** (`XPModder/Framework-ExpansionBay`, `ExpansionBay ExtensionCard
+  Module/Framework-ExpansionBay-IO-Module/usb3.kicad_sch`, re-cloned 2026-10-29 at HEAD): PEX_TX0± goes
+  straight to the uPD720201's **PERXP/PERXN** (receive, pins 10/11). PEX_RX0± goes through 100 nF caps
+  C1/C2 to its transmitter. Traced by wire connectivity, not by eye. Whether that board was built and
+  works is unknown.
+- **Community thread t/75786 "PCIe data lines":** Filip reports that the M.2 reference board wires interposer
+  RX to M.2 RX and TX to TX. M.2 pin names (PETp0 / PERp0) are host-side, so this matches. One community
+  report, not from Framework staff.
+
+Consequence: the card puts PCIe Gen4 AC caps (base spec 176–265 nF, i.e. 220 nF 0201/0402) on PEX_RX0–3
+only. XPModder's 100 nF suits its Gen2 controller, not Gen4. A TX/RX swap cannot be fixed by lane
+polarity inversion, so S3 must keep this mapping.
 
 ## Reference PCB vs README (2026-10-28)
 
@@ -73,3 +110,42 @@ the shell's fan connector: **AFC58-S04FIA-R1 × 2**, pin 1 +12V, 2 FANx_SPEED, 3
   view): Quad 226 rows F–L, Quad 225 rows M–W, Quad 224 rows Y–AF. UG575 Fig 3-83 (p. 311, top view).
 - **PCIe:** a single hard block, PCIE4C_X0Y0 (Gen4 up to x4). Lane-0 quad options per PG213 v1.3 Table 94:
   GTH_Quad_224 (x4), GTH_Quad_225 (x8). REFCLK goes to GTREFCLK0 of the lane-0 quad.
+
+## AFC58-S04FIA-R1 fan connector footprint (research 2026-10-29)
+
+Source: `PCB Reference Design/Datasheets/J200_J201-SP010036Q00_LTCX00A2N00_AFC58-S04FIA-R1.pdf` in the
+`gpu_design` clone. Page 1 is the Hefeng customer drawing for the whole AFC58-S series, 0.5 mm pitch,
+H = 1.5 mm, FPC/FFC "Easy-on" right-angle SMT, rev A 2020-09-11. Page 2 is the tape and reel. The drawing
+is generic, so the CKTS = 4 row of its table applies. Part-number decode (note 4): 04 circuits, **F = lower
+contacts**, I = gold flash, A = tape and reel, R1 = natural housing with a black latch. A web search on
+2026-10-29 found no LCSC/JLCPCB listing under this number (LCSC itself not queried directly), so plan for
+consignment or hand placement.
+
+**Verify before creating the footprint.** The page is a raster image. It could only be read at thumbnail
+resolution here, because `pdftoppm`, `pdftocairo` and `pdfimages` needed approval that a headless run
+could not get. Rows marked **(low-res)** need a check against a zoomed render.
+
+| Item | Value | Drawing callout |
+| --- | --- | --- |
+| Signal pads | 4, numbered 1–4 from the "Circuit 1" end | "Recommended P.C.B pattern layout" |
+| Pad pitch | 0.50 ± 0.05 mm | pattern, top-left |
+| Signal pad width | 0.30 ± 0.05 mm | pattern, top-right |
+| Signal pad length | 1.10 ± 0.05 mm **(low-res)** | pattern, right vertical callout |
+| Pad 1 → pad 4 centre span | DIM A = 1.50 ± 0.05 mm | pattern "DIM A", table CKTS 4 |
+| Fitting-nail pads | 2, mechanical (unnumbered, or "MP") | pattern, both ends |
+| Nail pad size | 1.00 ± 0.05 (X) × 1.60 ± 0.05 (Y) mm **(low-res)** | pattern, bottom-left |
+| Nail pad inner edge → pad 1 centre (X) | 1.60 ± 0.05 mm **(low-res)**. Working reading: nail centres at X = ±2.85 mm from the connector centre, giving an outer copper span of 6.70 mm. | pattern, bottom "1.60 ± 0.05". The "(0.15)" reference by Circuit 1 suggests the callout ends on the pad centreline. |
+| Signal row → nail pads (Y) | 2.00 ± 0.05 mm **(low-res)**. Unclear whether it runs from the signal-pad outer edge to the nail-pad near edge or to the far edge. | pattern, right "2.00 ± 0.05" |
+| Housing width | DIM A + 2.56 = 4.06 mm | top view |
+| Overall width incl. nails | DIM B = 6.40 ± 0.15 mm | front view, table |
+| DIM C / DIM D | 2.60 ± 0.05 / 5.40 ± 0.10 mm | front view, table |
+| Depth | 3.83 mm body; 4.45 mm overall; terminal tail 1.10 mm | side view |
+| Height | 1.50 mm (datum Z); latch opens to 105° | side view, section A-A |
+| Mating FPC | 0.30 ± 0.03 mm thick, 2.50 ± 0.08 mm wide (DIM A + 1.00), conductors 0.30 ± 0.03 mm on 0.50 pitch, ≥ 2.70 mm exposed, ≥ 3.5 mm stiffener | "Recommended FPC/FFC dimension" |
+
+Sanity check: the 6.70 mm working-reading pad span is wider than the 6.40 mm part (nail pads overhanging the
+nails), which is how such land patterns usually look. The other reading, 1.60 mm nail-centre to pad-1-centre,
+gives a 5.70 mm span, narrower than the part, which is unlikely. Pinout (FW_EXPANSION_BAY_PCB_0807.pdf
+sheet 2): 1 +12V_FAN, 2 FANx_SPEED, 3 FANx_PWM, 4 GND. **Open:** which side of the fan FPC has its contacts
+exposed. A lower-contact connector needs the conductors facing the board. The UMA fan spec PDFs have no
+extractable text.
