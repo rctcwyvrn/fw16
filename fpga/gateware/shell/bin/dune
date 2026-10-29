@@ -1,3 +1,3 @@
-(executable
- (name patterns)
+(executables
+ (names patterns emit_verilog)
  (libraries hardcaml omni_shell))
