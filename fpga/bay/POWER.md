@@ -183,7 +183,7 @@ datasheet. TPS74801 always needs a BIAS rail (from 5V0_MAIN).
 | --- | --- | --- | --- | --- | --- | --- |
 | TPS566238PRQFR | VQFN-HR-9 1.5 × 2 mm | 3–18 V | 6 A, 0.6 V ±1 % (25 °C) | FCCM (low ripple at light load), 600 kHz, **PG** | C2876603, 7 380, $0.41 @100 | Best-stocked part with PG. FCCM costs light-load efficiency, which is irrelevant when the rails are off in suspend. 1.5 × 2 HR package is assembly-only. |
 | TPS566231PRQFR | VQFN-HR-9 1.5 × 2 mm | 3–18 V | 6 A, 0.6 V ±1 % | Eco-mode (PFM at light load), PG | C3190178, 827 (non-P C2870135, 3 004), $0.51 @100 | Pin-compatible sibling. Eco-mode ripple at light load eats into the VCCINT window. Its only benefit is idle efficiency. |
-| TPS628690ARQYR (TPS62869) | VQFN-HR-9 1.5 × 2.5 mm | 2.4–5.5 V | 6 A, ±1 % | I²C VID, 2.4 MHz | C3190184, **20**; TPS6286900CRQYR C3190180, **15** | Smallest inductor; I²C allows margining. Stock is too thin to rely on. 5.5 V abs-max means it must sit behind 5V0_MAIN only. |
+| TPS628690ARQYR (TPS62869) | VQFN-HR-9 1.5 × 2.5 mm | 2.4–5.5 V | 4–6 A family (exact rating not confirmed), ±1 % | I²C VID, 2.4 MHz | C3190184, **20**; TPS6286900CRQYR C3190180, **15** | Smallest inductor; I²C allows margining. Stock is too thin to rely on. 5.5 V abs-max means it must sit behind 5V0_MAIN only. |
 
 Also considered, LCSC C number not found this session: TPS62867 (6 A, same family), TPS62827 (4 A, 1.5 × 1.5 mm),
 TPS568230 (8 A, 3 × 3 mm), MPS MP2147 (4 A).
