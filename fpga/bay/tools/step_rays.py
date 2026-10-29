@@ -1,7 +1,8 @@
 """Located solids from Framework's STEP files, and the first solid hit along a vertical ray.
 
 Every STEP is a Creo export in which every product is named `design`, so callers pick parts by geometry
-(bounding box), not by name. Rays run along ±Y only; that is all the keepout needs.
+(bounding box), not by name. hit() runs along ±Y only, which is all the keepout needs; cast() takes any
+direction, for the fan and duct probes.
 """
 from OCC.Core.Bnd import Bnd_Box
 from OCC.Core.BRepClass3d import BRepClass3d_SolidClassifier
@@ -15,9 +16,24 @@ from OCC.Core.gp import gp_Dir, gp_Lin, gp_Pnt
 
 
 class Solid:
-    def __init__(self, shape, lo, hi):
-        self.shape, self.lo, self.hi = shape, lo, hi
+    def __init__(self, shape, lo, hi, box=None):
+        self.shape, self.lo, self.hi, self.box = shape, lo, hi, box
         self._isect = None
+
+    def cast(self, p, d, far=400.0):
+        """Distance from point p along unit direction d (3-tuples) to this solid's first face, or None.
+        Unlike hit(), no inside test: a start inside the solid reports its exit face."""
+        lin = gp_Lin(gp_Pnt(*p), gp_Dir(*d))
+        if self.box is not None and self.box.IsOut(lin):
+            return None
+        if self._isect is None:
+            self._isect = IntCurvesFace_ShapeIntersector()
+            self._isect.Load(self.shape, 1e-4)
+        s = self._isect
+        s.Perform(lin, 0.0, far)
+        if not s.IsDone() or s.NbPnt() == 0:
+            return None
+        return min(s.WParameter(k) for k in range(1, s.NbPnt() + 1))
 
     def hit(self, x, y0, z, sign):
         """Distance from (x, y0, z) along ±Y to this solid's first face, or None.
@@ -53,7 +69,7 @@ def load_solids(path):
         brepbndlib.Add(shape, box)
         if not box.IsVoid():
             x0, y0, z0, x1, y1, z1 = box.Get()
-            out.append(Solid(shape, (x0, y0, z0), (x1, y1, z1)))
+            out.append(Solid(shape, (x0, y0, z0), (x1, y1, z1), box))
         exp.Next()
     return out
 
