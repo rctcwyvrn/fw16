@@ -5,6 +5,8 @@
 
 mod checker;
 mod counter;
+#[cfg(test)]
+mod golden;
 mod prbs31;
 
 pub use checker::Checker;
