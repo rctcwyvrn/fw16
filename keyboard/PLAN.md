@@ -1,0 +1,44 @@
+# Keyboard — split Choc halves
+
+From the design doc's "Split keyboard" section, starting from omnimeter's `plan/side-keyboard.md` sketch. The
+halves stow in the belly tray ([tray/PLAN.md](tray/PLAN.md)), so the deck's 3.7 mm limit never applies; the
+stock Framework keyboard stays in the deck. Wired first; wireless and the deck sled are later options.
+
+## Design targets (from the doc)
+
+- Two halves, each ≈ 130 × 100 mm with a thumb cluster, joined by their own cable.
+- Kailh Choc (PG1350) in hot-swap sockets.
+- QMK on an RP2040 per half for the wired version.
+- One short USB-C cable from one half to a laptop expansion card.
+- Fold-flat tenting legs: 10–12 mm thick per half stowed, 15–30° tent deployed.
+
+## Steps
+
+1. **Layout.** 5–6 columns × 3 rows + 3–4 thumb keys per half; print paper templates at 1:1 and pick column
+   stagger and thumb arc by typing on them. Check that two halves fit side by side in the tray's inner area
+   (≈ 356 × 270 mm outer, minus walls). Output: `keyboard/layout/` (KLE or Ergogen config) and the key count
+   for the parts order.
+2. **Electronics.** Fork HandyWork's RP2040/QMK KiCad templates (routed RP2040, Framework footprints) or use an
+   RP2040 module per half; pick the inter-half link (TRRS vs USB-C; USB-C if the cable must also nest in the
+   tray). Record the choice in `keyboard/docs/decisions/`.
+3. **PCB.** Per-key hot-swap sockets and diode matrix in KiCad (via Konnect), reversible if both halves share one
+   board. Keep the PCB + switch + keycap stack within the 10–12 mm stowed budget minus the case floor and leg.
+   Optional: footprint for a PMW3360 trackball on the right thumb.
+4. **Case and legs.** Fusion 360: low-profile printed case per half; fold-flat kickstand-style legs at 15°/30°
+   detents; magnets or pegs to locate each half in the tray insert. Iterate legs on the printer (doc risk:
+   tenting rigidity). Export STEP/STL to `keyboard/case/`. Hands the stowed envelope to tray step 3.
+5. **Firmware.** QMK keymap and split config in `keyboard/firmware/`; build via `nix develop` (add `qmk` and
+   the ARM toolchain to `flake.nix`).
+6. **Bring-up.** Matrix scan test per half, split handshake, USB-C to the laptop; layer and home-row-mod tuning.
+
+## Later options (not in the first build)
+
+- **Wireless:** nRF52840 + ZMK + a thin LiPo per half (the RP2040 is not low-power); a new PCB revision.
+- **Deck sled:** a thin input module with an edge USB-C port, so the cable plugs into the deck. It must fill
+  the deck slot and fit 3.7 mm (Input Module spec).
+
+## Acceptance
+
+- [ ] Both halves type over USB-C into the FW16 under NixOS.
+- [ ] Each half is ≤ 12 mm thick stowed; both fit the tray insert side by side.
+- [ ] Legs hold at 20° without wobble while typing.
