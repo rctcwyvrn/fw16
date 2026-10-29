@@ -4,8 +4,9 @@
 //!
 //! Single-threaded write-then-read, so a chunk must fit in the ring: a
 //! bigger write stalls (the ring backpressures H2C) with nothing draining
-//! it. The chunk is clamped to RING_DEPTH. Concurrent H2C/C2H threads are
-//! the real-card follow-up, once the vfio backend exists.
+//! it. The chunk is clamped to RING_DEPTH. Concurrent H2C/C2H threads (the
+//! `&self` transport allows them) are the real-card follow-up, once the
+//! XDMA engine exists.
 
 use std::time::{Duration, Instant};
 
@@ -18,12 +19,7 @@ use crate::args::Path;
 use crate::report::Report;
 use crate::sink_tally;
 
-pub fn run(
-    t: &mut dyn Transport,
-    pattern: Mode,
-    duration: Duration,
-    chunk: usize,
-) -> Result<Report> {
+pub fn run(t: &dyn Transport, pattern: Mode, duration: Duration, chunk: usize) -> Result<Report> {
     t.write32(OMNI_SRC_CTL, 0)?;
     t.write32(OMNI_SNK_CTL, 0)?;
     t.write32(OMNI_RING_CTL, OMNI_RING_CTL_LOOPBACK_MASK)?;

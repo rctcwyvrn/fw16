@@ -29,7 +29,7 @@ fn main() -> ExitCode {
 
 /// Runs every requested path; returns the total error count.
 fn run(a: &args::Args) -> omni::Result<u64> {
-    let mut t = omni::open(&a.uri)?;
+    let t = omni::open(&a.uri)?;
     let id = t.read32(omni::regs::OMNI_ID)?;
     if id != omni::regs::OMNI_ID_RESET {
         return Err(omni::Error::Device(format!(
@@ -44,15 +44,15 @@ fn run(a: &args::Args) -> omni::Result<u64> {
     let mut errors = 0;
     for path in &a.paths {
         let r = match path {
-            Path::C2h => c2h::run(&mut *t, a.pattern, a.duration, a.chunk)?,
-            Path::H2c => h2c::run(&mut *t, a.pattern, a.duration, a.chunk)?,
-            Path::Loop => ring_loop::run(&mut *t, a.pattern, a.duration, a.chunk)?,
+            Path::C2h => c2h::run(&*t, a.pattern, a.duration, a.chunk)?,
+            Path::H2c => h2c::run(&*t, a.pattern, a.duration, a.chunk)?,
+            Path::Loop => ring_loop::run(&*t, a.pattern, a.duration, a.chunk)?,
         };
         println!("{r}");
         errors += r.errors;
     }
     if a.irqs > 0 {
-        match irq_latency::run(&mut *t, a.irqs)? {
+        match irq_latency::run(&*t, a.irqs)? {
             Some(l) => println!("{l}"),
             None => println!("irq   no interrupt (map without the v0.2 IRQ block?)"),
         }

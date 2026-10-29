@@ -10,7 +10,7 @@ use crate::transport::Transport;
 
 const MAX_TRIES: usize = 8;
 
-pub fn read_u64(t: &mut dyn Transport, lo: u32, hi: u32) -> Result<u64> {
+pub fn read_u64(t: &dyn Transport, lo: u32, hi: u32) -> Result<u64> {
     let mut hi1 = t.read32(hi)?;
     for _ in 0..MAX_TRIES {
         let lo_v = t.read32(lo)?;

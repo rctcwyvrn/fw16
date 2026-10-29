@@ -11,12 +11,7 @@ use crate::DMA_TIMEOUT;
 use crate::args::Path;
 use crate::report::Report;
 
-pub fn run(
-    t: &mut dyn Transport,
-    pattern: Mode,
-    duration: Duration,
-    chunk: usize,
-) -> Result<Report> {
+pub fn run(t: &dyn Transport, pattern: Mode, duration: Duration, chunk: usize) -> Result<Report> {
     // Quiesce, then clear source and ring so the stream starts at beat 0.
     t.write32(OMNI_SRC_CTL, 0)?;
     t.write32(OMNI_RING_CTL, 0)?;

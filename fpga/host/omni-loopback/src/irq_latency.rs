@@ -13,7 +13,7 @@ const VECTOR: u32 = 0;
 const TIMEOUT: Duration = Duration::from_millis(100);
 
 /// `Ok(None)` if the first forced interrupt never arrives.
-pub fn run(t: &mut dyn Transport, n: u32) -> Result<Option<IrqLatency>> {
+pub fn run(t: &dyn Transport, n: u32) -> Result<Option<IrqLatency>> {
     t.write32(OMNI_IRQ_EN, 0)?;
     t.write32(OMNI_IRQ_PENDING, !0)?;
     t.write32(OMNI_IRQ_EN, OMNI_IRQ_EN_FORCE_MASK)?;

@@ -6,7 +6,7 @@ use omni::pattern::BEAT_BYTES;
 use omni::regs::*;
 use omni::{Result, Transport, counters};
 
-pub fn read(t: &mut dyn Transport, bytes_sent: u64, notes: &mut Vec<String>) -> Result<u64> {
+pub fn read(t: &dyn Transport, bytes_sent: u64, notes: &mut Vec<String>) -> Result<u64> {
     let errs = t.read32(OMNI_SNK_ERRS)?;
     let seen = counters::read_u64(t, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI)?;
     let sent = bytes_sent / BEAT_BYTES as u64;

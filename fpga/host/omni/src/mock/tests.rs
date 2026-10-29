@@ -12,13 +12,13 @@ use crate::regs::*;
 const T: Duration = Duration::from_millis(10);
 const BEAT: usize = crate::pattern::BEAT_BYTES;
 
-fn beats(m: &mut Mock, lo: u32, hi: u32) -> u64 {
+fn beats(m: &Mock, lo: u32, hi: u32) -> u64 {
     read_u64(m, lo, hi).unwrap()
 }
 
 #[test]
 fn identity_and_access_kinds() {
-    let mut m = Mock::new();
+    let m = Mock::new();
     assert_eq!(m.read32(OMNI_ID).unwrap(), 0x4F4D_4E49);
     assert_eq!(m.read32(OMNI_VERSION).unwrap(), OMNI_VERSION_RESET);
     // RW
@@ -42,7 +42,7 @@ fn identity_and_access_kinds() {
 #[test]
 fn c2h_delivers_the_source_pattern_through_the_ring() {
     for mode in [Mode::Counter, Mode::Prbs31] {
-        let mut m = Mock::new();
+        let m = Mock::new();
         m.write32(
             OMNI_SRC_CTL,
             OMNI_SRC_CTL_EN_MASK | mode.bit() << OMNI_SRC_CTL_MODE_SHIFT,
@@ -55,14 +55,14 @@ fn c2h_delivers_the_source_pattern_through_the_ring() {
         let mut c = Checker::new(mode);
         c.check(buf.words());
         assert_eq!(c.errors(), 0, "{mode:?}");
-        let src = beats(&mut m, OMNI_SRC_BEATS_LO, OMNI_SRC_BEATS_HI);
+        let src = beats(&m, OMNI_SRC_BEATS_LO, OMNI_SRC_BEATS_HI);
         assert_eq!(src, 4 * RING_DEPTH as u64, "delivered + ring refilled");
     }
 }
 
 #[test]
 fn c2h_with_source_off_times_out_with_progress() {
-    let mut m = Mock::new();
+    let m = Mock::new();
     m.write32(OMNI_SRC_CTL, OMNI_SRC_CTL_EN_MASK).unwrap();
     m.write32(OMNI_SRC_CTL, 0).unwrap();
     let mut buf = m.alloc((RING_DEPTH + 8) * BEAT).unwrap();
@@ -73,15 +73,15 @@ fn c2h_with_source_off_times_out_with_progress() {
 
 #[test]
 fn h2c_sink_counts_only_while_enabled() {
-    let mut m = Mock::new();
+    let m = Mock::new();
     let mut buf = m.alloc(64 * BEAT).unwrap();
     Generator::new(Mode::Prbs31).fill(buf.words_mut());
     m.dma_write(&buf, buf.len(), T).unwrap(); // sink off: accepted, not counted
-    assert_eq!(beats(&mut m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI), 0);
+    assert_eq!(beats(&m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI), 0);
     m.write32(OMNI_SNK_CTL, OMNI_SNK_CTL_EN_MASK | OMNI_SNK_CTL_MODE_MASK)
         .unwrap();
     m.dma_write(&buf, buf.len(), T).unwrap();
-    assert_eq!(beats(&mut m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI), 64);
+    assert_eq!(beats(&m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI), 64);
     assert_eq!(m.read32(OMNI_SNK_ERRS).unwrap(), 0);
     assert_eq!(
         m.read32(OMNI_RING_FILL).unwrap(),
@@ -92,7 +92,7 @@ fn h2c_sink_counts_only_while_enabled() {
 
 #[test]
 fn h2c_errors_set_status_and_clear() {
-    let mut m = Mock::new();
+    let m = Mock::new();
     m.write32(OMNI_SNK_CTL, OMNI_SNK_CTL_EN_MASK).unwrap();
     let mut buf = m.alloc(16 * BEAT).unwrap();
     Generator::new(Mode::Counter).fill(buf.words_mut());
@@ -102,12 +102,12 @@ fn h2c_errors_set_status_and_clear() {
     assert_ne!(m.read32(OMNI_STATUS).unwrap() & OMNI_STATUS_SNK_ERR_MASK, 0);
     m.write32(OMNI_SNK_CLEAR, 1).unwrap();
     assert_eq!(m.read32(OMNI_SNK_ERRS).unwrap(), 0);
-    assert_eq!(beats(&mut m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI), 0);
+    assert_eq!(beats(&m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI), 0);
 }
 
 #[test]
 fn loopback_returns_h2c_data_and_stalls_when_full() {
-    let mut m = Mock::new();
+    let m = Mock::new();
     m.write32(OMNI_SRC_CTL, OMNI_SRC_CTL_EN_MASK).unwrap(); // fills the ring...
     m.write32(OMNI_RING_CTL, OMNI_RING_CTL_LOOPBACK_MASK)
         .unwrap(); // ...then is held off
@@ -119,7 +119,7 @@ fn loopback_returns_h2c_data_and_stalls_when_full() {
     assert!(matches!(r, Err(Error::Timeout { done }) if done == RING_DEPTH * BEAT));
     // The stalled beat was not taken by the sink either.
     assert_eq!(
-        beats(&mut m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI),
+        beats(&m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI),
         RING_DEPTH as u64
     );
     let mut back = m.alloc(RING_DEPTH * BEAT).unwrap();
@@ -127,14 +127,14 @@ fn loopback_returns_h2c_data_and_stalls_when_full() {
     assert_eq!(back.words(), &out.words()[..back.words().len()]);
     // Only the fill from before LOOPBACK was set; none since.
     assert_eq!(
-        beats(&mut m, OMNI_SRC_BEATS_LO, OMNI_SRC_BEATS_HI),
+        beats(&m, OMNI_SRC_BEATS_LO, OMNI_SRC_BEATS_HI),
         RING_DEPTH as u64
     );
 }
 
 #[test]
 fn fault_injection_corrupts_c2h() {
-    let mut m = Mock::new().corrupt_c2h_every(100);
+    let m = Mock::new().corrupt_c2h_every(100);
     m.write32(OMNI_SRC_CTL, OMNI_SRC_CTL_EN_MASK).unwrap();
     let mut buf = m.alloc(1000 * BEAT).unwrap();
     m.dma_read(&mut buf, 1000 * BEAT, T).unwrap();
@@ -145,24 +145,28 @@ fn fault_injection_corrupts_c2h() {
 
 #[test]
 fn lo_read_latches_hi() {
-    let mut m = Mock::new();
-    m.shell.set_beat_counters(0x1_FFFF_FFFF, 0x2_0000_0005);
+    let m = Mock::new();
+    m.state()
+        .shell
+        .set_beat_counters(0x1_FFFF_FFFF, 0x2_0000_0005);
     assert_eq!(m.read32(OMNI_SRC_BEATS_LO).unwrap(), 0xFFFF_FFFF);
-    m.shell.set_beat_counters(0x2_0000_0000, 0x2_0000_0005); // carry after the LO read
+    m.state()
+        .shell
+        .set_beat_counters(0x2_0000_0000, 0x2_0000_0005); // carry after the LO read
     assert_eq!(
         m.read32(OMNI_SRC_BEATS_HI).unwrap(),
         1,
         "HI is the shadow from the LO read"
     );
     assert_eq!(
-        beats(&mut m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI),
+        beats(&m, OMNI_SNK_BEATS_LO, OMNI_SNK_BEATS_HI),
         0x2_0000_0005
     );
 }
 
 #[test]
 fn forced_irq_is_edge_triggered_and_rearms_on_clear() {
-    let mut m = Mock::new();
+    let m = Mock::new();
     m.write32(OMNI_IRQ_FORCE, 1).unwrap();
     assert!(
         m.wait_irq(0, T).is_err(),
@@ -182,8 +186,35 @@ fn forced_irq_is_edge_triggered_and_rearms_on_clear() {
 }
 
 #[test]
+fn one_handle_serves_h2c_and_c2h_threads() {
+    let m = Mock::new();
+    m.write32(OMNI_SNK_CTL, OMNI_SNK_CTL_EN_MASK).unwrap();
+    m.write32(OMNI_SRC_CTL, OMNI_SRC_CTL_EN_MASK).unwrap();
+    std::thread::scope(|s| {
+        s.spawn(|| {
+            let mut buf = m.alloc(64 * BEAT).unwrap();
+            Generator::new(Mode::Counter).fill(buf.words_mut());
+            for _ in 0..100 {
+                m.dma_write(&buf, buf.len(), T).unwrap();
+                m.write32(OMNI_SNK_CLEAR, 1).unwrap();
+            }
+        });
+        s.spawn(|| {
+            let mut buf = m.alloc(64 * BEAT).unwrap();
+            let mut c = Checker::new(Mode::Counter);
+            for _ in 0..100 {
+                m.dma_read(&mut buf, 64 * BEAT, T).unwrap();
+                c.check(buf.words());
+            }
+            assert_eq!(c.errors(), 0);
+        });
+    });
+    assert_eq!(m.read32(OMNI_SNK_ERRS).unwrap(), 0);
+}
+
+#[test]
 fn snk_err_interrupt_fires_once_per_error_run() {
-    let mut m = Mock::new();
+    let m = Mock::new();
     m.write32(OMNI_IRQ_EN, OMNI_IRQ_EN_SNK_ERR_MASK).unwrap();
     m.write32(OMNI_SNK_CTL, OMNI_SNK_CTL_EN_MASK).unwrap();
     let buf = m.alloc(8 * BEAT).unwrap(); // zeros: no beat matches the counter

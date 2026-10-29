@@ -11,12 +11,7 @@ use crate::args::Path;
 use crate::report::Report;
 use crate::sink_tally;
 
-pub fn run(
-    t: &mut dyn Transport,
-    pattern: Mode,
-    duration: Duration,
-    chunk: usize,
-) -> Result<Report> {
+pub fn run(t: &dyn Transport, pattern: Mode, duration: Duration, chunk: usize) -> Result<Report> {
     t.write32(OMNI_SNK_CTL, 0)?;
     t.write32(OMNI_RING_CTL, 0)?; // H2C to the sink only
     t.write32(OMNI_SNK_CLEAR, 1)?;
