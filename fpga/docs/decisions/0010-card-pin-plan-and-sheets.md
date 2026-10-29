@@ -23,10 +23,14 @@ Quad 225), plus the uncommitted pin plan (now `bay/card/fpga/pinplan.csv`).
 - **Fabric clock: a 100 MHz 3.3 V LVCMOS oscillator** on AC13 (HDGC pin), not STARTUPE3 CFGMCLK alone.
 - **GT bench clock on `MGTREFCLK1_225`: DNP footprint** (100 MHz LVDS osc + caps) for IBERT only.
 - **PPS on U.FL** (33 Ω series + ESD) and **2 LEDs** (heartbeat, PCIe link).
-- `MGTRREF_R`/`MGTAVTTRCAL_R`: 200 Ω 1 % calibration resistor (UG576).
+- `MGTRREF_R`/`MGTAVTTRCAL_R`: **100 Ω** 1 % calibration resistor, MGTAVTTRCAL tied to MGTAVTT (UG576 v1.7.1 Fig 5-1,
+  Table 5-9). *Amended 2026-10-29 (user, via [0011](0011-fpga-sheet-decoupling-and-tieoffs.md)): the carried-over
+  value was 200 Ω.*
 - The pin plan is **PCB-led and Vivado-checked**: `bay/card/fpga/pinplan.csv` is the single pin table; Vivado
   checks it against the synthesized top (I/O DRC + placement), and the XDC is generated from it (S3).
-  `pinplan.csv` is the omnimeter session's draft and has not been through that check yet.
+  The check (`bay/tools/pinplan_check.tcl`) **passed 2026-10-29** on fw16's own synth: Vivado placed the four
+  lanes on GTHE4_CHANNEL_X0Y4–X0Y7 (Quad 225) with REFCLK on V7 and PERST# on AF14. Placement only, not routed;
+  Vivado's vectorless power estimate warned that Vccint current exceeds the package limit (open item, see 0011).
 
 **AU15P symbol**: generated from Vivado's package-pin list (`get_package_pins` → CSV → Konnect `create_symbol`),
 not hand-built: 14 units (bank 0, GTH 224/225/226, HP 64/65/66, HD 84/85/86, power, GND ×2, NC), verified ball by

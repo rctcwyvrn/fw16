@@ -1,7 +1,7 @@
 # 0011 — fpga sheet: decoupling, unused banks/quads, housekeeping pins
 
 **Date:** 2026-10-29
-**Status:** proposed (awaiting the user; nothing is drawn yet). One open conflict with 0010: see "RCAL resistor".
+**Status:** accepted 2026-10-29 (user: "Approve, but more VCCINT caps"; RCAL → 100 Ω). Not drawn yet.
 
 ## Context
 
@@ -18,13 +18,13 @@ the banks and quads spin 1 leaves unused, and the configuration/SYSMON housekeep
 - UG571 v1.16 (2025-01-14), UG570 v1.20.1 (2025-03-04), UG580 v1.10.1 (2021-09-15), UG575 v1.22, DS931 v1.9
   (2026-05-19).
 
-## Proposed decisions
+## Decisions
 
 **Decoupling (UG583 v1.28 Table 154, XCAU15P-FFVB676 row)**
 
 | Rail (card net) | Table 154 | Proposed on the card |
 | --- | --- | --- |
-| VCCINT + VCCINT_IO + VCCBRAM (`+0V85_VCCINT`, one plane per DS931 Table 2 notes 3/7 and 0006's -2 grade) | VCCINT/VCCINT_IO: 330 + 100 + 47 + 10 µF; VCCBRAM/VCCINT_IO: 47 + 10 µF | 330 + 100 + 2× 47 + 2× 10 µF (**the sum of both columns — an estimate**; no source gives a merged-plane count) |
+| VCCINT + VCCINT_IO + VCCBRAM (`+0V85_VCCINT`, one plane per DS931 Table 2 notes 3/7 and 0006's -2 grade) | VCCINT/VCCINT_IO: 330 + 100 + 47 + 10 µF; VCCBRAM/VCCINT_IO: 47 + 10 µF | 330 + 100 + 2× 47 + 2× 10 µF (**the sum of both columns — an estimate**; no source gives a merged-plane count), **plus 8× 100 nF 0402 under/around the BGA** (user asked for margin beyond Table 154's 0× 1.0 µF; the count of 8 is Claude's call) |
 | VCCAUX + VCCAUX_IO (`+1V8`) | 47 + 10 µF | 47 + 10 µF |
 | VCCO bank 0 (`+1V8`) | 47 + 10 µF per bank | 10 µF; shares the VCCAUX 47 µF (Table 154 note: one 47 µF per 4 banks sharing a VCCO) |
 | VCCO HD 84 (`+3V3_IO`) | 47 + 10 µF | 47 + 10 µF |
@@ -57,12 +57,19 @@ the MGT LDOs); the counts above are at the FPGA.
 | VCCADC | `+1V8` through a ferrite bead, 470 nF + 100 nF (100 nF at the ball) | UG580 Fig 5-1 p.97 and notes, p.96 |
 | GNDADC | GND through a ferrite bead (on-chip sensors only) | UG580 Table 1-2, p.97 |
 
-## RCAL resistor: conflict with 0010 / `pinplan.csv`
+## RCAL resistor (corrects 0010)
 
-`pinplan.csv` (carried from omnimeter into 0010's pin plan) specifies **200 Ω 1 %** between MGTRREF_R (AD9) and
-MGTAVTTRCAL_R (AD8). UG576 Fig 5-1 p.320, p.321 and Table 5-9 p.339 specify **100 Ω 1 %**, with MGTAVTTRCAL tied
-to MGTAVTT, equal-length traces each < 0.5 Ω DC, and the RCAL quad powered. The AU15P's RCAL pins sit in quad 224
-(unused, but powered per the rule above). Not changed in either file until the user decides.
+`pinplan.csv` carried **200 Ω** from omnimeter. UG576 Fig 5-1 p.320, p.321 and Table 5-9 p.339 specify **100 Ω 1 %**
+between MGTRREF_R (AD9) and MGTAVTTRCAL_R (AD8), MGTAVTTRCAL tied to MGTAVTT, equal-length traces each < 0.5 Ω DC,
+and the RCAL quad powered. The AU15P's RCAL pins sit in quad 224 (unused, but powered per the rule above).
+**User chose 100 Ω (2026-10-29)**; `pinplan.csv` and 0010 are amended.
+
+## Open items
+
+- Vivado's vectorless power estimate after placement (pin-plan check, 2026-10-29) warned "Vccint supply current
+  exceeds the maximum limit of the selected package". It uses default toggle rates, not this design's; run
+  Power Design Manager / `report_power` with realistic activity before layout, and check the VCCINT ball count
+  against UG583's per-package current limit.
 
 ## Not resolved by the sources
 
