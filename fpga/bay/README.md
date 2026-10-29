@@ -150,7 +150,7 @@ sheet 2): 1 +12V_FAN, 2 FANx_SPEED, 3 FANx_PWM, 4 GND. **Open:** which side of t
 exposed. A lower-contact connector needs the conductors facing the board. The UMA fan spec PDFs have no
 extractable text.
 
-**Verified 2026-10-29 against a 300 dpi render, and built as `omnimeter:AFC58-S04FIA-R1`.** The low-res rows hold.
+**Verified 2026-10-29 against a 300 dpi render, and built as `fw16-fpga-module:AFC58-S04FIA-R1`.** The low-res rows hold.
 The 2.00 mm callout runs from the signal-pad edge nearest the nails to the far edge of the nail pad. The
 top view's 3.10 mm (terminal tip to the nail edge) equals 1.10 + 2.00, and the nail metal sits 1.93–3.10 mm behind
 the terminal tip. The pad-1 centre is 1.60 mm from the nail pad's inner edge.

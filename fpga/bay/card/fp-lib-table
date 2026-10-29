@@ -1,4 +1,4 @@
 (fp_lib_table
   (version 7)
 
-  (lib (name "omnimeter") (type "KiCad") (uri "${KIPRJMOD}/lib/omnimeter.pretty") (options "") (descr "")))
+  (lib (name "fw16-fpga-module") (type "KiCad") (uri "${KIPRJMOD}/lib/fw16-fpga-module.pretty") (options "") (descr "")))

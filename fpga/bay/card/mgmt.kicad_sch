@@ -1635,7 +1635,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "U1")
 					(unit 1)
@@ -1697,7 +1697,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "C2")
 					(unit 1)
@@ -1757,7 +1757,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "R3")
 					(unit 1)
@@ -1817,7 +1817,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "JP1")
 					(unit 1)
@@ -1877,7 +1877,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "R4")
 					(unit 1)
@@ -1946,7 +1946,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "R5")
 					(unit 1)
@@ -2016,7 +2016,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "#PWR01")
 					(unit 1)
@@ -2077,7 +2077,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "#PWR02")
 					(unit 1)
@@ -2138,7 +2138,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "#PWR03")
 					(unit 1)
@@ -2199,7 +2199,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "#PWR04")
 					(unit 1)
@@ -2259,7 +2259,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP1")
 					(unit 1)
@@ -2319,7 +2319,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP2")
 					(unit 1)
@@ -2379,7 +2379,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP3")
 					(unit 1)
@@ -2439,7 +2439,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP4")
 					(unit 1)
@@ -2499,7 +2499,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP5")
 					(unit 1)
@@ -2559,7 +2559,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP6")
 					(unit 1)
@@ -2619,7 +2619,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP7")
 					(unit 1)
@@ -2679,7 +2679,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP8")
 					(unit 1)
@@ -2739,7 +2739,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP9")
 					(unit 1)
@@ -2799,7 +2799,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP10")
 					(unit 1)
@@ -2859,7 +2859,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP11")
 					(unit 1)
@@ -2919,7 +2919,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP12")
 					(unit 1)
@@ -2979,7 +2979,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP13")
 					(unit 1)
@@ -3039,7 +3039,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP14")
 					(unit 1)
@@ -3099,7 +3099,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP15")
 					(unit 1)
@@ -3159,7 +3159,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP16")
 					(unit 1)
@@ -3219,7 +3219,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP17")
 					(unit 1)
@@ -3279,7 +3279,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP18")
 					(unit 1)
@@ -3339,7 +3339,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP19")
 					(unit 1)
@@ -3399,7 +3399,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP20")
 					(unit 1)
@@ -3459,7 +3459,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP21")
 					(unit 1)
@@ -3519,7 +3519,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP22")
 					(unit 1)
@@ -3579,7 +3579,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "TP23")
 					(unit 1)
@@ -3640,7 +3640,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/8a21ba0e-7a47-4b46-a7f2-ad4fc0a63301"
 					(reference "#PWR05")
 					(unit 1)

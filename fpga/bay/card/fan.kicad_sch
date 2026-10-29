@@ -678,7 +678,7 @@
 				)
 			)
 		)
-		(property "Footprint" "omnimeter:AFC58-S04FIA-R1"
+		(property "Footprint" "fw16-fpga-module:AFC58-S04FIA-R1"
 			(at 127 88.9 0)
 			(hide yes)
 			(effects
@@ -706,7 +706,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/77c85ed9-b6df-4ddd-ab26-1cbdf63af543"
 					(reference "J2")
 					(unit 1)
@@ -739,7 +739,7 @@
 				)
 			)
 		)
-		(property "Footprint" "omnimeter:AFC58-S04FIA-R1"
+		(property "Footprint" "fw16-fpga-module:AFC58-S04FIA-R1"
 			(at 127 139.7 0)
 			(hide yes)
 			(effects
@@ -767,7 +767,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/77c85ed9-b6df-4ddd-ab26-1cbdf63af543"
 					(reference "J3")
 					(unit 1)
@@ -829,7 +829,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/77c85ed9-b6df-4ddd-ab26-1cbdf63af543"
 					(reference "C1")
 					(unit 1)
@@ -890,7 +890,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/77c85ed9-b6df-4ddd-ab26-1cbdf63af543"
 					(reference "#PWR01")
 					(unit 1)
@@ -951,7 +951,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/77c85ed9-b6df-4ddd-ab26-1cbdf63af543"
 					(reference "#PWR02")
 					(unit 1)
@@ -1012,7 +1012,7 @@
 			)
 		)
 		(instances
-			(project "omnimeter-card"
+			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/77c85ed9-b6df-4ddd-ab26-1cbdf63af543"
 					(reference "#PWR03")
 					(unit 1)
