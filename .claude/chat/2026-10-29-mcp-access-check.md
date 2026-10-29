@@ -58,3 +58,9 @@
 **Did:**
 - Ported fpga/bay/tools/au15p_pins.tcl + au15p_symbol.py; ran Windows Vivado 2025.2 batch from WSL (build dir C:\Users\17786\fw16-fpga-build\pins): 676 balls, CSV byte-identical to omnimeter's.
 - Konnect create_symbol fw16-fpga-module:XCAU15P-FFVB676 (14 units); script check 676/676 ball→name match.
+
+## 20:18 pin-plan check + decision 0011 draft
+**User:** go ahead
+**Did:**
+- Ported fpga/bay/tools/pinplan_check.tcl; started fw16 Vivado project + synth (still running); research subagent gathered UG583/576/571/570/580 citations.
+- Drafted docs/decisions/0011 (status proposed): decoupling, unused banks/quads, housekeeping pins. Found RCAL conflict: pinplan.csv 200 Ω vs UG576 100 Ω — not changed, asking.
