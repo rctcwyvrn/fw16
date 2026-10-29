@@ -64,3 +64,7 @@
 **Did:**
 - Ported fpga/bay/tools/pinplan_check.tcl; started fw16 Vivado project + synth (still running); research subagent gathered UG583/576/571/570/580 citations.
 - Drafted docs/decisions/0011 (status proposed): decoupling, unused banks/quads, housekeeping pins. Found RCAL conflict: pinplan.csv 200 Ω vs UG576 100 Ω — not changed, asking.
+**Asked:** (1) RCAL value — 100 Ω per UG576 / keep 200 Ω / check more → **100 Ω per UG576**. (2) Approve 0011 — as drafted / approve but more VCCINT caps / review first → **Approve, but more VCCINT caps**.
+**Did:**
+- Pin-plan check PASS on fw16 synth (after loading the OOC XDMA dcp into its cell): lanes on GTHE4_CHANNEL_X0Y4–7 (Quad 225); Vivado power-estimate warning on Vccint recorded as open item.
+- pinplan.csv + 0010 amended to 100 Ω RCAL; 0011 accepted with 8× 100 nF 0402 extra on VCCINT (count is my call).
