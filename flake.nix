@@ -1,7 +1,7 @@
 # The dev environment for the whole repo — the single source of truth for
 # every tool: KiCad (the card), FreeCAD (bay keepout and the card envelope),
-# poppler (reading Framework's PDF drawings), Python (bay/tools checks), and
-# OxCaml + Hardcaml (gateware). Enter with `nix develop`; `shell.nix` is a
+# poppler (reading Framework's PDF drawings), Python (fpga/bay/tools checks),
+# and OxCaml + Hardcaml (fpga/gateware). Enter with `nix develop`; `shell.nix` is a
 # shim onto this flake so `nix-shell` keeps working.
 #
 # Hardcaml is not in nixpkgs; it comes from oxcaml-nix, which packages the
@@ -15,7 +15,7 @@
 # Konnect (the KiCad MCP server) is not provided here; it runs from
 # ~/bin/konnect and drives the kicad-cli from this same pin.
 {
-  description = "Omnimeter dev environment";
+  description = "fw16 dev environment (FPGA bay module, split keyboard)";
 
   nixConfig = {
     extra-substituters = [ "https://hexadecimaldinosaur.cachix.org" ];

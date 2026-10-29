@@ -44,14 +44,6 @@ __pycache__/
 .venv/
 *.pyc
 
-# Data (large; keep download scripts, not downloads)
-benchmarks/data/
-benchmarks/results/*.jsonl
-*.pod5
-*.fast5
-*.parquet
-docs/photos/*.heic
-
 # Third-party checkouts
-driver/third_party/
-bay/lib/
+fpga/driver/third_party/
+fpga/bay/lib/

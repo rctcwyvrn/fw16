@@ -3,7 +3,7 @@
 # flake output and never drifts from the shell. Build:
 #   nix build -f host/vm -o host/target/vm/result
 let
-  lock = builtins.fromJSON (builtins.readFile ../../flake.lock);
+  lock = builtins.fromJSON (builtins.readFile ../../../flake.lock);
   nixpkgs = builtins.fetchTree lock.nodes.nixpkgs.locked;
   nixos = import "${nixpkgs}/nixos" {
     system = "x86_64-linux";
