@@ -1,10 +1,10 @@
 (* Source -> ring -> C2H with a stalling consumer, and H2C -> checker with an
-   injected bit error: the two paths omni-loopback exercises. The waveform of
+   injected bit error: the two paths fw16-fpga-loopback exercises. The waveform of
    the first beats is part of the expected output. *)
 
 open Hardcaml
 open Hardcaml_waveterm
-open Omni_shell
+open Fw16_fpga_shell
 module R = Regmap.Map_v0
 
 let reset sim =

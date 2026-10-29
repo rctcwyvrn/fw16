@@ -3,7 +3,7 @@
    m_axis_c2h_tvalid), with no ppx_hardcaml "$" mangling. *)
 
 open Hardcaml
-open Omni_shell
+open Fw16_fpga_shell
 
 let%expect_test "shell_top port names" =
   print_endline (String.concat " " (Shell_top.I.Names_and_widths.port_names));
@@ -17,7 +17,7 @@ let%expect_test "shell_top port names" =
 let%expect_test "unflattened scope: source, sink, ring and irq are sub-modules" =
   let module C = Circuit.With_interface (Shell_top.I) (Shell_top.O) in
   let scope = Scope.create ~flatten_design:false () in
-  let top = C.create_exn ~name:"omni_shell" (Shell_top.Bram.create scope) in
+  let top = C.create_exn ~name:"fw16_fpga_shell" (Shell_top.Bram.create scope) in
   let subs = Circuit_database.get_circuits (Scope.circuit_database scope) in
   print_endline
     (String.concat " " (List.sort compare (List.map Circuit.name subs)));
@@ -28,7 +28,7 @@ let%expect_test "unflattened scope: source, sink, ring and irq are sub-modules" 
   Printf.printf "ports with $: %d\n"
     (List.length (List.concat_map mangled (top :: subs)));
   [%expect {|
-    omni_irq omni_ring omni_sink omni_source
+    fw16_fpga_irq fw16_fpga_ring fw16_fpga_sink fw16_fpga_source
     ports with $: 0
     |}]
 ;;

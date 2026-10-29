@@ -1,6 +1,6 @@
 (library
- (name omni_sim_tests)
- (libraries hardcaml hardcaml_waveterm omni_shell regmap)
+ (name fw16_fpga_sim_tests)
+ (libraries hardcaml hardcaml_waveterm fw16_fpga_shell regmap)
  ; ppx_expect 0.18-preview joins -source-tree-root with the test file's
  ; basename only, so dune's default (the workspace root) misses files in
  ; subdirectories. The runner's cwd already holds the sources; last flag wins.

@@ -1,7 +1,7 @@
-; The shell as Verilog for the Vivado flow: dune build gateware/vivado/omni_shell.v
+; The shell as Verilog for the Vivado flow: dune build gateware/vivado/fw16_fpga_shell.v
 ; lands it in _build/default/gateware/vivado/, where run.sh picks it up.
 
 (rule
  (with-stdout-to
-  omni_shell.v
+  fw16_fpga_shell.v
   (run %{exe:../shell/bin/emit_verilog.exe})))

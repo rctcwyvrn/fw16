@@ -1,4 +1,4 @@
-# A throwaway NixOS guest for testing omni's vfio layer (Path 4 step 4)
+# A throwaway NixOS guest for testing fw16-fpga's vfio layer (Path 4 step 4)
 # without the card: q35 + an emulated Intel IOMMU (vIOMMU) + QEMU's `edu`
 # DMA device, bound to vfio-pci at boot. On boot, a oneshot runs
 # /tmp/shared/edu_check (copied in by run-edu-check.sh), writes the log
@@ -8,7 +8,7 @@
   imports = [ (modulesPath + "/virtualisation/qemu-vm.nix") ];
 
   system.stateVersion = "26.05";
-  networking.hostName = "omni-edu";
+  networking.hostName = "fw16-fpga-edu";
 
   virtualisation = {
     graphics = false;
@@ -22,7 +22,7 @@
       # intremap=on: vfio refuses groups behind an IOMMU without interrupt
       # remapping (unless allow_unsafe_interrupts).
       "-device intel-iommu,intremap=on"
-      # edu: MSI (not MSI-X), 28-bit DMA mask by default — omni's IOVA
+      # edu: MSI (not MSI-X), 28-bit DMA mask by default — fw16-fpga's IOVA
       # window starts at 1 MiB, so small buffers stay under it.
       "-device edu"
     ];

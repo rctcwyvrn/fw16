@@ -52,5 +52,5 @@ let create (_ : Scope.t) (i : _ I.t) : _ O.t =
 
 let hierarchical scope i =
   let module H = Hierarchy.In_scope (I) (O) in
-  H.hierarchical ~scope ~name:"omni_sink" create i
+  H.hierarchical ~scope ~name:"fw16_fpga_sink" create i
 ;;

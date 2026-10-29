@@ -62,5 +62,5 @@ proc xdma_set {ip config} {
 create_ip -name xdma -vendor xilinx.com -library ip -version 4.2 -module_name xdma_0
 set xdma_ip [get_ips xdma_0]
 xdma_set $xdma_ip $xdma_config
-report_property -file [file join $omni_reports xdma_0.properties.txt] $xdma_ip
+report_property -file [file join $fw16_fpga_reports xdma_0.properties.txt] $xdma_ip
 generate_target all [get_files xdma_0.xci]

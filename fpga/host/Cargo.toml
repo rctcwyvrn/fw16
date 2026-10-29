@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["omni", "omni-loopback"]
+members = ["fw16-fpga", "fw16-fpga-loopback"]
 
 [workspace.package]
 version = "0.1.0"

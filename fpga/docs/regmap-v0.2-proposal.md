@@ -9,7 +9,7 @@ as written here.
 
 ## 1. Interrupt block — new, `IRQ` at 0x5000
 
-v0 has no interrupt registers, but Path 4 has `wait_irq` and `omni-loopback` reports interrupt latency.
+v0 has no interrupt registers, but Path 4 has `wait_irq` and `fw16-fpga-loopback` reports interrupt latency.
 
 | Offset | Name | Access | Description |
 | --- | --- | --- | --- |
@@ -46,4 +46,4 @@ the descriptions change; the offsets stay. Until then software uses hi–lo–hi
 
 Software's reading of `RING_CTL.LOOPBACK = 1`: H2C beats are teed to the sink (which checks them) and into
 the ring; C2H drains the ring; the source is idle. With `LOOPBACK = 0`: source → ring → C2H, and H2C goes
-only to the sink. `omni-loopback`'s three modes (c2h, h2c, loop) are built on this reading.
+only to the sink. `fw16-fpga-loopback`'s three modes (c2h, h2c, loop) are built on this reading.

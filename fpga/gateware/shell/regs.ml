@@ -1,5 +1,5 @@
 (* AXI-Lite register file generated from a register map (gateware/regmap), so
-   the map that produced host/include/omni_regs.h is the one decoded here.
+   the map that produced host/include/fw16_fpga_regs.h is the one decoded here.
 
    One transaction at a time: a write is accepted when address and data are
    both valid, a read when no read response is pending. Unmapped reads return

@@ -2,7 +2,7 @@
    reset values, writes to RO registers dropped, no aliasing between blocks. *)
 
 open Hardcaml
-open Omni_shell
+open Fw16_fpga_shell
 
 let%expect_test "regs: id, version, scratch, reset values" =
   let module Sim = Cyclesim.With_interface (Shell_top.I) (Shell_top.O) in

@@ -1,0 +1,9 @@
+[package]
+name = "fw16-fpga-loopback"
+description = "Stream test patterns over the fw16-fpga card's C2H/H2C/ring-loopback paths; report GB/s, errors, IRQ latency"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+fw16-fpga = { path = "../fw16-fpga" }

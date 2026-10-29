@@ -3,7 +3,7 @@
    (Through the shell a 64-bit counter would need 2^32 beats to show it.) *)
 
 open Hardcaml
-open Omni_shell
+open Fw16_fpga_shell
 module Reg = Regmap.Reg
 
 module I = struct

@@ -371,6 +371,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "fw16-fpga"
+version = "0.1.0"
+dependencies = [
+ "bindgen",
+ "libc",
+ "vfio-bindings",
+ "vfio-ioctls",
+ "vmm-sys-util",
+ "zbus",
+]
+
+[[package]]
+name = "fw16-fpga-loopback"
+version = "0.1.0"
+dependencies = [
+ "fw16-fpga",
+]
+
+[[package]]
 name = "getrandom"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -492,25 +511,6 @@ checksum = "d273983c5a657a70a3e8f2a01329822f3b8c8172b73826411a55751e404a0a4a"
 dependencies = [
  "memchr",
  "minimal-lexical",
-]
-
-[[package]]
-name = "omni"
-version = "0.1.0"
-dependencies = [
- "bindgen",
- "libc",
- "vfio-bindings",
- "vfio-ioctls",
- "vmm-sys-util",
- "zbus",
-]
-
-[[package]]
-name = "omni-loopback"
-version = "0.1.0"
-dependencies = [
- "omni",
 ]
 
 [[package]]

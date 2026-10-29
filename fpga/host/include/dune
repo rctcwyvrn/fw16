@@ -1,28 +1,28 @@
-; omni_regs.h is generated from gateware/regmap and committed so the C build
+; fw16_fpga_regs.h is generated from gateware/regmap and committed so the C build
 ; needs no OCaml. `dune build @regmap` fails when the copy is stale;
 ; `dune build @regmap --auto-promote` refreshes it.
 (rule
- (targets omni_regs.h.gen)
+ (targets fw16_fpga_regs.h.gen)
  (action
-  (with-stdout-to omni_regs.h.gen (run %{exe:../../gateware/regmap/bin/gen.exe} c))))
+  (with-stdout-to fw16_fpga_regs.h.gen (run %{exe:../../gateware/regmap/bin/gen.exe} c))))
 
 (rule
  (alias regmap)
- (action (diff omni_regs.h omni_regs.h.gen)))
+ (action (diff fw16_fpga_regs.h fw16_fpga_regs.h.gen)))
 
-; omni_patterns.txt: the first 64 beats of both test patterns, printed from the
-; RTL's own Pattern module, for host/omni's pattern tests. Stale-checked under
+; fw16_fpga_patterns.txt: the first 64 beats of both test patterns, printed from the
+; RTL's own Pattern module, for host/fw16-fpga's pattern tests. Stale-checked under
 ; both @regmap and plain `dune runtest`, so a pattern.ml change can't slip by.
 (rule
- (targets omni_patterns.txt.gen)
+ (targets fw16_fpga_patterns.txt.gen)
  (action
-  (with-stdout-to omni_patterns.txt.gen
+  (with-stdout-to fw16_fpga_patterns.txt.gen
    (run %{exe:../../gateware/shell/bin/patterns.exe} 64))))
 
 (rule
  (alias regmap)
- (action (diff omni_patterns.txt omni_patterns.txt.gen)))
+ (action (diff fw16_fpga_patterns.txt fw16_fpga_patterns.txt.gen)))
 
 (rule
  (alias runtest)
- (action (diff omni_patterns.txt omni_patterns.txt.gen)))
+ (action (diff fw16_fpga_patterns.txt fw16_fpga_patterns.txt.gen)))

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run omni's vfio layer against QEMU's edu device in a NixOS VM with a
+# Run fw16-fpga's vfio layer against QEMU's edu device in a NixOS VM with a
 # vIOMMU (Path 4 step 4). Run from the dev shell (`nix develop`):
 #
 #   bash host/vm/run-edu-check.sh [--suspend]
@@ -14,7 +14,7 @@ set -euo pipefail
 here=$(cd "$(dirname "$0")" && pwd)
 host=$(dirname "$here")
 work="$host/target/vm"
-timeout_s=${OMNI_VM_TIMEOUT:-1200}
+timeout_s=${FW16_FPGA_VM_TIMEOUT:-1200}
 
 mkdir -p "$work/shared" "$work/tmp"
 rm -f "$work/shared/edu-check.log"

@@ -10,7 +10,7 @@
 # there is no opam switch.
 #
 # Vivado is not provided by nix: it is the user's install under
-# $OMNI_VIVADO (default ~/vivado/2025.2), put on PATH by the shellHook.
+# $FW16_FPGA_VIVADO (default ~/vivado/2025.2), put on PATH by the shellHook.
 #
 # Konnect (the KiCad MCP server) is not provided here; it runs from
 # ~/bin/konnect and drives the kicad-cli from this same pin.
@@ -63,7 +63,7 @@
           # Plain python3 from the main pin. Its pythonocc segfaults on the
           # PCB_REF STEP — run bay/tools scripts with bay-python instead.
           (python3.withPackages (ps: [ ps.pythonocc-core ps.ezdxf ]))
-          # host/ — the omni crate; crates themselves come from Cargo.lock
+          # host/ — the fw16-fpga crate; crates themselves come from Cargo.lock
           rustc
           cargo
           clippy
@@ -97,13 +97,13 @@
         KICAD10_SYMBOL_DIR = "${pkgs.kicad.libraries.symbols}/share/kicad/symbols";
         KICAD10_FOOTPRINT_DIR = "${pkgs.kicad.libraries.footprints}/share/kicad/footprints";
         KICAD10_3DMODEL_DIR = "${pkgs.kicad.libraries.packages3d}/share/kicad/3dmodels";
-        # host/: bindgen (omni's build.rs) loads libclang through this.
+        # host/: bindgen (fw16-fpga's build.rs) loads libclang through this.
         LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
 
         shellHook = ''
-          export OMNI_VIVADO="''${OMNI_VIVADO:-$HOME/vivado/2025.2}"
-          if [ -x "$OMNI_VIVADO/Vivado/bin/vivado" ]; then
-            export PATH="$PATH:$OMNI_VIVADO/Vivado/bin"
+          export FW16_FPGA_VIVADO="''${FW16_FPGA_VIVADO:-$HOME/vivado/2025.2}"
+          if [ -x "$FW16_FPGA_VIVADO/Vivado/bin/vivado" ]; then
+            export PATH="$PATH:$FW16_FPGA_VIVADO/Vivado/bin"
           fi
         '';
       };

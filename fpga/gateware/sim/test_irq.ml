@@ -3,7 +3,7 @@
    twice, RW1C clears and re-arms, and SNK_ERR fires once per error run. *)
 
 open Hardcaml
-open Omni_shell
+open Fw16_fpga_shell
 
 let create () =
   let module Sim = Cyclesim.With_interface (Shell_top.I) (Shell_top.O) in

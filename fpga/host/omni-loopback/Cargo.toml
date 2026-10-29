@@ -1,9 +1,0 @@
-[package]
-name = "omni-loopback"
-description = "Stream test patterns over the omnimeter card's C2H/H2C/ring-loopback paths; report GB/s, errors, IRQ latency"
-version.workspace = true
-edition.workspace = true
-publish.workspace = true
-
-[dependencies]
-omni = { path = "../omni" }

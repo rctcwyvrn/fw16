@@ -3,7 +3,7 @@
    [write_on]/[read_on] take the raw AXI-Lite refs of any other circuit. *)
 
 open Hardcaml
-open Omni_shell
+open Fw16_fpga_shell
 
 type sim = (Bits.t ref Shell_top.I.t, Bits.t ref Shell_top.O.t) Cyclesim.t
 type port = Bits.t ref Axi_lite.M2s.t * Bits.t ref Axi_lite.S2m.t

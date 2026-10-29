@@ -1,9 +1,9 @@
 (* patterns N — print the first N beats of the counter and PRBS-31 patterns
    from the same Pattern.Make the RTL is built from, as a golden file for the
-   host's pattern ports (host/include/omni_patterns.txt). *)
+   host's pattern ports (host/include/fw16_fpga_patterns.txt). *)
 
 open Hardcaml
-open Omni_shell
+open Fw16_fpga_shell
 module P = Pattern.Make (Bits)
 
 let words beat =

@@ -101,6 +101,6 @@ module Make (M : Mem_port.S) = struct
 
   let hierarchical scope i =
     let module H = Hierarchy.In_scope (I) (O) in
-    H.hierarchical ~scope ~name:"omni_ring" create i
+    H.hierarchical ~scope ~name:"fw16_fpga_ring" create i
   ;;
 end

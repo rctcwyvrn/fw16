@@ -1,5 +1,5 @@
 (library
- (name omni_shell)
+ (name fw16_fpga_shell)
  (libraries hardcaml regmap)
  (preprocess
   (pps ppx_hardcaml)))

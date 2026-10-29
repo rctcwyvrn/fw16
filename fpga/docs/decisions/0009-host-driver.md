@@ -23,11 +23,11 @@ In the pinned nixpkgs (`58deea65`) rustc/cargo are 1.99 and both NixOS kernels (
 
 ## Decision
 
-Option 4. The card is bound to `vfio-pci`; the `omni` Rust crate opens the VFIO group, maps the shell's
+Option 4. The card is bound to `vfio-pci`; the `fw16-fpga` Rust crate opens the VFIO group, maps the shell's
 AXI-Lite BAR and the XDMA config BAR (assignment fixed by Path 3, see the regmap v0.2 proposal), IOMMU-maps its own DMA buffers, programs the XDMA descriptor engine
 itself (PG195 scatter-gather descriptors) and takes MSI-X through eventfds. The host library is a pure Rust
 crate (no C ABI until a caller needs one); register constants come from `bindgen` on the generated
-`host/include/omni_regs.h`, so the regmap generator stays the single source.
+`host/include/fw16_fpga_regs.h`, so the regmap generator stays the single source.
 
 ## Consequences
 
@@ -64,7 +64,7 @@ crate (no C ABI until a caller needs one); register constants come from `bindgen
   found for the Ryzen AI 300 board — the gate below still stands.
 - **Suspend:** in 7.3, `vfio-pci` has only runtime-PM callbacks, no system-sleep callbacks. The PCI core
   saves and restores config space (BARs, MSI-X) across suspend, but nothing tells the userspace driver. So
-  `omni` must hold a logind *delay* inhibitor: on `PrepareForSleep(true)` stop DMA and release the lock, on
+  `fw16-fpga` must hold a logind *delay* inhibitor: on `PrepareForSleep(true)` stop DMA and release the lock, on
   `PrepareForSleep(false)` re-check `ID` and re-initialise the XDMA engine.
 - **Non-root access:** the NixOS module gives the user the `/dev/vfio/<group>` node (udev) and raises
   `RLIMIT_MEMLOCK`, since `VFIO_IOMMU_MAP_DMA` pins buffer pages and counts them against it.
