@@ -25,7 +25,7 @@ module Make (M : Mem_port.S) = struct
       ; s_axis : 'a Axis.t [@rtlprefix "s_axis_"]
       ; m_tready : 'a
       }
-    [@@deriving hardcaml]
+    [@@deriving hardcaml ~rtlmangle:false]
   end
 
   module O = struct
@@ -35,7 +35,7 @@ module Make (M : Mem_port.S) = struct
       ; fill : 'a [@bits 32]
       ; mem_ready : 'a
       }
-    [@@deriving hardcaml]
+    [@@deriving hardcaml ~rtlmangle:false]
   end
 
   let create (i : _ I.t) : _ O.t =

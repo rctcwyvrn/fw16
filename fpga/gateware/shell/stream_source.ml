@@ -28,7 +28,7 @@ module O = struct
     { axis : 'a Axis.t [@rtlprefix "m_axis_"]
     ; beats : 'a [@bits 64]
     }
-  [@@deriving hardcaml]
+  [@@deriving hardcaml ~rtlmangle:false]
 end
 
 let create (i : _ I.t) : _ O.t =

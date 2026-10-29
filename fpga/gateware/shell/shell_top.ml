@@ -13,6 +13,10 @@ open Hardcaml
 open Signal
 module Map = Regmap.Map_v0
 
+(* [~rtlmangle:false] drops the field name from nested ports, so they get
+   XDMA/Vivado AXI names: s_axil_awvalid, not s_axil_axil$awvalid. It must be
+   record-level: a per-field [@rtlmangle] is spliced in as a separator string,
+   so it cannot turn mangling off. *)
 module I = struct
   type 'a t =
     { clock : 'a
@@ -24,7 +28,7 @@ module I = struct
     ; temp : 'a [@bits 16]  (** SYSMON temperature word *)
     ; pwr_mw : 'a [@bits 32]
     }
-  [@@deriving hardcaml]
+  [@@deriving hardcaml ~rtlmangle:false]
 end
 
 module O = struct
@@ -33,7 +37,7 @@ module O = struct
     ; h2c_tready : 'a
     ; c2h : 'a Axis.t [@rtlprefix "m_axis_c2h_"]
     }
-  [@@deriving hardcaml]
+  [@@deriving hardcaml ~rtlmangle:false]
 end
 
 module Make (M : Mem_port.S) = struct

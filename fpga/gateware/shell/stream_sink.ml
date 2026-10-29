@@ -16,7 +16,7 @@ module I = struct
     ; sync_clear : 'a  (** SNK_CLEAR pulse *)
     ; axis : 'a Axis.t [@rtlprefix "s_axis_"]
     }
-  [@@deriving hardcaml]
+  [@@deriving hardcaml ~rtlmangle:false]
 end
 
 module O = struct
