@@ -89,6 +89,154 @@ Sources (datasheets): [TPS25947](https://www.ti.com/lit/ds/symlink/tps25947.pdf)
 [INA226](https://www.ti.com/product/INA226), [TPS62933](https://www.ti.com/lit/ds/symlink/tps62933.pdf),
 [TPS54302](https://www.ti.com/lit/ds/symlink/tps54302.pdf), [LMR33630](https://www.ti.com/lit/ds/symlink/lmr33630.pdf).
 
+### core_power: XCAU15P-2FFVB676E rails from 5V0_MAIN
+
+Same LCSC snapshot rules as above (2026-10-29, `wmsc.lcsc.com` product detail). Nothing is chosen.
+
+#### Rail requirements (DS931 v1.9, 2026-05-19, § Recommended Operating Conditions)
+
+| Rail | Min / typ / max | DS931 typ. quiescent (XCAU15P, 85 °C, blank) | Spin-1 load estimate | Basis |
+| --- | --- | --- | --- | --- |
+| VCCINT | 0.825 / 0.850 / 0.876 V | ICCINTQ 424 mA | **0.5–4.7 A; size for 6 A** | See "VCCINT disagreement" below |
+| VCCINT_IO + VCCBRAM | 0.825 / 0.850 / 0.876 V | 44 + 5 mA | 0.05–0.3 A | DS931 static plus margin |
+| VCCAUX + VCCAUX_IO | 1.746 / 1.800 / 1.854 V | 55 + 24 mA | 0.1–0.5 A | MPS reference: 0.5 A (VCCAUX/ADC) |
+| VCCO, HP banks and bank 0 | 0.950–1.900 V | ICCOQ 1 mA | ≈ 0.1 A at 1.8 V | QSPI (MT25QU256), 1.8 V I/O |
+| VCCO, HD banks | 1.140–3.400 V | (in ICCOQ) | 0.05–0.2 A at 3.3 V | LEDs, 3.3 V sideband |
+| MGTAVCC | 0.873 / 0.900 / 0.927 V | — | **≈ 0.25 A** (one quad) | MPS: 0.75 A for all 12 GTH ÷ 3 |
+| MGTAVTT | 1.164 / 1.200 / 1.236 V | — | **≈ 1.0 A** (one quad) | MPS: 3 A for all 12 GTH ÷ 3 |
+| MGTVCCAUX | 1.746 / 1.800 / 1.854 V | — | ≈ 0.05 A | MPS: 0.15 A ÷ 3 |
+
+- **None of these is an XPE number.** XPE and `report_power` were not run; the "÷ 3" scaling assumes MGT current
+  goes with lane count. Both are to be replaced by an XPE estimate, then by S6 measurements.
+- **VCCINT disagreement.** The sources differ by 2–4×:
+  - DS931 static alone is 424 + 44 + 5 ≈ 0.47 A (typical, 85 °C; max static is higher, and only XPE gives it).
+  - MPS's AU10P/15P reference designs list VCCINT at 1–1.2 A.
+  - This file's load table above (2–4 W) implies 2.4–4.7 A.
+  - Candidates below are sized for the upper bound (6 A).
+- VCCINT's window is −2.9 / +3.1 %. That window has to hold DC setpoint, ripple and load-step together, so use
+  a ±1 % reference and 0.1 % feedback resistors.
+- MGT supply noise: UG576 (GTH user guide, § Power Supply and Filtering) carries the GTH noise limit. **It was
+  not fetched this session.** The often-quoted "< 10 mVpp, 10 kHz–80 MHz" was seen only in AM017 (Versal GTM).
+  Check UG576 before layout.
+- Do not reuse the AUBoard-15P "up to 6 A / 14 A" figures as loads. They are regulator ratings on a dev kit.
+  That guide also lists **MGTVCCAUX at 1.5 V, which contradicts DS931 (1.746 V min)**.
+
+#### Power-on sequence (DS931 v1.9, § Power-On/Off Power Supply Sequencing)
+
+These fragments are quoted from the docs.amd.com HTML edition, which has no page numbers. Page refs are still
+to be added from the PDF. Text outside quotation marks is paraphrase.
+
+- I/O and core: the recommended power-on sequence is "VCCINT, VCCINT_IO/VCCBRAM, VCCAUX/VCCAUX_IO, and VCCO",
+  to "achieve minimum current draw and ensure that the I/Os are 3-stated at power-on". Power-off is the reverse.
+- "If VCCINT and VCCINT_IO/VCCBRAM have the same recommended voltage levels, they can be powered by the same
+  supply and ramped simultaneously." "VCCINT_IO must be connected to VCCBRAM."
+- "If VCCAUX/VCCAUX_IO and VCCO have the same recommended voltage levels, they can be powered by the same supply
+  and ramped simultaneously." "VCCAUX and VCCAUX_IO must be connected together."
+- "VCCADC and VREF can be powered at any time and have no power-up sequencing requirements."
+- GTH: "The recommended power-on sequence to achieve minimum current draw for the GTH or GTY transceivers is
+  VCCINT, VMGTAVCC, VMGTAVTT OR VMGTAVCC, VCCINT, VMGTAVTT." "Both VMGTAVCC and VCCINT can be ramped
+  simultaneously." "There is no recommended sequencing for VMGTVCCAUX." Power-off is the reverse.
+- "If these recommended sequences are not met, current drawn from VMGTAVTT can be higher than specifications
+  during power-up and power-down."
+
+What this means for the card:
+- VCCINT, VCCINT_IO and VCCBRAM can share **one 0.85 V rail**, as the tree above already draws.
+- VCCAUX, VCCAUX_IO and the 1.8 V VCCO banks can share **one 1.8 V rail**.
+- Breaking the GTH order raises MGTAVTT current during the ramp. DS931 does not call it a damage condition.
+- **POR timing** (DS931 § Configuration Switching Characteristics):
+  - T_POR is 65 ms max (15 ms max with POR_OVERRIDE).
+  - It is counted from when the last of VCCINT, VCCBRAM, VCCAUX and VCCO_0 reaches 95 % of nominal.
+  - T_PL is 7.5 ms max.
+  - Together these set how long before PEX_RST# deassertion the rails must be up.
+- **Ramp-time limits:** no T_VCC* row was found in the DS931 HTML sections that were read. DS923 (Virtex US+) gives
+  0.2–40 ms. Confirm against the DS931 PDF before setting soft-start capacitors.
+- A plain PG→EN daisy chain gives the power-on order but **not the reverse power-off order** when the eFuse
+  drops. See the questions in the Path 2 report.
+- The MPS reference report is self-contradictory on the sequence (its diagram and its ripple table disagree).
+  DS931 governs.
+
+Possible PG→EN order, for discussion:
+
+```
+5V0_MAIN PG → 0.85 V (VCCINT + VCCINT_IO/VCCBRAM) PG → 1.8 V (VCCAUX/AUX_IO/VCCO 1.8 V) PG ─┬→ MGTAVCC LDO PG → MGTAVTT LDO
+                                                                                         └→ VCCO 3.3 V (HD banks)
+MGTVCCAUX: any time (ferrite off 1.8 V, or its own LDO)
+```
+
+#### LDO input: where the MGT LDOs get their headroom (decide first)
+
+Dissipation = (Vin − Vout) × I, using the estimates above:
+
+| LDO input | MGTAVCC 0.9 V @ 0.25 A | MGTAVTT 1.2 V @ 1.0 A | Cost |
+| --- | --- | --- | --- |
+| 5V0_MAIN direct | 1.0 W | **3.8 W — not viable** | none |
+| 1.8 V rail (shared with VCCAUX) | 0.23 W | 0.6 W | 1.8 V buck grows to ≈ 2 A, so the 2 A TLV62569 is out and a 3–6 A part is needed |
+| Dedicated ≈ 1.5 V pre-regulator buck | 0.15 W | 0.3 W | one more buck and inductor; MGT switching noise is kept off VCCAUX |
+
+TPS7A84A and TPS7A53 accept Vin down to 1.1 V. They need their BIAS pin only at the low end of Vin, so a 1.5 V or
+1.8 V input should not need a bias rail. The exact threshold is from memory and must be checked against the
+datasheet. TPS74801 always needs a BIAS rail (from 5V0_MAIN).
+
+#### Candidates: VCCINT + VCCINT_IO/VCCBRAM, 0.85 V, 6 A class buck
+
+| Part | Package | Vin | Iout, accuracy | Extras | LCSC, stock | Tradeoffs |
+| --- | --- | --- | --- | --- | --- | --- |
+| TPS566238PRQFR | VQFN-HR-9 1.5 × 2 mm | 3–18 V | 6 A, 0.6 V ±1 % (25 °C) | FCCM (low ripple at light load), 600 kHz, **PG** | C2876603, 7 380, $0.41 @100 | Best-stocked part with PG. FCCM costs light-load efficiency, which is irrelevant when the rails are off in suspend. 1.5 × 2 HR package is assembly-only. |
+| TPS566231PRQFR | VQFN-HR-9 1.5 × 2 mm | 3–18 V | 6 A, 0.6 V ±1 % | Eco-mode (PFM at light load), PG | C3190178, 827 (non-P C2870135, 3 004), $0.51 @100 | Pin-compatible sibling. Eco-mode ripple at light load eats into the VCCINT window. Its only benefit is idle efficiency. |
+| TPS628690ARQYR (TPS62869) | VQFN-HR-9 1.5 × 2.5 mm | 2.4–5.5 V | 6 A, ±1 % | I²C VID, 2.4 MHz | C3190184, **20**; TPS6286900CRQYR C3190180, **15** | Smallest inductor; I²C allows margining. Stock is too thin to rely on. 5.5 V abs-max means it must sit behind 5V0_MAIN only. |
+
+Also considered, LCSC C number not found this session: TPS62867 (6 A, same family), TPS62827 (4 A, 1.5 × 1.5 mm),
+TPS568230 (8 A, 3 × 3 mm), MPS MP2147 (4 A).
+
+#### Candidates: 1.8 V (VCCAUX/VCCAUX_IO + 1.8 V VCCO, optionally the LDO inputs)
+
+| Part | Package | Vin | Iout | Extras | LCSC, stock | Tradeoffs |
+| --- | --- | --- | --- | --- | --- | --- |
+| TLV62569ADRLR | SOT-563 | 2.5–5.5 V | 2 A | no PG (the PDRLR "P" variant has PG: 7 790 in stock, C number not captured) | C398367, 10 955, $0.11 @100 | Cheapest and deep stock. **2 A is not enough if the MGT LDOs also hang off 1.8 V.** |
+| TLV62569DBVR | SOT-23-5 | 2.5–5.5 V | 2 A | no PG | C141836, 15 345, $0.06 @100 | Hand-solderable. Same 2 A ceiling. No PG, so the chain needs a supervisor or an RC delay. |
+| TPS566238PRQFR | VQFN-HR-9 1.5 × 2 mm | 3–18 V | 6 A | PG, FCCM | C2876603, 7 380, $0.41 @100 | Same part as VCCINT: one BOM line, and enough to carry the LDO inputs. Oversized for VCCAUX alone. |
+
+TLV62585DRLR (3 A, SOT-563) shows up as an LCSC alternate with 895 in stock. Its C number was not captured.
+
+#### Candidates: VCCO 3.3 V (HD banks), ≈ 0.2 A
+
+TLV62569ADRLR (C398367) or TLV62569DBVR (C141836), as for the 1.8 V rail. A 5 V → 3.3 V LDO is the
+alternative. At 0.2 A it dissipates 0.34 W, but its C number was not verified this session. If a 3V3_ALW-fed
+bank were acceptable, the rail could come from there, but that breaks decision 0008 (ALW feeds management only).
+
+#### Candidates: MGTAVCC 0.9 V and MGTAVTT 1.2 V low-noise LDOs
+
+| Part | Package | Vin / BIAS | Iout, dropout | Noise | LCSC, stock | Tradeoffs |
+| --- | --- | --- | --- | --- | --- | --- |
+| TPS7A8400ARGRR (TPS7A84A) | VQFN-20 3.5 × 3.5 mm | 1.1–6.5 V; BIAS only at low Vin (threshold to verify) | 3 A, 180 mV max | 4.4 µVrms | C524802, 8 278, $1.84 @100 (non-A TPS7A8400RGRR C527696, 7 840, $1.80) | The low-noise reference choice. Vout is pin-strapped 0.5–2.075 V in 25 mV steps, so no feedback divider. 3 A covers MGTAVTT with margin. One part number serves both rails. |
+| TPS7A5301RPSR (TPS7A53) | VQFN-HR-12 2.2 × 2.5 mm | 1.1–6.5 V; optional BIAS | 3 A, ultra-low dropout | low-noise class (check datasheet) | C2868223, **289**, $1.93 @100 | Smallest footprint. Thin stock. HR package is assembly-only. |
+| TPS74801DRCR | VSON-10 3 × 3 mm | **separate BIAS rail required** (ranges to verify in datasheet) | 1.5 A, low dropout with BIAS | **not a low-noise LDO** (fast transient, programmable soft-start) | C105263, 43 339, $0.33 @100 (onsemi NCP59748 C464052, 5 529) | Cheapest, deepest stock, second source. 1.5 A is tight for MGTAVTT at 1.0 A estimated. It meets the "LDO" decision but not "low-noise". |
+
+TPS7A8300 / TPS7A8300A (2 A, 4.4 µVrms) are out on stock (6–358 units). SGM2049 and 3PEAK TPL920 are listed
+as alternates at 0 stock.
+
+#### Candidates: MGTVCCAUX 1.8 V, ≈ 0.05 A
+
+| Option | LCSC, stock | Tradeoffs |
+| --- | --- | --- |
+| Ferrite bead + caps off the 1.8 V VCCAUX rail | — | No IC. VCCAUX switching noise reaches the QPLL supply unless the filter is designed for it (UG576/UG583 filter guidance not read). |
+| TLV75518PDBVR (500 mA LDO, from 5V0_MAIN) | C2877863, 5 445, $0.16 @100 | Isolated, quiet, 0.16 W at 0.05 A. SOT-23-5. Alternates: TLV75718PDBVR, RT9013-18GB (stock listed, C numbers not captured). |
+| Ferrite off the MGTAVTT/MGTAVCC LDO input rail | — | Only meaningful if a dedicated 1.8 V pre-reg exists. Otherwise the same as option 1. |
+
+**Trap:** TPS7A20185PDBVR (C2877857) is a 1.85 V part. With its tolerance it can exceed DS931's 1.854 V max.
+
+Sources: DS931 [Recommended Operating Conditions](https://docs.amd.com/r/en-US/ds931-artix-ultrascale-plus/Recommended-Operating-Conditions),
+[Quiescent Supply Current](https://docs.amd.com/r/en-US/ds931-artix-ultrascale-plus/Quiescent-Supply-Current),
+[Power-On/Off Sequencing](https://docs.amd.com/r/en-US/ds931-artix-ultrascale-plus/Power-On/Off-Power-Supply-Sequencing),
+[Configuration Switching Characteristics](https://docs.amd.com/r/en-US/ds931-artix-ultrascale-plus/Configuration-Switching-Characteristics);
+MPS test reports [AU10P/15P cost-optimized (MP5416)](https://media.monolithicpower.com/mps_cms_document/a/r/artixus_au10_15p_pmic_mp5416_discrete_solution_tr_01252024_1.pdf)
+and [highest power (MP5475)](https://media.monolithicpower.com/mps_cms_document/a/r/artix_us_pmic_mp5475_highest_power_tr_01262024_2.pdf);
+Tria AUBoard-15P user guide v1.0 § 5.1.32–5.1.33 (rail ratings, GreenPAK sequencer);
+TI [TPS566238](https://www.ti.com/product/TPS566238), [TPS62869](https://www.ti.com/product/TPS62869),
+[TLV62569](https://www.ti.com/product/TLV62569), [TPS7A84A](https://www.ti.com/product/TPS7A84A),
+[TPS7A53](https://www.ti.com/product/TPS7A53), [TPS74801](https://www.ti.com/product/TPS74801),
+[TLV755P](https://www.ti.com/product/TLV755P).
+
 ## Measurements to take
 
 - [ ] Dual M.2 + NVMe reference in the bay: VSYS / 5V / 3V3 present in S0, S3, S5 (with its stock EEPROM).
