@@ -39,7 +39,7 @@ the descriptions change; the offsets stay. Until then software uses hi–lo–hi
 - **Interrupts:** MSI-X, `usr_irq` width 1. The vector assignment is programmed by software through XDMA's
   IRQ block registers, so it is not a gateware decision.
 - **IDs:** vendor 0x10EE with whatever device ID the IP config produces, **subsystem vendor/device
-  0x10EE / 0x4F4D ('OM')** — the NixOS rule binds to `vfio-pci` on the subsystem ID, so the device ID can
+  0x10EE / 0x4650 ('FP')** — the NixOS rule binds to `vfio-pci` on the subsystem ID, so the device ID can
   change between Gen3/Gen4 builds without a driver change.
 
 ## 4. Loopback dataflow — please confirm
