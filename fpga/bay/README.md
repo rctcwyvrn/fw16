@@ -64,3 +64,12 @@ the Electrical README on every pad except three in the power field: 3PF / 3PG / 
 I2C_DAT_VS / I2C_INT_VS** there, but **EXT_SSD1_RST# / EXT_SSD2_RST# / EXT_SSD2_CLK_REQ#** in the README. The
 README is newer (Dual-SSD era), so we follow it; these pads only go to test pads anyway. The same sheet gives
 the shell's fan connector: **AFC58-S04FIA-R1 × 2**, pin 1 +12V, 2 FANx_SPEED, 3 FANx_PWM, 4 GND.
+
+## XCAU15P-FFVB676 package facts (2026-10-28)
+
+- **Height:** lidded flip-chip. A (seated, balls included) = 3.12 / 3.31 / 3.52 mm min/nom/max; lid ≤ 22.10 mm
+  square on a 27 × 27 mm body; 1.0 mm pitch, 26 × 26. UG575 v1.22 Fig 4-10 (p. 454).
+- **Transceivers:** all 12 GTH (Quads 224, 225, 226) sit on the **column 1–7 edge** (the pin-1 side in top
+  view): Quad 226 rows F–L, Quad 225 rows M–W, Quad 224 rows Y–AF. UG575 Fig 3-83 (p. 311, top view).
+- **PCIe:** a single hard block, PCIE4C_X0Y0 (Gen4 up to x4). Lane-0 quad options per PG213 v1.3 Table 94:
+  GTH_Quad_224 (x4), GTH_Quad_225 (x8). REFCLK goes to GTREFCLK0 of the lane-0 quad.
