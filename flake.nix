@@ -48,6 +48,14 @@
           poppler-utils
           # bay/tools: pythonocc reads Framework's STEPs, ezdxf writes the card DXFs
           (python3.withPackages (ps: [ ps.pythonocc-core ps.ezdxf ]))
+          # host/ — the omni crate; crates themselves come from Cargo.lock
+          rustc
+          cargo
+          clippy
+          rustfmt
+          rust-analyzer
+          # host/ — QEMU VM (vIOMMU + edu device) for the vfio layer's tests
+          qemu_kvm
         ]) ++ [ oxDune ] ++ (with ox; [
           # gateware/ — compiler and editor tooling
           oxcaml
@@ -74,6 +82,8 @@
         KICAD10_SYMBOL_DIR = "${pkgs.kicad.libraries.symbols}/share/kicad/symbols";
         KICAD10_FOOTPRINT_DIR = "${pkgs.kicad.libraries.footprints}/share/kicad/footprints";
         KICAD10_3DMODEL_DIR = "${pkgs.kicad.libraries.packages3d}/share/kicad/3dmodels";
+        # host/: bindgen (omni's build.rs) loads libclang through this.
+        LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
 
         shellHook = ''
           export OMNI_VIVADO="''${OMNI_VIVADO:-$HOME/vivado/2025.2}"
