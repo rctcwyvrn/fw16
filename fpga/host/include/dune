@@ -9,3 +9,15 @@
 (rule
  (alias regmap)
  (action (diff omni_regs.h omni_regs.h.gen)))
+
+; omni_patterns.txt: the first 64 beats of both test patterns, printed from the
+; RTL's own Pattern module, for host/omni's pattern tests. Same stale-check.
+(rule
+ (targets omni_patterns.txt.gen)
+ (action
+  (with-stdout-to omni_patterns.txt.gen
+   (run %{exe:../../gateware/shell/bin/patterns.exe} 64))))
+
+(rule
+ (alias regmap)
+ (action (diff omni_patterns.txt omni_patterns.txt.gen)))
