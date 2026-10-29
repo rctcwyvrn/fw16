@@ -59,7 +59,7 @@ module Make (M : Mem_port.S) = struct
         ~ro:
           (("TEMP", i.temp)
            :: ("PWR_MW", i.pwr_mw)
-           :: ("RING_DEPTH", of_int ~width:32 M.depth)
+           :: ("RING_DEPTH", of_unsigned_int ~width:32 M.depth)
            :: !ro)
         i.axil
     in
@@ -101,19 +101,19 @@ module Make (M : Mem_port.S) = struct
         ; m_tready = i.c2h_tready
         }
     in
-    source_ready <== (~:loopback &: ring.s_tready);
-    h2c_tready <== (sink.tready &: (~:loopback |: ring.s_tready));
+    source_ready <-- (~:loopback &: ring.s_tready);
+    h2c_tready <-- (sink.tready &: (~:loopback |: ring.s_tready));
     status
-    <== concat_lsb
+    <-- concat_lsb
           [ i.link_up; ring.mem_ready; sink.errors <>:. 0; gnd; zero 28 ];
-    src_beats_lo <== sel_bottom source.beats 32;
-    src_beats_hi <== sel_top source.beats 32;
-    snk_errs <== sink.errors;
-    snk_beats_lo <== sel_bottom sink.beats 32;
-    snk_beats_hi <== sel_top sink.beats 32;
-    ring_fill <== ring.fill;
+    src_beats_lo <-- sel_bottom source.beats ~width:32;
+    src_beats_hi <-- sel_top source.beats ~width:32;
+    snk_errs <-- sink.errors;
+    snk_beats_lo <-- sel_bottom sink.beats ~width:32;
+    snk_beats_hi <-- sel_top sink.beats ~width:32;
+    ring_fill <-- ring.fill;
     (* TS block: step 4; reads 0 until the timestamp unit lands. *)
-    List.iter (fun s -> s <== zero 32) ts_ro;
+    List.iter (fun s -> s <-- zero 32) ts_ro;
     { axil = regs.s2m; h2c_tready; c2h = ring.m_axis }
   ;;
 end

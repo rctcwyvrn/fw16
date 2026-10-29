@@ -42,18 +42,22 @@ let create (i : _ I.t) : _ O.t =
   in
   let prbs = wire Pattern.prbs_width in
   let prbs_data, prbs_next = Pattern.prbs_beat prbs in
-  prbs
-  <== reg
-        (Reg_spec.override spec ~clear_to:(of_int ~width:Pattern.prbs_width Pattern.prbs_seed))
-        (mux2 i.sync_clear
-           (of_int ~width:Pattern.prbs_width Pattern.prbs_seed)
-           (mux2 accept prbs_next prbs));
-  let credit_max = of_int ~width:credit_width ((2 * one_beat) - 1) in
-  let added = uresize credit (credit_width + 15) +: uresize (sel_bottom i.rate 17) (credit_width + 15) in
+  let seed = of_unsigned_int ~width:Pattern.prbs_width Pattern.prbs_seed in
+  prbs <-- reg ~clear_to:seed spec (mux2 i.sync_clear seed (mux2 accept prbs_next prbs));
+  let credit_max = of_unsigned_int ~width:credit_width ((2 * one_beat) - 1) in
+  let added =
+    uresize credit ~width:(credit_width + 15)
+    +: uresize (sel_bottom i.rate ~width:17) ~width:(credit_width + 15)
+  in
   let spent = mux2 accept (added -:. one_beat) added in
-  let saturated = mux2 (spent >: uresize credit_max (width spent)) credit_max (uresize spent credit_width) in
+  let saturated =
+    mux2
+      (spent >: uresize credit_max ~width:(width spent))
+      credit_max
+      (uresize spent ~width:credit_width)
+  in
   credit
-  <== reg spec
+  <-- reg spec
         (mux2 (i.sync_clear |: ~:(i.en) |: unlimited) (zero credit_width) saturated);
   { O.axis =
       { tvalid

@@ -13,10 +13,10 @@ let idle (i : Bits.t ref Shell_top.I.t) =
 let write (sim : sim) addr data =
   let i = Cyclesim.inputs sim and o = Cyclesim.outputs ~clock_edge:Before sim in
   i.axil.awvalid := Bits.vdd;
-  i.axil.awaddr := Bits.of_int ~width:32 addr;
+  i.axil.awaddr := Bits.of_unsigned_int ~width:32 addr;
   i.axil.wvalid := Bits.vdd;
-  i.axil.wdata := Bits.of_int ~width:32 data;
-  i.axil.wstrb := Bits.of_int ~width:4 0xF;
+  i.axil.wdata := Bits.of_unsigned_int ~width:32 data;
+  i.axil.wstrb := Bits.of_unsigned_int ~width:4 0xF;
   i.axil.bready := Bits.vdd;
   while not (Bits.to_bool !(o.axil.awready)) do Cyclesim.cycle sim done;
   Cyclesim.cycle sim;
@@ -29,12 +29,12 @@ let write (sim : sim) addr data =
 let read (sim : sim) addr =
   let i = Cyclesim.inputs sim and o = Cyclesim.outputs ~clock_edge:Before sim in
   i.axil.arvalid := Bits.vdd;
-  i.axil.araddr := Bits.of_int ~width:32 addr;
+  i.axil.araddr := Bits.of_unsigned_int ~width:32 addr;
   i.axil.rready := Bits.vdd;
   while not (Bits.to_bool !(o.axil.arready)) do Cyclesim.cycle sim done;
   Cyclesim.cycle sim;
   i.axil.arvalid := Bits.gnd;
-  let v = Bits.to_int !(o.axil.rdata) in
+  let v = Bits.to_unsigned_int !(o.axil.rdata) in
   Cyclesim.cycle sim;
   idle i;
   v

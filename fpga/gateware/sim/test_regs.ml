@@ -1,5 +1,5 @@
 (* Register file through the whole shell: constants, scratch read/write,
-   reset values, writes to RO registers dropped. *)
+   reset values, writes to RO registers dropped, no aliasing between blocks. *)
 
 open Hardcaml
 open Omni_shell
@@ -21,5 +21,16 @@ let%expect_test "regs: id, version, scratch, reset values" =
   Axil_driver.write sim 0x0000 0x12345678;
   rd 0x0000;
   rd 0x0FFC;
-  [%expect {| |}]
+  (* TS_NOW_LO is tied to 0; a truncated decoder aliased it onto ID. *)
+  rd 0x4000;
+  [%expect {|
+    0x0000 = 0x4F4D4E49
+    0x0004 = 0x00000001
+    0x1004 = 0x00010000
+    0x3004 = 0x00001000
+    0x0008 = 0xDEADBEEF
+    0x0000 = 0x4F4D4E49
+    0x0FFC = 0x00000000
+    0x4000 = 0x00000000
+    |}]
 ;;

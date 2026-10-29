@@ -26,16 +26,19 @@ let create ~clock ~clear ~(blocks : Reg.block list) ~(ro : (string * Signal.t) l
   =
   let spec = Reg_spec.create ~clock ~clear () in
   let regs = regs_of blocks in
-  let word_addr a = sel_bottom (srl a 2) 12 in
+  (* Decode the full word address: truncating it would alias blocks (a 12-bit
+     word address folded TS at 0x4000 onto CTL at 0x0000). *)
+  let word_addr a = drop_bottom a ~width:2 in
   let is_at a (r : Reg.t) = word_addr a ==:. (r.offset lsr 2) in
   (* write channel *)
   let bvalid = wire 1 in
   let write = m.awvalid &: m.wvalid &: ~:bvalid in
-  bvalid <== reg_fb spec ~width:1 ~f:(fun d -> mux2 write vdd (mux2 m.bready gnd d));
+  bvalid <-- reg_fb spec ~width:1 ~f:(fun d -> mux2 write vdd (mux2 m.bready gnd d));
   let hit r = write &: is_at m.awaddr r in
   let strobed old =
     List.init 4 (fun b ->
-      mux2 m.wstrb.:(b) (select m.wdata ((8 * b) + 7) (8 * b)) (select old ((8 * b) + 7) (8 * b)))
+      let byte s = select s ~high:((8 * b) + 7) ~low:(8 * b) in
+      mux2 m.wstrb.:(b) (byte m.wdata) (byte old))
     |> concat_lsb
   in
   let owned =
@@ -45,7 +48,7 @@ let create ~clock ~clear ~(blocks : Reg.block list) ~(ro : (string * Signal.t) l
         | Reg.RO -> None
         | RW ->
           let v =
-            reg_fb (Reg_spec.override spec ~clear_to:(of_int ~width:32 r.reset)) ~width:32
+            reg_fb ~clear_to:(of_unsigned_int ~width:32 r.reset) spec ~width:32
               ~f:(fun d -> mux2 (hit r) (strobed d) d)
           in
           Some (r.name, v)
@@ -55,17 +58,17 @@ let create ~clock ~clear ~(blocks : Reg.block list) ~(ro : (string * Signal.t) l
   (* read channel *)
   let read_value (r : Reg.t) =
     match r.access, r.name with
-    | Reg.RO, ("ID" | "VERSION") -> of_int ~width:32 r.reset
+    | Reg.RO, ("ID" | "VERSION") -> of_unsigned_int ~width:32 r.reset
     | Reg.RO, name ->
       (match List.assoc_opt name ro with
-       | Some s -> uresize s 32
+       | Some s -> uresize s ~width:32
        | None -> failwith ("Regs.create: no value for RO register " ^ name))
     | RW, name -> List.assoc name owned
     | WO_PULSE, _ -> zero 32
   in
   let rvalid = wire 1 in
   let read = m.arvalid &: ~:rvalid in
-  rvalid <== reg_fb spec ~width:1 ~f:(fun d -> mux2 read vdd (mux2 m.rready gnd d));
+  rvalid <-- reg_fb spec ~width:1 ~f:(fun d -> mux2 read vdd (mux2 m.rready gnd d));
   let decoded =
     List.fold_left
       (fun acc r -> mux2 (is_at m.araddr r) (read_value r) acc)

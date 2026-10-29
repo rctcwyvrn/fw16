@@ -17,14 +17,14 @@ module Make (C : Comb.S) = struct
   open C
   (** Beat for counter value [beat_index] (64 bits). *)
   let counter_beat beat_index =
-    let base = sll (uresize beat_index 64) 2 in
+    let base = sll (uresize beat_index ~width:64) ~by:2 in
     List.init words_per_beat (fun i -> base +:. i) |> concat_lsb
   ;;
 
   (** One LFSR step: returns (output bit, next state). *)
   let prbs_step state =
     let fb = state.:(30) ^: state.:(27) in
-    fb, drop_top state 1 @: fb
+    fb, drop_top state ~width:1 @: fb
   ;;
 
   (** [prbs_beat state] = (256 data bits, state after 256 steps). Bit 0 of the

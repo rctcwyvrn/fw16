@@ -1,6 +1,10 @@
 (library
  (name omni_sim_tests)
  (libraries hardcaml hardcaml_waveterm omni_shell regmap)
- (inline_tests)
+ ; ppx_expect 0.18-preview joins -source-tree-root with the test file's
+ ; basename only, so dune's default (the workspace root) misses files in
+ ; subdirectories. The runner's cwd already holds the sources; last flag wins.
+ (inline_tests
+  (flags (-source-tree-root .)))
  (preprocess
   (pps ppx_hardcaml ppx_expect)))

@@ -31,5 +31,9 @@ end
 (** A backing memory. [depth] is in beats and must be a power of two. *)
 module type S = sig
   val depth : int
-  val create : clock:Signal.t -> clear:Signal.t -> Signal.t Req.t -> Signal.t Rsp.t
+  val create
+    :  clock:Hardcaml.Signal.t
+    -> clear:Hardcaml.Signal.t
+    -> Hardcaml.Signal.t Req.t
+    -> Hardcaml.Signal.t Rsp.t
 end

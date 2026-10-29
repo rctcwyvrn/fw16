@@ -35,11 +35,11 @@ let create (i : _ I.t) : _ O.t =
     mux2 i.sync_clear (zero w) (mux2 take (d +:. 1) d))
   in
   let beats = count 64 in
-  let seed = of_int ~width:Pattern.prbs_width Pattern.prbs_seed in
+  let seed = of_unsigned_int ~width:Pattern.prbs_width Pattern.prbs_seed in
   let prbs = wire Pattern.prbs_width in
   let prbs_expected, prbs_next = Pattern.prbs_beat prbs in
   prbs
-  <== reg (Reg_spec.override spec ~clear_to:seed)
+  <-- reg ~clear_to:seed spec
         (mux2 i.sync_clear seed (mux2 take prbs_next prbs));
   let expected = mux2 i.mode prbs_expected (Pattern.counter_beat beats) in
   let mismatch = take &: (i.axis.tdata <>: expected) in

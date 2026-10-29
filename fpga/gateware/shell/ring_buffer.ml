@@ -15,7 +15,7 @@ open Signal
 let prefetch = 16
 
 module Make (M : Mem_port.S) = struct
-  let abits = Int.ceil_log2 M.depth
+  let abits = address_bits_for M.depth
 
   module I = struct
     type 'a t =
@@ -51,17 +51,17 @@ module Make (M : Mem_port.S) = struct
     let full = (wr_ptr -: returned) >=:. M.depth in
     let s_tready = mem_rsp.ready &: mem_rsp.wr_ready &: ~:full in
     let write = i.s_axis.tvalid &: s_tready in
-    wr_ptr <== counter write;
+    wr_ptr <-- counter write;
     (* read side *)
     let issued = wire pw in
-    let inflight = wire (Int.ceil_log2 (prefetch + 1)) in
+    let inflight = wire (num_bits_to_represent prefetch) in
     let issue =
       mem_rsp.ready &: mem_rsp.rd_ready &: (issued <>: wr_ptr) &: (inflight <:. prefetch)
     in
-    issued <== counter issue;
-    returned <== counter mem_rsp.rd_data_valid;
+    issued <-- counter issue;
+    returned <-- counter mem_rsp.rd_data_valid;
     inflight
-    <== reg_fb spec ~width:(width inflight) ~f:(fun d ->
+    <-- reg_fb spec ~width:(width inflight) ~f:(fun d ->
       mux2 (issue &: ~:pop) (d +:. 1) (mux2 (pop &: ~:issue) (d -:. 1) d));
     let fifo =
       Fifo.create
@@ -73,16 +73,17 @@ module Make (M : Mem_port.S) = struct
         ~d:mem_rsp.rd_data
         ~rd:pop
         ()
+        ~scope:(Scope.create ~flatten_design:true ())
     in
     let m_tvalid = ~:(fifo.empty) in
-    pop <== (m_tvalid &: i.m_tready);
+    pop <-- (m_tvalid &: i.m_tready);
     let popped = counter pop in
     let req =
       { Mem_port.Req.wr_valid = write
-      ; wr_addr = uresize (sel_bottom wr_ptr abits) 32
+      ; wr_addr = uresize (sel_bottom wr_ptr ~width:abits) ~width:32
       ; wr_data = i.s_axis.tdata
       ; rd_valid = issue
-      ; rd_addr = uresize (sel_bottom issued abits) 32
+      ; rd_addr = uresize (sel_bottom issued ~width:abits) ~width:32
       }
     in
     Mem_port.Rsp.Of_signal.assign mem_rsp (M.create ~clock:i.clock ~clear:i.clear req);
@@ -93,7 +94,7 @@ module Make (M : Mem_port.S) = struct
         ; tkeep = ones (Axis.data_width / 8)
         ; tlast = gnd
         }
-    ; fill = uresize (wr_ptr -: popped) 32
+    ; fill = uresize (wr_ptr -: popped) ~width:32
     ; mem_ready = mem_rsp.ready
     }
   ;;
