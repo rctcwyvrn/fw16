@@ -1,6 +1,6 @@
 //! The one error type every transport returns.
 
-use std::fmt;
+use std::{fmt, io};
 
 #[derive(Debug)]
 pub enum Error {
@@ -17,9 +17,25 @@ pub enum Error {
     /// The device answered, but not sensibly (e.g. a 64-bit counter whose
     /// high word never settles).
     Device(String),
+    /// A VFIO ioctl failed (container, group, device, DMA map, interrupts).
+    Vfio(vfio_ioctls::VfioError),
+    /// A system call outside the VFIO ioctls failed; `what` says which step.
+    Os { what: String, err: io::Error },
+    /// Talking to logind over the system bus failed.
+    Dbus(zbus::Error),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
+
+impl Error {
+    /// `Error::Os` for the step `what`, from `errno`.
+    pub(crate) fn last_os(what: impl Into<String>) -> Error {
+        Error::Os {
+            what: what.into(),
+            err: io::Error::last_os_error(),
+        }
+    }
+}
 
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -29,8 +45,32 @@ impl fmt::Display for Error {
             Error::Unsupported(what) => write!(f, "not supported yet: {what}"),
             Error::InvalidArgument(why) => write!(f, "invalid argument: {why}"),
             Error::Device(why) => write!(f, "device error: {why}"),
+            Error::Vfio(e) => write!(f, "vfio: {e}"),
+            Error::Os { what, err } => write!(f, "{what}: {err}"),
+            Error::Dbus(e) => write!(f, "logind: {e}"),
         }
     }
 }
 
-impl std::error::Error for Error {}
+impl std::error::Error for Error {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        match self {
+            Error::Vfio(e) => Some(e),
+            Error::Os { err, .. } => Some(err),
+            Error::Dbus(e) => Some(e),
+            _ => None,
+        }
+    }
+}
+
+impl From<vfio_ioctls::VfioError> for Error {
+    fn from(e: vfio_ioctls::VfioError) -> Error {
+        Error::Vfio(e)
+    }
+}
+
+impl From<zbus::Error> for Error {
+    fn from(e: zbus::Error) -> Error {
+        Error::Dbus(e)
+    }
+}
