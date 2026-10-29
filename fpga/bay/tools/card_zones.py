@@ -13,7 +13,7 @@ of its 3 x 3 neighbourhood (obstacles grow by 1 mm). That gap is floored to a de
 then cells merge into rectangles. Labels are gaps, no
 tolerance taken off. Numbers assume a 1.2 mm board.
 
-The raycast takes ~20 min; it saves the raw gaps as card-zones-grid.json so the classes can be
+The raycast takes ~9 min; it saves the raw gaps as card-zones-grid.json so the classes can be
 changed and the DXFs rewritten without re-casting.
 
 usage: python3 card_zones.py <PCB_REF__0807.stp> <Framework_16_all_UMA_asm_0408.stp> <out_dir>

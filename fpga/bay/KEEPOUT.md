@@ -123,7 +123,8 @@ Bottom-side parts are limited to passives of about 1 mm, and nothing goes behind
 ## Proposed v1.1 (2026-10-29, Path 1 scripts; not yet accepted)
 
 Everything below is proposed, not adopted. It comes from `bay/tools/card_zones.py` (1 mm ray grid,
-`bay/cad/card-zones-{top,bottom}.dxf`), `fan_probe.py` and `step_section.py`. Where it disagrees with
+`bay/cad/card-zones-{top,bottom}.dxf`, raw gaps in `bay/cad/card-zones-grid.json`), `fan_probe.py` and
+`step_section.py`. Where it disagrees with
 v1 above, v1 stands until the user decides.
 
 ### Height zones (card_zones.py)
@@ -153,9 +154,15 @@ Differences from v1:
   board is fitted. It looks like a no-card filler, not a part that is present with a card. In PCB_REF
   the only things above the strip are the rear wall (Z < 1.6), the standoffs, and the block at
   X 0–6.5, Z 1.6–8.2. Calipers decide; until then the DXF caps the strip at the 8.65 class.
-- **Bottom, rear.** Bottom parts are blocked from Z 4 to Z **23**, not Z 15: the gap is 0.10 to Z 15,
-  then 0.30 over Z 18–23.
-- **Bottom, front tabs.** Z 68.5–76.5 has 0.30 below the board across the tabs, not 1.4.
+- **Bottom, rear.** Over the main body (X −50…50), bottom parts are blocked from Z 4 to Z **23**, not
+  Z 15: the gap is 0.10 to Z 15, then 0.30 over Z 18–23.
+- **Bottom, under the reference fan connectors.** The solid at X 54.65…61.65, Z 18.45…32.25 sits *on the
+  floor plate* (Y −12.05…−10.73), not on the board. Gaps above it: 0.08 at Z 18.5–22.5, 1.28 at
+  Z 23–32. On the left (board edge X −57.45 to −51) the gap is 1.28 at Z 23.5–29.5. These cells mark
+  where Framework's fan-cable connectors sit. They are not empty space, and the card must route the
+  fans to meet them there (decision 0007's fan pass-through).
+- **Bottom, front tabs.** On Tabs L, C and R (Z 68.5–76.5) the median gap below the board is 0.30, not
+  1.4. The minimum is 0 at the inserts; the maximum is 1.4 at the tab roots.
 - **Front ceiling.** Rib pitch is visible: 7.8 on the ribs, 8.55 between them, from Z 47. The DXF floors
   all of it to 7.8.
 - **Middle ceiling.** v1's "9.75 mm in a grid of pockets" are holes in a perforated plate: Y −0.80…0,
@@ -208,8 +215,9 @@ Y stack, from KEEPOUT numbers and the PCB path's FFVB676 data:
   taller than 1.85 mm goes behind Z 15.
 - **Clearance over parts:** a 3 mm inductor tops out at Y −6.45, 0.82 mm under the base, so the base can
   overhang the middle-zone inductors. No standoffs fall within Z 15–43.
-- **Underneath:** any backplate or screw head sits in the 1.40 mm floor gap, only within Z 23–68.5. With
-  0.5 mm margin that is ≤ 0.9 mm. Nothing goes under the card behind Z 23.
+- **Underneath:** any backplate or screw head sits in the 1.40 mm floor gap, only within Z 23–68.5 and
+  inboard of the fan-connector regions. With 0.5 mm margin that is ≤ 0.9 mm. Nothing goes under the main
+  body behind Z 23.
 - **Fins:** if any forced air reaches the card, it moves along ±X toward the fans, over the bay walls,
   between Y −3.7 and the ceiling. Fins should run along X. Only the top ~2.4 mm of a 4.33 mm fin
   (Y −3.7…−1.30) sits in that band.
