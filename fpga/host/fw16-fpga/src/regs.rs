@@ -14,7 +14,7 @@ mod tests {
     #[test]
     fn constants_match_the_map() {
         assert_eq!(FW16_FPGA_ID, 0x0000);
-        assert_eq!(FW16_FPGA_ID_RESET, 0x4F4D_4E49);
+        assert_eq!(FW16_FPGA_ID_RESET, 0x4650_4741);
         assert_eq!(FW16_FPGA_SCRATCH, 0x0008);
         assert_eq!(FW16_FPGA_SRC_CTL, 0x1000);
         assert_eq!(FW16_FPGA_SRC_RATE_RESET, 0x1_0000);

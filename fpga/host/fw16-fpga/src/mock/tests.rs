@@ -18,7 +18,7 @@ fn beats(m: &Mock, lo: u32, hi: u32) -> u64 {
 #[test]
 fn identity_and_access_kinds() {
     let m = Mock::new();
-    assert_eq!(m.read32(FW16_FPGA_ID).unwrap(), 0x4F4D_4E49);
+    assert_eq!(m.read32(FW16_FPGA_ID).unwrap(), 0x4650_4741);
     assert_eq!(m.read32(FW16_FPGA_VERSION).unwrap(), FW16_FPGA_VERSION_RESET);
     // RW
     m.write32(FW16_FPGA_SCRATCH, 0xDEAD_BEEF).unwrap();

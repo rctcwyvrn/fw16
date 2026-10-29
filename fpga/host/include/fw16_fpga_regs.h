@@ -7,8 +7,8 @@
 
 /* CTL — Identity, scratch, status and board telemetry. */
 #define FW16_FPGA_CTL_BASE 0x0000u
-#define FW16_FPGA_ID 0x0000u /* RO: Constant 0x4F4D4E49 ('OMNI'). */
-#define FW16_FPGA_ID_RESET 0x4F4D4E49u
+#define FW16_FPGA_ID 0x0000u /* RO: Constant 0x46504741 ('FPGA'). */
+#define FW16_FPGA_ID_RESET 0x46504741u
 #define FW16_FPGA_VERSION 0x0004u /* RO: Register-map version. */
 #define FW16_FPGA_VERSION_RESET 0x00000002u
 #define FW16_FPGA_VERSION_MINOR_SHIFT 0

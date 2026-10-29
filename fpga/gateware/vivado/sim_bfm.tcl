@@ -1,6 +1,6 @@
 # sim_bfm: AMD's XDMA example design + its PCIe root-port BFM (xsim), with the
 # example's endpoint swapped for fw16_fpga_top. Passes when the link comes up and a
-# BAR0 read at offset 0 returns the shell's ID, 0x4F4D4E49 ("OMNI").
+# BAR0 read at offset 0 returns the shell's ID, 0x46504741 ("FPGA").
 #
 # How the swap works (the example's own files are regenerated each run):
 #   1. open_example_project for xdma_0 into <build>/example.
@@ -15,7 +15,7 @@
 source [file join [file dirname [info script]] settings.tcl]
 
 set fw16_fpga_exdir [file join $fw16_fpga_build example]
-set fw16_fpga_magic 32'h4F4D4E49
+set fw16_fpga_magic 32'h46504741
 
 proc slurp {path} { set f [open $path r]; set s [read $f]; close $f; return $s }
 proc spit {path s} { set f [open $path w]; puts -nonewline $f $s; close $f }

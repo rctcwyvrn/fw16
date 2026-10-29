@@ -17,7 +17,7 @@ let ctl =
   ; base = 0x0000
   ; bdoc = "Identity, scratch, status and board telemetry."
   ; regs =
-      [ reg "ID" 0x0000 RO ~reset:0x4F4D4E49 "Constant 0x4F4D4E49 ('OMNI')."
+      [ reg "ID" 0x0000 RO ~reset:0x46504741 "Constant 0x46504741 ('FPGA')."
       ; reg
           "VERSION"
           0x0004

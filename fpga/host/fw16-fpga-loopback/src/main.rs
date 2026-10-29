@@ -33,7 +33,7 @@ fn run(a: &args::Args) -> fw16_fpga::Result<u64> {
     let id = t.read32(fw16_fpga::regs::FW16_FPGA_ID)?;
     if id != fw16_fpga::regs::FW16_FPGA_ID_RESET {
         return Err(fw16_fpga::Error::Device(format!(
-            "ID reads {id:#010x}, not 'OMNI'"
+            "ID reads {id:#010x}, not 'FPGA'"
         )));
     }
     let version = t.read32(fw16_fpga::regs::FW16_FPGA_VERSION)?;

@@ -9,7 +9,7 @@ Identity, scratch, status and board telemetry.
 
 | Offset | Name | Access | Reset | Description |
 | --- | --- | --- | --- | --- |
-| 0x0000 | `ID` | RO | 0x4F4D4E49 | Constant 0x4F4D4E49 ('OMNI'). |
+| 0x0000 | `ID` | RO | 0x46504741 | Constant 0x46504741 ('FPGA'). |
 | 0x0004 | `VERSION` | RO | 0x2 | Register-map version.<br>`[15:0]` MINOR<br>`[31:16]` MAJOR |
 | 0x0008 | `SCRATCH` | RW | 0x0 | Free read/write word for host access tests. |
 | 0x000C | `STATUS` | RO | 0x0 | Live status bits.<br>`[0]` LINK_UP — PCIe user link up (from XDMA).<br>`[1]` MEM_READY — Ring-buffer memory calibrated / ready.<br>`[2]` SNK_ERR — Sink has counted at least one error since clear.<br>`[3]` RING_OVERFLOW — Ring buffer dropped data since clear. |
