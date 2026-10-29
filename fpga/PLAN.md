@@ -29,7 +29,7 @@ branch A adds ~4–8 weeks around S4.
 | **S1 — clearance known** | T0 (Phase 0) | CAD → PCB: vertical clearance, pad-field geometry, insert positions (`bay/KEEPOUT.md` v1). Picks branch B/A. |
 | **S2 — outline frozen** | ~wk 2 | CAD → PCB: board outline, mounting holes, heatsink footprint and height, rear-slot position. PCB layout can start. |
 | **S3 — pinout frozen** | ~wk 4 | PCB → FPGA: every FPGA pin assignment (XDC). PCB → software: power-telemetry and LED/GPIO map. FPGA → software: register map v0 (ABI). After S3 the schematic's FPGA pins don't move without a 3-way review. |
-| **S4 — boards back** | ~wk 8–10 | PCB runs the bench stages. FPGA must have the *alive* bitstream (JTAG-only: LED blink, SYSMON readout, DDR4/BRAM self-test). Software must have the XDMA driver built and `omni-loopback` passing against `mock`. |
+| **S4 — boards back** | ~wk 8–10 | PCB runs the bench stages. FPGA must have the *alive* bitstream (JTAG-only: LED blink, SYSMON readout, DDR4/BRAM self-test). Software must have the `omni` crate's `vfio` layer passing in the QEMU `edu` VM and `omni-loopback` passing against `mock`. |
 | **S5 — PCIe trains in the bay** | ~wk 10–12 | PCB → everyone: `LnkSta` result (Gen3/Gen4, width). FPGA → software: PCIe bitstream in flash. Software captures enumeration, suspend/resume, loopback. |
 | **S6 — thermal soak result** | ~wk 12 | Software → CAD/PCB: Tj, surface temps, fan RPM, rail draw under 1 h loopback. CAD iterates the heatsink; PCB scopes spin 2. |
 
@@ -123,21 +123,29 @@ Owner artefacts: `gateware/shell/`, `gateware/vivado/*.tcl`, `gateware/sim/`.
 Owner artefacts: `driver/`, `host/`, `benchmarks/bay/`, `docs/thermal/`.
 
 1. **Bay reference tests**: scripts that record `lspci -vv` (BDF, `LnkCap`/`LnkSta`), `dmesg` on enumerate,
-   and a suspend/resume cycle test — run first on the Dual M.2 + NVMe reference the day the laptop arrives;
-   the same scripts later test the card. Store results in `benchmarks/bay/`.
-2. **XDMA driver**: build `dma_ip_drivers/XDMA/linux-kernel` against the laptop's kernel (DKMS or Nix
-   package), udev rules for the char devices, a `driver/README.md` with the exact steps.
-3. **`omni_transport`** (C): `open/read_regs/write_regs/dma_read/dma_write/wait_irq`; backends `local_xdma`
-   and `mock` (in-process ring buffer behaving like the shell). Register definitions consumed from the FPGA
-   path's generated header. → **S3**
-4. **`omni-loopback`** CLI: streams for N seconds at a target rate, reports GB/s, error count, interrupt
-   latency; passes against `mock` in CI before S4. → **S4**
-5. **Measurement tooling**: logging for the inline USB-C PD meter (or `/sys/class/power_supply` on battery),
-   `sensors`/thermocouple logger, fan RPM via `framework_tool`/`ectool`, FPGA SYSMON via `omni_transport`;
-   one script produces the S6 report (`docs/thermal/<date>-<spin>.md`).
+   a suspend/resume cycle test, and the bay device's **IOMMU group** plus `ACSCap`/`ACSCtl` on its root port —
+   run first on the Dual M.2 + NVMe reference the day the laptop arrives; the same scripts later test the
+   card. Store results in `benchmarks/bay/`. The IOMMU-group result gates decision 0009.
+2. **Driver = Rust VFIO userspace, no kernel module** ([decision 0009](../docs/decisions/0009-host-driver.md)).
+   `driver/` holds the NixOS module (IOMMU on, card VID:DID bound to `vfio-pci`, device-node permissions)
+   and `driver/README.md`. The `omni` crate's `vfio` layer (container/group/device, BAR mmap, IOMMU DMA
+   map, interrupt eventfds) is tested in a QEMU VM against the `edu` DMA device (MSI, not MSI-X) with a vIOMMU; the `xdma`
+   descriptor engine (PG195 SG descriptors, H2C/C2H channels) is tested against an XDMA model in `mock`.
+3. **`omni` crate** (Rust, cargo workspace in `host/`): a `Transport` trait — open, read/write regs,
+   library-owned DMA buffers, `dma_read`/`dma_write`, `wait_irq`; backends `mock` (in-process model of the
+   shell + XDMA), `vfio` (the card), later `sim` (Path 3's Hardcaml cyclesim over a pipe, once the shell RTL
+   exists). Register constants via `bindgen` on the generated `host/include/omni_regs.h`. Patterns
+   (counter, PRBS-31) hand-ported from `gateware/shell/pattern.ml`; `sim` is their cross-check. → **S3**
+4. **`omni-loopback`** (Rust binary): c2h / h2c / ring-loopback modes, streams for N seconds at a target
+   rate, reports GB/s, error count, interrupt latency; `nix develop -c cargo test` + a mock run pass before
+   S4. → **S4**
+5. **Measurement tooling** (Rust where it touches the card, bash for capture scripts): logging for the
+   inline USB-C PD meter (or `/sys/class/power_supply` on battery), `sensors`/thermocouple logger, fan RPM
+   via `framework_tool`/`ectool`, FPGA SYSMON and `PWR_MW` via `omni`; one command produces the S6 report
+   (`docs/thermal/<date>-<spin>.md`).
 6. **In-bay validation** at S5: enumerate, suspend/resume, 1 h loopback on mains and battery, AER/correctable
    error counts; write the result into the Phase 2 acceptance list. → **S6**
-7. **Hand-off to Phase 4**: `omni_transport` is the library the cytometer app builds on; freeze v0 ABI.
+7. **Hand-off to Phase 4**: the `omni` crate is the library the cytometer app builds on; freeze v0 ABI.
 
 ## Parts
 
@@ -171,4 +179,7 @@ Owner artefacts: `driver/`, `host/`, `benchmarks/bay/`, `docs/thermal/`.
 
 - Branch B: SOM stack height, connector part number and pinout quality — all from the Phase 0 quote.
 - Does the bay's root port train Gen4 to a non-GPU endpoint with the stock BIOS? S5 answers it.
+- Is the bay's root port alone in its IOMMU group (or behind ACS)? If it shares a group with the NVMe or USB4
+  controller, VFIO needs ACS override and [decision 0009](../docs/decisions/0009-host-driver.md) reopens.
+  Day-one Dual M.2 test answers it.
 - Is the bay's USB 2.0 pair worth routing to the rear as a free low-speed tray channel? Cheap to add.

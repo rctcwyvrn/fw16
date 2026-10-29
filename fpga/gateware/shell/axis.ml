@@ -2,7 +2,6 @@
    250 MHz (Gen4 x4 / Gen3 x8 rate). Source-side fields only; tready travels
    the other way as a plain signal. *)
 
-open Hardcaml
 
 let data_width = 256
 

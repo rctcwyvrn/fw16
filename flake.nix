@@ -11,6 +11,9 @@
 #
 # Vivado is not provided by nix: it is the user's install under
 # $OMNI_VIVADO (default ~/vivado/2025.2), put on PATH by the shellHook.
+#
+# Konnect (the KiCad MCP server) is not provided here; it runs from
+# ~/bin/konnect and drives the kicad-cli from this same pin.
 {
   description = "Omnimeter dev environment";
 
@@ -62,6 +65,14 @@
           hardcaml_circuits
           hardcaml_xilinx
         ]);
+
+        # The kicad wrapper sets these only for its own binaries; Konnect (and
+        # any script) resolves stock libraries like Device:R through them, so
+        # export them for everything started from this shell — including
+        # Claude Code.
+        KICAD10_SYMBOL_DIR = "${pkgs.kicad.libraries.symbols}/share/kicad/symbols";
+        KICAD10_FOOTPRINT_DIR = "${pkgs.kicad.libraries.footprints}/share/kicad/footprints";
+        KICAD10_3DMODEL_DIR = "${pkgs.kicad.libraries.packages3d}/share/kicad/3dmodels";
 
         shellHook = ''
           export OMNI_VIVADO="''${OMNI_VIVADO:-$HOME/vivado/2025.2}"

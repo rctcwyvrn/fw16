@@ -1,0 +1,5 @@
+(library
+ (name omni_shell)
+ (libraries hardcaml regmap)
+ (preprocess
+  (pps ppx_hardcaml)))
