@@ -29,3 +29,13 @@
 **Did:**
 - CLAUDE.md: plans index, decision-records-win rule, MCP-only-in-orchestrator, handoffs, VCS (commit + push without asking), worker rules ported from omnimeter lessons.
 - Lesson commit-without-asking.md; committed in groups (KiCad rename, plans, CLAUDE.md + lessons, chat logs) and pushed.
+
+## 19:38 start MCP lane only
+**User:** dont spawn the parallel agents yet, start with just the konnect and fusion360 work
+**Did:**
+- Found omnimeter's card work has moved past the import (pcie_sideband, config, XCAU15P symbol, core_power 0ee72b0, BFM sim pass 10fec6b3; pinplan.csv uncommitted, 4 claude processes live).
+- Stopped before any Konnect/Fusion call; asking which repo owns the card and what MCP work to do first.
+**Asked:** (1) Card home — fw16 re-import + freeze omni / omnimeter owns card / both → **"dont reimport, just copy over decisions, and continue here, omnimeter should have no changes from now on"**. (2) MCP busy — wait / tools free → **No, tools are free**. (3) First work — tray outline in Fusion / keyboard KiCad / nothing → **Tray outline in Fusion**.
+**Did:**
+- Carried omnimeter's post-import decisions as text (bd11feb3): KEEPOUT/POWER diffs, pinplan.csv, decision 0010 (pin plan, Quad 225, sideband/config sheets), 2 lessons. No KiCad files copied.
+- Fusion: imported Framework_16_all_UMA_asm_0408 into a new unsaved assembly doc; sketch tray_keepout_v1/underside_keepout; wrote keyboard/tray/KEEPOUT.md v1 (datum Y −12.85, feet, intakes, expansion-card rim limit).
