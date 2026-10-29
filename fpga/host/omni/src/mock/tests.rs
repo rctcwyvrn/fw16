@@ -6,7 +6,6 @@ use std::time::Duration;
 use super::*;
 use crate::counters::read_u64;
 use crate::pattern::{Checker, Generator, Mode, WORDS_PER_BEAT, counter_beat};
-use crate::regs::proposed::*;
 use crate::regs::*;
 
 const T: Duration = Duration::from_millis(10);
