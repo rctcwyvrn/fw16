@@ -146,10 +146,12 @@ fn fault_injection_corrupts_c2h() {
 fn lo_read_latches_hi() {
     let m = Mock::new();
     m.state()
+        .card
         .shell
         .set_beat_counters(0x1_FFFF_FFFF, 0x2_0000_0005);
     assert_eq!(m.read32(OMNI_SRC_BEATS_LO).unwrap(), 0xFFFF_FFFF);
     m.state()
+        .card
         .shell
         .set_beat_counters(0x2_0000_0000, 0x2_0000_0005); // carry after the LO read
     assert_eq!(

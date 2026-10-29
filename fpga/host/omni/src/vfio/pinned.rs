@@ -91,6 +91,11 @@ impl Pinned {
         self.iova
     }
 
+    /// Byte 0 of the mapping, for device-shared access without a slice.
+    pub fn as_ptr(&self) -> *mut u64 {
+        self.ptr.as_ptr()
+    }
+
     /// The first `words` u64s. `words * 8` must not exceed the mapping.
     pub fn words(&self, words: usize) -> &[u64] {
         assert!(words * 8 <= self.mapped);

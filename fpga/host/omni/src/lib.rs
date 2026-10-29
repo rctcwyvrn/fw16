@@ -17,6 +17,7 @@ pub mod regs;
 pub mod sleep_inhibit;
 mod transport;
 pub mod vfio;
+pub mod xdma;
 
 pub use dma_buf::DmaBuf;
 pub use error::{Error, Result};

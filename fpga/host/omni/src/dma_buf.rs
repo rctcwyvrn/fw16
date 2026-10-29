@@ -12,7 +12,7 @@
 //! must keep to the same rule.
 
 use crate::error::{Error, Result};
-use crate::pattern::{BEAT_BYTES, WORDS_PER_BEAT};
+use crate::pattern::BEAT_BYTES;
 use crate::vfio::Pinned;
 
 pub struct DmaBuf {
@@ -22,17 +22,22 @@ pub struct DmaBuf {
 }
 
 enum Storage {
-    // u64 storage keeps the buffer 8-byte aligned for `words()`.
-    Host(Vec<u64>),
+    // u64 storage keeps the buffer 8-byte aligned for `words()`. `iova` is
+    // the bus address the mock's XDMA model knows it by.
+    Host { mem: Vec<u64>, iova: u64 },
     Pinned(Pinned),
 }
 
 impl DmaBuf {
-    pub(crate) fn new_host(len: usize) -> Result<Self> {
+    /// Plain memory with a made-up bus address `iova` (the mock's).
+    pub(crate) fn new_host(len: usize, iova: u64) -> Result<Self> {
         check_beats(len)?;
         Ok(DmaBuf {
             words: len / 8,
-            storage: Storage::Host(vec![0; len / 8]),
+            storage: Storage::Host {
+                mem: vec![0; len / 8],
+                iova,
+            },
         })
     }
 
@@ -57,11 +62,13 @@ impl DmaBuf {
         self.words == 0
     }
 
-    /// The bus address the device uses for byte 0, for buffers from the
-    /// vfio backend; `None` for host-only (mock) buffers.
+    /// The bus address the device uses for byte 0: the IOMMU address for
+    /// vfio buffers, a made-up one the mock's XDMA model resolves for mock
+    /// buffers. `Option` because a transport may one day hand out buffers
+    /// no device can name.
     pub fn iova(&self) -> Option<u64> {
         match &self.storage {
-            Storage::Host(_) => None,
+            Storage::Host { iova, .. } => Some(*iova),
             Storage::Pinned(p) => Some(p.iova()),
         }
     }
@@ -70,27 +77,48 @@ impl DmaBuf {
     /// pattern reads.
     pub fn words(&self) -> &[u64] {
         match &self.storage {
-            Storage::Host(v) => v,
+            Storage::Host { mem, .. } => mem,
             Storage::Pinned(p) => p.words(self.words),
         }
     }
 
     pub fn words_mut(&mut self) -> &mut [u64] {
         match &mut self.storage {
-            Storage::Host(v) => v,
+            Storage::Host { mem, .. } => mem,
             Storage::Pinned(p) => p.words_mut(self.words),
         }
     }
 
-    /// Beat `i` as four words.
-    pub(crate) fn beat(&self, i: usize) -> [u64; WORDS_PER_BEAT] {
-        self.words()[i * WORDS_PER_BEAT..][..WORDS_PER_BEAT]
-            .try_into()
-            .unwrap()
+    /// Byte 0, without making a slice: for memory the device may write
+    /// while the pointer is in use (see [`read_volatile_u32`]).
+    ///
+    /// [`read_volatile_u32`]: Self::read_volatile_u32
+    pub(crate) fn as_ptr(&self) -> *const u64 {
+        match &self.storage {
+            Storage::Host { mem, .. } => mem.as_ptr(),
+            Storage::Pinned(p) => p.as_ptr(),
+        }
     }
 
-    pub(crate) fn set_beat(&mut self, i: usize, beat: [u64; WORDS_PER_BEAT]) {
-        self.words_mut()[i * WORDS_PER_BEAT..][..WORDS_PER_BEAT].copy_from_slice(&beat);
+    pub(crate) fn as_mut_ptr(&mut self) -> *mut u64 {
+        match &mut self.storage {
+            Storage::Host { mem, .. } => mem.as_mut_ptr(),
+            Storage::Pinned(p) => p.as_ptr(),
+        }
+    }
+
+    /// The u32 at byte `offset`, read the way a polled writeback must be:
+    /// volatile, so each call really looks at memory the device writes.
+    pub(crate) fn read_volatile_u32(&self, offset: usize) -> u32 {
+        assert!(offset.is_multiple_of(4) && offset + 4 <= self.len());
+        // SAFETY: in bounds and aligned (just checked; storage is 8-aligned).
+        unsafe {
+            self.as_ptr()
+                .cast::<u8>()
+                .add(offset)
+                .cast::<u32>()
+                .read_volatile()
+        }
     }
 
     /// Checks a transfer length against this buffer.
