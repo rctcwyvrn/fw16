@@ -1,0 +1,9 @@
+[package]
+name = "omni"
+description = "Host library for the omnimeter card: transports (mock, later vfio and sim), registers, test patterns"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[build-dependencies]
+bindgen = "0.72"

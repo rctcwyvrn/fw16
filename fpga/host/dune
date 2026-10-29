@@ -1,0 +1,2 @@
+; cargo owns target/ (build output); dune must not scan it.
+(data_only_dirs target)
