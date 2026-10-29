@@ -1,7 +1,7 @@
 # 0011 — fpga sheet: decoupling, unused banks/quads, housekeeping pins
 
 **Date:** 2026-10-29
-**Status:** accepted 2026-10-29 (user: "Approve, but more VCCINT caps"; RCAL → 100 Ω). Not drawn yet.
+**Status:** accepted 2026-10-29 (user: "Approve, but more VCCINT caps"; RCAL → 100 Ω). Drawn in `bay/card/fpga.kicad_sch` (A1) the same day.
 
 ## Context
 
@@ -56,6 +56,30 @@ the MGT LDOs); the counts above are at the FPGA.
 | VP, VN | GNDADC (unused) | UG580 Table 1-2 p.15 |
 | VCCADC | `+1V8` through a ferrite bead, 470 nF + 100 nF (100 nF at the ball) | UG580 Fig 5-1 p.97 and notes, p.96 |
 | GNDADC | GND through a ferrite bead (on-chip sensors only) | UG580 Table 1-2, p.97 |
+
+## Part choices (user, 2026-10-29)
+
+- VCCINT bulk: **330 µF/2.5 V polymer tantalum, EIA-7343** + **100 µF/4 V MLCC, 1210**. Check the 7343's ~4 mm
+  height against the 7.8 mm middle-zone ceiling (`bay/KEEPOUT.md`) at placement.
+- Oscillators: **SiTime SiT8008 100 MHz LVCMOS 3.3 V, 2016** for CLK100M (populated); **SiTime SiT9121 100 MHz LVDS,
+  3225** footprint for the DNP GT bench clock on MGTREFCLK1_225.
+- U.FL input on AB15 (net `PPS_IN`, name kept for 0010/gateware): built for **PPS and a 10 MHz reference / fast
+  trigger**, since it is spin 1's only external input. **TPD1E04U04** low-capacitance ESD (~0.5 pF) + 33 Ω series.
+  The HD-bank LVCMOS input caps useful bandwidth at tens of MHz.
+
+## As drawn: Claude's judgment calls (review)
+
+- U14 footprint: KiCad `Package_BGA:BGA-676_27.0x27.0mm_Layout26x26_P1.0mm_Ball0.6mm_Pad0.5mm_NSMD` (Xilinx
+  BGA-676); its 676 pad names match the Vivado ball list exactly. Pad size vs UG575's FFVB676 land pattern not checked.
+- SiT9121: no KiCad symbol, so `fw16-fpga-module:SiT9121` was created (1 OE, 2 NC, 3 GND, 4 OUT, 5 ~OUT, 6 VDD) for
+  KiCad's SiT9121 footprint; check the pinout against the datasheet's ordering-code variant before buying.
+  Powered from `+3V3_IO`, OE tied high; DNP with its 100 nF and the two 10 nF AC caps.
+- SiT8008 (Y1): OE tied to `+3V3_IO`, no series resistor on CLK100M.
+- TPD1E04U04 uses KiCad's `TPD1E05U06DPY` symbol/footprint (same DPY0002A two-pin package, I/O + GND).
+- SYSMON filter ferrites: BLM18PG221SN1 (0603) on VCCADC and GNDADC; PWR_FLAGs on both nets.
+- LEDs: green 0603 with 1 kΩ (≈ 1.3 mA at 3.3 V).
+- ERC warnings left: VBATT/POR_OVERRIDE/RSVDGND are "bidirectional" in the generated symbol and meet GND's
+  power flag; the interposer's local `GND` label (carried from omnimeter, left as is).
 
 ## RCAL resistor (corrects 0010)
 
