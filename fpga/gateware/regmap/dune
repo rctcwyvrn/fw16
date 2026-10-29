@@ -1,0 +1,13 @@
+(library
+ (name regmap))
+
+
+; REGMAP.md is committed beside the table; same stale-check as host/include.
+(rule
+ (targets REGMAP.md.gen)
+ (action
+  (with-stdout-to REGMAP.md.gen (run %{exe:bin/gen.exe} md))))
+
+(rule
+ (alias regmap)
+ (action (diff REGMAP.md REGMAP.md.gen)))

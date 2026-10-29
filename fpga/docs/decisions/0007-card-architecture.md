@@ -1,7 +1,7 @@
 # 0007 — No dev board; SOM carrier if it fits the bay, else minimal chip-down spin 1
 
 **Date:** 2026-10-28
-**Status:** accepted; the B/A branch resolves in Phase 0 once bay clearance is measured
+**Status:** accepted; **branch A taken 2026-10-28** (see Branch taken)
 
 ## Context
 
@@ -33,3 +33,9 @@ when taken. The AUBoard is dropped in both branches.
 - The $699 moves to the card budget; both branches come in under the old Phase 2 total.
 - In branch B, decision 0006's part is whatever the SOM carries (`-2FFVB676I`); 0006 stays correct on package.
 - In branch A, spin 2 is a committed cost, not a contingency.
+
+## Branch taken
+
+**A — minimal chip-down spin 1** (2026-10-28). The CAD inspection of the bay ruled out the SOM stack; the
+clearance numbers go in `bay/KEEPOUT.md`. Spin 1 is `XCAU15P-2FFVB676E` + power tree + PCIe x4 + QSPI + JTAG +
+fan pass-through, no DDR4, no rear I/O. Power input per [0008](0008-card-power-input.md).

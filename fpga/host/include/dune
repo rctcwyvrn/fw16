@@ -1,0 +1,11 @@
+; omni_regs.h is generated from gateware/regmap and committed so the C build
+; needs no OCaml. `dune build @regmap` fails when the copy is stale;
+; `dune build @regmap --auto-promote` refreshes it.
+(rule
+ (targets omni_regs.h.gen)
+ (action
+  (with-stdout-to omni_regs.h.gen (run %{exe:../../gateware/regmap/bin/gen.exe} c))))
+
+(rule
+ (alias regmap)
+ (action (diff omni_regs.h omni_regs.h.gen)))

@@ -1,0 +1,3 @@
+; dune sees only the OCaml/generated parts of the repo; bay/ holds KiCad and
+; third-party checkouts that dune must not scan.
+(dirs gateware host)
