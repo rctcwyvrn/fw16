@@ -74,3 +74,9 @@
 **Did:**
 - fpga.kicad_sch set to A1; U14 XCAU15P all 14 units placed; 244 NC flags, GND buses (203 junctions), 92 rail labels, 57 nets from a script over the Vivado CSV + pinplan.csv.
 - U14 0 unconnected pins; card ERC 6 errors, all nets awaiting passives (VCCADC/GNDADC filters, REFCLK0/1 caps).
+
+## 20:58 fpga sheet passives + part choices
+**Asked:** (1) VCCINT bulk — polymer tantalum + MLCC / all MLCC / defer → **Polymer tantalum 330 µF + MLCC 100 µF**. (2) Oscillators — SiTime MEMS / generic XO / placeholders → **SiTime MEMS, 2016**. (3) PPS ESD → **"What would need a higher than 1hz signal?"**; answered (10 MHz ref, triggers); follow-up U.FL purpose — PPS+10 MHz ref/trigger / PPS only → **PPS + 10 MHz ref/trigger** (TPD1E04U04).
+**Did:**
+- Created SiT9121 symbol; placed 57 passives (decoupling per 0011, SYSMON filter, RCAL 100 Ω, TX/REFCLK AC caps, Y1/Y2, U.FL+ESD+33 Ω, LEDs) + 40 GND + 2 PWR_FLAG; U14 footprint BGA-676.
+- Netlist check: U14 676/676 balls and every passive pin on the intended net; card ERC 0 errors, 4 benign warnings. Judgment calls listed in 0011.
