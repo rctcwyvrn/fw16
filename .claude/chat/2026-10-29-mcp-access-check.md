@@ -68,3 +68,9 @@
 **Did:**
 - Pin-plan check PASS on fw16 synth (after loading the OOC XDMA dcp into its cell): lanes on GTHE4_CHANNEL_X0Y4–7 (Quad 225); Vivado power-estimate warning on Vccint recorded as open item.
 - pinplan.csv + 0010 amended to 100 Ω RCAL; 0011 accepted with 8× 100 nF 0402 extra on VCCINT (count is my call).
+
+## 20:46 fpga sheet: U14 wired
+**User:** (after /mcp reconnect) Try again?
+**Did:**
+- fpga.kicad_sch set to A1; U14 XCAU15P all 14 units placed; 244 NC flags, GND buses (203 junctions), 92 rail labels, 57 nets from a script over the Vivado CSV + pinplan.csv.
+- U14 0 unconnected pins; card ERC 6 errors, all nets awaiting passives (VCCADC/GNDADC filters, REFCLK0/1 caps).
