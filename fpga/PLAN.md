@@ -46,9 +46,10 @@ card works.
    Dual M.2 Adapter already implies plain endpoints are fine; note what it connects on those pins if visible).
 
 ### C. Design the card (`bay/card/`, KiCad)
-10. **FPGA decision record** `docs/decisions/0006-fpga.md`: AU15P (`XCAU15P-2SBVB484E`, 0.8 mm pitch, 12 GTH,
-    Gen4 x4 hard block) unless the quote is > $300 or allocated, in which case Efinix Ti375 (free tools, Gen4
-    x4 hard block, LPDDR4) and the Hardcaml→Efinity flow is accepted. **Get the AU15P quote in Phase 0.**
+10. **FPGA part** ([decision 0006](../docs/decisions/0006-fpga.md), accepted): `XCAU15P-2FFVB676E` — 27 × 27 mm,
+    1.0 mm pitch, 12 GTH, and the only AU15P package with PCIe Gen4; identical to the AUBoard so its
+    constraints and DDR4 reference transfer. Confirm the 27 mm body against `bay/KEEPOUT.md` (step 7) before
+    schematic. Reopen 0006 only if the Phase 0 quote is > $300 or the part is allocated.
 11. **Schematic.** Land pattern for the two FXBeam fields from the community footprints, checked pin by pin
     against the Electrical README (power field: 5V_ALW ×4, 3V3_ALW ×4, VADP_GPU ×6, 12V_FAN, Fan0/1 PWM and
     SPEED, I²C_ALW, GPIO0–3_EC, ID0; signal field: 4 PCIe lanes used of 8, REFCLK, PERST#, CLKREQ#, USB 2.0,
