@@ -1,6 +1,6 @@
 # Register map v0.2 — proposal from the software path (Path 4)
 
-**Date:** 2026-10-28 · **For:** Path 3 (`gateware/regmap/map_v0.ml`, XDMA IP config) · **Status:** proposed
+**Date:** 2026-10-28 · **For:** Path 3 (`gateware/regmap/map_v0.ml`, XDMA IP config) · **Status:** landed (ab9cd540)
 
 Software drives the card from userspace through VFIO ([decision 0009](decisions/0009-host-driver.md)), so it
 programs the XDMA engine itself and needs a few things fixed in the IP configuration as well as in the

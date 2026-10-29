@@ -71,7 +71,7 @@
 #define OMNI_TS_PPS_HI 0x4010u /* RO: High word as of the last TS_PPS_LO read. */
 #define OMNI_TS_PPS_COUNT 0x4014u /* RO: PPS edges seen since reset. */
 
-/* IRQ — Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero. */
+/* IRQ — Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero. usr_irq_req is a held level and MSI-X fires only on its rising edge, so after clearing IRQ_PENDING the host must re-read it until it reads 0 under IRQ_EN before waiting for the next interrupt. */
 #define OMNI_IRQ_BASE 0x5000u
 #define OMNI_IRQ_EN 0x5000u /* RW: Per-source enable. */
 #define OMNI_IRQ_EN_FORCE_SHIFT 0

@@ -11,7 +11,8 @@
  (action (diff omni_regs.h omni_regs.h.gen)))
 
 ; omni_patterns.txt: the first 64 beats of both test patterns, printed from the
-; RTL's own Pattern module, for host/omni's pattern tests. Same stale-check.
+; RTL's own Pattern module, for host/omni's pattern tests. Stale-checked under
+; both @regmap and plain `dune runtest`, so a pattern.ml change can't slip by.
 (rule
  (targets omni_patterns.txt.gen)
  (action
@@ -20,4 +21,8 @@
 
 (rule
  (alias regmap)
+ (action (diff omni_patterns.txt omni_patterns.txt.gen)))
+
+(rule
+ (alias runtest)
  (action (diff omni_patterns.txt omni_patterns.txt.gen)))

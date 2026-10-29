@@ -66,7 +66,7 @@ Ring buffer between the source and C2H, backed by BRAM or DDR4.
 
 ## IRQ — 0x5000
 
-Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero.
+Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero. usr_irq_req is a held level and MSI-X fires only on its rising edge, so after clearing IRQ_PENDING the host must re-read it until it reads 0 under IRQ_EN before waiting for the next interrupt.
 
 | Offset | Name | Access | Reset | Description |
 | --- | --- | --- | --- | --- |

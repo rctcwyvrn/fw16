@@ -144,7 +144,10 @@ let irq =
   { bname = "IRQ"
   ; base = 0x5000
   ; bdoc =
-      "Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero."
+      "Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero. \
+       usr_irq_req is a held level and MSI-X fires only on its rising edge, so after \
+       clearing IRQ_PENDING the host must re-read it until it reads 0 under IRQ_EN \
+       before waiting for the next interrupt."
   ; regs =
       [ reg "IRQ_EN" 0x5000 RW "Per-source enable." ~fields:irq_sources
       ; reg
