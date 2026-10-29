@@ -54,7 +54,10 @@ VSYS_GPU ─ eFuse (EN from mgmt, PG) ─ current sense ─┬─ buck → 5V0_M
 - **VCCO plan:** 1.8 V for bank 0/QSPI and most I/O (shared with VCCAUX per DS931), plus a small **3.3 V HD-bank
   rail `+3V3_IO`** for the sense bus, EC sidebands and LEDs. The tree's "VCCO 3.3 V (QSPI…)" line is wrong: QSPI
   (MT25QU256) is 1.8 V.
-- Still open: 1.8 V buck part, 1.5 V pre-buck part, MGTVCCAUX source, +3V3_IO regulator, power-off ordering.
+- **Remaining core_power picks (2026-10-29, second round):** 1.8 V (VCCAUX/AUX_IO + 1.8 V VCCO) = **TLV62569P**;
+  ~1.5 V MGT pre-buck = **TLV62569P**; MGTVCCAUX = **TLV75518P** LDO from 5V0_MAIN; `+3V3_IO` = **TLV755P-3.3**
+  LDO (RT9013-33 fallback).
+- **Power-off ordering: a sequencer IC (LM3880-class)** orders the rails up and down, instead of a bare PG→EN chain.
 
 ## Proposal: group-2 part shortlists (2026-10-29, user to pick)
 
