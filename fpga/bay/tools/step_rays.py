@@ -18,7 +18,7 @@ from OCC.Core.gp import gp_Dir, gp_Lin, gp_Pnt
 class Solid:
     def __init__(self, shape, lo, hi, box=None):
         self.shape, self.lo, self.hi, self.box = shape, lo, hi, box
-        self._isect = None
+        self._isect = self._cls = None
 
     def cast(self, p, d, far=400.0):
         """Distance from point p along unit direction d (3-tuples) to this solid's first face, or None.
@@ -43,8 +43,10 @@ class Solid:
         if (sign > 0 and self.hi[1] < y0) or (sign < 0 and self.lo[1] > y0):
             return None
         if self.lo[1] < y0 < self.hi[1]:
-            c = BRepClass3d_SolidClassifier(self.shape, gp_Pnt(x, y0, z), 1e-4)
-            if c.State() == TopAbs_IN:
+            if self._cls is None:  # built once: per-call construction dominated whole-laptop runs
+                self._cls = BRepClass3d_SolidClassifier(self.shape)
+            self._cls.Perform(gp_Pnt(x, y0, z), 1e-4)
+            if self._cls.State() == TopAbs_IN:
                 return 0.0
         if self._isect is None:
             self._isect = IntCurvesFace_ShapeIntersector()
