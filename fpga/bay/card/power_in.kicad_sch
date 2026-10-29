@@ -2499,39 +2499,6 @@
 	)
 	(global_label "+3V3_ALW"
 		(shape input)
-		(at 35.56 146.05 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "20069bb6-2320-474a-b1c7-e813f6ef86b1")
-	)
-	(global_label "+3V3_ALW"
-		(shape input)
-		(at 50.8 146.05 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "689d4fd1-a85e-4929-9202-bd9edcd4074d")
-	)
-	(global_label "+3V3_ALW"
-		(shape input)
-		(at 66.04 146.05 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "4ae5a522-4d05-456a-969b-c66353bfa423")
-	)
-	(global_label "+3V3_ALW"
-		(shape input)
 		(at 203.2 146.05 0)
 		(effects
 			(font
@@ -2705,6 +2672,39 @@
 			(justify left)
 		)
 		(uuid "f31a70d1-e3bb-412d-944a-8071a2a4d6e7")
+	)
+	(global_label "+3V3_IO"
+		(shape input)
+		(at 35.56 146.05 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "bb4636e1-e94f-407f-92cb-11b589da8e48")
+	)
+	(global_label "+3V3_IO"
+		(shape input)
+		(at 50.8 146.05 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4c449fca-1268-4ef1-b3e7-e674c6720a77")
+	)
+	(global_label "+3V3_IO"
+		(shape input)
+		(at 66.04 146.05 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6b510d92-bad8-41c6-8c3b-31c693da7b8c")
 	)
 	(symbol
 		(lib_id "omnimeter:TPS259474LRPW")
