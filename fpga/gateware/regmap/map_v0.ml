@@ -1,12 +1,16 @@
 (* Register map v0 — the S3 ABI shared with host/. One 4 KiB block per
    subsystem on BAR0 (XDMA's AXI-Lite master), 32-bit registers, 4-byte
    aligned. Adding a register inside a block never moves another block;
-   changing an existing offset after S3 needs a 3-way review. *)
+   changing an existing offset after S3 needs a 3-way review.
+
+   v0.2 (docs/regmap-v0.2-proposal.md): the IRQ block, and every RO
+   [<P>_LO]/[<P>_HI] pair is tear-free — a read of [_LO] latches the high word,
+   which [_HI] returns (Regs implements this for every such pair by name). *)
 
 open Reg
 
 let version_major = 0
-let version_minor = 1
+let version_minor = 2
 
 let ctl =
   { bname = "CTL"
@@ -63,8 +67,8 @@ let src =
           RW
           ~reset:0x10000
           "Beats offered per 2^16 clock cycles; >= 0x10000 means every cycle."
-      ; reg "SRC_BEATS_LO" 0x1008 RO "Beats accepted downstream, low word."
-      ; reg "SRC_BEATS_HI" 0x100C RO "Beats accepted downstream, high word."
+      ; reg "SRC_BEATS_LO" 0x1008 RO "Beats accepted downstream, low word; reading it latches _HI."
+      ; reg "SRC_BEATS_HI" 0x100C RO "High word as of the last SRC_BEATS_LO read."
       ; reg "SRC_CLEAR" 0x1010 WO_PULSE "Bit 0: reset the beat counter and pattern state."
       ]
   }
@@ -85,8 +89,8 @@ let snk =
             ; field "MODE" 1 "Expected pattern: 0 = counter, 1 = PRBS-31."
             ]
       ; reg "SNK_ERRS" 0x2004 RO "Beats that did not match the expected pattern."
-      ; reg "SNK_BEATS_LO" 0x2008 RO "Beats received, low word."
-      ; reg "SNK_BEATS_HI" 0x200C RO "Beats received, high word."
+      ; reg "SNK_BEATS_LO" 0x2008 RO "Beats received, low word; reading it latches _HI."
+      ; reg "SNK_BEATS_HI" 0x200C RO "High word as of the last SNK_BEATS_LO read."
       ; reg "SNK_CLEAR" 0x2010 WO_PULSE "Bit 0: reset counters and pattern state."
       ]
   }
@@ -118,13 +122,47 @@ let ts =
   ; bdoc = "64-bit timestamp counter and PPS capture (Path 3 step 4)."
   ; regs =
       [ reg "TS_LATCH" 0x4000 WO_PULSE "Bit 0: copy the live counter into TS_NOW_*."
-      ; reg "TS_NOW_LO" 0x4004 RO "Counter at the last TS_LATCH, low word."
-      ; reg "TS_NOW_HI" 0x4008 RO "Counter at the last TS_LATCH, high word."
-      ; reg "TS_PPS_LO" 0x400C RO "Counter at the last PPS rising edge, low word."
-      ; reg "TS_PPS_HI" 0x4010 RO "Counter at the last PPS rising edge, high word."
+      ; reg "TS_NOW_LO" 0x4004 RO "Counter at the last TS_LATCH, low word; reading it latches _HI."
+      ; reg "TS_NOW_HI" 0x4008 RO "High word as of the last TS_NOW_LO read."
+      ; reg "TS_PPS_LO" 0x400C RO "Counter at the last PPS rising edge, low word; reading it latches _HI."
+      ; reg "TS_PPS_HI" 0x4010 RO "High word as of the last TS_PPS_LO read."
       ; reg "TS_PPS_COUNT" 0x4014 RO "PPS edges seen since reset."
       ]
   }
 ;;
 
-let blocks = [ ctl; src; snk; ring; ts ]
+(* One interrupt line (XDMA usr_irq_req[0]) shared by all sources. Bit 3 is
+   left free for a sink-done source if one is ever wanted. *)
+let irq_sources =
+  [ field "FORCE" 0 "IRQ_FORCE write (latency test)."
+  ; field "PPS" 1 "PPS rising edge (reads 0 until the TS unit lands)."
+  ; field "SNK_ERR" 2 "STATUS.SNK_ERR went 0 -> 1 (once per error run)."
+  ]
+;;
+
+let irq =
+  { bname = "IRQ"
+  ; base = 0x5000
+  ; bdoc =
+      "Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero."
+  ; regs =
+      [ reg "IRQ_EN" 0x5000 RW "Per-source enable." ~fields:irq_sources
+      ; reg
+          "IRQ_PENDING"
+          0x5004
+          RW1C
+          "Latched sources (set whether or not enabled); write 1 to clear. A set \
+           wins over a clear in the same cycle."
+          ~fields:irq_sources
+      ; reg "IRQ_COUNT" 0x5008 RO "Rising edges of usr_irq_req since reset (wraps)."
+      ; reg
+          "IRQ_FORCE"
+          0x500C
+          WO_PULSE
+          "Bit 0: set IRQ_PENDING.FORCE now."
+          ~fields:[ field "FORCE" 0 "" ]
+      ]
+  }
+;;
+
+let blocks = [ ctl; src; snk; ring; ts; irq ]

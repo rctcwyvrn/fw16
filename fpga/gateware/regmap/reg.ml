@@ -5,6 +5,7 @@ type access =
   | RO  (** read-only; writes ignored *)
   | RW  (** read/write, value held *)
   | WO_PULSE  (** write-only; each written 1 bit pulses for one cycle, reads 0 *)
+  | RW1C  (** hardware sets bits; reads the latched bits; writing 1 clears a bit *)
 
 type field =
   { fname : string
@@ -35,6 +36,7 @@ let access_to_string = function
   | RO -> "RO"
   | RW -> "RW"
   | WO_PULSE -> "WO (pulse)"
+  | RW1C -> "RW1C"
 ;;
 
 let field ?(width = 1) fname lsb fdoc = { fname; lsb; width; fdoc }

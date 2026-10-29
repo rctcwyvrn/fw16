@@ -3,14 +3,14 @@
 #define OMNI_REGS_H
 
 #define OMNI_REGMAP_VERSION_MAJOR 0u
-#define OMNI_REGMAP_VERSION_MINOR 1u
+#define OMNI_REGMAP_VERSION_MINOR 2u
 
 /* CTL — Identity, scratch, status and board telemetry. */
 #define OMNI_CTL_BASE 0x0000u
 #define OMNI_ID 0x0000u /* RO: Constant 0x4F4D4E49 ('OMNI'). */
 #define OMNI_ID_RESET 0x4F4D4E49u
 #define OMNI_VERSION 0x0004u /* RO: Register-map version. */
-#define OMNI_VERSION_RESET 0x00000001u
+#define OMNI_VERSION_RESET 0x00000002u
 #define OMNI_VERSION_MINOR_SHIFT 0
 #define OMNI_VERSION_MINOR_MASK 0x0000FFFFu
 #define OMNI_VERSION_MAJOR_SHIFT 16
@@ -37,8 +37,8 @@
 #define OMNI_SRC_CTL_MODE_MASK 0x00000002u
 #define OMNI_SRC_RATE 0x1004u /* RW: Beats offered per 2^16 clock cycles; >= 0x10000 means every cycle. */
 #define OMNI_SRC_RATE_RESET 0x00010000u
-#define OMNI_SRC_BEATS_LO 0x1008u /* RO: Beats accepted downstream, low word. */
-#define OMNI_SRC_BEATS_HI 0x100Cu /* RO: Beats accepted downstream, high word. */
+#define OMNI_SRC_BEATS_LO 0x1008u /* RO: Beats accepted downstream, low word; reading it latches _HI. */
+#define OMNI_SRC_BEATS_HI 0x100Cu /* RO: High word as of the last SRC_BEATS_LO read. */
 #define OMNI_SRC_CLEAR 0x1010u /* WO (pulse): Bit 0: reset the beat counter and pattern state. */
 
 /* SNK — AXI-Stream checker (from H2C). */
@@ -49,8 +49,8 @@
 #define OMNI_SNK_CTL_MODE_SHIFT 1
 #define OMNI_SNK_CTL_MODE_MASK 0x00000002u
 #define OMNI_SNK_ERRS 0x2004u /* RO: Beats that did not match the expected pattern. */
-#define OMNI_SNK_BEATS_LO 0x2008u /* RO: Beats received, low word. */
-#define OMNI_SNK_BEATS_HI 0x200Cu /* RO: Beats received, high word. */
+#define OMNI_SNK_BEATS_LO 0x2008u /* RO: Beats received, low word; reading it latches _HI. */
+#define OMNI_SNK_BEATS_HI 0x200Cu /* RO: High word as of the last SNK_BEATS_LO read. */
 #define OMNI_SNK_CLEAR 0x2010u /* WO (pulse): Bit 0: reset counters and pattern state. */
 
 /* RING — Ring buffer between the source and C2H, backed by BRAM or DDR4. */
@@ -65,10 +65,31 @@
 /* TS — 64-bit timestamp counter and PPS capture (Path 3 step 4). */
 #define OMNI_TS_BASE 0x4000u
 #define OMNI_TS_LATCH 0x4000u /* WO (pulse): Bit 0: copy the live counter into TS_NOW_*. */
-#define OMNI_TS_NOW_LO 0x4004u /* RO: Counter at the last TS_LATCH, low word. */
-#define OMNI_TS_NOW_HI 0x4008u /* RO: Counter at the last TS_LATCH, high word. */
-#define OMNI_TS_PPS_LO 0x400Cu /* RO: Counter at the last PPS rising edge, low word. */
-#define OMNI_TS_PPS_HI 0x4010u /* RO: Counter at the last PPS rising edge, high word. */
+#define OMNI_TS_NOW_LO 0x4004u /* RO: Counter at the last TS_LATCH, low word; reading it latches _HI. */
+#define OMNI_TS_NOW_HI 0x4008u /* RO: High word as of the last TS_NOW_LO read. */
+#define OMNI_TS_PPS_LO 0x400Cu /* RO: Counter at the last PPS rising edge, low word; reading it latches _HI. */
+#define OMNI_TS_PPS_HI 0x4010u /* RO: High word as of the last TS_PPS_LO read. */
 #define OMNI_TS_PPS_COUNT 0x4014u /* RO: PPS edges seen since reset. */
+
+/* IRQ — Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero. */
+#define OMNI_IRQ_BASE 0x5000u
+#define OMNI_IRQ_EN 0x5000u /* RW: Per-source enable. */
+#define OMNI_IRQ_EN_FORCE_SHIFT 0
+#define OMNI_IRQ_EN_FORCE_MASK 0x00000001u
+#define OMNI_IRQ_EN_PPS_SHIFT 1
+#define OMNI_IRQ_EN_PPS_MASK 0x00000002u
+#define OMNI_IRQ_EN_SNK_ERR_SHIFT 2
+#define OMNI_IRQ_EN_SNK_ERR_MASK 0x00000004u
+#define OMNI_IRQ_PENDING 0x5004u /* RW1C: Latched sources (set whether or not enabled); write 1 to clear. A set wins over a clear in the same cycle. */
+#define OMNI_IRQ_PENDING_FORCE_SHIFT 0
+#define OMNI_IRQ_PENDING_FORCE_MASK 0x00000001u
+#define OMNI_IRQ_PENDING_PPS_SHIFT 1
+#define OMNI_IRQ_PENDING_PPS_MASK 0x00000002u
+#define OMNI_IRQ_PENDING_SNK_ERR_SHIFT 2
+#define OMNI_IRQ_PENDING_SNK_ERR_MASK 0x00000004u
+#define OMNI_IRQ_COUNT 0x5008u /* RO: Rising edges of usr_irq_req since reset (wraps). */
+#define OMNI_IRQ_FORCE 0x500Cu /* WO (pulse): Bit 0: set IRQ_PENDING.FORCE now. */
+#define OMNI_IRQ_FORCE_FORCE_SHIFT 0
+#define OMNI_IRQ_FORCE_FORCE_MASK 0x00000001u
 
 #endif /* OMNI_REGS_H */

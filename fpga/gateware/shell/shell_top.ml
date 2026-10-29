@@ -27,6 +27,9 @@ module I = struct
     ; link_up : 'a
     ; temp : 'a [@bits 16]  (** SYSMON temperature word *)
     ; pwr_mw : 'a [@bits 32]
+    ; usr_irq_ack : 'a
+          (** XDMA usr_irq_ack[0]; unused: usr_irq_req is held until the host
+              clears IRQ_PENDING, which is all the MSI-X handshake needs *)
     }
   [@@deriving hardcaml ~rtlmangle:false]
 end
@@ -36,6 +39,7 @@ module O = struct
     { axil : 'a Axi_lite.S2m.t [@rtlprefix "s_axil_"]
     ; h2c_tready : 'a
     ; c2h : 'a Axis.t [@rtlprefix "m_axis_c2h_"]
+    ; usr_irq_req : 'a  (** XDMA usr_irq_req[0] *)
     }
   [@@deriving hardcaml ~rtlmangle:false]
 end
@@ -43,7 +47,7 @@ end
 module Make (M : Mem_port.S) = struct
   module Ring = Ring_buffer.Make (M)
 
-  (* Source, sink and ring are hierarchical: separate modules in generated RTL
+  (* Source, sink, ring and irq are hierarchical: separate modules in generated RTL
      unless [scope] flattens the design (simulation). Regs stays inline; its
      [value] lookup is not an interface. *)
   let create scope (i : _ I.t) : _ O.t =
@@ -60,10 +64,12 @@ module Make (M : Mem_port.S) = struct
     let snk_beats_lo = ro_wire "SNK_BEATS_LO" 32 in
     let snk_beats_hi = ro_wire "SNK_BEATS_HI" 32 in
     let ring_fill = ro_wire "RING_FILL" 32 in
+    let irq_pending = ro_wire "IRQ_PENDING" Irq.sources in
+    let irq_count = ro_wire "IRQ_COUNT" 32 in
     let ts_ro = List.map (fun n -> ro_wire n 32) [ "TS_NOW_LO"; "TS_NOW_HI"; "TS_PPS_LO"; "TS_PPS_HI"; "TS_PPS_COUNT" ] in
     let regs =
       Regs.create ~clock:i.clock ~clear:i.clear ~blocks:Map.blocks
-        ~ro:
+        ~hw:
           (("TEMP", i.temp)
            :: ("PWR_MW", i.pwr_mw)
            :: ("RING_DEPTH", of_unsigned_int ~width:32 M.depth)
@@ -119,9 +125,22 @@ module Make (M : Mem_port.S) = struct
     snk_beats_lo <-- sel_bottom sink.beats ~width:32;
     snk_beats_hi <-- sel_top sink.beats ~width:32;
     ring_fill <-- ring.fill;
+    let irq =
+      Irq.hierarchical scope
+        { clock = i.clock
+        ; clear = i.clear
+        ; en = sel_bottom (regs.value "IRQ_EN") ~width:Irq.sources
+        ; ack_clear = sel_bottom (regs.value "IRQ_PENDING") ~width:Irq.sources
+        ; force = bit "IRQ_FORCE" 0
+        ; pps = gnd (* TS block, step 4 *)
+        ; snk_err = sink.errors <>:. 0
+        }
+    in
+    irq_pending <-- irq.pending;
+    irq_count <-- irq.count;
     (* TS block: step 4; reads 0 until the timestamp unit lands. *)
     List.iter (fun s -> s <-- zero 32) ts_ro;
-    { axil = regs.s2m; h2c_tready; c2h = ring.m_axis }
+    { axil = regs.s2m; h2c_tready; c2h = ring.m_axis; usr_irq_req = irq.usr_irq_req }
   ;;
 end
 
