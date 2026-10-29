@@ -53,8 +53,10 @@ All files share one frame, so they can be loaded together in Fusion with no movi
 | Tab R | 39.00 … 48.20 | to 76.5 | |
 | Outer edges | < −45.45, > 48.20 | to 67.5 | |
 
-The authoritative 2D outline is `fw_expansion_bay_pcb_0{1,2,3}_0807.dxf`. Import that into KiCad rather
-than redrawing from these numbers.
+Framework's `fw_expansion_bay_pcb_0{1,2,3}_0807.dxf` are **A2 drawing sheets**: 594 × 420 mm in sheet
+coordinates, holding several views with dimensions and hatching. They are not a clean board outline and
+can't be imported into KiCad as Edge.Cuts. The outline above was taken from the bare-PCB STEP's top face.
+A clean outline DXF in KEEPOUT coordinates is a CAD deliverable for S2.
 
 ## Holes (bare PCB, world X, Z)
 

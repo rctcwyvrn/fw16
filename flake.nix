@@ -46,7 +46,8 @@
           kicad
           freecad
           poppler-utils
-          python3
+          # bay/tools: pythonocc reads Framework's STEPs, ezdxf writes the card DXFs
+          (python3.withPackages (ps: [ ps.pythonocc-core ps.ezdxf ]))
         ]) ++ [ oxDune ] ++ (with ox; [
           # gateware/ — compiler and editor tooling
           oxcaml
