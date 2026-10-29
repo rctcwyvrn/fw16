@@ -31,7 +31,7 @@ module O = struct
   [@@deriving hardcaml ~rtlmangle:false]
 end
 
-let create (i : _ I.t) : _ O.t =
+let create (_ : Scope.t) (i : _ I.t) : _ O.t =
   let spec = Reg_spec.create ~clock:i.clock ~clear:i.clear () in
   let unlimited = i.rate >=:. one_beat in
   let credit = wire credit_width in
@@ -67,4 +67,9 @@ let create (i : _ I.t) : _ O.t =
       }
   ; beats = beat_index
   }
+;;
+
+let hierarchical scope i =
+  let module H = Hierarchy.In_scope (I) (O) in
+  H.hierarchical ~scope ~name:"omni_source" create i
 ;;

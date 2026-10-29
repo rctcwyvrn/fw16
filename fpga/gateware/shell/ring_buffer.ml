@@ -38,7 +38,7 @@ module Make (M : Mem_port.S) = struct
     [@@deriving hardcaml ~rtlmangle:false]
   end
 
-  let create (i : _ I.t) : _ O.t =
+  let create scope (i : _ I.t) : _ O.t =
     let clear = i.clear |: i.sync_clear in
     let spec = Reg_spec.create ~clock:i.clock ~clear () in
     let pw = abits + 1 in
@@ -73,7 +73,7 @@ module Make (M : Mem_port.S) = struct
         ~d:mem_rsp.rd_data
         ~rd:pop
         ()
-        ~scope:(Scope.create ~flatten_design:true ())
+        ~scope
     in
     let m_tvalid = ~:(fifo.empty) in
     pop <-- (m_tvalid &: i.m_tready);
@@ -97,5 +97,10 @@ module Make (M : Mem_port.S) = struct
     ; fill = uresize (wr_ptr -: popped) ~width:32
     ; mem_ready = mem_rsp.ready
     }
+  ;;
+
+  let hierarchical scope i =
+    let module H = Hierarchy.In_scope (I) (O) in
+    H.hierarchical ~scope ~name:"omni_ring" create i
   ;;
 end

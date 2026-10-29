@@ -28,7 +28,7 @@ module O = struct
   [@@deriving hardcaml]
 end
 
-let create (i : _ I.t) : _ O.t =
+let create (_ : Scope.t) (i : _ I.t) : _ O.t =
   let spec = Reg_spec.create ~clock:i.clock ~clear:i.clear () in
   let take = i.en &: i.axis.tvalid in
   let count w = reg_fb spec ~width:w ~f:(fun d ->
@@ -48,4 +48,9 @@ let create (i : _ I.t) : _ O.t =
       (mux2 (mismatch &: (d <>:. 0xFFFF_FFFF)) (d +:. 1) d))
   in
   { O.tready = vdd; errors; beats }
+;;
+
+let hierarchical scope i =
+  let module H = Hierarchy.In_scope (I) (O) in
+  H.hierarchical ~scope ~name:"omni_sink" create i
 ;;

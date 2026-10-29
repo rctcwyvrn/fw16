@@ -16,7 +16,7 @@ let reset sim =
 
 let%expect_test "c2h: counter source through the ring, consumer ready 1 in 3" =
   let module Sim = Cyclesim.With_interface (Shell_top.I) (Shell_top.O) in
-  let sim = Sim.create Shell_top.Bram.create in
+  let sim = Sim.create (Shell_top.Bram.create (Scope.create ~flatten_design:true ())) in
   let waves, sim = Cyclesim.Waveform.create sim in
   let i = Cyclesim.inputs sim and o = Cyclesim.outputs ~clock_edge:Before sim in
   reset sim;
@@ -61,7 +61,7 @@ let%expect_test "h2c: checker counts one corrupted beat, counter and PRBS" =
   List.iter
     (fun mode ->
       let module Sim = Cyclesim.With_interface (Shell_top.I) (Shell_top.O) in
-      let sim = Sim.create Shell_top.Bram.create in
+      let sim = Sim.create (Shell_top.Bram.create (Scope.create ~flatten_design:true ())) in
       let i = Cyclesim.inputs sim in
       reset sim;
       Axil_driver.write sim 0x2000 (0b01 lor (mode lsl 1));

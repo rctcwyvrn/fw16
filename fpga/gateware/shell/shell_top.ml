@@ -43,7 +43,10 @@ end
 module Make (M : Mem_port.S) = struct
   module Ring = Ring_buffer.Make (M)
 
-  let create (i : _ I.t) : _ O.t =
+  (* Source, sink and ring are hierarchical: separate modules in generated RTL
+     unless [scope] flattens the design (simulation). Regs stays inline; its
+     [value] lookup is not an interface. *)
+  let create scope (i : _ I.t) : _ O.t =
     let ro = ref [] in
     let ro_wire name w =
       let s = wire w in
@@ -71,7 +74,7 @@ module Make (M : Mem_port.S) = struct
     let src_ctl = "SRC_CTL" and snk_ctl = "SNK_CTL" in
     let source_ready = wire 1 in
     let source =
-      Stream_source.create
+      Stream_source.hierarchical scope
         { clock = i.clock
         ; clear = i.clear
         ; en = bit src_ctl 0
@@ -85,7 +88,7 @@ module Make (M : Mem_port.S) = struct
        ring can stall H2C. *)
     let h2c_tready = wire 1 in
     let sink =
-      Stream_sink.create
+      Stream_sink.hierarchical scope
         { clock = i.clock
         ; clear = i.clear
         ; en = bit snk_ctl 0
@@ -97,7 +100,7 @@ module Make (M : Mem_port.S) = struct
     let loopback = bit "RING_CTL" 0 in
     let ring_in = Axis.Of_signal.mux2 loopback { i.h2c with tvalid = i.h2c.tvalid &: h2c_tready } source.axis in
     let ring =
-      Ring.create
+      Ring.hierarchical scope
         { clock = i.clock
         ; clear = i.clear
         ; sync_clear = bit "RING_CLEAR" 0

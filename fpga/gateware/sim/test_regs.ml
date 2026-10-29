@@ -6,7 +6,7 @@ open Omni_shell
 
 let%expect_test "regs: id, version, scratch, reset values" =
   let module Sim = Cyclesim.With_interface (Shell_top.I) (Shell_top.O) in
-  let sim = Sim.create Shell_top.Bram.create in
+  let sim = Sim.create (Shell_top.Bram.create (Scope.create ~flatten_design:true ())) in
   let i = Cyclesim.inputs sim in
   i.clear := Bits.vdd;
   Cyclesim.cycle sim;
