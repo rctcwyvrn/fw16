@@ -30,3 +30,8 @@
 **Asked:** (1) KiCad rename — Konnect, ask if stuck / Konnect + one-off text edit / defer → **Defer KiCad rename**. (2) PCIe subsystem ID — change to 0x4650 ('FP') / leave 0x4F4D → **Change to 0x4650 ('FP')**. (3) Push — after KiCad step / now / don't → **Push now**.
 **Did:**
 - `xdma_0.tcl` + regmap proposal: subsystem 0x10EE/0x4650. Added remote origin, pushed `main`.
+
+## 15:58 commit and push
+**User:** commit and push
+**Did:**
+- Working copy was already clean (everything committed and pushed at bbe8e6d); committed and pushed this log entry only.
