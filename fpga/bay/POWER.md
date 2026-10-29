@@ -37,10 +37,24 @@ VSYS_GPU ─ eFuse (EN from mgmt, PG) ─ current sense ─┬─ buck → 5V0_M
 12V_FAN ─ straight to the two fan connectors (AFC58-S04FIA-R1)
 ```
 
-- The management domain (3V3_ALW) controls the eFuse enable. It drops the FPGA rails when PEX_RST# is held
-  asserted in suspend, and brings them up before PEX_RST# deasserts. Timing vs PERST#: TBD from the CEM spec
-  and measurement.
-- Branch A (decision 0007): the core rails follow the AU+ power-on sequence (DS931). Regulator choice is pending.
+- ~~The management domain (3V3_ALW) controls the eFuse enable.~~ Superseded 2026-10-29: the eFuse EN/UVLO is a
+  plain divider from VSYS (see Decisions). The card follows the EC's VSYS_GPU gating; dropping FPGA rails in
+  suspend, if needed, happens downstream of the eFuse (core_power ENs), timing vs PERST# still TBD.
+- Branch A (decision 0007): the core rails follow the AU+ power-on sequence (DS931).
+
+## Decisions (user, 2026-10-29)
+
+- **power_in** (drawn, `bay/card/power_in.kicad_sch`): TPS259474LRPW eFuse, INA237AIDGSR monitor (0x40, 10 mΩ
+  shunt), LMR33630ADDA VSYS → 5V0_MAIN (5.0 V, 10 µH XAL5030). EN/UVLO = divider only (on 6.3 V / off 5.8 V),
+  OVLO 22 V, ILIM ≈ 2.5 A (1.33 kΩ), PGTH 6.3 V. Chain: eFuse PG → `VSYS_PG` → buck EN; buck PG → `5V0_PG`.
+- **Sense I²C pull-ups go to the FPGA's 3.3 V HD-bank VCCO (`+3V3_IO`)**, not 3V3_ALW, so nothing back-powers
+  unpowered FPGA I/O. INA237 VS stays on 3V3_ALW.
+- **core_power picks:** VCCINT (+VCCINT_IO/VCCBRAM) = **TPS566238P**; MGTAVCC + MGTAVTT = **TPS7A84A ×2**, fed
+  from a **dedicated ~1.5 V pre-buck** (not the 1.8 V rail, not 5V0).
+- **VCCO plan:** 1.8 V for bank 0/QSPI and most I/O (shared with VCCAUX per DS931), plus a small **3.3 V HD-bank
+  rail `+3V3_IO`** for the sense bus, EC sidebands and LEDs. The tree's "VCCO 3.3 V (QSPI…)" line is wrong: QSPI
+  (MT25QU256) is 1.8 V.
+- Still open: 1.8 V buck part, 1.5 V pre-buck part, MGTVCCAUX source, +3V3_IO regulator, power-off ordering.
 
 ## Proposal: group-2 part shortlists (2026-10-29, user to pick)
 
