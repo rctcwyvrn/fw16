@@ -45,3 +45,9 @@
 **Did:**
 - pcie_sideband (aefce8da): Q1/Q2 2N7002K + R21/R22 100k, R23 0R CLKREQ# strap, R24 0R DNP; config: U5 MT25QU256, J4 TC2050, C17, R25–R34 per decision 0010.
 - ERC: 0 errors on pcie_sideband; config's 2 expected (FPGA_CCLK and +1V8 undriven until fpga/core_power sheets). Lesson on Konnect field rotation.
+
+## 20:00 core_power sheet
+**Asked:** core_power needs TPS566238P/TPS7A8400A/TLV62569P symbols + RQF0009A footprint — recreate via Konnect from omnimeter's / rebuild from TI datasheets / pause → **1** (recreate from omnimeter's).
+**Did:**
+- Recreated the 3 symbols + footprint via Konnect (e5d5625f); script diff vs omnimeter: pins/pads identical.
+- Drew core_power from omnimeter's netlist (U6–U13, R35–R47, C18–C45, L2–L4, 40 GND, 3 PWR_FLAG); all 167 pins' nets match omnimeter's. Card ERC: 1 error left (FPGA_CCLK, waits for fpga sheet).
