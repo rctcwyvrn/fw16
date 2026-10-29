@@ -64,6 +64,11 @@ spit $tests $patched
 # 4. Run to completion.
 set_property top board [get_filesets sim_1]
 set_property -name xsim.simulate.runtime -value -all -objects [get_filesets sim_1]
+# If the chain's first 'if (testname ==' is inline in pci_exp_usrapp_tx.v and the
+# hook above lands on an 'else if', a name no real test matches still falls
+# through to it. Harmless if the tb doesn't read the plusarg.
+set_property -name xsim.simulate.xsim.more_options -value {-testplusarg TESTNAME=omni_bar0_id} \
+  -objects [get_filesets sim_1]
 update_compile_order -fileset sim_1
 launch_simulation -simset sim_1 -mode behavioral
 close_sim
@@ -73,4 +78,4 @@ if {$log eq ""} { error "sim_bfm: simulate.log not found under $omni_exdir" }
 file copy -force $log [file join $omni_reports bfm_simulate.log]
 set lines [lsearch -all -inline [split [slurp $log] \n] *OMNI_BFM*]
 puts "omni: BFM result\n  [join $lines "\n  "]"
-if {![llength [lsearch $lines {*OMNI_BFM: PASS*}]]} { error "sim_bfm: no PASS in $log" }
+if {[lsearch $lines {*OMNI_BFM: PASS*}] < 0} { error "sim_bfm: no PASS in $log" }

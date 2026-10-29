@@ -12,7 +12,12 @@
 set -euo pipefail
 
 vivado_bat='F:\AMDDesignTools\2025.2\Vivado\bin\vivado.bat'
+# Absolute: the nix-shell PATH drops the Windows interop dirs.
+cmd_exe=/mnt/c/Windows/System32/cmd.exe
 build=${OMNI_VIVADO_BUILD:-/mnt/c/Users/17786/omnimeter-build/vivado}
+# /mnt/c/x/y -> C:\x\y by hand, so wslpath (not on every distro's PATH) isn't needed.
+[[ $build =~ ^/mnt/([a-z])/(.*)$ ]] || { echo "OMNI_VIVADO_BUILD must be under /mnt/<drive>/" >&2; exit 2; }
+win="${BASH_REMATCH[1]^^}:\\${BASH_REMATCH[2]//\//\\}"
 here=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "$here/../.." && pwd)
 
@@ -24,10 +29,9 @@ stage() {
 }
 
 vivado() {
-  local step=$1 win
-  win=$(wslpath -w "$build")
-  # cmd.exe refuses a UNC cwd, hence /mnt/c.
-  (cd /mnt/c && cmd.exe /c "$vivado_bat -mode batch -nojournal -log $win\\logs\\$step.log -source $win\\src\\$step.tcl")
+  local step=$1
+  # cmd.exe refuses a UNC cwd; the build dir is drive-local and takes Vivado's .Xil/ scratch.
+  (cd "$build" && "$cmd_exe" /c "$vivado_bat -mode batch -nojournal -log $win\\logs\\$step.log -source $win\\src\\$step.tcl")
 }
 
 case ${1:-} in

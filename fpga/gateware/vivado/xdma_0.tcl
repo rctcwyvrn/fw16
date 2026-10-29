@@ -3,6 +3,7 @@
 #   AXI-ST at 250 MHz, 1 H2C + 1 C2H, BAR0 = 64 KiB AXI-Lite master (the shell's
 #   register map, PCIe-to-AXI translation 0, so awaddr = BAR offset),
 #   BAR1 = DMA config, MSI-X with usr_irq width 1, subsystem 0x10EE/0x4F4D.
+#   cfg_mgmt is off so the IP has no inputs the wrapper would leave floating.
 #
 # Sourced inside an open project. The CONFIG names were written without a
 # Vivado to check them against; xdma_set therefore resolves each name
@@ -28,6 +29,7 @@ set xdma_config {
   xdma_num_usr_irq            1
   pf0_subsystem_vendor_id     10EE
   pf0_subsystem_id            4F4D
+  cfg_mgmt_if                 false
 }
 
 proc xdma_set {ip config} {
