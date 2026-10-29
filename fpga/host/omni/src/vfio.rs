@@ -8,11 +8,13 @@
 //!
 //! The other files are its parts: `bdf` (addresses, sysfs checks), `bar`
 //! (one mapped BAR), `iova` (bus-address allocator), `pinned` (IOMMU-mapped
-//! memory), `irq` (eventfds).
+//! memory), `irq` (eventfds), `card_dma` (the card's XDMA channels and
+//! their suspend handling).
 
 mod bar;
 mod bdf;
 mod card;
+mod card_dma;
 mod iova;
 mod irq;
 mod pci;

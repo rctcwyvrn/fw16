@@ -1,56 +1,44 @@
 //! `vfio:<BDF>` — the omnimeter card through [`VfioPci`]: BAR0 is the
-//! shell's AXI-Lite registers, BAR1 the XDMA config block (regmap v0.2
-//! proposal), interrupts are MSI-X vectors, and a logind delay inhibitor
-//! guards suspend.
-//!
-//! The XDMA descriptor engine is Path 4 step 5, so `dma_read`/`dma_write`
-//! are `Unsupported` for now and the sleep hook only counts events; step 5
-//! hooks quiesce and re-init into it.
+//! shell's AXI-Lite registers, BAR1 the XDMA register space
+//! (`gateware/vivado/xdma_0.tcl`), interrupts are MSI-X vectors, DMA is the
+//! XDMA engine ([`crate::xdma`]) on IOMMU-mapped buffers, and a logind
+//! delay inhibitor guards suspend (`card_dma.rs` says how).
 
 use std::sync::Arc;
-use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::Duration;
 
+use super::bar::Bar;
 use super::bdf::Bdf;
+use super::card_dma::CardDma;
 use super::pci::VfioPci;
 use crate::dma_buf::DmaBuf;
 use crate::error::{Error, Result};
 use crate::regs::{OMNI_ID, OMNI_ID_RESET};
-use crate::sleep_inhibit::{SleepEvent, SleepInhibitor};
+use crate::sleep_inhibit::SleepInhibitor;
 use crate::transport::Transport;
+use crate::xdma::Data;
 
 pub struct Card {
     pci: VfioPci,
+    dma: Arc<CardDma>,
     /// `None` when there is no logind (a headless box without a system
     /// bus): the card still works, it just will not survive a suspend.
     sleep: Option<SleepInhibitor>,
-    /// Bumped on each resume; step 5 re-initialises XDMA when it moves.
-    resumes: Arc<AtomicU64>,
 }
 
 impl Card {
     pub fn open(bdf: Bdf) -> Result<Card> {
         let mut pci = VfioPci::open(bdf)?;
-        let id = pci.bar(0)?.read32(OMNI_ID)?;
-        if id != OMNI_ID_RESET {
-            return Err(Error::Device(format!(
-                "{bdf}: ID reads {id:#010x}, not {OMNI_ID_RESET:#010x} — not an omnimeter shell"
-            )));
-        }
+        check_id(&pci)?;
         pci.enable_irqs()?;
-        let resumes = Arc::new(AtomicU64::new(0));
-        let r = resumes.clone();
-        let hook = Box::new(move |e| {
-            if e == SleepEvent::Resumed {
-                r.fetch_add(1, Ordering::SeqCst);
-            }
-        });
-        let sleep = SleepInhibitor::start(&format!("omnimeter {bdf} DMA"), hook).ok();
-        Ok(Card {
-            pci,
-            sleep,
-            resumes,
-        })
+        let dma = Arc::new(CardDma::new(pci.bar(1)?)?);
+        let d = dma.clone();
+        let sleep = SleepInhibitor::start(
+            &format!("omnimeter {bdf} DMA"),
+            Box::new(move |e| d.on_sleep(e)),
+        )
+        .ok();
+        Ok(Card { pci, dma, sleep })
     }
 
     pub fn pci(&self) -> &VfioPci {
@@ -63,8 +51,30 @@ impl Card {
     }
 
     pub fn resumes(&self) -> u64 {
-        self.resumes.load(Ordering::SeqCst)
+        self.dma.resumes()
     }
+
+    fn bar1(&self) -> Result<&Bar> {
+        self.pci.bar(1)
+    }
+
+    /// Refuse while suspending; re-check and re-init after a resume.
+    fn ready(&self) -> Result<&Bar> {
+        let bar1 = self.bar1()?;
+        self.dma.ready(bar1, || check_id(&self.pci))?;
+        Ok(bar1)
+    }
+}
+
+fn check_id(pci: &VfioPci) -> Result<()> {
+    let id = pci.bar(0)?.read32(OMNI_ID)?;
+    if id != OMNI_ID_RESET {
+        return Err(Error::Device(format!(
+            "{}: ID reads {id:#010x}, not {OMNI_ID_RESET:#010x} — not an omnimeter shell",
+            pci.bdf()
+        )));
+    }
+    Ok(())
 }
 
 impl Transport for Card {
@@ -80,21 +90,20 @@ impl Transport for Card {
         self.pci.alloc(len)
     }
 
-    fn dma_read(&self, buf: &mut DmaBuf, len: usize, _timeout: Duration) -> Result<()> {
-        buf.check_len(len)?;
-        Err(Error::Unsupported(
-            "C2H on the card: the XDMA engine (Path 4 step 5)",
-        ))
+    fn dma_read(&self, buf: &mut DmaBuf, len: usize, timeout: Duration) -> Result<()> {
+        let bar1 = self.ready()?;
+        self.dma
+            .transfer(bar1, &|n| self.pci.alloc(n), Data::C2h(buf), len, timeout)
     }
 
-    fn dma_write(&self, buf: &DmaBuf, len: usize, _timeout: Duration) -> Result<()> {
-        buf.check_len(len)?;
-        Err(Error::Unsupported(
-            "H2C on the card: the XDMA engine (Path 4 step 5)",
-        ))
+    fn dma_write(&self, buf: &DmaBuf, len: usize, timeout: Duration) -> Result<()> {
+        let bar1 = self.ready()?;
+        self.dma
+            .transfer(bar1, &|n| self.pci.alloc(n), Data::H2c(buf), len, timeout)
     }
 
     fn wait_irq(&self, vector: u32, timeout: Duration) -> Result<()> {
+        self.ready()?;
         self.pci.wait_irq(vector, timeout).map(|_| ())
     }
 }

@@ -240,8 +240,10 @@ impl Channel {
                     self.dir
                 )));
             }
+            // Only paces the polls: a port that refuses to wait (a suspend
+            // in progress) must not stop the stop.
             let soon = Instant::now() + Duration::from_millis(1);
-            port.wait(&self.mem(data), soon)?;
+            let _ = port.wait(&self.mem(data), soon);
         }
         port.read32(chan + CHAN_STATUS_RC)
     }
