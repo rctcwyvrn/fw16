@@ -39,3 +39,9 @@
 **Did:**
 - Carried omnimeter's post-import decisions as text (bd11feb3): KEEPOUT/POWER diffs, pinplan.csv, decision 0010 (pin plan, Quad 225, sideband/config sheets), 2 lessons. No KiCad files copied.
 - Fusion: imported Framework_16_all_UMA_asm_0408 into a new unsaved assembly doc; sketch tray_keepout_v1/underside_keepout; wrote keyboard/tray/KEEPOUT.md v1 (datum Y −12.85, feet, intakes, expansion-card rim limit).
+
+## 19:52 card sheets via Konnect
+**User:** ive saved the fusion document, continue
+**Did:**
+- pcie_sideband (aefce8da): Q1/Q2 2N7002K + R21/R22 100k, R23 0R CLKREQ# strap, R24 0R DNP; config: U5 MT25QU256, J4 TC2050, C17, R25–R34 per decision 0010.
+- ERC: 0 errors on pcie_sideband; config's 2 expected (FPGA_CCLK and +1V8 undriven until fpga/core_power sheets). Lesson on Konnect field rotation.
