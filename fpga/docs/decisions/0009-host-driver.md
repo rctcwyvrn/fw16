@@ -44,4 +44,28 @@ crate (no C ABI until a caller needs one); register constants come from `bindgen
   reopens. Checked on day one with the Dual M.2 reference (Path 4 step 1).
 - IOMMU must be on on the FW16; this desktop has it off, so no VFIO test on bare metal before the laptop.
 - `driver/third_party/dma_ip_drivers` stays only as a reference for descriptor layout and register offsets.
+  Upstream Linux also has a clean XDMA engine, `drivers/dma/xilinx/xdma.c` + `xdma-regs.h` (~1,500 lines in
+  7.3, dmaengine glue included) — a second reference. Both are GPL: read them, write ours from PG195.
+
+## Viability check (2026-10-28)
+
+- **Kernel:** the pinned NixOS 7.3 kernel has `VFIO=m`, `VFIO_PCI=m`, `VFIO_GROUP=y`, `VFIO_CONTAINER=y`
+  (legacy `/dev/vfio/vfio`), `VFIO_DEVICE_CDEV=y` + `IOMMUFD=m` (the newer cdev/iommufd path), `AMD_IOMMU=y`.
+- **Crate:** `vfio-ioctls` 0.10.0 (rust-vmm, released 2026-10-16, ~736 k downloads, Apache-2.0/BSD-3; the
+  layer Cloud Hypervisor uses). `VfioContainer::new(None)` needs no KVM; it has `vfio_dma_map/unmap`
+  (unsafe), `VfioDevice::enable_msix(eventfds)`, `reset`, `region_read/write` and a `VfioOps` trait covering
+  both the legacy container and iommufd cdev. There is no BAR mmap helper, so BAR mmap is our own small unsafe
+  `mmap` at `get_region_offset`. `pci-driver` (0.1.4, last released 2023) is unmaintained and was ruled out.
+- **Precedent:** Rust userspace drivers exist — `ixy.rs` (10 GbE NIC), `vroom` (NVMe, proof of concept) —
+  and VFIO is how DPDK and SPDK run in production. No public XDMA-over-VFIO driver was found; ours is the
+  first we know of.
+- **FW16 IOMMU groups:** a FW16 owner on the 7040 (Phoenix) board posted the bay's RTX 5070 module in **its
+  own group** (GPU + its audio function only), passed through to a VM without ACS override. No report was
+  found for the Ryzen AI 300 board — the gate below still stands.
+- **Suspend:** in 7.3, `vfio-pci` has only runtime-PM callbacks, no system-sleep callbacks. The PCI core
+  saves and restores config space (BARs, MSI-X) across suspend, but nothing tells the userspace driver. So
+  `omni` must hold a logind *delay* inhibitor: on `PrepareForSleep(true)` stop DMA and release the lock, on
+  `PrepareForSleep(false)` re-check `ID` and re-initialise the XDMA engine.
+- **Non-root access:** the NixOS module gives the user the `/dev/vfio/<group>` node (udev) and raises
+  `RLIMIT_MEMLOCK`, since `VFIO_IOMMU_MAP_DMA` pins buffer pages and counts them against it.
 - Path 3 must fix a VID:DID for the XDMA IP and agree on it (goes in the regmap v0.2 proposal).
