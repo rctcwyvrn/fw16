@@ -35,3 +35,15 @@
 **User:** commit and push
 **Did:**
 - Working copy was already clean (everything committed and pushed at bbe8e6d); committed and pushed this log entry only.
+
+## 16:10 KiCad project rename
+**User:** rename the kicad files to match the fw16-fpga-module/fw16-fpga naming scheme
+**Did:**
+- Konnect `rename_project`: `fpga/bay/card/omnimeter-card.*` → `fw16-fpga-module.{kicad_pro,kicad_sch,kicad_pcb}`; 118 `(project …)` instance refs rewritten across 6 files. No other repo refs to `omnimeter-card`.
+- Library nickname `omnimeter` (lib/omnimeter.kicad_sym, .pretty, 10 lib_id refs) not renamed yet: Konnect has no library-rename tool; asked user.
+
+## 16:15 library rename
+**Asked:** Library `omnimeter` → `fw16-fpga-module`? Konnect workaround / leave as `omnimeter` / one-off text replace → **One-off text replace**.
+**Did:**
+- Moved `lib/omnimeter.{kicad_sym,pretty}` → `lib/fw16-fpga-module.*`; sed'd lib-table nicknames/URIs and 10 `omnimeter:` lib_id/footprint refs in sch/pcb, plus `fpga/bay/README.md`.
+- Konnect confirms project `fw16-fpga-module` and its library resolve (1 symbol lib, 3 footprints). No `omnimeter` left under `fpga/bay/card`. Not committed.
