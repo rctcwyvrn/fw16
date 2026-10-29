@@ -21,7 +21,7 @@ which is the part the user is strongest at. Meanwhile an AU15P system-on-module 
 ## Decision
 
 **B if the SOM stack clears the bay, else A.** Phase 0 opens `FW_UMA_MODULE_REF_0.stp` and
-`FW_EXPANSION_BAY_PCB_0807.stp` in FreeCAD, records the vertical clearance above the module PCB in
+`FW_EXPANSION_BAY_PCB_0807.stp` in Fusion 360, records the vertical clearance above the module PCB in
 `bay/KEEPOUT.md`, and requests the Puzhi SOM quote (with mated connector height). The branch is recorded here
 when taken. The AUBoard is dropped in both branches.
 

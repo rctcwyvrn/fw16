@@ -35,16 +35,16 @@ branch A adds ~4–8 weeks around S4.
 
 ## Path 1 — CAD (mechanical)
 
-Owner artefacts: `bay/KEEPOUT.md`, `bay/cad/` (FreeCAD), `bay/cad/stl/`, `docs/photos/`.
+Owner artefacts: `bay/KEEPOUT.md`, `bay/cad/` (Fusion 360; the `.f3d` lives in Fusion's cloud, and STEP + outline DXF exports are committed at each sync point), `bay/cad/stl/`, `docs/photos/`.
 
 1. **Keepout from the STEP files** (Phase 0 step 5, repeated here as the entry): open
    `Mechanical/ExpansionBayShell/FW_UMA_MODULE_REF_0.stp` and `PCB Reference Design/FW_EXPANSION_BAY_PCB_0807.stp`;
-   record outline, FXBeam pad fields (two 74-pin fields, 27.75 mm apart), insert positions, fan footprints and
+   record outline, FXBeam pad fields (two 74-pin fields, 16.65 mm apart; 27.75 mm is the connector length), insert positions, fan footprints and
    duct zones, max heights above and below the PCB, the rear wall's free area. → **S1**
 2. **Verify against the physical shell** once the laptop and extra shell arrive: calipers on the open area,
    check the STEP against reality, note the Dual M.2 Adapter's own component heights as a sanity reference.
    Update `KEEPOUT.md` v2; diff the ExpansionBay repo against the clone date.
-3. **Card envelope model**: a FreeCAD body for the card outline with mounting holes, the SOM stack (B) or the
+3. **Card envelope model**: a Fusion 360 body for the card outline with mounting holes, the SOM stack (B) or the
    BGA + tallest components (A), and a heatsink block sized to the duct gap. Export the outline DXF and the
    hole pattern for KiCad. → **S2**
 4. **Dummy card**: 3D-print the envelope (PCB thickness slab + heatsink block + connectors as blocks) and fit
