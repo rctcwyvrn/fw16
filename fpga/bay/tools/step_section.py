@@ -6,7 +6,7 @@ Coordinates stay in the STEP frame (KEEPOUT.md), not the card frame, because the
 outside the card. DXF x = STEP X, DXF y = -STEP Z, so the rear face (Z 0) is at the top of the sheet,
 the same way up as the card DXFs.
 
-usage: python3 step_section.py <y> <out.dxf> <x0> <x1> <z0> <z1> <file.stp> [<file.stp> ...]
+usage: bay-python step_section.py <y> <out.dxf> <x0> <x1> <z0> <z1> <file.stp> [<file.stp> ...]
   only solids whose bounding box meets the X/Z window are cut.
 """
 import os

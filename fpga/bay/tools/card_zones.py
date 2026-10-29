@@ -16,8 +16,8 @@ tolerance taken off. Numbers assume a 1.2 mm board.
 The raycast takes ~9 min; it saves the raw gaps as card-zones-grid.json so the classes can be
 changed and the DXFs rewritten without re-casting.
 
-usage: python3 card_zones.py <PCB_REF__0807.stp> <Framework_16_all_UMA_asm_0408.stp> <out_dir>
-       python3 card_zones.py <card-zones-grid.json> <out_dir>
+usage: bay-python card_zones.py <PCB_REF__0807.stp> <Framework_16_all_UMA_asm_0408.stp> <out_dir>
+       bay-python card_zones.py <card-zones-grid.json> <out_dir>
   -> card-zones-top.dxf, card-zones-bottom.dxf (+ card-zones-grid.json from a raycast)
 """
 import json

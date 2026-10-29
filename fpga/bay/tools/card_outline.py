@@ -6,7 +6,7 @@ planar face at the board top, outer wire -> card-outline.dxf (import as Edge.Cut
 card-holes.dxf (reference only: KiCad mounting holes should be footprints placed on these centres).
 Coordinates are the card frame (card_frame.py).
 
-usage: python3 card_outline.py <FW_EXPANSION_BAY_PCB_0807.stp> <out_dir>
+usage: bay-python card_outline.py <FW_EXPANSION_BAY_PCB_0807.stp> <out_dir>
 """
 import os
 import sys

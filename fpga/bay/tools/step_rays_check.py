@@ -5,7 +5,7 @@ Covers the starts-inside-solid case (returns 0), a start inside the bounding box
 (the notch), and plain hits from above and below. Then lists every other solid that straddles the board
 top face, i.e. parts sunk into the board, which a top-side ray reports as 0 clearance.
 
-usage: python3 step_rays_check.py <PCB_REF__0807.stp>   (exit 1 on any failure)
+usage: bay-python step_rays_check.py <PCB_REF__0807.stp>   (exit 1 on any failure)
 """
 import sys
 

@@ -7,7 +7,7 @@ Impeller axes are the centres of the impeller solids in FW_EXPANSION_BAY_PCB_REF
 (X ±102.88, Z 35.16; KEEPOUT.md "Fans and airflow"). Solids lying wholly inside R_SKIP of an axis are
 the impeller itself and are ignored, and rays start at R_START so the blades don't block them.
 
-usage: python3 fan_probe.py <file.stp> [<file.stp> ...]
+usage: bay-python fan_probe.py <file.stp> [<file.stp> ...]
 """
 import math
 import sys

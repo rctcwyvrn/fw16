@@ -3,6 +3,9 @@
 Every STEP is a Creo export in which every product is named `design`, so callers pick parts by geometry
 (bounding box), not by name. hit() runs along ±Y only, which is all the keepout needs; cast() takes any
 direction, for the fan and duct probes.
+
+Run everything that imports this under `bay-python` (flake.nix's second nixpkgs pin): the main python3's
+pythonocc segfaults loading FW_EXPANSION_BAY_PCB_REF__0807.stp.
 """
 from OCC.Core.Bnd import Bnd_Box
 from OCC.Core.BRepClass3d import BRepClass3d_SolidClassifier
