@@ -149,3 +149,14 @@ gives a 5.70 mm span, narrower than the part, which is unlikely. Pinout (FW_EXPA
 sheet 2): 1 +12V_FAN, 2 FANx_SPEED, 3 FANx_PWM, 4 GND. **Open:** which side of the fan FPC has its contacts
 exposed. A lower-contact connector needs the conductors facing the board. The UMA fan spec PDFs have no
 extractable text.
+
+**Verified 2026-10-29 against a 300 dpi render, and built as `omnimeter:AFC58-S04FIA-R1`.** The low-res rows hold.
+The 2.00 mm callout runs from the signal-pad edge nearest the nails to the far edge of the nail pad. The
+top view's 3.10 mm (terminal tip to the nail edge) equals 1.10 + 2.00, and the nail metal sits 1.93–3.10 mm behind
+the terminal tip. The pad-1 centre is 1.60 mm from the nail pad's inner edge.
+
+Footprint frame: origin at the signal-pad centre. Pads 1–4 are 0.30 × 1.10 mm at x = −0.75…+0.75, y = 0. The two `MP`
+nail pads are 1.00 × 1.60 mm at x = ±2.85, y = +1.75. The terminal tip is at y −0.70, and the housing runs to y +3.75.
+The courtyard is ±3.6 × (−0.95…+4.0). The MP pads have no net, because the symbol is a plain `Conn_01x04`. Tie them
+to GND in the PCB if the reference board does. The connectors go on the **bottom** side (CAD), so flip them at
+placement.

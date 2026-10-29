@@ -678,7 +678,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "omnimeter:AFC58-S04FIA-R1"
 			(at 127 88.9 0)
 			(hide yes)
 			(effects
@@ -739,7 +739,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "omnimeter:AFC58-S04FIA-R1"
 			(at 127 139.7 0)
 			(hide yes)
 			(effects
