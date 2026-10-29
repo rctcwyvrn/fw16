@@ -1,7 +1,7 @@
 # 0001 — Skip the Tier 1 drop-in board; go straight to a custom AU15P card
 
 **Date:** 2026-10-28
-**Status:** accepted
+**Status:** accepted; the "AUBoard 15P first" condition is superseded by [0007](0007-card-architecture.md)
 
 ## Context
 
