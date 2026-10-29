@@ -26,19 +26,33 @@
     # nixpkgs-unstable as of 2026-10-28: KiCad 10.0.7, the version Konnect
     # 0.13 drives — bump only together with Konnect's KiCad.
     nixpkgs.url = "github:NixOS/nixpkgs/58deea654ec5dd0644f31c840a07c29fa0592528";
+    # Second pin, used ONLY for bay-python (the bay/tools CAD env). At the
+    # main pin, pythonocc-core segfaults loading Framework's
+    # FW_EXPANSION_BAY_PCB_REF__0807.stp (Extrema_ExtCC in ShapeFix_Solid);
+    # this rev, the user's nixpkgs channel on 2026-10-29 (26.05pre958799),
+    # loads it cleanly. Bump independently of the main pin, and only after
+    # re-running bay/tools/step_rays_check.py against that STEP.
+    nixpkgs-bay.url = "github:NixOS/nixpkgs/917fec990948658ef1ccd07cef2a1ef060786846";
     # Deliberately *not* following our nixpkgs: oxcaml-nix's own pin is what
     # its cachix cache was built against, and following ours would rebuild
     # the OxCaml compiler and every Jane Street package from source.
     oxcaml-nix.url = "git+https://git.underpowe.red/hexadecimalDinosaur/oxcaml-nix";
   };
 
-  outputs = { nixpkgs, oxcaml-nix, ... }:
+  outputs = { nixpkgs, nixpkgs-bay, oxcaml-nix, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       ox = oxcaml-nix.legacyPackages.${system}.oxcamlPackages;
       # oxcaml-nix pairs its compiler with its own nixpkgs' dune.
       oxDune = oxcaml-nix.inputs.nixpkgs.legacyPackages.${system}.dune;
+      # bay/tools: pythonocc reads Framework's STEPs, ezdxf writes the card
+      # DXFs. Exposed as `bay-python` so it never shadows the main python3.
+      bayPython = nixpkgs-bay.legacyPackages.${system}.python3.withPackages
+        (ps: [ ps.pythonocc-core ps.numpy ps.ezdxf ]);
+      bayPythonBin = pkgs.writeShellScriptBin "bay-python" ''
+        exec ${bayPython}/bin/python3 "$@"
+      '';
     in {
       devShells.${system}.default = pkgs.mkShell {
         packages = (with pkgs; [
@@ -46,7 +60,8 @@
           kicad
           freecad
           poppler-utils
-          # bay/tools: pythonocc reads Framework's STEPs, ezdxf writes the card DXFs
+          # Plain python3 from the main pin. Its pythonocc segfaults on the
+          # PCB_REF STEP — run bay/tools scripts with bay-python instead.
           (python3.withPackages (ps: [ ps.pythonocc-core ps.ezdxf ]))
           # host/ — the omni crate; crates themselves come from Cargo.lock
           rustc
@@ -56,7 +71,7 @@
           rust-analyzer
           # host/ — QEMU VM (vIOMMU + edu device) for the vfio layer's tests
           qemu_kvm
-        ]) ++ [ oxDune ] ++ (with ox; [
+        ]) ++ [ bayPythonBin oxDune ] ++ (with ox; [
           # gateware/ — compiler and editor tooling
           oxcaml
           findlib
