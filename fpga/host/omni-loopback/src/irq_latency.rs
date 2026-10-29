@@ -4,7 +4,7 @@
 
 use std::time::{Duration, Instant};
 
-use omni::regs::proposed::*;
+use omni::regs::*;
 use omni::{Error, Result, Transport};
 
 use crate::report::IrqLatency;

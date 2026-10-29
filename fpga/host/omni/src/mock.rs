@@ -1,5 +1,5 @@
-//! `mock:` — an in-process model of the card: shell v0 plus the proposed v0.2
-//! IRQ block, behind the same [`Transport`] as the real card.
+//! `mock:` — an in-process model of the card: shell regmap v0.2 (with its
+//! IRQ block), behind the same [`Transport`] as the real card.
 //!
 //! Everything is synchronous, so data can only arrive inside a call: when a
 //! transfer cannot finish (empty ring, loopback ring full, no interrupt
@@ -20,7 +20,7 @@ use std::time::Duration;
 
 use crate::dma_buf::DmaBuf;
 use crate::error::{Error, Result};
-use crate::regs::proposed::{OMNI_IRQ_BASE, OMNI_IRQ_EN_SNK_ERR_MASK};
+use crate::regs::{OMNI_IRQ_BASE, OMNI_IRQ_EN_SNK_ERR_MASK};
 use crate::transport::Transport;
 use irq::Irq;
 use shell::Shell;

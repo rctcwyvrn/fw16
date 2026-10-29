@@ -85,5 +85,5 @@ fn irq_latency_on_the_mock() {
         .unwrap()
         .expect("mock implements IRQ_FORCE");
     assert_eq!(l.samples.len(), 10);
-    assert_eq!(m.read32(omni::regs::proposed::OMNI_IRQ_COUNT).unwrap(), 10);
+    assert_eq!(m.read32(omni::regs::OMNI_IRQ_COUNT).unwrap(), 10);
 }

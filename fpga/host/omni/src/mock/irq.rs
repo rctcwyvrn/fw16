@@ -1,10 +1,10 @@
-//! The IRQ block from the regmap v0.2 proposal (§1), which the RTL does not
-//! have yet. `IRQ_PENDING & IRQ_EN` is the shell's `usr_irq_req[0]`; XDMA
+//! The regmap v0.2 IRQ block (`gateware/shell/irq.ml`).
+//! `IRQ_PENDING & IRQ_EN` is the shell's `usr_irq_req[0]`; XDMA
 //! sends one MSI-X message per rising edge of it, so a source that stays
 //! pending does not interrupt again until the host clears it (RW1C) and it
 //! is raised anew.
 
-use crate::regs::proposed::*;
+use crate::regs::*;
 
 const SOURCES: u32 = OMNI_IRQ_EN_FORCE_MASK | OMNI_IRQ_EN_PPS_MASK | OMNI_IRQ_EN_SNK_ERR_MASK;
 
