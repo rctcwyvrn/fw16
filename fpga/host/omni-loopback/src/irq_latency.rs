@@ -1,11 +1,16 @@
-//! Interrupt latency: IRQ_FORCE (regmap v0.2 proposal) → `wait_irq`, n times.
-//! On a map without the IRQ block nothing fires; that is reported as "no
-//! interrupt", not as a failure of the run.
+//! Interrupt latency: IRQ_FORCE → `wait_irq`, n times. On a map without
+//! the IRQ block nothing fires; that is reported as "no interrupt", not as a
+//! failure of the run.
+//!
+//! The wait is on the vector itself (not `omni::irq::wait_pending`, which
+//! returns as soon as FORCE reads pending, before any message), and after
+//! each message `irq::drain` clears IRQ_PENDING until it reads 0, so the
+//! next FORCE is a fresh rising edge of `usr_irq_req`.
 
 use std::time::{Duration, Instant};
 
 use omni::regs::*;
-use omni::{Error, Result, Transport};
+use omni::{Error, Result, Transport, irq};
 
 use crate::report::IrqLatency;
 
@@ -30,7 +35,10 @@ pub fn run(t: &dyn Transport, n: u32) -> Result<Option<IrqLatency>> {
                 break;
             }
         }
-        t.write32(OMNI_IRQ_PENDING, OMNI_IRQ_EN_FORCE_MASK)?;
+        if let Err(e) = irq::drain(t) {
+            result = Err(e);
+            break;
+        }
     }
     t.write32(OMNI_IRQ_EN, 0)?;
     t.write32(OMNI_IRQ_PENDING, !0)?;

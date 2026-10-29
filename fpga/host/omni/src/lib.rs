@@ -9,6 +9,7 @@
 pub mod counters;
 mod dma_buf;
 mod error;
+pub mod irq;
 pub mod mock;
 mod open;
 pub mod pattern;
