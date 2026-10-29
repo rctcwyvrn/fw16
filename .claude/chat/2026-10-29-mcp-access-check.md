@@ -51,3 +51,10 @@
 **Did:**
 - Recreated the 3 symbols + footprint via Konnect (e5d5625f); script diff vs omnimeter: pins/pads identical.
 - Drew core_power from omnimeter's netlist (U6–U13, R35–R47, C18–C45, L2–L4, 40 GND, 3 PWR_FLAG); all 167 pins' nets match omnimeter's. Card ERC: 1 error left (FPGA_CCLK, waits for fpga sheet).
+
+## 20:06 AU15P symbol via Vivado
+**Asked:** AU15P symbol source — run Vivado here (port au15p_pins.tcl) / reuse omnimeter's CSV → **"run vivado here"**.
+**User:** run vivado here
+**Did:**
+- Ported fpga/bay/tools/au15p_pins.tcl + au15p_symbol.py; ran Windows Vivado 2025.2 batch from WSL (build dir C:\Users\17786\fw16-fpga-build\pins): 676 balls, CSV byte-identical to omnimeter's.
+- Konnect create_symbol fw16-fpga-module:XCAU15P-FFVB676 (14 units); script check 676/676 ball→name match.
