@@ -258,3 +258,24 @@ TI [TPS566238](https://www.ti.com/product/TPS566238), [TPS62869](https://www.ti.
 
 - [ ] Dual M.2 + NVMe reference in the bay: VSYS / 5V / 3V3 present in S0, S3, S5 (with its stock EEPROM).
 - [ ] Card in the bay: VSYS voltage on AC and on battery; total draw idle / loopback; Tj (S6).
+
+## core_power design (decided 2026-10-29; drawn in omnimeter, not yet in fw16)
+
+Carried over from omnimeter `0ee72b0` as decisions only. The fw16 `bay/card/core_power.kicad_sch` is still empty: redraw it to
+this spec (A3) through Konnect.
+
+
+- **Sequencer U5 LM3880MF-1AE** (2 ms steps), VCC from 5V0_MAIN, EN = `5V0_PG`. FLAG1 → `EN_VCCINT`; FLAG2 → `EN_AUX`
+  (1.8 V + 1.6 V pre-buck); FLAG3 → `EN_MGT` (MGTAVCC LDO + 3V3_IO LDO). MGTAVTT EN = MGTAVCC PG. 100 k pull-ups to
+  5V0_MAIN. Power-down reverses (3→2→1) only when 5V0_PG falls slowly; a VSYS loss collapses everything (accepted).
+- **VCCINT U6 TPS566238P** → `+0V85_VCCINT` = 0.6 × (1 + 8.45k/20k) = **0.8535 V** (0.1 % divider), L 1 µH XAL4020,
+  4 × 22 µF, PG → `VCCINT_PG`. Values per datasheet Table 7-2. Footprint `fw16-fpga-module:Texas_RQF0009A` (to be created from TI's land pattern).
+- **1.8 V U7 TLV62569P** → `+1V8` (200k/100k), 2.2 µH DFE201610, 22 µF, PG → `VCC1V8_PG`.
+- **MGT pre-buck U8 TLV62569P** → `+1V6_MGT` = **1.6 V** (200k/120k), not 1.5 V: TPS7A84A specs assume
+  VIN ≥ VOUT + 0.4 V and its no-BIAS UVLO is up to 1.39 V. PG unused (NC).
+- **MGTAVCC U11 / MGTAVTT U12 TPS7A8400A**, ANY-OUT: U11 100mV pin → GND = **0.9 V**, U12 400mV pin → GND =
+  **1.2 V**; SNS → OUT; FB left open (no CFF, it can disturb PG); BIAS = 5V0_MAIN (improves PSRR at VIN ≤ 2.2 V);
+  NR/SS 10 nF; 47 µF + 10 µF out, 10 µF in. Stock `QFN-20-1EP_3.5x3.5mm_..._ThermalVias` footprint (pads overlap TI's
+  RGR0020A land pattern).
+- **MGTVCCAUX U9 TLV75518P** (EN tied to IN) → `+1V8_MGTVCCAUX`; **+3V3_IO U10 TLV75533P** (EN = `EN_MGT`).
+- PG outputs `VCCINT_PG`, `VCC1V8_PG`, `MGTAVTT_PG` pulled to +3V3_ALW, global, unconsumed until the fpga/mgmt sheets.

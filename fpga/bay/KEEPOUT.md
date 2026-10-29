@@ -123,8 +123,8 @@ Bottom-side parts are limited to passives of about 1 mm, and nothing goes behind
 ## Proposed v1.1 (2026-10-29, Path 1 scripts; not yet accepted)
 
 Everything below is proposed, not adopted. It comes from `bay/tools/card_zones.py` (1 mm ray grid,
-`bay/cad/card-zones-{top,bottom}.dxf`, raw gaps in `bay/cad/card-zones-grid.json`), `fan_probe.py` and
-`step_section.py`. Where it disagrees with
+`bay/cad/card-zones-{top,bottom}.dxf`, raw gaps in `bay/cad/card-zones-grid.json`), `strip_probe.py`,
+`fan_probe.py` and `step_section.py`. Where it disagrees with
 v1 above, v1 stands until the user decides.
 
 ### Height zones (card_zones.py)
@@ -148,12 +148,30 @@ inside it, and obstacles grow by 1 mm. Raw gaps, X −50…50, by Z row:
 | 68.5 – 76.5 | 0 – 8.55 (interposer, tabs) | **0.30** (0 at the inserts) |
 
 Differences from v1:
-- **Rear strip, top.** v1's "rear bracket at Y −7.6, 1.85 mm above the board, X −58…62, Z 2–15" is a
-  solid in the *shell* file (`FW_UMA_MODULE_REF_0.stp`: X −57.65…58.0, Y −10.75…−7.65, Z 2.7…14.7)
-  that occupies the board's own volume (Y −10.65…−9.45). It is absent from `PCB_REF__0807`, where a
-  board is fitted. It looks like a no-card filler, not a part that is present with a card. In PCB_REF
-  the only things above the strip are the rear wall (Z < 1.6), the standoffs, and the block at
-  X 0–6.5, Z 1.6–8.2. Calipers decide; until then the DXF caps the strip at the 8.65 class.
+- **Rear strip, top.** v1's "rear bracket at Y −7.6, 1.85 mm above the board, X −58…62, Z 2–15" is
+  `IFGP6_UMA_SUPPORT_RUBBER` (named in Fusion), a solid in the *shell* file only
+  (`FW_UMA_MODULE_REF_0.stp`: X −57.65…58.0, Y −10.75…−7.65, Z 2.7…14.7). It sits on the lock plate and
+  fills the board's own volume (Y −10.65…−9.45); its top is 1.80 mm above board-top level. It is absent
+  from `PCB_REF__0807`, where a board is fitted, and Framework's Dual SSD reference card puts its M.2
+  drive (X −51.55…28.45, Z 12.13…34.13, up to Y −6.02) through the rubber's volume. So it reads as the
+  no-card filler of the UMA (empty-bay) configuration.
+- **Rear strip, what PCB_REF actually puts there** (`strip_probe.py`, 0.5 mm rays, board excluded).
+  `IFGP6_UMA_LOCK_PLATE` (X −58.20…61.70, Y −11.25…−1.90, Z 2.10…15.00, 735 mm³) is a **0.5 mm sheet
+  under the board**, Y −11.25…−10.75, lying on the shell floor. Its Y −1.90 top is a lanced latch tab
+  bent up out of the sheet at X ≈ −2.75…−0.5, Z 2.1…7.5, inside the rear notch, so off the board. Over
+  the board (X −50…50, Z 4–15, rear notch excluded) no PCB_REF solid stands above the board top; the
+  only on-board hits are at the rear mounting holes: standoff bodies to Y −8.05 and screw heads to Y
+  −7.35 (X −57.2…−50.2 and 50.3…57.3, Z 4.25…11.25), with the shell boss coming up through each hole.
+  The M2 standoff (X 1.05…5.25, Z 3.6…7.8, to Y −7.90) and the block above it (X 0.71…5.59, to Y
+  −6.00) are both inside the notch. The top of the strip is therefore set by the chassis in the
+  full-laptop model: 13.55 to Z 11, then 13.0, 10.25 and 8.45 by Z 14, 8.65 from Z 14. The DXF caps it at
+  the 8.65 class (7.8 over Z 13–14), unchanged. Calipers on a real shell decide whether the rubber
+  comes out when a card is fitted.
+- **Rear strip, bottom.** The 0.10 gap over Z 4–15 is the lock plate. Through its cut-outs (Ø ≈ 5 mm at
+  both rear mounting holes; a window at X −10.2…−4.2, Z 4.25…7.75; a sliver at X 8.3…8.8) the next
+  surface is the shell floor at Y −11.25, 0.60 below the board. Under the plate the shell floor is 1.6 mm
+  thick (to Y −12.85). Just forward of the plate's front edge (Z 15–16) the gap is also 0.60, to the
+  shell floor. Either way, no bottom-side parts behind Z 15.
 - **Bottom, rear.** Over the main body (X −50…50), bottom parts are blocked from Z 4 to Z **23**, not
   Z 15: the gap is 0.10 to Z 15, then 0.30 over Z 18–23.
 - **Bottom, under the reference fan connectors.** The solid at X 54.65…61.65, Z 18.45…32.25 sits *on the
@@ -211,8 +229,9 @@ Y stack, from KEEPOUT numbers and the PCB path's FFVB676 data:
 - **Forward extension, reduced height:** Z 44–63 under the 7.8 ceiling: top ≤ −2.15, which leaves
   3.48 mm. Stop by Z 63, because the interposer fields start at Z 65.3 and the mated connector top
   (Y −5.0) sits above the heatsink base (−5.63).
-- **No rearward extension** until the rear-strip question is settled. If v1's 1.85 mm holds, nothing
-  taller than 1.85 mm goes behind Z 15.
+- **No rearward extension** until the rear-strip question is settled. If the support rubber stays in
+  with a card, it would sit on the board top over X −57.65…58, Z 2.7…14.7 and leave no room for parts
+  there. Without it, the strip has 8.45–13.55 mm to the chassis.
 - **Clearance over parts:** a 3 mm inductor tops out at Y −6.45, 0.82 mm under the base, so the base can
   overhang the middle-zone inductors. No standoffs fall within Z 15–43.
 - **Underneath:** any backplate or screw head sits in the 1.40 mm floor gap, only within Z 23–68.5 and
@@ -221,3 +240,12 @@ Y stack, from KEEPOUT numbers and the PCB path's FFVB676 data:
 - **Fins:** if any forced air reaches the card, it moves along ±X toward the fans, over the bay walls,
   between Y −3.7 and the ceiling. Fins should run along X. Only the top ~2.4 mm of a 4.33 mm fin
   (Y −3.7…−1.30) sits in that band.
+
+### Fusion checklist (2026-10-29, omnimeter `omnimeter-bay-assembly` doc; carried over)
+- **Fan outlets face ±X — confirmed:** the right fan, seen from +X, shows an open rectangular mouth (rotor visible)
+  on its outboard face.
+- **Fan inlets, top — confirmed:** each fan's top cover has three large kidney-shaped intakes around the hub.
+  The bottom-cover intake is still unchecked.
+- **Rear strip:** see "Rear strip, top" above (`IFGP6_UMA_SUPPORT_RUBBER` vs `IFGP6_UMA_LOCK_PLATE`).
+- Still open: side vents (real?), gap above the bay walls, ceiling grille deck, fan-connector solids
+  (`IFGP6_UMA_FAN_BOARD_ASSY_V` at X −46…54.7, Z 58…76 and `IFGP6_UMA_FAN_FPC_PCBEZM_ASSY` are in the box).
