@@ -1,0 +1,89 @@
+side,ref,part,layer,x_mm,y_mm,rot_deg,note
+L,SW1,choc_v1_hotswap,F (sockets B),0.000,-34.000,0,matrix_outer_top R0xC0
+L,D1,D_SOD-123,B,0.000,-29.300,0,diode of SW1, cathode (pad 1) to R0
+L,SW2,choc_v1_hotswap,F (sockets B),18.000,-34.000,0,matrix_pinky_top R0xC1
+L,D2,D_SOD-123,B,18.000,-29.300,0,diode of SW2, cathode (pad 1) to R0
+L,SW3,choc_v1_hotswap,F (sockets B),36.000,-40.000,0,matrix_ring_top R0xC2
+L,D3,D_SOD-123,B,36.000,-35.300,0,diode of SW3, cathode (pad 1) to R0
+L,SW4,choc_v1_hotswap,F (sockets B),54.000,-43.000,0,matrix_middle_top R0xC3
+L,D4,D_SOD-123,B,54.000,-38.300,0,diode of SW4, cathode (pad 1) to R0
+L,SW5,choc_v1_hotswap,F (sockets B),72.000,-39.000,0,matrix_index_top R0xC4
+L,D5,D_SOD-123,B,72.000,-34.300,0,diode of SW5, cathode (pad 1) to R0
+L,SW6,choc_v1_hotswap,F (sockets B),90.000,-37.000,0,matrix_inner_top R0xC5
+L,D6,D_SOD-123,B,90.000,-32.300,0,diode of SW6, cathode (pad 1) to R0
+L,SW7,choc_v1_hotswap,F (sockets B),0.000,-17.000,0,matrix_outer_home R1xC0
+L,D7,D_SOD-123,B,0.000,-12.300,0,diode of SW7, cathode (pad 1) to R1
+L,SW8,choc_v1_hotswap,F (sockets B),18.000,-17.000,0,matrix_pinky_home R1xC1
+L,D8,D_SOD-123,B,18.000,-12.300,0,diode of SW8, cathode (pad 1) to R1
+L,SW9,choc_v1_hotswap,F (sockets B),36.000,-23.000,0,matrix_ring_home R1xC2
+L,D9,D_SOD-123,B,36.000,-18.300,0,diode of SW9, cathode (pad 1) to R1
+L,SW10,choc_v1_hotswap,F (sockets B),54.000,-26.000,0,matrix_middle_home R1xC3
+L,D10,D_SOD-123,B,54.000,-21.300,0,diode of SW10, cathode (pad 1) to R1
+L,SW11,choc_v1_hotswap,F (sockets B),72.000,-22.000,0,matrix_index_home R1xC4
+L,D11,D_SOD-123,B,72.000,-17.300,0,diode of SW11, cathode (pad 1) to R1
+L,SW12,choc_v1_hotswap,F (sockets B),90.000,-20.000,0,matrix_inner_home R1xC5
+L,D12,D_SOD-123,B,90.000,-15.300,0,diode of SW12, cathode (pad 1) to R1
+L,SW13,choc_v1_hotswap,F (sockets B),0.000,0.000,0,matrix_outer_bottom R2xC0
+L,D13,D_SOD-123,B,0.000,4.700,0,diode of SW13, cathode (pad 1) to R2
+L,SW14,choc_v1_hotswap,F (sockets B),18.000,0.000,0,matrix_pinky_bottom R2xC1
+L,D14,D_SOD-123,B,18.000,4.700,0,diode of SW14, cathode (pad 1) to R2
+L,SW15,choc_v1_hotswap,F (sockets B),36.000,-6.000,0,matrix_ring_bottom R2xC2
+L,D15,D_SOD-123,B,36.000,-1.300,0,diode of SW15, cathode (pad 1) to R2
+L,SW16,choc_v1_hotswap,F (sockets B),54.000,-9.000,0,matrix_middle_bottom R2xC3
+L,D16,D_SOD-123,B,54.000,-4.300,0,diode of SW16, cathode (pad 1) to R2
+L,SW17,choc_v1_hotswap,F (sockets B),72.000,-5.000,0,matrix_index_bottom R2xC4
+L,D17,D_SOD-123,B,72.000,-0.300,0,diode of SW17, cathode (pad 1) to R2
+L,SW18,choc_v1_hotswap,F (sockets B),90.000,-3.000,0,matrix_inner_bottom R2xC5
+L,D18,D_SOD-123,B,90.000,1.700,0,diode of SW18, cathode (pad 1) to R2
+L,SW19,choc_v1_hotswap,F (sockets B),63.000,15.000,0,thumb_tuck_cluster R3xC3
+L,D19,D_SOD-123,B,63.000,19.700,0,diode of SW19, cathode (pad 1) to R3
+L,SW20,choc_v1_hotswap,F (sockets B),82.571,17.057,-12,thumb_mid_cluster R3xC4
+L,D20,D_SOD-123,B,81.593,21.654,-12,diode of SW20, cathode (pad 1) to R3
+L,SW21,choc_v1_hotswap,F (sockets B),101.286,23.138,-24,thumb_reach_cluster R3xC5
+L,D21,D_SOD-123,B,99.374,27.432,-24,diode of SW21, cathode (pad 1) to R3
+L,U1,RP2040-Zero,F,110.000,-34.750,0,module centre; USB-C end flush with the top (rear) PCB edge
+L,J1,USB_C_HRO_TYPE-C-31-M-12,F,122.000,-14.000,-90,link port; mouth centre on the inner PCB edge, facing the other half
+R,SW1,choc_v1_hotswap,F (sockets B),0.000,-34.000,0,matrix_outer_top R0xC0
+R,D1,D_SOD-123,B,0.000,-29.300,0,diode of SW1, cathode (pad 1) to R0
+R,SW2,choc_v1_hotswap,F (sockets B),-18.000,-34.000,0,matrix_pinky_top R0xC1
+R,D2,D_SOD-123,B,-18.000,-29.300,0,diode of SW2, cathode (pad 1) to R0
+R,SW3,choc_v1_hotswap,F (sockets B),-36.000,-40.000,0,matrix_ring_top R0xC2
+R,D3,D_SOD-123,B,-36.000,-35.300,0,diode of SW3, cathode (pad 1) to R0
+R,SW4,choc_v1_hotswap,F (sockets B),-54.000,-43.000,0,matrix_middle_top R0xC3
+R,D4,D_SOD-123,B,-54.000,-38.300,0,diode of SW4, cathode (pad 1) to R0
+R,SW5,choc_v1_hotswap,F (sockets B),-72.000,-39.000,0,matrix_index_top R0xC4
+R,D5,D_SOD-123,B,-72.000,-34.300,0,diode of SW5, cathode (pad 1) to R0
+R,SW6,choc_v1_hotswap,F (sockets B),-90.000,-37.000,0,matrix_inner_top R0xC5
+R,D6,D_SOD-123,B,-90.000,-32.300,0,diode of SW6, cathode (pad 1) to R0
+R,SW7,choc_v1_hotswap,F (sockets B),0.000,-17.000,0,matrix_outer_home R1xC0
+R,D7,D_SOD-123,B,0.000,-12.300,0,diode of SW7, cathode (pad 1) to R1
+R,SW8,choc_v1_hotswap,F (sockets B),-18.000,-17.000,0,matrix_pinky_home R1xC1
+R,D8,D_SOD-123,B,-18.000,-12.300,0,diode of SW8, cathode (pad 1) to R1
+R,SW9,choc_v1_hotswap,F (sockets B),-36.000,-23.000,0,matrix_ring_home R1xC2
+R,D9,D_SOD-123,B,-36.000,-18.300,0,diode of SW9, cathode (pad 1) to R1
+R,SW10,choc_v1_hotswap,F (sockets B),-54.000,-26.000,0,matrix_middle_home R1xC3
+R,D10,D_SOD-123,B,-54.000,-21.300,0,diode of SW10, cathode (pad 1) to R1
+R,SW11,choc_v1_hotswap,F (sockets B),-72.000,-22.000,0,matrix_index_home R1xC4
+R,D11,D_SOD-123,B,-72.000,-17.300,0,diode of SW11, cathode (pad 1) to R1
+R,SW12,choc_v1_hotswap,F (sockets B),-90.000,-20.000,0,matrix_inner_home R1xC5
+R,D12,D_SOD-123,B,-90.000,-15.300,0,diode of SW12, cathode (pad 1) to R1
+R,SW13,choc_v1_hotswap,F (sockets B),0.000,0.000,0,matrix_outer_bottom R2xC0
+R,D13,D_SOD-123,B,0.000,4.700,0,diode of SW13, cathode (pad 1) to R2
+R,SW14,choc_v1_hotswap,F (sockets B),-18.000,0.000,0,matrix_pinky_bottom R2xC1
+R,D14,D_SOD-123,B,-18.000,4.700,0,diode of SW14, cathode (pad 1) to R2
+R,SW15,choc_v1_hotswap,F (sockets B),-36.000,-6.000,0,matrix_ring_bottom R2xC2
+R,D15,D_SOD-123,B,-36.000,-1.300,0,diode of SW15, cathode (pad 1) to R2
+R,SW16,choc_v1_hotswap,F (sockets B),-54.000,-9.000,0,matrix_middle_bottom R2xC3
+R,D16,D_SOD-123,B,-54.000,-4.300,0,diode of SW16, cathode (pad 1) to R2
+R,SW17,choc_v1_hotswap,F (sockets B),-72.000,-5.000,0,matrix_index_bottom R2xC4
+R,D17,D_SOD-123,B,-72.000,-0.300,0,diode of SW17, cathode (pad 1) to R2
+R,SW18,choc_v1_hotswap,F (sockets B),-90.000,-3.000,0,matrix_inner_bottom R2xC5
+R,D18,D_SOD-123,B,-90.000,1.700,0,diode of SW18, cathode (pad 1) to R2
+R,SW19,choc_v1_hotswap,F (sockets B),-63.000,15.000,0,thumb_tuck_cluster R3xC3
+R,D19,D_SOD-123,B,-63.000,19.700,0,diode of SW19, cathode (pad 1) to R3
+R,SW20,choc_v1_hotswap,F (sockets B),-82.571,17.057,12,thumb_mid_cluster R3xC4
+R,D20,D_SOD-123,B,-81.593,21.654,12,diode of SW20, cathode (pad 1) to R3
+R,SW21,choc_v1_hotswap,F (sockets B),-101.286,23.138,24,thumb_reach_cluster R3xC5
+R,D21,D_SOD-123,B,-99.374,27.432,24,diode of SW21, cathode (pad 1) to R3
+R,U1,RP2040-Zero,F,-110.000,-34.750,0,module centre; USB-C end flush with the top (rear) PCB edge
+R,J1,USB_C_HRO_TYPE-C-31-M-12,F,-122.000,-14.000,90,link port; mouth centre on the inner PCB edge, facing the other half

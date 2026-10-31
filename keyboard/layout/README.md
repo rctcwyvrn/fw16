@@ -68,3 +68,10 @@ outlines). The PDFs are rewritten in `templates/` and the fit table is printed t
 - `template_svg.py`: draws one page.
 - `legends.py`: the QWERTY labels.
 - `fit.py`: the tray table.
+- `positions.py`: the PCB placement table `positions-b.csv` for layout B (left and mirrored right board), used by
+  `../docs/pcb-spec.md`. Run it after `build.py`: `python3 keyboard/layout/positions.py > keyboard/layout/positions-b.csv`.
+
+Layout B also has a `pcb` outline (the PCB edge, 1 mm past the key pitch boxes and controller zone). Ergogen 4.2.1
+applies each outline step's `expand` to the union built so far, so in `case` the `_pitch` hull ends up 8 mm past the
+pitch boxes rather than 4 mm (measured from the DXFs). The fit table above therefore overstates each half by 8 mm in
+both directions on the key sides, which is conservative.
