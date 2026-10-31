@@ -104,3 +104,9 @@
 **Did:**
 - New Fusion doc `fw16-bay-card` (shell + PCB_REF + full laptop STEPs); `fw16-card` component from the outline/holes DXFs matches Framework's PCB body; U14, pad, heatsink envelope (4.33 mm, 0.5 mm under KBCAP), 4 nuts; no interference.
 - `fpga/bay/cad/card-envelope.step`, decision 0012, KEEPOUT v1.1 accepted, 0011 ceiling note fixed, S2 marked passed in fpga/PLAN.md.
+
+## 16:10 Round 1 worker reports (copied from _build/agents/*.report.md)
+**Did:**
+- F3-gw: timestamp unit + PPS sync/capture, cyclesim tests (bd02e15c); project-slot proposal (54923514); its Vivado run was permission-denied, so the orchestrator started `run.sh all`.
+- F4-sw: pciutils in the flake (24397ca0); bay reference tests (f4baa0da); driver NixOS module + VM check MODULE-CHECK PASS (26d69c56, 90fe1b5f); S6 tooling plan only; cargo test 70/70.
+- K-layout: ergogen + librsvg in the flake (68ca26a4); 3 Ergogen candidates with 1:1 Letter PDFs, all fit the tray (1076d538); electronics options (02de6888). Lessons copied: 7 new files plus 1 updated.

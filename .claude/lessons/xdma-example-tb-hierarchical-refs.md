@@ -5,3 +5,6 @@ AMD's XDMA example root-port testbench reaches into the example endpoint by hier
 - Error seen: `VRFC 10-2991 'm_axi_wstrb' is not declared under prefix 'EP'`.
 - Fix: in the sim-only EP copy, declare tied-off wires / a localparam with those names; the tasks that use them are never called by a custom test.
 - The full flow (open_example_project → xsim to a BAR read) takes ~35 min wall on this machine; link-up is at ~187 µs sim time.
+- `board.v` instantiates the EP with only the PCIe ports, so every other card input (e.g. `pps_in`) floats: Z → X in
+  xsim, and X spreads into sampled registers such as `IRQ_PENDING`. Give each sampled card input a sim-only
+  `pulldown`/`pullup` in the same shims (F3-gw, 2026-10-31).
