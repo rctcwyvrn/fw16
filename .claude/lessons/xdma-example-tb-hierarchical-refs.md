@@ -8,3 +8,6 @@ AMD's XDMA example root-port testbench reaches into the example endpoint by hier
 - `board.v` instantiates the EP with only the PCIe ports, so every other card input (e.g. `pps_in`) floats: Z → X in
   xsim, and X spreads into sampled registers such as `IRQ_PENDING`. Give each sampled card input a sim-only
   `pulldown`/`pullup` in the same shims (F3-gw, 2026-10-31).
+- `sim_bfm.tcl` splices the test in with `regsub`; in a regsub replacement `&` is the matched text, so a Verilog `&&`
+  in the inserted test expanded into copies of `if (testname ==` (VRFC 10-4982). Escape `\` and `&` in the inserted
+  text with `string map` first (2026-11-01).

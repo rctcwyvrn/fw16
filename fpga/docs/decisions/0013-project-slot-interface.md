@@ -34,3 +34,11 @@ proposal gave options for the address window, clocking, stream width, routing, t
   the bypass BAR enumerates. F4's BAR layout and `vfio` BAR mmap gain BAR2.
 - Under a later DFX route, the AXI4 bypass port is part of the boundary to decouple, a wider one than an AXI-Lite
   window.
+- **Added 2026-11-01 (user, on F4-sw's round-2 questions):**
+  - **`SLOT_CTL.RESET` gates the slot's streams in the shell**: `s_axis.tvalid` into the slot and the slot's `tready`
+    are ANDed with `~slot_clear`, so any project is silent in reset and RESET is the host's guaranteed way to stop
+    slot traffic. F3 adds the two gates and a cyclesim test; F4's mock already stalls this way.
+  - **The SLOT interrupt (bit 3) belongs to project code**: the crate's `irq::drain` leaves it alone, and a
+    per-project handler services it, so a project holding `slot_irq` cannot block the shell's sources.
+  - Claude's calls (status quo): BAR2 stays `vfio::Card::slot_bar()` only until a `sim` transport exists;
+    `fw16-fpga-loopback --mode all` excludes `slot`; vfio-pci binding stays the udev `driver_override` rule.

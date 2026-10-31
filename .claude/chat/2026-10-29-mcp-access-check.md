@@ -148,3 +148,8 @@
 - F3-gw2: regmap v0.3 (c9949a39), slot boundary + cyclesim (2ed87fcc); bypass BAR edits left uncommitted when its background Vivado run was killed at turn end; orchestrator rerunning `run.sh all`.
 - F4-sw2: amd_iommu=on dropped (not an option), polkit assertion, kernel findings (793ecfec, ba605706), nixosModules.fw16-fpga (7103a45e), crate v0.3 + BAR2 (1e314d7a); cargo test/clippy clean; VM check not booted (denied).
 - K-elec: keyboard/docs/pcb-spec.md + positions-b.csv + pcb outline (e6744adb, 54d1d5b4); 6 lessons copied.
+
+## 00:10 Round 2 questions
+**Asked:** Master → **Left (Recommended)**; Boards → **Two mirrored boards (Recommended)**; Link power → **CC-gated source + Ra (Recommended)**; KB holes → **4× M2 per half (Recommended)**; Slot reset → **Shell gates streams (Recommended)**; SLOT IRQ → **Hand SLOT to project code (Recommended)**.
+**Did:**
+- keyboard decision 0002; 0013 amended. Vivado on F3's bypass BAR: synth/place clean, BFM sim failed on a Tcl regsub `&` expansion in sim_bfm.tcl → fixed, sim rerunning.
