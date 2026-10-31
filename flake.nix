@@ -71,6 +71,8 @@
           rust-analyzer
           # host/ — QEMU VM (vIOMMU + edu device) for the vfio layer's tests
           qemu_kvm
+          # benchmarks/bay/ — lspci/setpci for the bay reference tests
+          pciutils
           # keyboard/layout — Ergogen layouts; rsvg-convert turns the 1:1
           # template SVGs into PDFs
           ergogen
