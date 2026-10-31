@@ -88,12 +88,25 @@ between MGTRREF_R (AD9) and MGTAVTTRCAL_R (AD8), MGTAVTTRCAL tied to MGTAVTT, eq
 and the RCAL quad powered. The AU15P's RCAL pins sit in quad 224 (unused, but powered per the rule above).
 **User chose 100 Ω (2026-10-29)**; `pinplan.csv` and 0010 are amended.
 
-## Open items
+## Power estimate (2026-10-31, closes the open item)
 
-- Vivado's vectorless power estimate after placement (pin-plan check, 2026-10-29) warned "Vccint supply current
-  exceeds the maximum limit of the selected package". It uses default toggle rates, not this design's; run
-  Power Design Manager / `report_power` with realistic activity before layout, and check the VCCINT ball count
-  against UG583's per-package current limit.
+`gateware/vivado/run.sh power` (power.tcl) placed the current shell + XDMA Gen4 x4 design with the card's pins
+(fw16_fpga_pins.xdc) and ran `report_power` with vectorless defaults (12.5 % toggle, 0.5 static probability),
+50 °C ambient, no airflow, no heatsink. Placement DRC: clean apart from RTSTAT-13 (not routed, expected). The
+earlier "Vccint exceeds the package limit" warning came from the pin-plan check's unconstrained run and did not
+recur.
+
+| Rail | Estimate | Card supply |
+| --- | --- | --- |
+| VCCINT + VCCINT_IO + VCCBRAM (0.85 V) | 1.84 + 0.04 + 0.05 = **1.92 A** | TPS566238P, 6 A |
+| VCCAUX + VCCAUX_IO (1.8 V) | 0.09 A | TLV62569P (shared 1.8 V) |
+| MGTAVCC (0.9 V) | 0.47 A | TPS7A8400A, 4 A |
+| MGTAVTT (1.2 V) | 0.56 A | TPS7A8400A, 4 A |
+| MGTVCCAUX (1.8 V) | 0.01 A | TLV75518P |
+| VCCO 3.3 V (bank 84) | 0.01 A | TLV75533P |
+
+Total on-chip 2.95 W (2.47 W dynamic), estimated Tj 68.8 °C. Synthesis timing: setup WNS +0.728 ns; hold is
+negative before routing, as expected. Re-run with real activity once the project slot carries logic.
 
 ## Not resolved by the sources
 
