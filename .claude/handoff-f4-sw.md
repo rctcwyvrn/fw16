@@ -46,3 +46,33 @@ Deliberately left out: the reload flow (remove → reprogram → rescan) and `si
 ## Judgment calls to surface in the report
 - The vfio-pci binding mechanism; the device-node group name; whether the module belongs in this repo's flake
   as a `nixosModules` output.
+
+---
+
+# Round 2 (written 2026-10-31)
+
+## User decisions on your round-1 questions
+- **Add a `nixosModules.fw16-fpga` flake output** (CLAUDE.md now allows `nixosModules` edits; commit it alone).
+- memlock stays **unlimited**.
+- **`amd_iommu=on`: verify against the pinned 7.3 kernel source** (`tar -xJf` of `/nix/store/…-linux-7.3.tar.xz` is now
+  allowed; extract under `_build/`, never into the tree) and drop it if it is not a recognised value. While there,
+  check the other from-memory claims: `vfio-pci ids=` wildcard parsing, PCI bridges in a group not blocking vfio's
+  group claim, `pcieport` and `driver_managed_dma`. Record findings with file:line in `driver/README.md`.
+- **Polkit: the module asserts `security.polkit.enable`** (evaluation error otherwise). The VM test turns polkit on and
+  the inhibitor check must pass as `tester`.
+- Measurement gear for S6: POWER-Z KM003C PD meter, a USB-serial multi-channel K-type logger (model open).
+
+## Also decided (0013, read it)
+- The project slot gets a **bypass BAR (BAR2, AXI4)**. F3 lands **regmap v0.3** (`RING_CTL.SRC_SEL`, IRQ bit 3 `SLOT`,
+  `SLOT_CTL` at 0x6000) this round as its own commit.
+- PCIe lanes were swapped on the card; nothing changes for software.
+
+## Next steps (round 2)
+1. Module: flake output, polkit assertion, `amd_iommu` decision from the source; VM check passes.
+2. Kernel-source findings in `driver/README.md`.
+3. **If `jj git fetch` shows F3's "regmap v0.3" commit on main:** pick it up (regs, mock: `SRC_SEL`, IRQ bit 3, `SLOT_CTL`;
+   a fourth `slot` loopback mode against a mock echo slot), and add BAR2 to the `vfio` BAR layout. If it is not there
+   when you reach this step, stop at the checkpoint and say so; do not wait or poll.
+
+Checkpoint: stop after step 3 (or at it). Still no dune. Commit only `fpga/host/`, `fpga/driver/`, `fpga/benchmarks/`,
+and `flake.nix` alone.

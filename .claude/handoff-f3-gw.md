@@ -49,3 +49,33 @@ Deliberately left out: the alive bitstream (step 6), implementation/bitstream, p
 
 ## Judgment calls to surface in the report
 - Where the PPS synchroniser lives; whether `TS_PPS_COUNT` saturates or wraps; reset value of the counter.
+
+---
+
+# Round 2 (written 2026-10-31)
+
+## State after round 1
+- Timestamp unit landed (bd02e15c); `fpga/docs/project-slot-proposal.md` (54923514) is decided in
+  **`fpga/docs/decisions/0013-project-slot-interface.md`**. Read 0013 first: it differs from the proposal's
+  recommendation on the register space (**bypass BAR**, not a BAR0 window).
+- **PCIe lanes swapped** on the card (0010 amendment, lesson `xdma-gt-lane-order-is-reversed-on-quad-225`): lane n is
+  on Quad 225 channel 3−n. `power.tcl` now fails if any port is off its pin-plan ball. Keep that check green.
+- The orchestrator's Vivado rerun: 0 critical warnings, WNS +0.728 ns, 2.94 W, BFM PASS.
+- You may now run `fpga/gateware/vivado/run.sh <step>` yourself (exactly that form, from `fpga/`'s parent or with the
+  repo path; ~35 min for `sim`). One Vivado run at a time.
+
+## Next steps (round 2)
+1. **Regmap v0.3** in `map_v0.ml` per 0013: `RING_CTL.SRC_SEL` (2 bits, `LOOPBACK` stays bit 0), IRQ bit 3 `SLOT`,
+   a `SLOT` block at 0x6000 with `SLOT_CTL.RESET` (and `DECOUPLE` reserved), the stale TS/IRQ-PPS doc strings fixed,
+   VERSION bump. Regenerate with `dune build @regmap --auto-promote`. Commit the regmap + generated header **alone and
+   first** so F4 can pick it up, with "regmap v0.3" in the message.
+2. **Slot boundary in the shell:** a `Slot` interface (`axi_aclk`, `slot_clk`, `slot_clear`, 256-bit s_axis/m_axis,
+   `ts_now`, `pps_edge`, `slot_irq`, the AXI4 bypass port) behind one `keep_hierarchy` boundary, with a default
+   project (e.g. a stream echo + `SLOT_ID`/`SLOT_VERSION` at bypass offsets 0x0/0x4). Cyclesim tests through the ring
+   with `SRC_SEL` = 2.
+3. **XDMA bypass BAR:** enable the AXI-MM bypass master on BAR2 in `xdma_0.tcl` and wire it through
+   `fw16_fpga_top.v` to the slot. Run `run.sh all`, and in the BFM test also read `SLOT_ID` through BAR2.
+4. Record the results in `fpga/docs/decisions/0013` (a Consequences note, numbers and commit ids).
+
+Checkpoint: stop after step 4. Out of scope: the CDC library for `slot_clk` (say what it needs), DFX, project gateware.
+Commit only `fpga/gateware/`, `fpga/host/include/` and 0013.
