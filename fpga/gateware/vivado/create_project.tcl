@@ -13,7 +13,9 @@ source [file join $fw16_fpga_src xdma_0.tcl]
 add_files -norecurse [list \
   [file join $fw16_fpga_src fw16_fpga_shell.v] \
   [file join $fw16_fpga_src fw16_fpga_top.v]]
-add_files -fileset constrs_1 -norecurse [file join $fw16_fpga_src fw16_fpga_top.xdc]
+add_files -fileset constrs_1 -norecurse [list \
+  [file join $fw16_fpga_src fw16_fpga_top.xdc] \
+  [file join $fw16_fpga_src fw16_fpga_pins.xdc]]
 set_property top fw16_fpga_top [current_fileset]
 update_compile_order -fileset sources_1
 

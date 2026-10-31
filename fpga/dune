@@ -1,3 +1,4 @@
 ; dune sees only the OCaml/generated parts of the repo; bay/ holds KiCad and
-; third-party checkouts that dune must not scan.
-(dirs gateware host)
+; third-party checkouts that dune must not scan. bay/ is entered only down to
+; bay/card/fpga/pinplan.csv, which gateware/vivado/pins reads (bay/dune, bay/card/dune).
+(dirs gateware host bay)

@@ -1,0 +1,2 @@
+; Only fpga/pinplan.csv is a dune input; skip lib/ and the KiCad files.
+(dirs fpga)

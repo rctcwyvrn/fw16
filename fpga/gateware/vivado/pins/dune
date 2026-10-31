@@ -1,0 +1,18 @@
+; pins_xdc: pinplan.csv -> fw16_fpga_pins.xdc. The XDC is committed beside fw16_fpga_top.xdc (run.sh
+; copies ../*.xdc); `dune runtest` fails when it is stale, `dune promote` refreshes it.
+
+(executable
+ (name pins_xdc))
+
+(rule
+ (targets fw16_fpga_pins.xdc.gen)
+ (deps %{project_root}/bay/card/fpga/pinplan.csv)
+ (action
+  (with-stdout-to
+   fw16_fpga_pins.xdc.gen
+   (run %{exe:pins_xdc.exe} %{deps}))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff ../fw16_fpga_pins.xdc fw16_fpga_pins.xdc.gen)))

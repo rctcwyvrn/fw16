@@ -1,0 +1,2 @@
+; Only bay/card/fpga/pinplan.csv is a dune input (gateware/vivado/pins); skip the rest.
+(dirs card)

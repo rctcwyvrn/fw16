@@ -4,7 +4,8 @@
 #   gateware/vivado/run.sh project   # emit fw16_fpga_shell.v, create <build>/fw16_fpga with xdma_0
 #   gateware/vivado/run.sh synth     # synthesis + reports/synth_*.txt
 #   gateware/vivado/run.sh sim       # XDMA example + root-port BFM sim, BAR0 ID check
-#   gateware/vivado/run.sh all       # the three in order
+#   gateware/vivado/run.sh power     # place with the card pins (fw16_fpga_pins.xdc), DRC + power reports
+#   gateware/vivado/run.sh all       # project, synth, power, sim in order
 #
 # <build> is Windows-local (default C:\Users\17786\fw16-fpga-build\vivado, override with
 # FW16_FPGA_VIVADO_BUILD as a WSL path) and outside the repo. Every step re-copies the sources into
@@ -38,6 +39,7 @@ case ${1:-} in
   project) stage; vivado create_project ;;
   synth)   stage; vivado synth ;;
   sim)     stage; vivado sim_bfm ;;
-  all)     stage; vivado create_project; vivado synth; vivado sim_bfm ;;
-  *) sed -n '2,8p' "$0"; exit 2 ;;
+  power)   stage; vivado power ;;
+  all)     stage; vivado create_project; vivado synth; vivado power; vivado sim_bfm ;;
+  *) sed -n '2,9p' "$0"; exit 2 ;;
 esac

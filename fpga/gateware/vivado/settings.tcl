@@ -2,9 +2,9 @@
 # generated fw16_fpga_shell.v into <build>/src on a Windows-local disk; every path
 # here is relative to that copy, so Vivado never reads or writes the WSL share.
 #
-#   <build>/src/      these scripts, fw16_fpga_top.v, fw16_fpga_top.xdc, fw16_fpga_shell.v
+#   <build>/src/      these scripts, fw16_fpga_top.v, fw16_fpga_top.xdc, fw16_fpga_pins.xdc, fw16_fpga_shell.v
 #   <build>/fw16_fpga/     the project (create_project.tcl)
-#   <build>/reports/  synth reports, xdma_0 property dump
+#   <build>/reports/  synth reports, xdma_0 property dump, placed DRC/IO/power (power.tcl)
 #   <build>/example/  XDMA example design + root-port BFM sim (sim_bfm.tcl)
 
 set fw16_fpga_src     [file normalize [file dirname [info script]]]

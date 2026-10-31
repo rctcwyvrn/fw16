@@ -15,8 +15,32 @@ module fw16_fpga_top (
     output [3:0] pci_exp_txp,
     output [3:0] pci_exp_txn,
     input  [3:0] pci_exp_rxp,
-    input  [3:0] pci_exp_rxn
+    input  [3:0] pci_exp_rxn,
+
+    // Card I/O on HD bank 84 (3.3 V), pins from bay/card/fpga/pinplan.csv via fw16_fpga_pins.xdc.
+    // Safe defaults until the shell owns them: nothing here drives a shared line.
+    input        clk100m,       // 100 MHz LVCMOS oscillator (Y1)
+    output       led_hb,        // heartbeat LED, ~0.75 Hz from clk100m
+    output       led_link,      // PCIe link-up LED
+    output       th_alert,      // drives Q1 -> TH_ALERT# (open drain to the host); held low = not asserted
+    output       th_overt,      // drives Q2 -> TH_OVERT# (PROCHOT#); held low = not asserted
+    inout        sense_scl,     // INA237 bus, pulled up on the card; released
+    inout        sense_sda,
+    input        sense_alert_n, // INA237 ALERT, unused yet
+    input        pps_in,        // U.FL PPS / 10 MHz ref / trigger, unused yet
+    inout        clkreq_n       // only via DNP R24; released
 );
+
+    // Heartbeat on the free-running fabric clock, independent of PCIe.
+    reg [26:0] hb_count = 27'd0;
+    always @(posedge clk100m) hb_count <= hb_count + 27'd1;
+    assign led_hb = hb_count[26];
+
+    assign th_alert  = 1'b0;
+    assign th_overt  = 1'b0;
+    assign sense_scl = 1'bz;
+    assign sense_sda = 1'bz;
+    assign clkreq_n  = 1'bz;
 
     // 100 MHz PCIe reference: ODIV2 for the core, O for the GTs.
     wire sys_clk;
@@ -30,6 +54,7 @@ module fw16_fpga_top (
     wire axi_aclk;
     wire axi_aresetn;
     wire user_lnk_up;
+    assign led_link = user_lnk_up;
 
     // AXI-Lite master (BAR0) -> shell registers
     wire [31:0] m_axil_awaddr;
