@@ -135,3 +135,10 @@
 **Did:**
 - Round-2 handoffs; launched f3-gw2 (regmap v0.3, slot, bypass BAR), f4-sw2 (nixosModules, polkit, kernel-source checks, v0.3), k-elec (GPIO map, link circuit, PCB spec).
 - Heatsink nut Würth 9774030243R: footprint from its datasheet, H1–H4 on the fpga sheet (GND), ERC 0; 0012 updated. Holes DXF corrected to a user layer, not Edge.Cuts.
+
+## 23:25 Card board set up
+**User:** Can't save due to error, see ~/code/momentum lessons
+**User:** Done
+**Did:**
+- KiCad can't save on \\wsl.localhost: Windows working copy C:\Users\17786\fw16-card + fpga/bay/card/sync.sh (seed/pull/check), CLAUDE.md rule, lessons; KiCad lock files ignored.
+- Board: 8 layers / 1.2 mm, outline from DXF, 201 footprints synced from the schematic; J1, U14 (rot 90), H1–H4 placed per 0012; lanes do not cross. jj file-size limit raised to 8 MiB (repo config).

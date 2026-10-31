@@ -87,3 +87,9 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
 - **Layer count: 8 at 1.2 mm** (user, 2026-10-31), JLCPCB template JLC08121H-1080 or -2313 (confirm in the quote).
   Outline from `card-outline.dxf` on Edge.Cuts; `card-holes.dxf` goes on a user layer as reference only, and the
   holes are placed as footprints on its centres.
+- **Board set up 2026-10-31** (`bay/card/fw16-fpga-module.kicad_pcb`, edited in the Windows copy per CLAUDE.md):
+  8 copper layers at 1.2 mm; Edge.Cuts from `card-outline.dxf` (board extents x −64.775…53.875, y −66.55…5.95, the
+  KiCad frame exactly); `card-holes.dxf` on Dwgs.User; all 201 schematic footprints. J1 (FXBeam) at the origin,
+  U14 at (0, −41.05) rotated 90° so its GTH balls face the interposer, H1–H4 at (±17.5, −52.05) / (±17.5, −30.05).
+- **Lanes need no crossing**: PCIe lanes 0–3 increase in +x at both ends, U14 RX balls at x 0.5…6.5 (y −29.55) and the
+  interposer's lanes 0/1 at x 2.94 and 2/3 at x 6.25 (y −3.1…2.9). Ball-to-pad run ≈ 30 mm, inside the 5 cm budget.

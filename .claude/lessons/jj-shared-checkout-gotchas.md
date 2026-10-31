@@ -17,3 +17,5 @@ Found by the Path 1 and Path 4 workers, 2026-10-29.
   with `jj new <id>`, fix the file, `jj squash`. Found 2026-10-29 (pcie_sideband/config commits sat unpushed).
 - `~` is jj's fileset negation operator, so a KiCad lock file such as `~foo.kicad_pcb.lck` must be quoted as a string
   literal: `jj file untrack 'glob:"dir/~*.lck"'` (fw16, 2026-10-31).
+- A KiCad board passes jj's default 1 MiB `snapshot.max-new-file-size` once it is routed, and then every session's
+  snapshot fails. fw16 sets `jj config set --repo snapshot.max-new-file-size 8MiB` (repo-local: a fresh clone needs it again).
