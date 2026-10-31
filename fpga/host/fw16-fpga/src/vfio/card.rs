@@ -1,8 +1,15 @@
 //! `vfio:<BDF>` — the fw16-fpga card through [`VfioPci`]: BAR0 is the
 //! shell's AXI-Lite registers, BAR1 the XDMA register space
-//! (`gateware/vivado/xdma_0.tcl`), interrupts are MSI-X vectors, DMA is the
-//! XDMA engine ([`crate::xdma`]) on IOMMU-mapped buffers, and a logind
-//! delay inhibitor guards suspend (`card_dma.rs` says how).
+//! (`gateware/vivado/xdma_0.tcl`), BAR2 the project slot's AXI4 bypass
+//! port (decision 0013; `SLOT_ID` at 0x0, `SLOT_VERSION` at 0x4),
+//! interrupts are MSI-X vectors, DMA is the XDMA engine ([`crate::xdma`])
+//! on IOMMU-mapped buffers, and a logind delay inhibitor guards suspend
+//! (`card_dma.rs` says how).
+//!
+//! BAR2 is optional at open: bitstreams built before the bypass interface
+//! have none, and only [`Card::slot_bar`] asks for it. The BAR numbers are
+//! VFIO region indices, so they hold only while BAR0 and BAR1 stay 32-bit
+//! (a 64-bit BAR takes two indices and shifts the rest).
 
 use std::sync::Arc;
 use std::time::Duration;
@@ -17,6 +24,9 @@ use crate::regs::{FW16_FPGA_ID, FW16_FPGA_ID_RESET};
 use crate::sleep_inhibit::SleepInhibitor;
 use crate::transport::Transport;
 use crate::xdma::Data;
+
+/// The bypass BAR (decision 0013).
+const SLOT_BAR: usize = 2;
 
 pub struct Card {
     pci: VfioPci,
@@ -52,6 +62,12 @@ impl Card {
 
     pub fn resumes(&self) -> u64 {
         self.dma.resumes()
+    }
+
+    /// The project slot's registers (BAR2, the XDMA AXI4 bypass port), or
+    /// `Error::Device` if this bitstream has no bypass BAR.
+    pub fn slot_bar(&self) -> Result<&Bar> {
+        self.pci.bar(SLOT_BAR)
     }
 
     fn bar1(&self) -> Result<&Bar> {

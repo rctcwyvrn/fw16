@@ -22,6 +22,12 @@ mod tests {
         assert_eq!(FW16_FPGA_RING_CLEAR, 0x300C);
         assert_eq!(FW16_FPGA_VERSION_MAJOR_MASK, 0xFFFF_0000);
         assert_eq!(FW16_FPGA_STATUS_RING_OVERFLOW_SHIFT, 3);
+        // v0.3 (decision 0013)
+        assert_eq!(FW16_FPGA_VERSION_RESET, 0x0000_0003);
+        assert_eq!(FW16_FPGA_RING_CTL_SRC_SEL_MASK, 0x3);
+        assert_eq!(FW16_FPGA_IRQ_EN_SLOT_SHIFT, 3);
+        assert_eq!(FW16_FPGA_SLOT_CTL, 0x6000);
+        assert_eq!(FW16_FPGA_SLOT_CTL_DECOUPLE_MASK, 0x2);
     }
 
     #[test]

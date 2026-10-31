@@ -4,7 +4,8 @@
 //! - [`VfioPci`] — any vfio-pci function: BARs, pinned DMA buffers,
 //!   MSI/MSI-X eventfds. Tested against QEMU's `edu` device in a VM
 //!   (`host/vm/`, `examples/edu_check.rs`).
-//! - [`Card`] — the fw16-fpga card on top of it: the `vfio:<BDF>` transport.
+//! - [`Card`] — the fw16-fpga card on top of it: the `vfio:<BDF>` transport
+//!   (BAR0 shell, BAR1 XDMA, BAR2 the project slot when the bitstream has it).
 //!
 //! The other files are its parts: `bdf` (addresses, sysfs checks), `bar`
 //! (one mapped BAR), `iova` (bus-address allocator), `pinned` (IOMMU-mapped

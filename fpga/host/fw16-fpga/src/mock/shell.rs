@@ -1,9 +1,12 @@
-//! Transaction-level model of shell v0 (`gateware/shell/shell_top.ml`): the
-//! CTL/SRC/SNK/RING/TS register blocks and the dataflow
+//! Transaction-level model of shell v0 (`gateware/shell/shell_top.ml`) at
+//! regmap v0.3: the CTL/SRC/SNK/RING/TS/SLOT register blocks and the
+//! dataflow, by `RING_CTL.SRC_SEL`:
 //!
-//!   source ─> ring ─> C2H        (RING_CTL.LOOPBACK = 0)
-//!   H2C ───> ring ─> C2H         (LOOPBACK = 1; source held off)
-//!   H2C ───> sink                (always; counts only while SNK_CTL.EN)
+//!   source ─> ring ─> C2H              (0)
+//!   H2C ───> ring ─> C2H               (1, the v0.2 LOOPBACK)
+//!   H2C ───> slot ─> ring ─> C2H       (2; the slot is `echo_slot.rs`)
+//!   nothing ─> ring ─> C2H             (3, reserved: the ring only drains)
+//!   H2C ───> sink                      (always; counts only while SNK_CTL.EN)
 //!
 //! There is no clock: the source is infinitely fast (it tops the ring up to
 //! RING_DEPTH whenever there is room) and SRC_RATE is stored but has no
@@ -12,9 +15,11 @@
 
 use std::collections::VecDeque;
 
+use super::echo_slot::EchoSlot;
 use super::pattern_state::PatternState;
 use crate::pattern::Beat;
 use crate::regs::*;
+use crate::ring_src::RingSrc;
 
 /// Ring capacity in beats: the BRAM build (`Shell_top.Bram`, depth 4096).
 pub const RING_DEPTH: usize = 4096;
@@ -33,6 +38,7 @@ pub(super) struct Shell {
     snk_hi: u32,
     ring_ctl: u32,
     ring: VecDeque<Beat>,
+    slot: EchoSlot,
 }
 
 impl Shell {
@@ -49,11 +55,12 @@ impl Shell {
             snk_hi: 0,
             ring_ctl: 0,
             ring: VecDeque::with_capacity(RING_DEPTH),
+            slot: EchoSlot::default(),
         }
     }
 
-    fn loopback(&self) -> bool {
-        self.ring_ctl & FW16_FPGA_RING_CTL_LOOPBACK_MASK != 0
+    fn ring_src(&self) -> RingSrc {
+        RingSrc::from_ring_ctl(self.ring_ctl)
     }
 
     pub fn snk_errs(&self) -> u32 {
@@ -93,6 +100,7 @@ impl Shell {
             FW16_FPGA_RING_CTL => self.ring_ctl,
             FW16_FPGA_RING_DEPTH => RING_DEPTH as u32,
             FW16_FPGA_RING_FILL => self.ring.len() as u32,
+            FW16_FPGA_SLOT_CTL => self.slot.ctl(),
             // PWR_MW (no INA), pulse registers, the TS block (zero in the
             // RTL until Path 3 step 4) and unmapped offsets.
             _ => 0,
@@ -113,7 +121,8 @@ impl Shell {
             }
             FW16_FPGA_RING_CTL => self.ring_ctl = value,
             FW16_FPGA_RING_CLEAR if pulse => self.ring.clear(),
-            // RO, TS_LATCH (no timestamp unit yet) and unmapped: dropped.
+            FW16_FPGA_SLOT_CTL => self.slot.set_ctl(value),
+            // RO, TS_LATCH (the mock has no timestamp unit) and unmapped: dropped.
             _ => {}
         }
         self.settle();
@@ -122,7 +131,7 @@ impl Shell {
     /// Let the source fill the ring as far as it would by now.
     fn settle(&mut self) {
         let src_on = self.src_ctl & FW16_FPGA_SRC_CTL_EN_MASK != 0;
-        if src_on && !self.loopback() {
+        if src_on && self.ring_src() == RingSrc::Source {
             let mode = (self.src_ctl & FW16_FPGA_SRC_CTL_MODE_MASK) >> FW16_FPGA_SRC_CTL_MODE_SHIFT;
             while self.ring.len() < RING_DEPTH {
                 let beat = self.src.next(mode);
@@ -139,11 +148,19 @@ impl Shell {
         beat
     }
 
-    /// One H2C beat in. Returns false if the shell stalls it (loopback with
-    /// the ring full) — the beat is then not taken by the sink either.
+    /// One H2C beat in. Returns false if the shell stalls it (H2C or the slot
+    /// feeding a full ring, or the slot held in reset) — the beat is then not
+    /// taken by the sink either.
     pub fn h2c_push(&mut self, beat: Beat) -> bool {
-        let loopback = self.loopback();
-        if loopback && self.ring.len() >= RING_DEPTH {
+        let to_ring = match self.ring_src() {
+            RingSrc::H2c => Some(beat),
+            RingSrc::Slot => match self.slot.echo(beat) {
+                Some(out) => Some(out),
+                None => return false,
+            },
+            RingSrc::Source | RingSrc::None => None,
+        };
+        if to_ring.is_some() && self.ring.len() >= RING_DEPTH {
             return false;
         }
         if self.snk_ctl & FW16_FPGA_SNK_CTL_EN_MASK != 0 {
@@ -152,8 +169,8 @@ impl Shell {
                 self.snk_errs = self.snk_errs.saturating_add(1);
             }
         }
-        if loopback {
-            self.ring.push_back(beat);
+        if let Some(out) = to_ring {
+            self.ring.push_back(out);
         }
         true
     }

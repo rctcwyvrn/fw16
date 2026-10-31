@@ -1,6 +1,6 @@
-//! `mock:` — an in-process model of the card: shell regmap v0.2 (with its
-//! IRQ block) behind an XDMA model, behind the same [`Transport`] as the
-//! real card.
+//! `mock:` — an in-process model of the card: shell regmap v0.3 (with its
+//! IRQ block, and an echo project in the slot) behind an XDMA model, behind
+//! the same [`Transport`] as the real card.
 //!
 //! DMA runs the real engine ([`crate::xdma::Channel`]) against the XDMA
 //! model (`xdma.rs`, `xdma_chan.rs`): the same chains, register sequence
@@ -15,9 +15,12 @@
 //! calls from several threads serialise; each transfer holds the lock for
 //! its whole length.
 
+mod echo_slot;
 mod irq;
 mod pattern_state;
 mod shell;
+#[cfg(test)]
+mod slot_tests;
 #[cfg(test)]
 mod tests;
 mod xdma;
@@ -119,6 +122,12 @@ impl Mock {
         let span = (len as u64).next_multiple_of(PAGE);
         let iova = self.next_iova.fetch_add(span, Ordering::Relaxed);
         DmaBuf::new_host(len, iova)
+    }
+
+    /// Drive the slot's `slot_irq` level (the echo project never raises it).
+    #[cfg(test)]
+    fn set_slot_irq(&self, level: bool) {
+        self.state().card.irq.set_slot_irq(level);
     }
 
     /// A BAR1 (XDMA) register, for tests of the model itself.

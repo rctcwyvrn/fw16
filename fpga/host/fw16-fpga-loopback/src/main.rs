@@ -46,7 +46,7 @@ fn run(a: &args::Args) -> fw16_fpga::Result<u64> {
         let r = match path {
             Path::C2h => c2h::run(&*t, a.pattern, a.duration, a.chunk)?,
             Path::H2c => h2c::run(&*t, a.pattern, a.duration, a.chunk)?,
-            Path::Loop => ring_loop::run(&*t, a.pattern, a.duration, a.chunk)?,
+            Path::Loop | Path::Slot => ring_loop::run(&*t, *path, a.pattern, a.duration, a.chunk)?,
         };
         println!("{r}");
         errors += r.errors;
@@ -54,7 +54,7 @@ fn run(a: &args::Args) -> fw16_fpga::Result<u64> {
     if a.irqs > 0 {
         match irq_latency::run(&*t, a.irqs)? {
             Some(l) => println!("{l}"),
-            None => println!("irq   no interrupt (map without the v0.2 IRQ block?)"),
+            None => println!("irq   no interrupt (map older than v0.2, without the IRQ block?)"),
         }
     }
     println!("{}", if errors == 0 { "PASS" } else { "FAIL" });

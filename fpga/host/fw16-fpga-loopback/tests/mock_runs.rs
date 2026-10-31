@@ -6,6 +6,7 @@ use std::time::Duration;
 use fw16_fpga::pattern::Mode;
 use fw16_fpga::regs::*;
 use fw16_fpga::{Mock, Transport};
+use fw16_fpga_loopback::args::Path;
 use fw16_fpga_loopback::{c2h, h2c, irq_latency, ring_loop};
 
 const D: Duration = Duration::from_millis(50);
@@ -18,7 +19,8 @@ fn every_mode_is_clean_on_the_mock() {
         for r in [
             c2h::run(&m, pattern, D, CHUNK).unwrap(),
             h2c::run(&m, pattern, D, CHUNK).unwrap(),
-            ring_loop::run(&m, pattern, D, CHUNK).unwrap(),
+            ring_loop::run(&m, Path::Loop, pattern, D, CHUNK).unwrap(),
+            ring_loop::run(&m, Path::Slot, pattern, D, CHUNK).unwrap(),
         ] {
             assert_eq!(r.errors, 0, "{r}");
             assert!(r.bytes >= CHUNK as u64, "{r}");
@@ -36,16 +38,28 @@ fn c2h_counts_corrupt_beats() {
 
 #[test]
 fn loop_counts_corruption_on_the_way_back_only() {
-    let m = Mock::new().corrupt_c2h_every(512);
-    let r = ring_loop::run(&m, Mode::Counter, D, CHUNK).unwrap();
-    assert_eq!(r.errors, r.bytes / 32 / 512, "{r}");
-    assert!(r.notes.iter().any(|n| n.contains("host checker")), "{r}");
+    for path in [Path::Loop, Path::Slot] {
+        let m = Mock::new().corrupt_c2h_every(512);
+        let r = ring_loop::run(&m, path, Mode::Counter, D, CHUNK).unwrap();
+        assert_eq!(r.errors, r.bytes / 32 / 512, "{r}");
+        assert!(r.notes.iter().any(|n| n.contains("host checker")), "{r}");
+    }
+}
+
+#[test]
+fn slot_mode_takes_the_slot_out_of_reset_and_reports_as_slot() {
+    let m = Mock::new();
+    m.write32(FW16_FPGA_SLOT_CTL, FW16_FPGA_SLOT_CTL_RESET_MASK).unwrap();
+    let r = ring_loop::run(&m, Path::Slot, Mode::Prbs31, D, CHUNK).unwrap();
+    assert_eq!(r.errors, 0, "{r}");
+    assert!(r.to_string().starts_with("slot"), "{r}");
+    assert_eq!(m.read32(FW16_FPGA_RING_CTL).unwrap(), 0, "left on the test source");
 }
 
 #[test]
 fn loop_clamps_the_chunk_to_the_ring() {
     let m = Mock::new();
-    let r = ring_loop::run(&m, Mode::Counter, D, 4 << 20).unwrap();
+    let r = ring_loop::run(&m, Path::Loop, Mode::Counter, D, 4 << 20).unwrap();
     assert_eq!(r.errors, 0, "{r}");
     assert!(r.notes.iter().any(|n| n.contains("clamped")), "{r}");
 }

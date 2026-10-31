@@ -1,12 +1,17 @@
-//! The regmap v0.2 IRQ block (`gateware/shell/irq.ml`).
+//! The regmap v0.3 IRQ block (`gateware/shell/irq.ml`).
 //! `IRQ_PENDING & IRQ_EN` is the shell's `usr_irq_req[0]`; XDMA
 //! sends one MSI-X message per rising edge of it, so a source that stays
 //! pending does not interrupt again until the host clears it (RW1C) and it
-//! is raised anew.
+//! is raised anew. `SLOT` (bit 3) is the slot's `slot_irq` *level*: it
+//! re-latches every cycle the level is high, so its clear sticks only once
+//! the project has dropped it.
 
 use crate::regs::*;
 
-const SOURCES: u32 = FW16_FPGA_IRQ_EN_FORCE_MASK | FW16_FPGA_IRQ_EN_PPS_MASK | FW16_FPGA_IRQ_EN_SNK_ERR_MASK;
+const SOURCES: u32 = FW16_FPGA_IRQ_EN_FORCE_MASK
+    | FW16_FPGA_IRQ_EN_PPS_MASK
+    | FW16_FPGA_IRQ_EN_SNK_ERR_MASK
+    | FW16_FPGA_IRQ_EN_SLOT_MASK;
 
 #[derive(Default)]
 pub(super) struct Irq {
@@ -14,6 +19,8 @@ pub(super) struct Irq {
     pending: u32,
     count: u32,
     line: bool,
+    /// The slot's `slot_irq` level.
+    slot_irq: bool,
     /// Messages sent to vector 0 and not yet consumed by `wait_irq`.
     undelivered: u32,
 }
@@ -44,7 +51,19 @@ impl Irq {
         self.update();
     }
 
+    /// Drive the slot's `slot_irq` level. Only tests drive it: the mock's
+    /// echo project has no interrupt.
+    #[cfg(test)]
+    pub fn set_slot_irq(&mut self, level: bool) {
+        self.slot_irq = level;
+        self.update();
+    }
+
     fn update(&mut self) {
+        // The level re-latches after any clear (the next cycle on the card).
+        if self.slot_irq {
+            self.pending |= FW16_FPGA_IRQ_PENDING_SLOT_MASK;
+        }
         let line = self.pending & self.en != 0;
         if line && !self.line {
             self.count = self.count.wrapping_add(1);

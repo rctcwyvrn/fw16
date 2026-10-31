@@ -1,6 +1,8 @@
-//! loop: RING_CTL.LOOPBACK routes H2C into the ring and back out over C2H,
-//! while the card's sink checks the H2C side and the host checks what
-//! returns.
+//! loop and slot: `RING_CTL.SRC_SEL` routes H2C into the ring (loop: `H2c`,
+//! the v0.2 LOOPBACK) or through the project slot into the ring (slot:
+//! `Slot`, which needs an echo project loaded and out of `SLOT_CTL.RESET`)
+//! and back out over C2H, while the card's sink checks the H2C side and the
+//! host checks what returns.
 //!
 //! Single-threaded write-then-read, so a chunk must fit in the ring: a
 //! bigger write stalls (the ring backpressures H2C) with nothing draining
@@ -12,17 +14,31 @@ use std::time::{Duration, Instant};
 
 use fw16_fpga::pattern::{BEAT_BYTES, Checker, Generator, Mode};
 use fw16_fpga::regs::*;
-use fw16_fpga::{Result, Transport};
+use fw16_fpga::{Result, RingSrc, Transport};
 
 use crate::DMA_TIMEOUT;
 use crate::args::Path;
 use crate::report::Report;
 use crate::sink_tally;
 
-pub fn run(t: &dyn Transport, pattern: Mode, duration: Duration, chunk: usize) -> Result<Report> {
+/// `path` is `Path::Loop` or `Path::Slot`.
+pub fn run(
+    t: &dyn Transport,
+    path: Path,
+    pattern: Mode,
+    duration: Duration,
+    chunk: usize,
+) -> Result<Report> {
+    let src = match path {
+        Path::Slot => RingSrc::Slot,
+        _ => RingSrc::H2c,
+    };
     t.write32(FW16_FPGA_SRC_CTL, 0)?;
     t.write32(FW16_FPGA_SNK_CTL, 0)?;
-    t.write32(FW16_FPGA_RING_CTL, FW16_FPGA_RING_CTL_LOOPBACK_MASK)?;
+    if src == RingSrc::Slot {
+        t.write32(FW16_FPGA_SLOT_CTL, 0)?;
+    }
+    t.write32(FW16_FPGA_RING_CTL, src.ring_ctl())?;
     t.write32(FW16_FPGA_RING_CLEAR, 1)?;
     t.write32(FW16_FPGA_SNK_CLEAR, 1)?;
     t.write32(
@@ -73,7 +89,7 @@ pub fn run(t: &dyn Transport, pattern: Mode, duration: Duration, chunk: usize) -
     t.write32(FW16_FPGA_SNK_CTL, 0)?;
     t.write32(FW16_FPGA_RING_CTL, 0)?;
     Ok(Report {
-        path: Path::Loop,
+        path,
         pattern,
         bytes,
         elapsed,

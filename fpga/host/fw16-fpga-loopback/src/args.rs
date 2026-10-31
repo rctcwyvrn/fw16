@@ -5,14 +5,16 @@ use std::time::Duration;
 use fw16_fpga::pattern::Mode;
 
 pub const USAGE: &str = "\
-usage: fw16-fpga-loopback [--uri mock:|vfio:<BDF>] [--mode c2h|h2c|loop|all]
+usage: fw16-fpga-loopback [--uri mock:|vfio:<BDF>] [--mode c2h|h2c|loop|slot|all]
                      [--pattern counter|prbs31] [--seconds S] [--chunk BYTES[K|M]]
                      [--irqs N]
 
   c2h   card source -> ring -> C2H; the host checks the pattern
   h2c   host pattern -> H2C -> card sink; the card counts errors
-  loop  H2C -> ring -> C2H (RING_CTL.LOOPBACK); both sides check
-  all   the three in turn (default)
+  loop  H2C -> ring -> C2H (RING_CTL.SRC_SEL = 1); both sides check
+  slot  H2C -> slot -> ring -> C2H (SRC_SEL = 2); needs an echo project
+        in the slot (mock: has one); both sides check
+  all   c2h, h2c and loop in turn (default; not slot)
 Then times N forced interrupts (IRQ_FORCE -> wait_irq), default 100.
 Exit status: 0 clean, 1 pattern errors, 2 transport or usage error.";
 
@@ -21,6 +23,7 @@ pub enum Path {
     C2h,
     H2c,
     Loop,
+    Slot,
 }
 
 #[derive(Clone, Debug)]
@@ -58,6 +61,7 @@ pub fn parse(argv: impl IntoIterator<Item = String>) -> Result<Args, String> {
                     "c2h" => vec![Path::C2h],
                     "h2c" => vec![Path::H2c],
                     "loop" => vec![Path::Loop],
+                    "slot" => vec![Path::Slot],
                     "all" => vec![Path::C2h, Path::H2c, Path::Loop],
                     m => return Err(format!("unknown mode {m}")),
                 }
@@ -120,6 +124,7 @@ mod tests {
         assert_eq!(a.pattern, Mode::Counter);
         assert_eq!(a.duration, Duration::from_millis(500));
         assert_eq!((a.chunk, a.irqs), (65536, 3));
+        assert_eq!(p("--mode slot").unwrap().paths, vec![Path::Slot]);
     }
 
     #[test]

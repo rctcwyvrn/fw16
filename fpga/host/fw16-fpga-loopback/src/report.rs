@@ -11,7 +11,7 @@ use crate::args::Path;
 pub struct Report {
     pub path: Path,
     pub pattern: Mode,
-    /// Payload bytes moved (in loop mode each crosses the link twice).
+    /// Payload bytes moved (in loop and slot modes each crosses the link twice).
     pub bytes: u64,
     pub elapsed: Duration,
     /// Pattern errors from every checker involved, plus beat-count mismatches.
@@ -31,6 +31,7 @@ impl fmt::Display for Report {
             Path::C2h => "c2h",
             Path::H2c => "h2c",
             Path::Loop => "loop",
+            Path::Slot => "slot",
         };
         write!(
             f,
