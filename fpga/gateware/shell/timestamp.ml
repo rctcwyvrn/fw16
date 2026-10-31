@@ -31,7 +31,8 @@ end
 
 module O = struct
   type 'a t =
-    { now : 'a [@bits 64]  (** counter at the last latch *)
+    { count : 'a [@bits 64]  (** the live counter, for the slot's ts_now *)
+    ; now : 'a [@bits 64]  (** counter at the last latch *)
     ; pps : 'a [@bits 64]  (** counter at the last PPS edge *)
     ; pps_count : 'a [@bits 32]
     ; pps_edge : 'a  (** one-cycle pulse, to the IRQ block *)
@@ -49,7 +50,7 @@ let create (_ : Scope.t) (i : _ I.t) : _ O.t =
   let now = reg spec ~enable:i.latch count in
   let pps = reg spec ~enable:pps_edge count in
   let pps_count = reg_fb spec ~width:32 ~f:(fun d -> mux2 pps_edge (d +:. 1) d) in
-  { O.now; pps; pps_count; pps_edge }
+  { O.count; now; pps; pps_count; pps_edge }
 ;;
 
 let hierarchical scope i =

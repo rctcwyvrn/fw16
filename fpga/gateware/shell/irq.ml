@@ -6,13 +6,15 @@
    host clears the pending bit (RW1C). A source that is already pending
    therefore cannot fire twice; enabling a pending source fires it. Pending
    bits latch whether or not they are enabled, and a set wins over a clear in
-   the same cycle so no event is lost. IRQ_COUNT counts rising edges of the
+   the same cycle so no event is lost. SLOT is the one level source: it
+   sets the bit every cycle slot_irq is high, so a clear sticks only once the
+   project drops it. IRQ_COUNT counts rising edges of the
    request, i.e. messages XDMA was asked to send. *)
 
 open Hardcaml
 open Signal
 
-let sources = 3
+let sources = 4
 
 module I = struct
   type 'a t =
@@ -23,6 +25,7 @@ module I = struct
     ; force : 'a  (** IRQ_FORCE bit 0 pulse *)
     ; pps : 'a  (** PPS rising-edge pulse *)
     ; snk_err : 'a  (** STATUS.SNK_ERR level *)
+    ; slot : 'a  (** the slot's slot_irq level *)
     }
   [@@deriving hardcaml]
 end
@@ -39,7 +42,7 @@ end
 let create (_ : Scope.t) (i : _ I.t) : _ O.t =
   let spec = Reg_spec.create ~clock:i.clock ~clear:i.clear () in
   let rose s = s &: ~:(reg spec s) in
-  let set = concat_lsb [ i.force; i.pps; rose i.snk_err ] in
+  let set = concat_lsb [ i.force; i.pps; rose i.snk_err; i.slot ] in
   let pending = reg_fb spec ~width:sources ~f:(fun d -> d &: ~:(i.ack_clear) |: set) in
   let usr_irq_req = (pending &: i.en) <>:. 0 in
   let count = reg_fb spec ~width:32 ~f:(fun d -> mux2 (rose usr_irq_req) (d +:. 1) d) in
