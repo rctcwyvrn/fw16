@@ -15,3 +15,5 @@ Found by the Path 1 and Path 4 workers, 2026-10-29.
   (or `jj log -r 'mine() & ~::main@origin'`) and use it: `jj rebase -r <id> -d main@origin && jj bookmark set main -r
   <id> && jj git push -b main`. Two commits appending to the same log file from the same base then conflict — resolve
   with `jj new <id>`, fix the file, `jj squash`. Found 2026-10-29 (pcie_sideband/config commits sat unpushed).
+- `~` is jj's fileset negation operator, so a KiCad lock file such as `~foo.kicad_pcb.lck` must be quoted as a string
+  literal: `jj file untrack 'glob:"dir/~*.lck"'` (fw16, 2026-10-31).
