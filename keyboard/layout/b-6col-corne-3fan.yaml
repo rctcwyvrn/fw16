@@ -1,0 +1,72 @@
+# Candidate B — 6 columns, Corne-strength column stagger, 3 thumb keys fanned.
+# 21 keys per half, 42 total. Left half only; the template script mirrors it.
+# Ergogen frame: mm, y up, columns left→right = outer→inner of the left hand.
+meta:
+  engine: 4.1.0
+  name: B — 6 col, moderate stagger, 3 thumbs fanned
+units:
+  kx: 18    # Choc column pitch (hot-swap sockets need ≥ 18)
+  ky: 17    # Choc row pitch
+  capx: 17.5  # MBK / CFX Choc keycap
+  capy: 16.5
+  mcux: 22  # controller zone: XIAO / RP2040-Zero class + link jack
+  mcuy: 40
+  wall: 4   # case allowance beyond the key pitch box: 1 clearance + 3 wall
+  fan: -12  # thumb fan step, degrees (clockwise on the left half)
+points:
+  zones:
+    matrix:
+      key: {spread: kx, padding: ky, width: kx, height: ky}
+      columns:
+        outer:
+        pinky:
+        ring: {key.stagger: 6}
+        middle: {key.stagger: 3}
+        index: {key.stagger: -4}
+        inner: {key.stagger: -2}
+      rows:
+        bottom:
+        home:
+        top:
+    thumb:
+      anchor: {ref: matrix_index_bottom, shift: [-0.5kx, -ky-3]}
+      key: {spread: kx, padding: ky, width: kx, height: ky}
+      columns:
+        tuck:
+        mid: {key: {splay: fan, origin: [-kx/2, -ky/2]}}
+        reach: {key: {splay: fan, origin: [-kx/2, -ky/2]}}
+      rows:
+        cluster:
+outlines:
+  caps:
+    - what: rectangle
+      where: true
+      size: [capx, capy]
+  _pitch:
+    - what: hull
+      points:
+        - matrix_outer_bottom
+        - matrix_outer_top
+        - matrix_ring_top
+        - matrix_middle_top
+        - matrix_index_top
+        - matrix_inner_top
+        - matrix_inner_bottom
+        - thumb_reach_cluster
+        - thumb_mid_cluster
+        - thumb_tuck_cluster
+        - matrix_middle_bottom
+        - matrix_ring_bottom
+        - matrix_pinky_bottom
+  mcu:
+    - what: rectangle
+      where: matrix_inner_top
+      size: [mcux, mcuy]
+      adjust: {shift: [kx/2 + mcux/2, ky/2 - mcuy/2]}
+  case:
+    - what: outline
+      name: _pitch
+      expand: wall
+    - what: outline
+      name: mcu
+      expand: wall
