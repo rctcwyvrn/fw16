@@ -67,8 +67,7 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   edges, inside Z 15–43, and behind the Z < 15 line. The diameter is a **4.5 mm placeholder**. The board-top-to-heatsink-base distance is 3.82 mm, but that is **not
   the nut height**: a rigid 3.82 mm standoff would only meet a lid at its 3.52 mm maximum, and at the 3.31 mm nominal
   the 0.30 mm pad would float. Choose a nut shorter than 3.31 mm and let the heatsink boss plus a compliant pad or
-  spring screws take up the lid tolerance (Path 1 step 5). Choose the part (Würth WA-SMSI/SMSN class, and whether it needs a locating
-  NPTH) before layout places footprints.
+  spring screws take up the lid tolerance (Path 1 step 5). Choose the part before layout places footprints.
 - **Envelope width 40 mm in X**, which covers the nuts plus screw heads. The screw heads must be counterbored
   flush, because the envelope top has only 0.5 mm to the keyboard plate.
 - **The 7343 tantalum (≈ 4 mm, top Y −5.45) cannot go under the heatsink**, whose base is at −5.63. Place it
@@ -79,3 +78,9 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
 - Layout can start from `card-outline.dxf`, `card-holes.dxf` and the nut and U14 table above.
 - Path 1 step 5 (heatsink design) designs within this envelope. Still open: fins along X in the ~2.4 mm air band
   versus a spreader with a pad up to the keyboard plate, and the material. Step 4's dummy card prints this STEP.
+- **Nut part chosen 2026-10-31: Würth WA-SMSI M2, L 3.0 ± 0.1 mm (9774030243R)**, OD 4.35 mm, tin over steel, 0.2 N·m
+  max. Land pattern per its datasheet (rev 001.003): Ø5.3 SMD pad around a **Ø3.0 non-plated through hole**, stencil
+  annulus Ø5.2/Ø3.1. Footprint `fw16-fpga-module:Wurth_WA-SMSI_M2_9774030243R`; symbols H1–H4 on the `fpga` sheet,
+  pad on GND. The 3.0 mm nut sits 0.31 mm below the lid's 3.31 mm nominal top, so the heatsink ears step down by
+  that plus the pad's compression (Path 1 step 5). The NPTH goes through the board, so the M2 screw length must keep
+  its tip inside the nut: at nuts 1/2 (Z 18.5) the floor gap below is only 0.30 mm.

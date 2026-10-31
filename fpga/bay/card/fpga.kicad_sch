@@ -14501,6 +14501,129 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Mechanical:MountingHole_Pad"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "H"
+				(at 0 6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole_Pad"
+				(at 0 4.445 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Mounting Hole with connection"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*Pad*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "MountingHole_Pad_0_1"
+				(circle
+					(center 0 1.27)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "MountingHole_Pad_1_1"
+				(pin input line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(junction
 		(at 521.97 177.8)
@@ -18081,6 +18204,86 @@
 		)
 		(uuid "2046e7cb-36d3-49c0-9a2b-d998e3466a64")
 	)
+	(label "GT_TX0_P"
+		(at 401.32 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "15599cef-ce39-41e3-ba5b-c84c621c4eb5")
+	)
+	(label "GT_TX0_N"
+		(at 401.32 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "18d8162d-36a6-455a-8328-e85b4bf98ae4")
+	)
+	(label "GT_TX1_P"
+		(at 401.32 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c36bde16-adc4-4be3-b8cb-e380d3bc99f4")
+	)
+	(label "GT_TX1_N"
+		(at 401.32 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b0f150e0-b6eb-47c3-91c6-d1b9c96cecdf")
+	)
+	(label "GT_TX2_P"
+		(at 401.32 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a3e956c7-ac96-402b-bb30-cdb23cdb526c")
+	)
+	(label "GT_TX2_N"
+		(at 355.6 83.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4e828f5a-e217-493d-ad44-8cc62ff7e653")
+	)
+	(label "GT_TX3_N"
+		(at 355.6 81.28 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2b89c72e-6485-4816-96cb-2163a0d6f06b")
+	)
+	(label "GT_TX3_P"
+		(at 401.32 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "242b855d-814d-4c19-9e44-104f1ff4a5f5")
+	)
 	(global_label "+0V85_VCCINT"
 		(shape input)
 		(at 684.53 139.7 180)
@@ -19885,54 +20088,6 @@
 		)
 		(uuid "045fc64b-c6cf-472f-9373-3a0c4fc2a923")
 	)
-  (label "GT_TX0_P"
-    (at 401.32 73.66 0)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid "15599cef-ce39-41e3-ba5b-c84c621c4eb5")
-  )
-  (label "GT_TX0_N"
-    (at 401.32 63.5 0)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid "18d8162d-36a6-455a-8328-e85b4bf98ae4")
-  )
-  (label "GT_TX1_P"
-    (at 401.32 71.12 0)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid "c36bde16-adc4-4be3-b8cb-e380d3bc99f4")
-  )
-  (label "GT_TX1_N"
-    (at 401.32 60.96 0)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid "b0f150e0-b6eb-47c3-91c6-d1b9c96cecdf")
-  )
-  (label "GT_TX2_P"
-    (at 401.32 68.58 0)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid "a3e956c7-ac96-402b-bb30-cdb23cdb526c")
-  )
-  (label "GT_TX2_N"
-    (at 355.59999999999997 83.82 180)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid "4e828f5a-e217-493d-ad44-8cc62ff7e653")
-  )
-  (label "GT_TX3_N"
-    (at 355.59999999999997 81.28 180)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid "2b89c72e-6485-4816-96cb-2163a0d6f06b")
-  )
-  (label "GT_TX3_P"
-    (at 401.32 66.04 0)
-    (fields_autoplaced yes)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid "242b855d-814d-4c19-9e44-104f1ff4a5f5")
-  )
 	(symbol
 		(lib_id "fw16-fpga-module:XCAU15P-FFVB676")
 		(at 80.01 60.96 0)
@@ -27329,6 +27484,490 @@
 			(project "fw16-fpga-module"
 				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
 					(reference "#FLG010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 304.8 474.98 0)
+		(unit 1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2724a7f1-2ff3-4846-9ebd-b5cf188825b7")
+		(property "Reference" "H1"
+			(at 304.8 468.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "M2 SMT nut 9774030243R"
+			(at 304.8 470.535 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fw16-fpga-module:Wurth_WA-SMSI_M2_9774030243R"
+			(at 304.8 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 304.8 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 304.8 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "fw16-fpga-module"
+				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 325.12 474.98 0)
+		(unit 1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a7954e8d-d06e-45af-a7bb-8baf8aed0b9c")
+		(property "Reference" "H2"
+			(at 325.12 468.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "M2 SMT nut 9774030243R"
+			(at 325.12 470.535 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fw16-fpga-module:Wurth_WA-SMSI_M2_9774030243R"
+			(at 325.12 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 325.12 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 325.12 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "fw16-fpga-module"
+				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
+					(reference "H2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 345.44 474.98 0)
+		(unit 1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "404cfdf2-4c7d-4633-90d1-9a2f190f8430")
+		(property "Reference" "H3"
+			(at 345.44 468.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "M2 SMT nut 9774030243R"
+			(at 345.44 470.535 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fw16-fpga-module:Wurth_WA-SMSI_M2_9774030243R"
+			(at 345.44 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 345.44 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 345.44 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "fw16-fpga-module"
+				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 365.76 474.98 0)
+		(unit 1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "59613d01-9570-4b03-a874-cefce29a5956")
+		(property "Reference" "H4"
+			(at 365.76 468.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "M2 SMT nut 9774030243R"
+			(at 365.76 470.535 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "fw16-fpga-module:Wurth_WA-SMSI_M2_9774030243R"
+			(at 365.76 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 365.76 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 365.76 474.98 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "fw16-fpga-module"
+				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
+					(reference "H4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 304.8 477.52 0)
+		(unit 1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6791f691-2cb8-438c-91fc-4a6ed1fa8699")
+		(property "Reference" "#PWR01"
+			(at 304.8 483.87 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 304.8 481.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 304.8 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 304.8 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 304.8 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "fw16-fpga-module"
+				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 325.12 477.52 0)
+		(unit 1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c963a2d0-1fee-4b54-879f-0285568ef5b2")
+		(property "Reference" "#PWR02"
+			(at 325.12 483.87 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 325.12 481.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 325.12 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 325.12 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 325.12 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "fw16-fpga-module"
+				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
+					(reference "#PWR02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 345.44 477.52 0)
+		(unit 1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "92bb5220-a65d-43aa-9ee0-c2e0951970fb")
+		(property "Reference" "#PWR03"
+			(at 345.44 483.87 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 345.44 481.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 345.44 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 345.44 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 345.44 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "fw16-fpga-module"
+				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
+					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 365.76 477.52 0)
+		(unit 1)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "96ebb9ab-b5c4-4ef5-91e7-036b83ea3914")
+		(property "Reference" "#PWR04"
+			(at 365.76 483.87 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 365.76 481.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 365.76 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 365.76 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 365.76 477.52 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(instances
+			(project "fw16-fpga-module"
+				(path "/d7dcd351-036e-417b-86ff-4ba43184a562/c45ac60d-0fbe-4acc-9072-322aab9c8e2e"
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
