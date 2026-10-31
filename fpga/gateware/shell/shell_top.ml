@@ -6,6 +6,8 @@
      H2C ────┤  (RING_CTL.LOOPBACK picks H2C)
              └─> checker (always sees H2C)
 
+     pps_in ─> timestamp ─> TS registers, IRQ PPS source
+
    The ring's memory is a parameter ([Make]); [Bram] is the BRAM build used in
    simulation and on branch A spin 1. *)
 
@@ -30,6 +32,7 @@ module I = struct
     ; usr_irq_ack : 'a
           (** XDMA usr_irq_ack[0]; unused: usr_irq_req is held until the host
               clears IRQ_PENDING, which is all the MSI-X handshake needs *)
+    ; pps_in : 'a  (** raw U.FL PPS pin, asynchronous; Timestamp synchronises it *)
     }
   [@@deriving hardcaml ~rtlmangle:false]
 end
@@ -47,7 +50,7 @@ end
 module Make (M : Mem_port.S) = struct
   module Ring = Ring_buffer.Make (M)
 
-  (* Source, sink, ring and irq are hierarchical: separate modules in generated RTL
+  (* Source, sink, ring, irq and timestamp are hierarchical: separate modules in generated RTL
      unless [scope] flattens the design (simulation). Regs stays inline; its
      [value] lookup is not an interface. *)
   let create scope (i : _ I.t) : _ O.t =
@@ -66,7 +69,11 @@ module Make (M : Mem_port.S) = struct
     let ring_fill = ro_wire "RING_FILL" 32 in
     let irq_pending = ro_wire "IRQ_PENDING" Irq.sources in
     let irq_count = ro_wire "IRQ_COUNT" 32 in
-    let ts_ro = List.map (fun n -> ro_wire n 32) [ "TS_NOW_LO"; "TS_NOW_HI"; "TS_PPS_LO"; "TS_PPS_HI"; "TS_PPS_COUNT" ] in
+    let ts_now_lo = ro_wire "TS_NOW_LO" 32 in
+    let ts_now_hi = ro_wire "TS_NOW_HI" 32 in
+    let ts_pps_lo = ro_wire "TS_PPS_LO" 32 in
+    let ts_pps_hi = ro_wire "TS_PPS_HI" 32 in
+    let ts_pps_count = ro_wire "TS_PPS_COUNT" 32 in
     let regs =
       Regs.create ~clock:i.clock ~clear:i.clear ~blocks:Map.blocks
         ~hw:
@@ -125,6 +132,15 @@ module Make (M : Mem_port.S) = struct
     snk_beats_lo <-- sel_bottom sink.beats ~width:32;
     snk_beats_hi <-- sel_top sink.beats ~width:32;
     ring_fill <-- ring.fill;
+    let ts =
+      Timestamp.hierarchical scope
+        { clock = i.clock; clear = i.clear; latch = bit "TS_LATCH" 0; pps_in = i.pps_in }
+    in
+    ts_now_lo <-- sel_bottom ts.now ~width:32;
+    ts_now_hi <-- sel_top ts.now ~width:32;
+    ts_pps_lo <-- sel_bottom ts.pps ~width:32;
+    ts_pps_hi <-- sel_top ts.pps ~width:32;
+    ts_pps_count <-- ts.pps_count;
     let irq =
       Irq.hierarchical scope
         { clock = i.clock
@@ -132,14 +148,12 @@ module Make (M : Mem_port.S) = struct
         ; en = sel_bottom (regs.value "IRQ_EN") ~width:Irq.sources
         ; ack_clear = sel_bottom (regs.value "IRQ_PENDING") ~width:Irq.sources
         ; force = bit "IRQ_FORCE" 0
-        ; pps = gnd (* TS block, step 4 *)
+        ; pps = ts.pps_edge
         ; snk_err = sink.errors <>:. 0
         }
     in
     irq_pending <-- irq.pending;
     irq_count <-- irq.count;
-    (* TS block: step 4; reads 0 until the timestamp unit lands. *)
-    List.iter (fun s -> s <-- zero 32) ts_ro;
     { axil = regs.s2m; h2c_tready; c2h = ring.m_axis; usr_irq_req = irq.usr_irq_req }
   ;;
 end

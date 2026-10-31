@@ -27,7 +27,7 @@ module fw16_fpga_top (
     inout        sense_scl,     // INA237 bus, pulled up on the card; released
     inout        sense_sda,
     input        sense_alert_n, // INA237 ALERT, unused yet
-    input        pps_in,        // U.FL PPS / 10 MHz ref / trigger, unused yet
+    input        pps_in,        // U.FL PPS / 10 MHz ref / trigger; synchronised inside the shell
     inout        clkreq_n       // only via DNP R24; released
 );
 
@@ -170,6 +170,7 @@ module fw16_fpga_top (
         .temp        (16'd0),  // SYSMON: alive-bitstream step
         .pwr_mw      (32'd0),  // power monitor: not on the card yet
         .usr_irq_ack (usr_irq_ack[0]),
+        .pps_in      (pps_in),
         .usr_irq_req (usr_irq_req[0])
     );
 

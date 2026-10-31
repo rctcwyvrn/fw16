@@ -33,7 +33,8 @@ set n [regsub {module\s+fw16_fpga_top\s*\(} [slurp [file join $fw16_fpga_src fw1
 if {$n != 1} { error "sim_bfm: could not rename fw16_fpga_top in fw16_fpga_top.v" }
 # AMD's usrapp tasks reference example-design internals hierarchically (board.EP.m_axi_w*, user_clk,
 # C_NUM_USR_IRQ). Our test never calls those tasks, but elaboration needs the names to exist, so the
-# EP copy gets tied-off shims (lesson xdma-example-tb-hierarchical-refs; VRFC 10-2991 without them).
+# EP copy gets tied-off shims (lesson xdma-example-tb-hierarchical-refs; VRFC 10-2991 without them),
+# plus a pulldown on pps_in, the one card input the shell now samples.
 set shims {
     // --- BFM shims (sim only): names the example testbench references; tasks using them are not called.
     localparam C_NUM_USR_IRQ = 1;
@@ -42,6 +43,8 @@ set shims {
     wire [63:0]  m_axi_wstrb  = 64'd0;
     wire         m_axi_wvalid = 1'b0;
     wire         m_axi_wready = 1'b0;
+    // board.v leaves the card ports unconnected: a floating pps_in would put X into TS and IRQ_PENDING.
+    pulldown pps_in_pd (pps_in);
 endmodule}
 set n [regsub {endmodule\s*$} $ep_text $shims ep_text]
 if {$n != 1} { error "sim_bfm: could not find the closing endmodule in fw16_fpga_top.v" }

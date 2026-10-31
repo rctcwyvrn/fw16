@@ -1,6 +1,6 @@
 (* emit_verilog: print the BRAM shell as Verilog for the Vivado project
-   (gateware/vivado/). Top module [fw16_fpga_shell]; source, sink, ring and irq
-   come out as their own modules, as in test_ports. *)
+   (gateware/vivado/). Top module [fw16_fpga_shell]; source, sink, ring, irq and
+   timestamp come out as their own modules, as in test_ports. *)
 
 open Hardcaml
 open Fw16_fpga_shell
