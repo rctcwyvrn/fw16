@@ -112,6 +112,9 @@ Why two boards:
 - **The right module's USB-C still has to be reachable for flashing.** In a QMK split, each half is flashed over
   its own USB (BOOT button + UF2). The case (K-case) needs an opening at the right module's rear edge too, or a
   removable lid.
+- **The module's BOOT button is on its top face, under the case lid.** It is needed for the first UF2 flash of each
+  half. After that, K-fw puts `QK_BOOT` on a layer in the keymap so later flashes need no button. K-case either
+  leaves a pin-hole over BOOT or accepts opening the lid once per half.
 - **Master detection:** QMK's default on ARM, `SPLIT_USB_DETECT`: the half that enumerates on USB within
   `SPLIT_USB_TIMEOUT` (2 s) becomes master ([QMK split keyboard](https://docs.qmk.fm/features/split_keyboard)). No
   hardware needed: the RP2040-Zero brings no VBUS-sense GPIO out anyway.
@@ -164,8 +167,13 @@ appears on that module's USB-C VBUS, and vice versa. Both directions are blocked
   - Through a passive cable, a laptop or charger sees **Ra on its CC and its other CC open**.
   - USB Type-C spec, source-side attach table: Ra / Open = "powered cable without sink attached", so a
     compliant source does not enable VBUS.
-  - Ra / Ra (audio accessory) cannot happen through a cable, because only one CC wire passes.
   - Our own left board's discrete FET gate does not tell Ra from Rd, so it powers the right half.
+  - **This holds only for non-e-marked cables.** An e-marked cable (every cable rated above 60 W, e.g. a
+    laptop-charger cable) has its own Ra on each plug's VCONN pin. A source on such a cable then sees Ra / Ra,
+    the audio-accessory state: a source that implements it may apply VBUS and treat D± as analog audio. That
+    does no damage (D22 and R3 absorb it), but it is outside the design.
+  - **Requirement: the link cable is a USB 2.0 C-to-C cable without an e-marker** (any ≤ 60 W, USB 2.0-only
+    cable). Label the link ports.
 - `LINK_VBUS` → **D22** Schottky (anode at the link) → `+5V` (module pad 1). This blocks the right module's own
   USB VBUS (plugged in for flashing) from driving the link.
 - **C1** 10 µF on `+5V` next to D22.
@@ -192,6 +200,8 @@ appears on that module's USB-C VBUS, and vice versa. Both directions are blocked
 | Legacy USB-A-to-C cable from a charger or PC (VBUS always on) → right link | 5 V through D22 powers the right half, as normal link power would | none |
 | Same → left link | VBUS meets F1, the body diodes and D22 reversed: blocked | none |
 | Link cable from a link port to the *other* half's module USB-C | the module port presents Rd. From the left link port: VBUS on into the right module's VUSB; harmless, but no serial (module D± are USB) | none, doesn't work |
+| E-marked cable in the **left** link port, far end unplugged | the plug's own Ra pulls one CC to ≈ 0.09 V → FETs on → VBUS on a dangling plug (a compliant source would not) | none (current-limited by F1); outside the design |
+| Laptop or charger → **right** link port over an **e-marked** cable | source sees Ra (ours) + Ra (the plug's) = audio-accessory state; it may apply VBUS (→ D22 powers the right half) and drive analog audio on D± (→ R3, ESD) | none expected; outside the design |
 | Both module ports plugged into the laptop with the link connected | left supplies the link; right D22 blocks the right module's VBUS from the link; both enumerate, both think they're master | no damage; unsupported (§4) |
 
 **Hot-plug:** USB-C mates GND and VBUS before the signal pins and has no sliding ring contacts. That removes the
