@@ -100,8 +100,8 @@ recur.
 | --- | --- | --- |
 | VCCINT + VCCINT_IO + VCCBRAM (0.85 V) | 1.84 + 0.04 + 0.05 = **1.92 A** | TPS566238P, 6 A |
 | VCCAUX + VCCAUX_IO (1.8 V) | 0.09 A | TLV62569P (shared 1.8 V) |
-| MGTAVCC (0.9 V) | 0.47 A | TPS7A8400A, 4 A |
-| MGTAVTT (1.2 V) | 0.56 A | TPS7A8400A, 4 A |
+| MGTAVCC (0.9 V) | 0.47 A | TPS7A8400A, 3 A |
+| MGTAVTT (1.2 V) | 0.56 A | TPS7A8400A, 3 A |
 | MGTVCCAUX (1.8 V) | 0.01 A | TLV75518P |
 | VCCO 3.3 V (bank 84) | 0.01 A | TLV75533P |
 
