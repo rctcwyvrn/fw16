@@ -2,8 +2,9 @@
 # Turns the IOMMU on, hands the card to vfio-pci, and lets members of one
 # group drive it from userspace through the fw16-fpga crate (host/):
 #
-#   imports = [ "${fw16}/fpga/driver/fw16-fpga.nix" ];
+#   imports = [ fw16.nixosModules.fw16-fpga ];   # or "${fw16}/fpga/driver/fw16-fpga.nix"
 #   hardware.fw16-fpga.enable = true;
+#   security.polkit.enable = true;               # asserted, see below
 #   users.users.<you>.extraGroups = [ "fw16-fpga" ];
 #
 # The card is matched on vendor 0x10EE plus its PCI *subsystem* ID (regmap
@@ -72,16 +73,25 @@ in
 
     kernelParams = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ "amd_iommu=on" "iommu=pt" ];
+      default = [ "iommu=pt" ];
       description = ''
         IOMMU kernel parameters. iommu=pt keeps host-owned devices on
         identity mappings (no translation cost); vfio still gets a
-        translated domain for the card.
+        translated domain for the card. No amd_iommu=on: the AMD driver
+        comes up by default once the firmware has an IVRS table, and "on"
+        is not one of its options (driver/README.md, kernel findings).
       '';
     };
   };
 
   config = lib.mkIf cfg.enable {
+    # The crate takes a logind delay inhibitor around DMA (0009); logind
+    # grants it to a non-root group member only through polkit.
+    assertions = [{
+      assertion = config.security.polkit.enable;
+      message = "hardware.fw16-fpga needs security.polkit.enable = true: without polkit, logind refuses the fw16-fpga crate's suspend inhibitor to non-root users.";
+    }];
+
     boot.kernelParams = cfg.kernelParams;
     # vfio-pci has no device table, so nothing autoloads it.
     boot.kernelModules = [ "vfio-pci" ];

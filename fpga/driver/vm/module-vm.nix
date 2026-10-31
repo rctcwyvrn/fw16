@@ -32,8 +32,11 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # The vIOMMU is Intel's; the module's amd_iommu=on stays on the cmdline too.
+  # The vIOMMU is Intel's, which needs intel_iommu=on; the module adds iommu=pt.
   boot.kernelParams = [ "intel_iommu=on" ];
+
+  # The module asserts it; edu_check's inhibitor step must pass as tester.
+  security.polkit.enable = true;
 
   hardware.fw16-fpga = {
     enable = true;
