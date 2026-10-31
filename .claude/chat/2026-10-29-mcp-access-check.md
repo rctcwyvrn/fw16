@@ -92,3 +92,9 @@
 **Did:**
 - Placed with card pins: DRC clean (RTSTAT-13 only); power VCCINT 1.92 A / MGTAVCC 0.47 A / MGTAVTT 0.56 A, 2.95 W, Tj 68.8 °C, recorded in 0011 (open item closed); fixed TPS7A84A rating to 3 A.
 - BFM sim failed on missing testbench shims → added to sim_bfm.tcl; rerun PASS (link up 187.5 µs, BAR0 = 0x46504741). 0010 updated.
+
+## 07:10 Round 1 workers + S2 start
+**User:** Write handoffs and start the background workers, then start the card outline and heatsink in fusion
+**Did:**
+- Ported 4 worker lessons from omnimeter; wrote `.claude/handoff-{f3-gw,f4-sw,k-layout}.md`; `_build/agents/launch.sh` (fw16-<lane> systemd units, nix develop).
+- Launched F3-gw (TS/PPS unit, Vivado rerun, project-slot proposal), F4-sw (bay test scripts, driver NixOS module, S6 plan), K-layout (Ergogen candidates, 1:1 PDFs, electronics options). Not launched: P-proj, K-fw, T-tray (blocked or riding F3).
