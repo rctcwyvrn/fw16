@@ -12,6 +12,10 @@ type field =
   ; lsb : int
   ; width : int
   ; fdoc : string
+  ; alias : bool
+        (** an older name for bits inside another field of the same register
+            (RING_CTL.LOOPBACK = SRC_SEL bit 0), kept so host code using it
+            still compiles; exempt from the overlap check only *)
   }
 
 type t =
@@ -39,7 +43,7 @@ let access_to_string = function
   | RW1C -> "RW1C"
 ;;
 
-let field ?(width = 1) fname lsb fdoc = { fname; lsb; width; fdoc }
+let field ?(width = 1) ?(alias = false) fname lsb fdoc = { fname; lsb; width; fdoc; alias }
 
 let reg ?(reset = 0) ?(fields = []) name offset access doc =
   { name; offset; access; reset; doc; fields }

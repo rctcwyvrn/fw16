@@ -1,5 +1,6 @@
 (* Structural checks on a register map: every register inside its own block,
-   aligned, unique, and every field inside 32 bits without overlap. *)
+   aligned, unique, and every field inside 32 bits without overlap (an alias
+   field must instead sit inside a real one). *)
 
 open Reg
 
@@ -19,14 +20,25 @@ let errors (blocks : block list) =
            | Some other -> err "%s and %s share offset 0x%x" r.name other r.offset
            | None -> Hashtbl.add seen r.offset r.name);
           let used = ref 0 in
+          let mask f = ((1 lsl f.width) - 1) lsl f.lsb in
           List.iter
             (fun f ->
               if f.lsb < 0 || f.width < 1 || f.lsb + f.width > 32
               then err "%s.%s: bits outside [31:0]" r.name f.fname
-              else (
-                let mask = ((1 lsl f.width) - 1) lsl f.lsb in
-                if !used land mask <> 0 then err "%s.%s overlaps another field" r.name f.fname;
-                used := !used lor mask))
+              else if not f.alias
+              then (
+                if !used land mask f <> 0 then err "%s.%s overlaps another field" r.name f.fname;
+                used := !used lor mask f))
+            r.fields;
+          (* An alias must name bits wholly inside one real field. *)
+          List.iter
+            (fun a ->
+              if a.alias
+                 && not
+                      (List.exists
+                         (fun f -> (not f.alias) && mask a land mask f = mask a)
+                         r.fields)
+              then err "%s.%s: alias outside every field" r.name a.fname)
             r.fields)
         b.regs)
     blocks;

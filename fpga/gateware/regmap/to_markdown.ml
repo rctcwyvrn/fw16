@@ -23,7 +23,8 @@ let render ~major ~minor (blocks : block list) =
             String.concat ""
               (List.map
                  (fun f ->
-                   Printf.sprintf "<br>`%s` %s%s" (bits f) f.fname
+                   Printf.sprintf "<br>`%s` %s%s%s" (bits f) f.fname
+                     (if f.alias then " (alias)" else "")
                      (if f.fdoc = "" then "" else " — " ^ f.fdoc))
                  r.fields)
           in

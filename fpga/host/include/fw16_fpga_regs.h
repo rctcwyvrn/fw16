@@ -3,14 +3,14 @@
 #define FW16_FPGA_REGS_H
 
 #define FW16_FPGA_REGMAP_VERSION_MAJOR 0u
-#define FW16_FPGA_REGMAP_VERSION_MINOR 2u
+#define FW16_FPGA_REGMAP_VERSION_MINOR 3u
 
 /* CTL — Identity, scratch, status and board telemetry. */
 #define FW16_FPGA_CTL_BASE 0x0000u
 #define FW16_FPGA_ID 0x0000u /* RO: Constant 0x46504741 ('FPGA'). */
 #define FW16_FPGA_ID_RESET 0x46504741u
 #define FW16_FPGA_VERSION 0x0004u /* RO: Register-map version. */
-#define FW16_FPGA_VERSION_RESET 0x00000002u
+#define FW16_FPGA_VERSION_RESET 0x00000003u
 #define FW16_FPGA_VERSION_MINOR_SHIFT 0
 #define FW16_FPGA_VERSION_MINOR_MASK 0x0000FFFFu
 #define FW16_FPGA_VERSION_MAJOR_SHIFT 16
@@ -53,23 +53,25 @@
 #define FW16_FPGA_SNK_BEATS_HI 0x200Cu /* RO: High word as of the last SNK_BEATS_LO read. */
 #define FW16_FPGA_SNK_CLEAR 0x2010u /* WO (pulse): Bit 0: reset counters and pattern state. */
 
-/* RING — Ring buffer between the source and C2H, backed by BRAM or DDR4. */
+/* RING — Ring buffer in front of C2H, filled from the source, H2C or the slot; BRAM or DDR4. */
 #define FW16_FPGA_RING_BASE 0x3000u
 #define FW16_FPGA_RING_CTL 0x3000u /* RW: Ring control. */
+#define FW16_FPGA_RING_CTL_SRC_SEL_SHIFT 0
+#define FW16_FPGA_RING_CTL_SRC_SEL_MASK 0x00000003u
 #define FW16_FPGA_RING_CTL_LOOPBACK_SHIFT 0
 #define FW16_FPGA_RING_CTL_LOOPBACK_MASK 0x00000001u
 #define FW16_FPGA_RING_DEPTH 0x3004u /* RO: Capacity in 256-bit beats. */
 #define FW16_FPGA_RING_FILL 0x3008u /* RO: Beats currently stored. */
 #define FW16_FPGA_RING_CLEAR 0x300Cu /* WO (pulse): Bit 0: empty the ring and clear OVERFLOW. */
 
-/* TS — 64-bit timestamp counter and PPS capture (Path 3 step 4). */
+/* TS — 64-bit counter of shell clock cycles (axi_aclk, 250 MHz) and PPS capture. It resets to 0 with the PCIe link (axi_aresetn), so time restarts on every link reset and rescan reload. The slot sees the live counter. */
 #define FW16_FPGA_TS_BASE 0x4000u
 #define FW16_FPGA_TS_LATCH 0x4000u /* WO (pulse): Bit 0: copy the live counter into TS_NOW_*. */
 #define FW16_FPGA_TS_NOW_LO 0x4004u /* RO: Counter at the last TS_LATCH, low word; reading it latches _HI. */
 #define FW16_FPGA_TS_NOW_HI 0x4008u /* RO: High word as of the last TS_NOW_LO read. */
-#define FW16_FPGA_TS_PPS_LO 0x400Cu /* RO: Counter at the last PPS rising edge, low word; reading it latches _HI. */
+#define FW16_FPGA_TS_PPS_LO 0x400Cu /* RO: Counter at the last PPS rising edge, low word; reading it latches _HI. The edge is 2 cycles older than the capture (synchroniser). */
 #define FW16_FPGA_TS_PPS_HI 0x4010u /* RO: High word as of the last TS_PPS_LO read. */
-#define FW16_FPGA_TS_PPS_COUNT 0x4014u /* RO: PPS edges seen since reset. */
+#define FW16_FPGA_TS_PPS_COUNT 0x4014u /* RO: PPS rising edges since reset (wraps). */
 
 /* IRQ — Interrupts: usr_irq_req[0] is high while IRQ_PENDING & IRQ_EN is non-zero. usr_irq_req is a held level and MSI-X fires only on its rising edge, so after clearing IRQ_PENDING the host must re-read it until it reads 0 under IRQ_EN before waiting for the next interrupt. */
 #define FW16_FPGA_IRQ_BASE 0x5000u
@@ -80,6 +82,8 @@
 #define FW16_FPGA_IRQ_EN_PPS_MASK 0x00000002u
 #define FW16_FPGA_IRQ_EN_SNK_ERR_SHIFT 2
 #define FW16_FPGA_IRQ_EN_SNK_ERR_MASK 0x00000004u
+#define FW16_FPGA_IRQ_EN_SLOT_SHIFT 3
+#define FW16_FPGA_IRQ_EN_SLOT_MASK 0x00000008u
 #define FW16_FPGA_IRQ_PENDING 0x5004u /* RW1C: Latched sources (set whether or not enabled); write 1 to clear. A set wins over a clear in the same cycle. */
 #define FW16_FPGA_IRQ_PENDING_FORCE_SHIFT 0
 #define FW16_FPGA_IRQ_PENDING_FORCE_MASK 0x00000001u
@@ -87,9 +91,19 @@
 #define FW16_FPGA_IRQ_PENDING_PPS_MASK 0x00000002u
 #define FW16_FPGA_IRQ_PENDING_SNK_ERR_SHIFT 2
 #define FW16_FPGA_IRQ_PENDING_SNK_ERR_MASK 0x00000004u
+#define FW16_FPGA_IRQ_PENDING_SLOT_SHIFT 3
+#define FW16_FPGA_IRQ_PENDING_SLOT_MASK 0x00000008u
 #define FW16_FPGA_IRQ_COUNT 0x5008u /* RO: Rising edges of usr_irq_req since reset (wraps). */
 #define FW16_FPGA_IRQ_FORCE 0x500Cu /* WO (pulse): Bit 0: set IRQ_PENDING.FORCE now. */
 #define FW16_FPGA_IRQ_FORCE_FORCE_SHIFT 0
 #define FW16_FPGA_IRQ_FORCE_FORCE_MASK 0x00000001u
+
+/* SLOT — Shell-side control of the project slot, out of the project's reach. The project's own registers are on BAR2 (SLOT_ID at 0x0, SLOT_VERSION at 0x4). */
+#define FW16_FPGA_SLOT_BASE 0x6000u
+#define FW16_FPGA_SLOT_CTL 0x6000u /* RW: Slot control. */
+#define FW16_FPGA_SLOT_CTL_RESET_SHIFT 0
+#define FW16_FPGA_SLOT_CTL_RESET_MASK 0x00000001u
+#define FW16_FPGA_SLOT_CTL_DECOUPLE_SHIFT 1
+#define FW16_FPGA_SLOT_CTL_DECOUPLE_MASK 0x00000002u
 
 #endif /* FW16_FPGA_REGS_H */

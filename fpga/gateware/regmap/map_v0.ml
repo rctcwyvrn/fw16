@@ -5,12 +5,16 @@
 
    v0.2 (docs/regmap-v0.2-proposal.md): the IRQ block, and every RO
    [<P>_LO]/[<P>_HI] pair is tear-free — a read of [_LO] latches the high word,
-   which [_HI] returns (Regs implements this for every such pair by name). *)
+   which [_HI] returns (Regs implements this for every such pair by name).
+
+   v0.3 (docs/decisions/0013): the project slot. RING_CTL.SRC_SEL, IRQ bit 3
+   SLOT, the SLOT block at 0x6000. The slot's own registers are not here: they
+   live on BAR2 (XDMA's AXI4 bypass master), SLOT_ID at 0x0, SLOT_VERSION at 0x4. *)
 
 open Reg
 
 let version_major = 0
-let version_minor = 2
+let version_minor = 3
 
 let ctl =
   { bname = "CTL"
@@ -99,7 +103,7 @@ let snk =
 let ring =
   { bname = "RING"
   ; base = 0x3000
-  ; bdoc = "Ring buffer between the source and C2H, backed by BRAM or DDR4."
+  ; bdoc = "Ring buffer in front of C2H, filled from the source, H2C or the slot; BRAM or DDR4."
   ; regs =
       [ reg
           "RING_CTL"
@@ -107,7 +111,18 @@ let ring =
           RW
           "Ring control."
           ~fields:
-            [ field "LOOPBACK" 0 "Fill from H2C instead of the source (sink still checks)."
+            [ field
+                "SRC_SEL"
+                0
+                ~width:2
+                "Ring source: 0 = test source, 1 = H2C (loopback), 2 = slot m_axis, 3 = \
+                 none (reserved). The sink always checks H2C; H2C reaches the slot only \
+                 when 2."
+            ; field
+                "LOOPBACK"
+                0
+                ~alias:true
+                "SRC_SEL bit 0, the v0.2 name: writing just this bit selects H2C."
             ]
       ; reg "RING_DEPTH" 0x3004 RO "Capacity in 256-bit beats."
       ; reg "RING_FILL" 0x3008 RO "Beats currently stored."
@@ -119,24 +134,36 @@ let ring =
 let ts =
   { bname = "TS"
   ; base = 0x4000
-  ; bdoc = "64-bit timestamp counter and PPS capture (Path 3 step 4)."
+  ; bdoc =
+      "64-bit counter of shell clock cycles (axi_aclk, 250 MHz) and PPS capture. It \
+       resets to 0 with the PCIe link (axi_aresetn), so time restarts on every link \
+       reset and rescan reload. The slot sees the live counter."
   ; regs =
       [ reg "TS_LATCH" 0x4000 WO_PULSE "Bit 0: copy the live counter into TS_NOW_*."
       ; reg "TS_NOW_LO" 0x4004 RO "Counter at the last TS_LATCH, low word; reading it latches _HI."
       ; reg "TS_NOW_HI" 0x4008 RO "High word as of the last TS_NOW_LO read."
-      ; reg "TS_PPS_LO" 0x400C RO "Counter at the last PPS rising edge, low word; reading it latches _HI."
+      ; reg
+          "TS_PPS_LO"
+          0x400C
+          RO
+          "Counter at the last PPS rising edge, low word; reading it latches _HI. The \
+           edge is 2 cycles older than the capture (synchroniser)."
       ; reg "TS_PPS_HI" 0x4010 RO "High word as of the last TS_PPS_LO read."
-      ; reg "TS_PPS_COUNT" 0x4014 RO "PPS edges seen since reset."
+      ; reg "TS_PPS_COUNT" 0x4014 RO "PPS rising edges since reset (wraps)."
       ]
   }
 ;;
 
-(* One interrupt line (XDMA usr_irq_req[0]) shared by all sources. Bit 3 is
-   left free for a sink-done source if one is ever wanted. *)
+(* One interrupt line (XDMA usr_irq_req[0]) shared by all sources. *)
 let irq_sources =
   [ field "FORCE" 0 "IRQ_FORCE write (latency test)."
-  ; field "PPS" 1 "PPS rising edge (reads 0 until the TS unit lands)."
+  ; field "PPS" 1 "PPS rising edge (the TS_PPS capture)."
   ; field "SNK_ERR" 2 "STATUS.SNK_ERR went 0 -> 1 (once per error run)."
+  ; field
+      "SLOT"
+      3
+      "The slot's slot_irq level: re-latches while it is high, so clearing sticks only \
+       after the project drops it."
   ]
 ;;
 
@@ -168,4 +195,24 @@ let irq =
   }
 ;;
 
-let blocks = [ ctl; src; snk; ring; ts; irq ]
+let slot =
+  { bname = "SLOT"
+  ; base = 0x6000
+  ; bdoc =
+      "Shell-side control of the project slot, out of the project's reach. The \
+       project's own registers are on BAR2 (SLOT_ID at 0x0, SLOT_VERSION at 0x4)."
+  ; regs =
+      [ reg
+          "SLOT_CTL"
+          0x6000
+          RW
+          "Slot control."
+          ~fields:
+            [ field "RESET" 0 "Hold the slot in reset (slot_clear) while set; the link stays up."
+            ; field "DECOUPLE" 1 "Reserved for partial reconfiguration; no effect yet."
+            ]
+      ]
+  }
+;;
+
+let blocks = [ ctl; src; snk; ring; ts; irq; slot ]
