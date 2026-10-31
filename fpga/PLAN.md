@@ -27,7 +27,7 @@ branch A adds ~4–8 weeks around S4.
 | Sync | When | What crosses between paths |
 | --- | --- | --- |
 | **S1 — clearance known** | T0 (Phase 0) | CAD → PCB: vertical clearance, pad-field geometry, insert positions (`bay/KEEPOUT.md` v1). Picks branch B/A. |
-| **S2 — outline frozen** | ~wk 2 | CAD → PCB: board outline, mounting holes, heatsink footprint and height, rear-slot position. PCB layout can start. |
+| **S2 — outline frozen** | ~wk 2 | CAD → PCB: board outline, mounting holes, heatsink footprint and height, rear-slot position. PCB layout can start. **Passed 2026-10-31** ([0012](docs/decisions/0012-card-envelope-and-heatsink-mount.md), `bay/cad/card-envelope.step`). |
 | **S3 — pinout frozen** | ~wk 4 | PCB → FPGA: every FPGA pin assignment (XDC). PCB → software: power-telemetry and LED/GPIO map. FPGA → software: register map v0 (ABI). After S3 the schematic's FPGA pins don't move without a 3-way review. |
 | **S4 — boards back** | ~wk 8–10 | PCB runs the bench stages. FPGA must have the *alive* bitstream (JTAG-only: LED blink, SYSMON readout, DDR4/BRAM self-test). Software must have the `fw16-fpga` crate's `vfio` layer passing in the QEMU `edu` VM and `fw16-fpga-loopback` passing against `mock`. |
 | **S5 — PCIe trains in the bay** | ~wk 10–12 | PCB → everyone: `LnkSta` result (Gen3/Gen4, width). FPGA → software: PCIe bitstream in flash. Software captures enumeration, suspend/resume, loopback. |

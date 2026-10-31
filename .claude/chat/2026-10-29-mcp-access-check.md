@@ -98,3 +98,9 @@
 **Did:**
 - Ported 4 worker lessons from omnimeter; wrote `.claude/handoff-{f3-gw,f4-sw,k-layout}.md`; `_build/agents/launch.sh` (fw16-<lane> systemd units, nix develop).
 - Launched F3-gw (TS/PPS unit, Vivado rerun, project-slot proposal), F4-sw (bay test scripts, driver NixOS module, S6 plan), K-layout (Ergogen candidates, 1:1 PDFs, electronics options). Not launched: P-proj, K-fw, T-tray (blocked or riding F3).
+
+## 15:25 S2 card envelope in Fusion
+**Asked:** (1) Heatsink mount — 4× M2 SMT nuts at BGA / arms to existing standoffs / compression → **4× M2 SMT nuts at BGA**. (2) Card thickness — 1.2 / 1.6 mm → **"reserach jlcpcb thickness options"** (found 8L and 10L impedance stackups at 1.2 mm → chose 1.2). (3) Keepout — v1.1 rubber stays / v1.1 rubber removed / v1 → **v1.1, rubber stays**.
+**Did:**
+- New Fusion doc `fw16-bay-card` (shell + PCB_REF + full laptop STEPs); `fw16-card` component from the outline/holes DXFs matches Framework's PCB body; U14, pad, heatsink envelope (4.33 mm, 0.5 mm under KBCAP), 4 nuts; no interference.
+- `fpga/bay/cad/card-envelope.step`, decision 0012, KEEPOUT v1.1 accepted, 0011 ceiling note fixed, S2 marked passed in fpga/PLAN.md.

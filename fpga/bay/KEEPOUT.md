@@ -120,9 +120,10 @@ Bottom-side parts are limited to passives of about 1 mm, and nothing goes behind
 - v2 must measure, with calipers on the real laptop: the front and middle ceilings, the floor gap, and the
   rear bracket height.
 
-## Proposed v1.1 (2026-10-29, Path 1 scripts; not yet accepted)
+## v1.1 (2026-10-29, Path 1 scripts; accepted 2026-10-31, decision 0012)
 
-Everything below is proposed, not adopted. It comes from `bay/tools/card_zones.py` (1 mm ray grid,
+Accepted as the design basis by the user on 2026-10-31, with one rule while the support-rubber question is open:
+**no top-side parts at Z < 15** (assume `IFGP6_UMA_SUPPORT_RUBBER` stays with a card fitted). Originally proposed, not adopted. It comes from `bay/tools/card_zones.py` (1 mm ray grid,
 `bay/cad/card-zones-{top,bottom}.dxf`, raw gaps in `bay/cad/card-zones-grid.json`), `strip_probe.py`,
 `fan_probe.py` and `step_section.py`. Where it disagrees with
 v1 above, v1 stands until the user decides.

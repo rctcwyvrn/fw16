@@ -60,7 +60,8 @@ the MGT LDOs); the counts above are at the FPGA.
 ## Part choices (user, 2026-10-29)
 
 - VCCINT bulk: **330 µF/2.5 V polymer tantalum, EIA-7343** + **100 µF/4 V MLCC, 1210**. Check the 7343's ~4 mm
-  height against the 7.8 mm middle-zone ceiling (`bay/KEEPOUT.md`) at placement.
+  height at placement: the ceiling is 7.8 mm in the front zone and 8.65 mm in the middle zone (`bay/KEEPOUT.md`), and
+  it cannot sit under the heatsink, whose base is at Y −5.63 (0012).
 - Oscillators: **SiTime SiT8008 100 MHz LVCMOS 3.3 V, 2016** for CLK100M (populated); **SiTime SiT9121 100 MHz LVDS,
   3225** footprint for the DNP GT bench clock on MGTREFCLK1_225.
 - U.FL input on AB15 (net `PPS_IN`, name kept for 0010/gateware): built for **PPS and a 10 MHz reference / fast
