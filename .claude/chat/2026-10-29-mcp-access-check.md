@@ -142,3 +142,9 @@
 **Did:**
 - KiCad can't save on \\wsl.localhost: Windows working copy C:\Users\17786\fw16-card + fpga/bay/card/sync.sh (seed/pull/check), CLAUDE.md rule, lessons; KiCad lock files ignored.
 - Board: 8 layers / 1.2 mm, outline from DXF, 201 footprints synced from the schematic; J1, U14 (rot 90), H1–H4 placed per 0012; lanes do not cross. jj file-size limit raised to 8 MiB (repo config).
+
+## 23:40 Round 2 reports (copied from _build/agents/*.report.md)
+**Did:**
+- F3-gw2: regmap v0.3 (c9949a39), slot boundary + cyclesim (2ed87fcc); bypass BAR edits left uncommitted when its background Vivado run was killed at turn end; orchestrator rerunning `run.sh all`.
+- F4-sw2: amd_iommu=on dropped (not an option), polkit assertion, kernel findings (793ecfec, ba605706), nixosModules.fw16-fpga (7103a45e), crate v0.3 + BAR2 (1e314d7a); cargo test/clippy clean; VM check not booted (denied).
+- K-elec: keyboard/docs/pcb-spec.md + positions-b.csv + pcb outline (e6744adb, 54d1d5b4); 6 lessons copied.
