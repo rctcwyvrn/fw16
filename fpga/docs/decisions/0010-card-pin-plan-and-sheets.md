@@ -55,6 +55,7 @@ ball against the CSV.
 
 - fw16's `pcie_sideband`, `config`, `core_power` and `fpga` sheets are redrawn here to this spec through Konnect.
   The `fw16-fpga-module` library needs the AU15P symbol and the RQF0009A footprint recreated.
-- Vivado results from omnimeter (synth passes: LUT 32.7 %, BRAM 57.3 %, setup WNS +0.728 ns; XDMA BFM sim passes
-  once the example EP copy gets tied-off shims, see lesson `xdma-example-tb-hierarchical-refs`) are not reproduced in
-  fw16 yet; fw16's `sim_bfm.tcl` lacks the shims.
+- Reproduced in fw16 on 2026-10-31 with the card's pins in place (`fw16_fpga_pins.xdc`, generated from
+  `pinplan.csv`): synthesis setup WNS +0.728 ns, and the XDMA BFM simulation passes. It needed the tied-off
+  shims from lesson `xdma-example-tb-hierarchical-refs`, now in `sim_bfm.tcl`. Link-up is at 187.5 µs, and
+  BAR0[0x0] reads 0x46504741.

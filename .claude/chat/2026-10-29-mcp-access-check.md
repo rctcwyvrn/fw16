@@ -80,3 +80,15 @@
 **Did:**
 - Created SiT9121 symbol; placed 57 passives (decoupling per 0011, SYSMON filter, RCAL 100 Ω, TX/REFCLK AC caps, Y1/Y2, U.FL+ESD+33 Ω, LEDs) + 40 GND + 2 PWR_FLAG; U14 footprint BGA-676.
 - Netlist check: U14 676/676 balls and every passive pin on the intended net; card ERC 0 errors, 4 benign warnings. Judgment calls listed in 0011.
+
+## 05:26 S3: pin XDC + top ports + power estimate
+**User:** continue
+**Asked:** (1) XDC generation — OCaml exe + dune rule / Python in bay/tools / Vivado Tcl → **OCaml exe + dune rule**. (2) Top ports — all ports with safe defaults / PCIe only → **All ports, safe defaults**. (3) Power estimate — report_power now / later → **Yes, report_power now**.
+**Did:**
+- gateware/vivado/pins/pins_xdc.ml + dune rule → committed fw16_fpga_pins.xdc (dune runtest checks staleness); dune now sees only bay/card/fpga.
+- fw16_fpga_top.v: clk100m, LEDs (heartbeat, link), TH drives low, I2C/CLKREQ released, PPS/ALERT inputs; power.tcl (place + DRC + vectorless power). Full Vivado run (project/synth/power/sim) started.
+
+## 06:21 Vivado results
+**Did:**
+- Placed with card pins: DRC clean (RTSTAT-13 only); power VCCINT 1.92 A / MGTAVCC 0.47 A / MGTAVTT 0.56 A, 2.95 W, Tj 68.8 °C, recorded in 0011 (open item closed); fixed TPS7A84A rating to 3 A.
+- BFM sim failed on missing testbench shims → added to sim_bfm.tcl; rerun PASS (link up 187.5 µs, BAR0 = 0x46504741). 0010 updated.
