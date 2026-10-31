@@ -1,8 +1,9 @@
 # 0012 — Card envelope, thickness and heatsink mounting (S2)
 
 **Date:** 2026-10-31
-**Status:** accepted 2026-10-31 (user: M2 SMT nuts at the BGA; KEEPOUT v1.1 with the support rubber assumed to
-stay; thickness after a JLCPCB check). The positions below are Claude's calls, listed for review.
+**Status:** accepted 2026-10-31. The user chose the M2 SMT nuts at the BGA and KEEPOUT v1.1 with the support rubber
+assumed to stay, and asked for JLCPCB's thickness options to be researched. **1.2 mm is Claude's call from that research**
+(overridable). The positions below are Claude's calls too, listed for review.
 
 ## Context
 
@@ -38,11 +39,11 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
 
 | Item | Laptop frame (X, Z) | KiCad frame (x, y) | Y (mm) |
 | --- | --- | --- | --- |
-| U14 FFVB676, 27 × 27 | centre (7.325, 30.0) | centre (0, −40.55) | −9.45 … −5.93 (3.52 max seated) |
+| U14 FFVB676, 27 × 27 | centre (7.325, 29.5), Z 16 … 43 | centre (0, −41.05) | −9.45 … −5.93 (3.52 max seated) |
 | Thermal pad | over U14 | | −5.93 … −5.63 (0.30) |
 | Heatsink envelope, full height | X −12.675 … 27.325, Z 15 … 43 | x −20 … 20, y −55.55 … −27.55 | −5.63 … −1.30 (4.33) |
-| M2 nut 1 / 2 | (−10.175, 19) / (24.825, 19) | (−17.5, −51.55) / (17.5, −51.55) | board top to the heatsink base (3.82) |
-| M2 nut 3 / 4 | (−10.175, 41) / (24.825, 41) | (−17.5, −29.55) / (17.5, −29.55) | |
+| M2 nut 1 / 2 | (−10.175, 18.5) / (24.825, 18.5) | (−17.5, −52.05) / (17.5, −52.05) | board top −9.45; see the nut height note |
+| M2 nut 3 / 4 | (−10.175, 40.5) / (24.825, 40.5) | (−17.5, −30.05) / (17.5, −30.05) | |
 
 - **Rear slot:** none on spin 1 (0007, no rear I/O).
 
@@ -50,18 +51,23 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
 
 - The card slab extruded from `card-outline.dxf` + `card-holes.dxf` has the same bounding box as Framework's
   reference PCB body in `PCB_REF__0807` (X −57.45…61.20, Z 4.0…76.5, Y −10.65…−9.45). Its volume is within
-  0.1 % of the reference (9483.7 vs 9474.2 mm³), so the DXFs are the right outline in the right frame.
+  0.1 % of the reference (9483.7 vs 9474.2 mm³), so the DXFs are the right outline in the right frame. Both bodies have the
+  same 14 through-features at the same centres (4× Ø6.2, 2× Ø2.7, 4× Ø1.5, 2× Ø1.4, Ø2.4, the 2.3 mm slot). KEEPOUT's
+  "2× Ø1.0 at (−45.95, 68.0), (48.7, 68.0)" are R0.5 inside-corner fillets of the outline at the tab roots, not holes.
 - No envelope body (U14, pad, heatsink, nuts) intersects any laptop, shell or reference body. Nearest solids:
   the heatsink envelope top is **0.5 mm** under `IFW70_ID_D_KBCAP` (the middle-zone ceiling is the keyboard
   plate), then 1.14 mm to the keyboard frame. U14 and the nuts are 1.5 mm from the shell frame.
 
 ## Judgment calls (review)
 
-- **U14 centred at X 7.325**, the interposer centreline, and at Z 30, the middle of the full-height band. Layout
+- **U14 centred at X 7.325**, the interposer centreline, and at Z 29.5, so the package (Z 16–43) sits inside the
+  envelope's full-height band (Z 15–43). Layout
   may move it; the nuts and the heatsink envelope move with it.
 - **Nut positions:** ±17.5 mm in X and ±11 mm in Z from the BGA centre. That is 4 mm outside the package's X
-  edges, inside Z 15–43, and behind the Z < 15 line. The diameter is a **4.5 mm placeholder**, and the height to
-  the heatsink base is 3.82 mm. Choose the part (Würth WA-SMSI/SMSN class, and whether it needs a locating
+  edges, inside Z 15–43, and behind the Z < 15 line. The diameter is a **4.5 mm placeholder**. The board-top-to-heatsink-base distance is 3.82 mm, but that is **not
+  the nut height**: a rigid 3.82 mm standoff would only meet a lid at its 3.52 mm maximum, and at the 3.31 mm nominal
+  the 0.30 mm pad would float. Choose a nut shorter than 3.31 mm and let the heatsink boss plus a compliant pad or
+  spring screws take up the lid tolerance (Path 1 step 5). Choose the part (Würth WA-SMSI/SMSN class, and whether it needs a locating
   NPTH) before layout places footprints.
 - **Envelope width 40 mm in X**, which covers the nuts plus screw heads. The screw heads must be counterbored
   flush, because the envelope top has only 0.5 mm to the keyboard plate.

@@ -68,7 +68,7 @@ A clean outline DXF in KEEPOUT coordinates is a CAD deliverable for S2.
 | 1.4 | 2 | (−1.0, 66.35), (15.655, 74.75) | FXBeam alignment |
 | 2.0 | 6 | (−27, 69.5), (−11.35, 69.5), (25.35, 69.5), (38, 69.5), (−3, 8.8), (7, 8.8) | notch / rear-notch corner reliefs |
 | 2.3–2.4 | 3 | (−43.35, 66.9), (45.55, 66.9), (46.15, 66.9) | small holes beside Tab L and Tab R; the X 45.55–46.15 pair are the ends of one slot, 2.3 mm wide and 2.9 mm long in X |
-| 1.0 | 2 | (−45.95, 68.0), (48.7, 68.0) | |
+| 1.0 | 2 | (−45.95, 68.0), (48.7, 68.0) | **not holes**: R0.5 inside-corner fillets of the outline at the tab roots (checked in Fusion 2026-10-31, 0012) |
 
 ## Interposer (FXBeam) fields
 
