@@ -47,3 +47,7 @@ __pycache__/
 # Third-party checkouts
 fpga/driver/third_party/
 fpga/bay/lib/
+
+# KiCad session files (locks, local history)
+~*.lck
+.history/
