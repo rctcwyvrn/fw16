@@ -110,3 +110,14 @@
 - F3-gw: timestamp unit + PPS sync/capture, cyclesim tests (bd02e15c); project-slot proposal (54923514); its Vivado run was permission-denied, so the orchestrator started `run.sh all`.
 - F4-sw: pciutils in the flake (24397ca0); bay reference tests (f4baa0da); driver NixOS module + VM check MODULE-CHECK PASS (26d69c56, 90fe1b5f); S6 tooling plan only; cargo test 70/70.
 - K-layout: ergogen + librsvg in the flake (68ca26a4); 3 Ergogen candidates with 1:1 Letter PDFs, all fit the tray (1076d538); electronics options (02de6888). Lessons copied: 7 new files plus 1 updated.
+
+## 16:40 Vivado rerun with the timestamp unit → PCIe lane-order mismatch found
+**Did:**
+- `run.sh all` passes (WNS +0.728 ns, 2.94 W, BFM PASS), but 8× CRITICAL WARNING 12-1411: XDMA's gt.xdc puts PCIe lane 0 on Quad 225 ch3 (P2/R5), while pinplan.csv / 0010 / the fpga sheet put lane 0 on ch0 (Y2/AA5), so the card as drawn is lane-reversed. pinplan_check only listed GT LOCs and missed it.
+- Testing `lane_order = Top` in the build dir (no repo change) before asking the user how to fix it.
+
+## 17:30 PCIe lane swap
+**Asked:** Lane fix — swap lanes on the card / rely on lane reversal / override the IP's GT LOCs → **Swap lanes on the card (Recommended)**.
+**Did:**
+- `lane_order = Top` changed nothing. Remapped pinplan.csv (lane n → ch 3−n), regenerated fw16_fpga_pins.xdc, moved the 16 U14 lane labels on the fpga sheet via Konnect (netlist diff: exactly 16 pins; ERC 0 errors).
+- power.tcl and pinplan_check.tcl now fail when a port is off its pin-plan ball; Vivado rerun: 0 critical warnings, WNS +0.728 ns. 0010 amended; lesson `xdma-gt-lane-order-is-reversed-on-quad-225`.

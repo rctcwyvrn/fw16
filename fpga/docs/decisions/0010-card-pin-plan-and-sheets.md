@@ -15,7 +15,9 @@ Quad 225), plus the uncommitted pin plan (now `bay/card/fpga/pinplan.csv`).
 ## Decisions
 
 **PCIe quad and pins**
-- **GTH Quad 225** (XDMA default for Gen4 x4, `PCIE4C_X0Y0`, lane order Bottom): lanes 0–3 = channels 0–3;
+- **GTH Quad 225** (XDMA default for Gen4 x4, `PCIE4C_X0Y0`): **PCIe lane n = channel 3−n** (lane 0 on RX P2 / TX R5,
+  lane 3 on RX Y2 / TX AA5). *Amended 2026-10-31 (user chose to swap the lanes on the card): the original "lanes 0–3 =
+  channels 0–3" is wrong; see below.*
   `MGTREFCLK0_225` (V7/V6) = host `PEX_REFCLK` through 10 nF AC caps; FPGA TX → 220 nF AC caps → `PEX_RX*`.
 - **PERST# is a fabric input on HD bank 84** (AF14), not T19/PERSTN0 (no tandem configuration).
 - **All 3.3 V sidebands on HD bank 84 at 3.3 V** (VCCO = `+3V3_IO`): PEX_RST#, FPGA_CLKREQ_N, TH_ALERT/OVERT drives,
@@ -31,6 +33,8 @@ Quad 225), plus the uncommitted pin plan (now `bay/card/fpga/pinplan.csv`).
   The check (`bay/tools/pinplan_check.tcl`) **passed 2026-10-29** on fw16's own synth: Vivado placed the four
   lanes on GTHE4_CHANNEL_X0Y4–X0Y7 (Quad 225) with REFCLK on V7 and PERST# on AF14. Placement only, not routed;
   Vivado's vectorless power estimate warned that Vccint current exceeds the package limit (open item, see 0011).
+  **That check missed the lane order**: it listed only the GT sites, which were right, not which port landed on which
+  ball. Fixed 2026-10-31: it and `gateware/vivado/power.tcl` now fail if any port is not on its pin-plan ball.
 
 **AU15P symbol**: generated from Vivado's package-pin list (`get_package_pins` → CSV → Konnect `create_symbol`),
 not hand-built: 14 units (bank 0, GTH 224/225/226, HP 64/65/66, HD 84/85/86, power, GND ×2, NC), verified ball by
@@ -59,3 +63,12 @@ ball against the CSV.
   `pinplan.csv`): synthesis setup WNS +0.728 ns, and the XDMA BFM simulation passes. It needed the tied-off
   shims from lesson `xdma-example-tb-hierarchical-refs`, now in `sim_bfm.tcl`. Link-up is at 187.5 µs, and
   BAR0[0x0] reads 0x46504741.
+- **Lane order corrected 2026-10-31.** The rerun with the timestamp unit gave 8× CRITICAL WARNING 12-1411. The IP's
+  `xdma_0_pcie4c_ip_gt.xdc` LOCs gtwizard `inst[k]` to `GTHE4_CHANNEL_X0Y(4+k)`, PCIe lane 0 is driven by `inst[3]`,
+  and the pin XDC's conflicting PACKAGE_PINs were dropped, so the card as drawn was lane-reversed. Setting
+  `lane_order = Top` (with a fresh out-of-context resynthesis) changed nothing. The user chose to swap the lanes on the
+  card: `pinplan.csv` was remapped, the regenerated `fw16_fpga_pins.xdc` follows it, and the `fpga` sheet's 16 lane labels
+  on U14 were moved through Konnect. The netlist diff shows exactly those 16 U14 pins changed, and card ERC has 0 errors.
+  Vivado rerun with the swapped pins (project, synth, power): **0 critical warnings**, every port on its pin-plan
+  ball, setup WNS +0.728 ns, 2.94 W, Tj 68.8 °C. The BFM sim (it does not model the board pins) passed earlier the
+  same day with the timestamp unit: link up at 187.5 µs, BAR0 = 0x46504741.

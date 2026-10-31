@@ -24,4 +24,12 @@ opt_design
 place_design -directive RuntimeOptimized
 report_drc -append -file $rpt
 foreach c [lsort [get_cells -hier -filter {REF_NAME == GTHE4_CHANNEL}]] { puts "fw16: GT [get_property LOC $c]" }
+# The XDMA IP LOCs its own GT channels (lane n -> Quad 225 channel 3-n), and a conflicting PACKAGE_PIN is dropped
+# with only a CRITICAL WARNING (12-1411), so check where each port actually landed.
+set bad 0
+foreach {port net} $map {
+  set got [get_property PACKAGE_PIN [get_ports $port]]
+  if {$got ne [dict get $plan $net]} { puts "fw16: MISMATCH $port placed on $got, pin plan says [dict get $plan $net]"; incr bad }
+}
+if {$bad} { error "pinplan_check: $bad port(s) not on their pin-plan ball" }
 puts "fw16: pinplan_check PASS"

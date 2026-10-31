@@ -11,6 +11,18 @@ opt_design
 place_design -directive RuntimeOptimized
 report_drc -file [file join $fw16_fpga_reports place_drc.txt]
 report_io -file [file join $fw16_fpga_reports place_io.txt]
+# A PACKAGE_PIN that conflicts with the XDMA IP's own GT LOCs is dropped with only a CRITICAL WARNING (12-1411), so
+# check that every port landed where fw16_fpga_pins.xdc (from pinplan.csv) put it.
+set f [open [file join $fw16_fpga_src fw16_fpga_pins.xdc] r]; set bad 0
+foreach line [split [read $f] \n] {
+  if {[regexp {^set_property PACKAGE_PIN (\S+) \[get_ports \{(.+)\}\]} $line -> ball port]} {
+    set got [get_property PACKAGE_PIN [get_ports $port]]
+    if {$got ne $ball} { puts "fw16-fpga: MISMATCH $port placed on $got, pin XDC says $ball"; incr bad }
+  }
+}
+close $f
+if {$bad} { error "power: $bad port(s) not on their pin-plan ball" }
+puts "fw16-fpga: every port is on its pin-plan ball"
 
 set_operating_conditions -ambient_temp 50 -airflow 0 -heatsink none
 set_switching_activity -default_toggle_rate 12.5 -default_static_probability 0.5
