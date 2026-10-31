@@ -19,7 +19,8 @@ Two independent Framework Laptop 16 builds, per the doc
 - **No sidecar docs in this repo**, mirroring omnimeter; do not add `.claude/sidecar.json` or sidecars. Files
   still keep one purpose each.
 - Tools come from `flake.nix` (`nix develop`); `shell.nix` is a shim onto it so `nix-shell` also works. Add tools
-  to the flake only; a flake edit touches only the tool list and is committed alone.
+  to the flake only; a flake edit touches only the tool list or `nixosModules` (user, 2026-10-31: the driver module
+  is exported as `nixosModules.fw16-fpga`) and is committed alone.
 - KiCad files change only through Konnect MCP tools; Fusion work goes through the fusion360 MCP. Both run as
   Windows processes and reach only the interactive session, never subagents or headless workers.
 - Handoffs are repo markdown: `.claude/handoff-<lane>.md` (read-first list, decisions made, state, next steps,

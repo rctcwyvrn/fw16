@@ -41,5 +41,5 @@ stock Framework keyboard stays in the deck. Wired first; wireless and the deck s
 ## Acceptance
 
 - [ ] Both halves type over USB-C into the FW16 under NixOS.
-- [ ] Each half is ≤ 12 mm thick stowed; both fit the tray insert side by side.
+- [ ] Each half is ≤ 13 mm thick stowed (relaxed from 12 mm, decision 0001); both fit the tray insert side by side.
 - [ ] Legs hold at 20° without wobble while typing.

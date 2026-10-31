@@ -121,3 +121,10 @@
 **Did:**
 - `lane_order = Top` changed nothing. Remapped pinplan.csv (lane n → ch 3−n), regenerated fw16_fpga_pins.xdc, moved the 16 U14 lane labels on the fpga sheet via Konnect (netlist diff: exactly 16 pins; ERC 0 errors).
 - power.tcl and pinplan_check.tcl now fail when a port is off its pin-plan ball; Vivado rerun: 0 critical warnings, WNS +0.728 ns. 0010 amended; lesson `xdma-gt-lane-order-is-reversed-on-quad-225`.
+
+## 18:00 Round 1 questions
+**User:** ask me questions for the round1 quetsions
+**Asked:** Keyboard — Layout → **B: 42 keys**; Controller → **Module per half (Recommended)**; Link → **USB-C (Recommended)**; Stack → **Relax to 13 mm**. Slot — window → **Separate bypass BAR**; clock → **axi_aclk + a free clock (Recommended)**; width → **256-bit native (Recommended)**; v0.3 → **Accept as one v0.3 (Recommended)**. Driver — module → **nixosModules flake output (Recommended)**; memlock → **unlimited (current)**; amd_iommu → **Verify, then drop if no-op (Recommended)**; polkit → **Assert polkit is on (Recommended)**. Misc — TS reset → **Keep link-reset (Recommended)**; PD meter → **POWER-Z KM003C (Recommended)**; TC logger → **USB-serial multi-channel (Recommended)**; Workers → **Allow Vivado run.sh, Allow tar on kernel source**.
+**Did:**
+- keyboard decision 0001 (B, RP2040-Zero, USB-C, 13 mm); fpga decision 0013 (slot: bypass BAR, axi_aclk + free clock, 256-bit, regmap v0.3); PLAN.md acquire list; CLAUDE.md flake rule allows nixosModules.
+- Launcher allow-list gains `fpga/gateware/vivado/run.sh` and `tar` for workers.

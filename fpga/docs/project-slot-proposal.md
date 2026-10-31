@@ -1,6 +1,6 @@
 # Project-slot interface — proposal from the gateware path (Path 3)
 
-**Date:** 2026-10-31 · **For:** the user (sync point SP), then Path 4 (`fw16-fpga`) · **Status:** proposal, nothing built
+**Date:** 2026-10-31 · **For:** the user (sync point SP), then Path 4 (`fw16-fpga`) · **Status:** decided 2026-10-31 in [0013](decisions/0013-project-slot-interface.md) (bypass BAR instead of the BAR0 window; the other recommendations accepted); nothing built
 
 [`projects/PLAN.md`](../projects/PLAN.md) "Shell prerequisites" 4 asks for a slot in the shell — AXI-Stream in
 and out plus an AXI-Lite window — so a project is a module plugged into the shell, never an edit of it. This
