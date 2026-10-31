@@ -54,6 +54,10 @@
         exec ${bayPython}/bin/python3 "$@"
       '';
     in {
+      # fpga/driver: binds the bay card to vfio-pci for the fw16-fpga crate
+      # (decision 0009); see fpga/driver/README.md.
+      nixosModules.fw16-fpga = import ./fpga/driver/fw16-fpga.nix;
+
       devShells.${system}.default = pkgs.mkShell {
         packages = (with pkgs; [
           # bay/ — card, keepout, drawings, checks
