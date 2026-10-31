@@ -18,7 +18,8 @@ stock Framework keyboard stays in the deck. Wired first; wireless and the deck s
    stagger and thumb arc by typing on them. Check that two halves fit side by side in the tray's inner area
    (≈ 356 × 270 mm outer, minus walls). Output: `keyboard/layout/` (KLE or Ergogen config) and the key count
    for the parts order.
-2. **Electronics.** Fork HandyWork's RP2040/QMK KiCad templates (routed RP2040, Framework footprints) or use an
+2. **Electronics.** Reuse HandyWork's routed RP2040 block (HandyWork itself is a 3.65 mm deck Input Module, so its board and
+   Framework footprints don't carry over; see `keyboard/docs/electronics-options.md`) or use an
    RP2040 module per half; pick the inter-half link (TRRS vs USB-C; USB-C if the cable must also nest in the
    tray). Record the choice in `keyboard/docs/decisions/`.
 3. **PCB.** Per-key hot-swap sockets and diode matrix in KiCad (via Konnect), reversible if both halves share one

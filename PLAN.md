@@ -37,7 +37,7 @@ project leaves simulation.
 | AU15P quote (`XCAU15P-2FFVB676E` ×2) | F | TBD | decision 0006 reopens above ~$300/unit |
 | Inline USB-C PD meter, thermocouple logger | F, T | ~$55 | S6 soak and the tray thermal test share them |
 | 40–44 Choc switches, hot-swap sockets, diodes, keycaps | K | ~$90 | order after K step 1 fixes the key count |
-| 2× RP2040 (chip-down, per HandyWork) or 2× RP2040 boards | K | ~$10–30 | K step 2 decides |
+| 2× RP2040 (chip-down, HandyWork's RP2040 block) or 2× RP2040 boards | K | ~$10–30 | K step 2 decides |
 | Calipers (if not owned) | F, T | ~$25 | KEEPOUT v2 and tray fit |
 
 ## Order of work (no hardware yet)
