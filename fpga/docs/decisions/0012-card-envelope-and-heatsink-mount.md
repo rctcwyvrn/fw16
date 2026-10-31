@@ -84,3 +84,6 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   pad on GND. The 3.0 mm nut sits 0.31 mm below the lid's 3.31 mm nominal top, so the heatsink ears step down by
   that plus the pad's compression (Path 1 step 5). The NPTH goes through the board, so the M2 screw length must keep
   its tip inside the nut: at nuts 1/2 (Z 18.5) the floor gap below is only 0.30 mm.
+- **Layer count: 8 at 1.2 mm** (user, 2026-10-31), JLCPCB template JLC08121H-1080 or -2313 (confirm in the quote).
+  Outline from `card-outline.dxf` on Edge.Cuts; `card-holes.dxf` goes on a user layer as reference only, and the
+  holes are placed as footprints on its centres.

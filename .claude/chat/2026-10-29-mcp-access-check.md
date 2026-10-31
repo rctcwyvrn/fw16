@@ -128,3 +128,10 @@
 **Did:**
 - keyboard decision 0001 (B, RP2040-Zero, USB-C, 13 mm); fpga decision 0013 (slot: bypass BAR, axi_aclk + free clock, 256-bit, regmap v0.3); PLAN.md acquire list; CLAUDE.md flake rule allows nixosModules.
 - Launcher allow-list gains `fpga/gateware/vivado/run.sh` and `tar` for workers.
+
+## 18:40 Round 2 launch + card layout setup
+**User:** go
+**Asked:** Layers — 8 / 10 → **8 layers (Recommended)**. KiCad GUI steps (open board, import outline DXF, stackup) — now / later → **Doing it now**.
+**Did:**
+- Round-2 handoffs; launched f3-gw2 (regmap v0.3, slot, bypass BAR), f4-sw2 (nixosModules, polkit, kernel-source checks, v0.3), k-elec (GPIO map, link circuit, PCB spec).
+- Heatsink nut Würth 9774030243R: footprint from its datasheet, H1–H4 on the fpga sheet (GND), ERC 0; 0012 updated. Holes DXF corrected to a user layer, not Edge.Cuts.
