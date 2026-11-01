@@ -175,3 +175,8 @@
 **Did:**
 - k-fw: layout case outlines fixed (B half 138 × 94) (83ac0324); flake qmk + gcc-arm-embedded (2ca5d866); QMK skeleton fw16kb builds a 71 168-byte .uf2, lint passes (d51e49a9, 76c7777c).
 - Card PCB first placement pass around U14 (45 parts), copper/courtyard DRC clean for them (00046918); under-BGA 0402s wait for the fanout plan.
+
+## 02:40 f3-gw round 3 report (copied)
+**Did:**
+- shell_top.ml gates all four slot handshake signals with ~slot_clear; cyclesim RESET test incl. a clear-deaf pipe (04621656).
+- Vivado all: 0 critical warnings, WNS +0.728 ns, 2.95 W, BFM PASS incl. BAR2 (6087cd35). Found: Bash 600 s foreground cap kills long worker runs.

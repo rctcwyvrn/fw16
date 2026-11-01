@@ -15,3 +15,8 @@ Seen in round 1 (2026-10-31), despite matching `--allowedTools` patterns:
   timeout (Vivado `all` ≈ 40 min).
 - Waiting on `pgrep -f "run.sh"` from a Bash loop never ends: the loop's own command line contains "run.sh". Wait on a
   task notification or a file instead.
+- **The Bash tool caps a foreground command at 600 s**, moves it to the background and kills it ~30 min later, so
+  `timeout 3600 run.sh all` does not stay foreground (F3-gw round 3). The Windows Vivado process survives the WSL-side
+  kill: read its own log at `C:\Users\17786\fw16-fpga-build\vivado\logs\<step>.log` (Read/Grep work; Bash on `/mnt/c`
+  is denied for workers) and keep the turn alive with ≤ 580 s `until …; do sleep 30; done` polls. WSL-side stdout
+  capture through cmd.exe lags Vivado's own log.
