@@ -124,24 +124,32 @@ module Make (M : Mem_port.S) (P : Slot.Project) = struct
     (* The slot gets a real handshake on H2C: its tvalid does not wait for its
        own tready (sink.tready is constant 1), and H2C completes exactly when
        the slot takes the beat. slot_clear comes off a no-clear register so it
-       is high during the shell clear as well. *)
+       is high during the shell clear as well.
+
+       SLOT_CTL.RESET gates the slot's streams here, outside the boundary
+       (0013), so no project can move a beat while it is in reset: both
+       handshakes are cut on both sides, H2C is back-pressured, and a beat
+       held on H2C goes in once RESET drops. *)
     let ring_ready = wire 1 in
+    let slot_clear = reg (Reg_spec.create ~clock:i.clock ()) (i.clear |: bit "SLOT_CTL" 0) in
+    let slot_run = ~:slot_clear in
     let slot =
       Slot.hierarchical
         (module P)
         scope
         { clock = i.clock
         ; slot_clk = i.slot_clk
-        ; clear = reg (Reg_spec.create ~clock:i.clock ()) (i.clear |: bit "SLOT_CTL" 0)
-        ; s_axis = { i.h2c with tvalid = i.h2c.tvalid &: from_slot &: sink.tready }
-        ; m_tready = from_slot &: ring_ready
+        ; clear = slot_clear
+        ; s_axis = { i.h2c with tvalid = i.h2c.tvalid &: from_slot &: sink.tready &: slot_run }
+        ; m_tready = from_slot &: ring_ready &: slot_run
         ; axi = i.axib
         ; ts_now = ts.count
         ; pps_edge = ts.pps_edge
         }
     in
+    let slot_out = { slot.m_axis with tvalid = slot.m_axis.tvalid &: slot_run } in
     let idle = Axis.map Axis.port_widths ~f:zero in
-    let ring_in = Axis.Of_signal.mux src_sel [ source.axis; h2c_taken; slot.m_axis; idle ] in
+    let ring_in = Axis.Of_signal.mux src_sel [ source.axis; h2c_taken; slot_out; idle ] in
     let ring =
       Ring.hierarchical scope
         { clock = i.clock
@@ -154,7 +162,7 @@ module Make (M : Mem_port.S) (P : Slot.Project) = struct
     ring_ready <-- ring.s_tready;
     source_ready <-- ((src_sel ==:. 0) &: ring.s_tready);
     h2c_tready
-    <-- (sink.tready &: mux2 from_h2c ring.s_tready (mux2 from_slot slot.s_tready vdd));
+    <-- (sink.tready &: mux2 from_h2c ring.s_tready (mux2 from_slot (slot.s_tready &: slot_run) vdd));
     status
     <-- concat_lsb
           [ i.link_up; ring.mem_ready; sink.errors <>:. 0; gnd; zero 28 ];

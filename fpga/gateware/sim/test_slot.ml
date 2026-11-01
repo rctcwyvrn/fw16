@@ -100,6 +100,114 @@ let%expect_test "slot: echo's BAR2 registers over AXI4, lane by address" =
     |}]
 ;;
 
+(* A project that ignores clear: a one-beat register stage with no reset. In
+   SLOT_CTL.RESET it would still take H2C and offer its beat to C2H, so only
+   the shell's gates keep it silent. *)
+module Deaf_pipe = struct
+  open Signal
+
+  let create scope (i : _ Slot.I.t) : _ Slot.O.t =
+    let o = Slot_echo.create scope i in
+    let spec = Reg_spec.create ~clock:i.clock () in
+    let full = wire 1 in
+    let take = i.s_axis.tvalid &: ~:full in
+    let give = full &: i.m_tready in
+    full <-- reg spec (mux2 take vdd (mux2 give gnd full));
+    let beat = Axis.Of_signal.reg ~enable:take spec i.s_axis in
+    { o with s_tready = ~:full; m_axis = { beat with tvalid = full } }
+  ;;
+end
+
+(* H2C beats base .. base + n - 1 offered back to back, C2H always ready, and
+   the handshakes seen each cycle; [step] can drive the AXI-Lite writes too, so
+   the stream never pauses while SLOT_CTL changes. *)
+type feed =
+  { sim : Axil_driver.sim
+  ; base : int
+  ; n : int
+  ; mutable sent : int
+  ; mutable got : string list
+  ; mutable taken : int  (** H2C handshakes since the last [report] *)
+  }
+
+let step f () =
+  let i = Cyclesim.inputs f.sim and o = Cyclesim.outputs ~clock_edge:Before f.sim in
+  i.c2h_tready := Bits.vdd;
+  i.h2c.tvalid := Bits.of_bool (f.sent < f.n);
+  i.h2c.tdata := Bits.of_unsigned_int ~width:Axis.data_width (f.base + f.sent);
+  i.h2c.tlast := Bits.of_bool (f.sent = f.n - 1);
+  Cyclesim.cycle f.sim;
+  if f.sent < f.n && Bits.to_bool !(o.h2c_tready)
+  then (
+    f.sent <- f.sent + 1;
+    f.taken <- f.taken + 1);
+  if Bits.to_bool !(o.c2h.tvalid)
+  then
+    f.got
+    <- Printf.sprintf "%d%s"
+         (Bits.to_unsigned_int (Bits.sel_bottom !(o.c2h.tdata) ~width:16))
+         (if Bits.to_bool !(o.c2h.tlast) then "L" else "")
+       :: f.got
+;;
+
+let run f cycles = for _ = 1 to cycles do step f () done
+
+let report f what =
+  Printf.printf "  %-12s h2c taken=%d c2h: [%s]\n" what f.taken
+    (String.concat " " (List.rev f.got));
+  f.got <- [];
+  f.taken <- 0
+;;
+
+let slot_ctl f v = Axil_driver.write_on ~cycle:(step f) (Axil_driver.shell_port f.sim) 0x6000 v
+
+let%expect_test "slot: SLOT_CTL.RESET stops both streams and resumes without loss" =
+  List.iter
+    (fun (name, (module P : Slot.Project)) ->
+      Printf.printf "%s\n" name;
+      let sim = create (module P) in
+      Axil_driver.write sim 0x3000 2;
+      let f = { sim; base = 500; n = 8; sent = 0; got = []; taken = 0 } in
+      (* in reset before the stream starts, then released *)
+      Axil_driver.write sim 0x6000 1;
+      run f 20;
+      report f "RESET held";
+      slot_ctl f 0;
+      run f 20;
+      report f "released";
+      (* into reset mid-stream, then released. C2H under "RESET held" is the
+         ring draining beats the slot passed before RESET landed; Deaf_pipe
+         keeps 602 inside through the reset and gives it up after. *)
+      let f = { f with base = 600; sent = 0 } in
+      run f 3;
+      slot_ctl f 1;
+      report f "until RESET";
+      run f 20;
+      report f "RESET held";
+      slot_ctl f 0;
+      run f 20;
+      report f "released";
+      Printf.printf "  snk_beats=%d ring_fill=%d\n" (Axil_driver.read sim 0x2008)
+        (Axil_driver.read sim 0x3008))
+    [ "Slot_echo", (module Slot_echo : Slot.Project); "Deaf_pipe", (module Deaf_pipe) ];
+  [%expect {|
+    Slot_echo
+      RESET held   h2c taken=0 c2h: []
+      released     h2c taken=8 c2h: [500 501 502 503 504 505 506 507]
+      until RESET  h2c taken=5 c2h: [600 601 602]
+      RESET held   h2c taken=0 c2h: [603 604]
+      released     h2c taken=3 c2h: [605 606 607]
+      snk_beats=16 ring_fill=0
+    Deaf_pipe
+      RESET held   h2c taken=0 c2h: []
+      released     h2c taken=8 c2h: [500 501 502 503 504 505 506 507]
+      until RESET  h2c taken=3 c2h: [600]
+      RESET held   h2c taken=0 c2h: [601]
+      released     h2c taken=5 c2h: [602 603 604 605 606 607]
+      snk_beats=16 ring_fill=0
+    |}]
+;;
+
 (* Echo, plus slot_irq = "a tlast has gone through since slot_clear". *)
 module Irq_project = struct
   open Signal
