@@ -299,3 +299,9 @@
 **User:** done / done
 **Did:**
 - Both plate boards: plate.dxf on Edge.Cuts, 26 closed loops (outline + 21 cutouts + 4 holes), no open ends, in the keyboard boards' frame; 1.2 mm; DRC 0 violations (831df879 + this commit).
+
+## 2026-11-01 fpga next steps
+**User:** whats next for the fpga?
+**Did:**
+- Read `fpga/PLAN.md`, 0012 layout notes, the f3-gw/f4-sw handoffs and main's log: gateware and host round 3 done; the card layout (path 2.5) is the critical path, at placement + U14 dogbone fanout + JLC rules.
+- Proposed next: BGA-underside 0402s, lane/refclk escape, stackup layer roles, power-tree placement; plus a parallel worker round (alive bitstream, S6 tooling) and heatsink design.
