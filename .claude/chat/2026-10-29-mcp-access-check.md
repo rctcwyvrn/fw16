@@ -222,3 +222,9 @@
 **Did:**
 - Both keyboard `.kicad_pro`: Default 0.2 clearance / 0.25 track / 0.6/0.3 via; Power 0.5 track, 0.8/0.4 via for `/GND /+5V /LINK_VBUS` (+ `/LINK_VBUS_SW /VSRC` on the left); mins 0.15 track/clearance, via 0.5/0.3, hole-to-hole 0.25.
 - Next: right board mirrored holes, then DSN export → freerouting → SES import.
+
+## 2026-11-01 right board mounting holes
+**User:** right project is open
+**Did:**
+- Right H2-H4 mirrored (-30,5.5), (-62.5,4.5), (-102,-6); mirrored H1 hit SW3's (unmirrored) socket pad, so H1 moved to (-23.5,-45.5) (socket courtyard ends at -26.2, top edge at y~-49).
+- DRC errors now only 90 unconnected + J1 shield 0.25 mm from edge (board setup edge clearance 0.5; JLC needs 0.2).
