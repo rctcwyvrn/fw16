@@ -196,9 +196,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "001c514d-3122-4546-9b8e-e566177fc27d")
-		(at 6.48 1129.875)
+		(at 22.5 -43 90)
 		(property "Reference" "C68"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "4bfc7815-352c-4a20-ac7f-d10eb28573f5")
@@ -210,7 +210,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -223,7 +223,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b9b89894-c456-49fd-bdfc-525a6591b5b8")
@@ -234,7 +234,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6d046463-5e06-4db7-9305-340394203037")
@@ -289,7 +289,7 @@
 			(uuid "321d89c3-3ad4-4be9-a1e3-f5af0577c477")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "1f6429d2-f5d2-4f0e-912d-3f2265517c3a")
@@ -301,7 +301,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -309,7 +309,7 @@
 			(uuid "0333260d-b4d5-456b-a17a-902dc6a38961")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -2258,7 +2258,7 @@
 	(footprint "Package_SON:Texas_DPY0002A_0.6x1mm_P0.65mm"
 		(layer "F.Cu")
 		(uuid "0f6b6588-2ecf-43d3-9e5a-3d968772c3ef")
-		(at 5.78 1408.765)
+		(at 36 -40)
 		(property "Reference" "U15"
 			(at 0 -1.25 0)
 			(unlocked yes)
@@ -2404,7 +2404,7 @@
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "143aac12-7067-456f-8383-318942e18200")
-		(at 5.93 1356.765)
+		(at 33 -40)
 		(property "Reference" "R49"
 			(at 0 -1.17 0)
 			(unlocked yes)
@@ -2654,9 +2654,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "16ff1e5c-901b-4b17-b8ab-f5b6a78a5b40")
-		(at 5.91 1247.705)
+		(at 22.5 -37 90)
 		(property "Reference" "C87"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "d03cb246-f608-4952-8b4a-02c6f3f70d86")
@@ -2668,7 +2668,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2681,7 +2681,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a44685ee-c24c-42c0-bf2e-477a9014b3e4")
@@ -2692,7 +2692,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "82316e8e-995a-4b08-8f0b-3053fbdcb40c")
@@ -2747,7 +2747,7 @@
 			(uuid "9d7f277d-0a2f-4b78-a30d-0dd06f2bf3af")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "4b4f2889-e079-4d29-ac83-db8cadb502f4")
@@ -2759,7 +2759,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -2767,7 +2767,7 @@
 			(uuid "5bc92c14-dc11-4d96-ad53-ef9b0be28f41")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -2779,7 +2779,7 @@
 	(footprint "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical"
 		(layer "F.Cu")
 		(uuid "18120805-cbea-47b3-9c2b-223a9ba1d748")
-		(at 7.175 1342.765)
+		(at 40 -40)
 		(property "Reference" "J5"
 			(at 0 -3.2 0)
 			(unlocked yes)
@@ -3105,9 +3105,9 @@
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "183b0e93-1cba-4188-b351-1ac2913ddb6f")
-		(at 5.93 1350.765)
+		(at 14.3 -33 90)
 		(property "Reference" "R48"
-			(at 0 -1.17 0)
+			(at 0 -1.17 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "dd1d3218-9555-424d-8993-5c714991ab67")
@@ -3119,7 +3119,7 @@
 			)
 		)
 		(property "Value" "100 1%"
-			(at 0 1.17 0)
+			(at 0 1.17 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3132,7 +3132,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "bcfe42f2-003c-4505-bc11-a8e8d94848b7")
@@ -3143,7 +3143,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e06befdb-ceb7-4677-8ef2-6dc8d153a996")
@@ -3198,7 +3198,7 @@
 			(uuid "8f7a0e06-5c81-4ada-96e4-e8ef4ff8f52a")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "4a8c4b39-a94e-4222-b9bf-71c98e60df1b")
@@ -3210,7 +3210,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.51 0)
+			(at -0.51 0 90)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -3218,7 +3218,7 @@
 			(uuid "22e8e466-d677-4eeb-b046-8b7d79bbf0d0")
 		)
 		(pad "2" smd roundrect
-			(at 0.509999 0)
+			(at 0.509999 0 90)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -4530,9 +4530,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "21c1b36b-1f18-4c30-818a-44063ecd7d9b")
-		(at 6.48 1169.475)
+		(at -6 -25.8 90)
 		(property "Reference" "C74"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "c7fdd976-8f7b-40f5-ae68-0284cd074e7d")
@@ -4544,7 +4544,7 @@
 			)
 		)
 		(property "Value" "4.7u/6.3V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4557,7 +4557,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "74b2386a-1e76-4238-b7d2-410b282a83b3")
@@ -4568,7 +4568,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8cb993c1-426d-4b2f-a48c-dc420a9a5071")
@@ -4623,7 +4623,7 @@
 			(uuid "83f80582-31ea-4801-8069-3c61fa5f904a")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "a8e89e85-3dd7-4ef8-a76f-6b647649fa01")
@@ -4635,7 +4635,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -4643,7 +4643,7 @@
 			(uuid "2cebcf53-5aba-4873-86aa-d475ff5b7086")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -4655,9 +4655,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "2233816c-0bd8-43a8-a4a7-a9ea8d3574f0")
-		(at 6.48 1163.015)
+		(at -8 -25.8 90)
 		(property "Reference" "C73"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "6a37a808-515b-4ac5-9141-f301e52bd70b")
@@ -4669,7 +4669,7 @@
 			)
 		)
 		(property "Value" "4.7u/6.3V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4682,7 +4682,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "31d0f70f-483a-4460-bb33-41f0ae101704")
@@ -4693,7 +4693,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "05fafe90-02f7-49d3-a757-ae07419c7f7d")
@@ -4748,7 +4748,7 @@
 			(uuid "f5566120-64a3-4f09-a2c8-d0f1d0907c21")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "bd5b933c-1586-453c-95cb-59024dcc1074")
@@ -4760,7 +4760,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -4768,7 +4768,7 @@
 			(uuid "455594c2-3564-4e04-ab30-a8298faf3741")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -5240,9 +5240,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "2323ef5b-cba4-4a99-b561-6a8a9182cb88")
-		(at 6.48 1014.755)
+		(at -19.5 -42 90)
 		(property "Reference" "C50"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "17ce98ce-42be-4ffe-95c8-98178bededde")
@@ -5254,7 +5254,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5267,7 +5267,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "fb28d9ca-3a4c-4e90-b72a-748af3b50f12")
@@ -5278,7 +5278,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "36b1fc6a-78ea-4a56-994f-0941f3c29d57")
@@ -5333,7 +5333,7 @@
 			(uuid "f3c3e589-d50b-40ce-8b7a-a8a1d9f9399b")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "8261782e-9b8c-4805-9b8d-073bba0f45b4")
@@ -5345,7 +5345,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -5353,7 +5353,7 @@
 			(uuid "2e09e827-ba94-4a18-8520-30d3cdbaaa37")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -5860,9 +5860,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "26a76ad2-19f6-440b-817f-10c6fe62e443")
-		(at 6.48 1021.215)
+		(at -19.5 -39 90)
 		(property "Reference" "C51"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "4bf68b05-f41c-45fe-adf5-753eb2f10420")
@@ -5874,7 +5874,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5887,7 +5887,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3b5963f0-cc50-4d9f-8e46-5e822010c5f4")
@@ -5898,7 +5898,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "67e9ad59-b8a8-4b6d-9c04-ed6f2d1d280b")
@@ -5953,7 +5953,7 @@
 			(uuid "9fbd9776-62cf-47b1-95d5-01907c5ddbf5")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "a79651f3-dd57-4d8a-8a7f-e7c0bbd4f61a")
@@ -5965,7 +5965,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -5973,7 +5973,7 @@
 			(uuid "263f64de-b212-4f45-87cd-cc378adece8f")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -6594,7 +6594,7 @@
 	(footprint "Oscillator:Oscillator_SMD_SiT_PQFN-4Pin_2.0x1.6mm"
 		(layer "F.Cu")
 		(uuid "271db1e7-4c87-40c0-b7fb-e483c3a78ed3")
-		(at 6.5 1415.565)
+		(at 24.5 -38)
 		(property "Reference" "Y1"
 			(at 0 -2 0)
 			(unlocked yes)
@@ -7379,9 +7379,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "2fa79ab4-b919-4339-87ab-14a5dcdfe948")
-		(at 6.48 1110.495)
+		(at 19.5 -40.5 90)
 		(property "Reference" "C65"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "d60538c1-936e-441c-8b0d-251ac758561c")
@@ -7393,7 +7393,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7406,7 +7406,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "22a6b38f-1bed-4da0-94a0-dcce4414cb9d")
@@ -7417,7 +7417,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "df6253f7-0b50-492e-8a7c-3e7069759bb9")
@@ -7472,7 +7472,7 @@
 			(uuid "28e6b33b-f3f5-4185-9549-b71f6ccfa6cb")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "e8b70aad-8fb7-4105-b2bc-ea5898a190fb")
@@ -7484,7 +7484,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -7492,7 +7492,7 @@
 			(uuid "e1670f87-e092-4037-a235-fd4d3e3d5a06")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -12525,9 +12525,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "30a33339-6c28-4067-95f1-d37dd639c0a8")
-		(at 5.91 1241.705)
+		(at 13.4 -12 90)
 		(property "Reference" "C86"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "8d1fccbb-9419-4a10-b035-b124f012e5c8")
@@ -12539,7 +12539,7 @@
 			)
 		)
 		(property "Value" "10n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -12552,7 +12552,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5bd6f8c3-7df4-492e-b92d-576bd4d490a4")
@@ -12563,7 +12563,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0682e632-4f9c-480b-9f47-3d1811e61820")
@@ -12618,7 +12618,7 @@
 			(uuid "45cf5bfc-235b-410c-8770-3cf4776dd50d")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "8a651546-b715-4763-a117-63fedbf850ce")
@@ -12630,7 +12630,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -12638,7 +12638,7 @@
 			(uuid "9c94f671-59e8-4ab5-b00d-b47df8a721ed")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -12650,7 +12650,7 @@
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "34c445be-cb8c-4241-ab59-6069a92cbe9b")
-		(at 5.93 1362.765)
+		(at 30 -46)
 		(property "Reference" "R50"
 			(at 0 -1.17 0)
 			(unlocked yes)
@@ -13351,9 +13351,9 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "3cdf8a7e-ac55-47e4-8ad5-b1a76801c42f")
-		(at 7.3 1000.575)
+		(at -16 -45.5 90)
 		(property "Reference" "C48"
-			(at 0 -1.85 0)
+			(at 0 -1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "cd28f606-9ca9-40a2-98b0-be6530580047")
@@ -13365,7 +13365,7 @@
 			)
 		)
 		(property "Value" "47u/4V"
-			(at 0 1.85 0)
+			(at 0 1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -13378,7 +13378,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1cff2364-8506-44da-95b9-a86a0975b709")
@@ -13389,7 +13389,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2168b3ea-026c-49ac-8c4f-479e44fdc66f")
@@ -13444,7 +13444,7 @@
 			(uuid "66501260-7fbe-433a-ae01-3a52e8393fa0")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "79bed72a-2327-4d05-a88d-7c5cd1a9f48d")
@@ -13456,7 +13456,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1.475001 0)
+			(at -1.475001 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -13464,7 +13464,7 @@
 			(uuid "f2006f61-f3c9-49a4-a8b0-290615b8fa42")
 		)
 		(pad "2" smd roundrect
-			(at 1.475 0)
+			(at 1.475 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -13476,9 +13476,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "3ed2e685-ecf2-4b02-9890-2fdc66c9d73f")
-		(at 5.91 1235.705)
+		(at 12.2 -12 90)
 		(property "Reference" "C85"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "fbb5ebbf-8043-43e3-a08e-32bc502f43ed")
@@ -13490,7 +13490,7 @@
 			)
 		)
 		(property "Value" "10n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -13503,7 +13503,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c47eb8d3-35f5-4973-ba95-13979e45cff6")
@@ -13514,7 +13514,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0e3175e1-8be5-4e29-8083-cefc73d58e5a")
@@ -13569,7 +13569,7 @@
 			(uuid "52c4266d-8942-413d-84ce-6342935f1385")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "9e22a85a-36dc-4ac2-bb1d-0c737f49feb6")
@@ -13581,7 +13581,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -13589,7 +13589,7 @@
 			(uuid "b0b96071-5927-45cc-842b-21f553b148f1")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -14087,9 +14087,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "41642e49-96d1-4497-b35d-cd34e0188862")
-		(at 5.91 1259.705)
+		(at 15.5 -18 90)
 		(property "Reference" "C89"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "e16d8273-f40a-4adf-b75a-89489fa9fdf6")
@@ -14101,7 +14101,7 @@
 			)
 		)
 		(property "Value" "10n DNP"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -14114,7 +14114,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0a979657-8dee-4098-8539-357b6d087d09")
@@ -14125,7 +14125,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "69250076-642e-445f-8d3c-31191c338f24")
@@ -14180,7 +14180,7 @@
 			(uuid "97c4419e-d1f3-42f6-8d86-47f03f2033d9")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "682b7217-49e5-4e76-a607-14dc77803e01")
@@ -14192,7 +14192,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -14200,7 +14200,7 @@
 			(uuid "6b727642-694f-4622-b851-ac8065a8fa7a")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -14337,7 +14337,7 @@
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "4595087c-7f8e-4de5-ac4f-0f21496d775f")
-		(at 5.93 1368.765)
+		(at 30 -48)
 		(property "Reference" "R51"
 			(at 0 -1.17 0)
 			(unlocked yes)
@@ -14712,9 +14712,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "498f7892-05f0-4a38-89f6-763cd6b078aa")
-		(at 6.48 1123.415)
+		(at 19.5 -34.5 90)
 		(property "Reference" "C67"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "5c6f9437-f780-479f-9681-c04659c7c9cb")
@@ -14726,7 +14726,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -14739,7 +14739,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8c778b2d-d21c-45aa-9cea-91fde3137165")
@@ -14750,7 +14750,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0e8f8abd-9463-4909-a9d1-409c110ef08b")
@@ -14805,7 +14805,7 @@
 			(uuid "d30ccb53-b9db-4960-b6a2-be07eb63d923")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "69128738-a5af-48bb-bceb-31e516a1fdd1")
@@ -14817,7 +14817,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -14825,7 +14825,7 @@
 			(uuid "dc98642b-886a-4baf-ba59-36616b262691")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -14837,9 +14837,9 @@
 	(footprint "Capacitor_SMD:C_1210_3225Metric"
 		(layer "F.Cu")
 		(uuid "4aab1abc-a25c-48fa-ac6d-7bb35acdb74a")
-		(at 7.3 992.825)
+		(at -16.5 -41 90)
 		(property "Reference" "C47"
-			(at 0 -2.3 0)
+			(at 0 -2.3 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "6fa0ab9c-d5b0-477a-818b-a32df4658ed6")
@@ -14851,7 +14851,7 @@
 			)
 		)
 		(property "Value" "100u/4V"
-			(at 0 2.3 0)
+			(at 0 2.3 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -14864,7 +14864,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0144c972-2729-493e-8a86-0611e7aed76f")
@@ -14875,7 +14875,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "01fe06c3-20e4-4c4b-8849-51a176dc0167")
@@ -14930,7 +14930,7 @@
 			(uuid "cf496121-7601-4068-a984-b21926730b61")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "d3052413-88cc-43ee-ae56-d31e1d33a881")
@@ -14942,7 +14942,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1.475001 0)
+			(at -1.475001 0 90)
 			(size 1.15 2.7)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -14950,7 +14950,7 @@
 			(uuid "8c10e7fe-9e50-4fbb-9e94-100ec55a0f7e")
 		)
 		(pad "2" smd roundrect
-			(at 1.475 0)
+			(at 1.475 0 90)
 			(size 1.15 2.7)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -15723,9 +15723,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "5841561a-31a6-4847-a762-6dc7f73aa9db")
-		(at 5.91 1265.705)
+		(at 16.7 -18 90)
 		(property "Reference" "C90"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "5c614fa0-5f9b-4f1f-a29e-6e1e4f08b916")
@@ -15737,7 +15737,7 @@
 			)
 		)
 		(property "Value" "10n DNP"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -15750,7 +15750,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "cd12a562-99e4-43a2-9187-b4a49ccb18fb")
@@ -15761,7 +15761,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a6ca8e98-ab2f-478c-9d71-d6589a0a929e")
@@ -15816,7 +15816,7 @@
 			(uuid "28c0a23b-fac7-44d0-a197-e6844335d877")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "e956cddb-e2ac-440f-b4dd-3decb66ecd95")
@@ -15828,7 +15828,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -15836,7 +15836,7 @@
 			(uuid "002be269-40c9-491f-bb9c-6a8c025e2bc1")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -16194,9 +16194,9 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "5b508860-04da-4fef-89b3-eba0d01bd872")
-		(at 7.3 1076.095)
+		(at 16 -45.5 90)
 		(property "Reference" "C60"
-			(at 0 -1.85 0)
+			(at 0 -1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "9520029d-7ef5-4458-a33c-035e414c4b78")
@@ -16208,7 +16208,7 @@
 			)
 		)
 		(property "Value" "47u/4V"
-			(at 0 1.85 0)
+			(at 0 1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -16221,7 +16221,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0b356760-8f8f-4229-a1f0-c93ec93ed9bf")
@@ -16232,7 +16232,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "cbacc90d-abbf-4e67-a02e-f68db3b7fd07")
@@ -16287,7 +16287,7 @@
 			(uuid "d57c3c56-4213-4138-81ab-65915548ac78")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "9d3eaf94-2bed-4004-b165-ee742c437991")
@@ -16299,7 +16299,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1.475001 0)
+			(at -1.475001 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -16307,7 +16307,7 @@
 			(uuid "892aeeb6-4c75-42f3-b5a0-84ca60f47f12")
 		)
 		(pad "2" smd roundrect
-			(at 1.475 0)
+			(at 1.475 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -16760,9 +16760,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "5fde5924-32fc-4943-9ee0-30fc3374e41c")
-		(at 6.48 1082.975)
+		(at 19.5 -46.5 90)
 		(property "Reference" "C61"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "8e26f767-c1e9-4d85-954f-d4170214987d")
@@ -16774,7 +16774,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -16787,7 +16787,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5e2d34da-7008-48a4-a9db-d32a1be9a99f")
@@ -16798,7 +16798,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3a7881a6-ef59-4649-91fa-4e49f23009c0")
@@ -16853,7 +16853,7 @@
 			(uuid "a9fafff7-a793-495f-9c0f-c45404af4105")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "4515f3c7-5dc2-4115-8e4d-bba8c7f3a62e")
@@ -16865,7 +16865,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -16873,7 +16873,7 @@
 			(uuid "fd729663-8b36-4d76-ba0e-c7ef2eff127b")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -16885,7 +16885,7 @@
 	(footprint "LED_SMD:LED_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "66135eb1-7f01-4fdb-a484-34a12adc319b")
-		(at 6.4825 1278.41)
+		(at 33 -48)
 		(property "Reference" "D2"
 			(at 0 -1.43 0)
 			(unlocked yes)
@@ -17934,9 +17934,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "6c27adf6-d3c7-4f48-ab92-d4c1e8730358")
-		(at 6.48 1150.095)
+		(at 22.5 -46 90)
 		(property "Reference" "C71"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "16279be0-523c-4d85-af77-2ede9488fd8a")
@@ -17948,7 +17948,7 @@
 			)
 		)
 		(property "Value" "10u/6.3V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -17961,7 +17961,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8b855001-9026-48cf-b5bc-183fa22fdc47")
@@ -17972,7 +17972,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "05f8ff01-85c7-43e0-b56d-f893802ce73d")
@@ -18027,7 +18027,7 @@
 			(uuid "dac19977-343e-44d4-8eac-7fddf6a9a1d4")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "278cf620-8626-49d9-9d3f-cc785755a68f")
@@ -18039,7 +18039,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -18047,7 +18047,7 @@
 			(uuid "79bde7e9-ef73-422e-99f3-38fa8803db1e")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -18059,9 +18059,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "6cb0c844-47fc-4b7d-8132-632d8cd6d909")
-		(at 5.91 1223.705)
+		(at 7.9 -12 90)
 		(property "Reference" "C83"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "f18df7b9-9841-4346-a147-957ad5d03e09")
@@ -18073,7 +18073,7 @@
 			)
 		)
 		(property "Value" "220n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -18086,7 +18086,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "24fd9280-f4e5-4174-a393-839c85333686")
@@ -18097,7 +18097,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "df6a392f-a0df-4d4b-b1b5-fa2d63fe5ad1")
@@ -18152,7 +18152,7 @@
 			(uuid "64eccc76-f128-4651-99e0-835000a86331")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "2fb51cef-0759-4f9d-843b-e111d7136974")
@@ -18164,7 +18164,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -18172,7 +18172,7 @@
 			(uuid "a56c4333-ebae-492e-88f2-2ae101d00ac5")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -18684,9 +18684,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "72d8ecb8-fd9a-4209-9521-671a920b8cf1")
-		(at 6.48 1136.335)
+		(at 22.5 -40 90)
 		(property "Reference" "C69"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "501d3e34-bc26-47ff-96a8-5f1682826b36")
@@ -18698,7 +18698,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -18711,7 +18711,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f556a802-4b13-4982-a4f2-0a1877200556")
@@ -18722,7 +18722,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8e0e0819-cf35-481d-9fb2-0b4e3bcfebf1")
@@ -18777,7 +18777,7 @@
 			(uuid "4850bd3a-77ee-46ab-b314-a5eba6b247d2")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "ebb7d65b-e057-463f-9f60-a3413e0d8b03")
@@ -18789,7 +18789,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -18797,7 +18797,7 @@
 			(uuid "38caef6d-c441-476d-8fdd-0a6d737718e9")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -19030,9 +19030,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "79d63d9d-189d-4b26-ad86-268c209677c6")
-		(at 5.91 1193.705)
+		(at 1.6 -12 90)
 		(property "Reference" "C78"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "1ee56db5-e078-4b3b-9ca6-48173e473f64")
@@ -19044,7 +19044,7 @@
 			)
 		)
 		(property "Value" "220n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -19057,7 +19057,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a621f52f-2809-47ac-8529-2825ba93e834")
@@ -19068,7 +19068,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "cf0bb715-35c7-492d-ae2c-5d8f582e20be")
@@ -19123,7 +19123,7 @@
 			(uuid "5871aa54-f990-4de1-ad93-c8ee9cd5a70a")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "11dfb541-0a74-4665-806b-b33dc6886fa2")
@@ -19135,7 +19135,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -19143,7 +19143,7 @@
 			(uuid "485dd607-728b-4e06-8845-3fe9f62d2887")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -19644,9 +19644,9 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "8061b055-34d3-4543-b47c-4ca0e260cba5")
-		(at 7.3 1143.215)
+		(at 26 -45.5 90)
 		(property "Reference" "C70"
-			(at 0 -1.85 0)
+			(at 0 -1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "d622c6ac-625a-4865-b9a1-1b86dd0376d6")
@@ -19658,7 +19658,7 @@
 			)
 		)
 		(property "Value" "47u/6.3V"
-			(at 0 1.85 0)
+			(at 0 1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -19671,7 +19671,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f4141ae5-16c0-4634-99ea-18d233df4cce")
@@ -19682,7 +19682,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "17e4fa87-9eff-463b-90fa-fb130251f4cf")
@@ -19737,7 +19737,7 @@
 			(uuid "545535a3-3609-452a-be20-5e650c7a1224")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "1178738b-ed69-455e-a2e9-573fd0ea9445")
@@ -19749,7 +19749,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1.475001 0)
+			(at -1.475001 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -19757,7 +19757,7 @@
 			(uuid "25fbba75-10e7-41ef-b27c-7901e555a07f")
 		)
 		(pad "2" smd roundrect
-			(at 1.475 0)
+			(at 1.475 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -19894,9 +19894,9 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "825d8315-cac9-4f08-bad4-4f578d743f48")
-		(at 7.3 1007.875)
+		(at -16 -36.5 90)
 		(property "Reference" "C49"
-			(at 0 -1.85 0)
+			(at 0 -1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "7c109df9-ff3d-4fbc-a620-4999dbd6e456")
@@ -19908,7 +19908,7 @@
 			)
 		)
 		(property "Value" "47u/4V"
-			(at 0 1.85 0)
+			(at 0 1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -19921,7 +19921,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9ce4329d-82bb-4b09-85d1-3f126f91d726")
@@ -19932,7 +19932,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "084d1473-09b2-430a-9903-52c283681056")
@@ -19987,7 +19987,7 @@
 			(uuid "d2f9ff9a-4607-4953-bc2e-4e676b3025ce")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "474e5662-a9d0-44c8-99de-6721700cc343")
@@ -19999,7 +19999,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1.475001 0)
+			(at -1.475001 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -20007,7 +20007,7 @@
 			(uuid "39d9c85e-200a-41d3-b4f4-827d8c04fec6")
 		)
 		(pad "2" smd roundrect
-			(at 1.475 0)
+			(at 1.475 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -23295,9 +23295,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "94424912-2db4-4a71-8e66-150bd1c915dc")
-		(at 5.91 1211.705)
+		(at 5.4 -12 90)
 		(property "Reference" "C81"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "3ac53d3b-18c4-4ba8-a958-47b48d8e4fd4")
@@ -23309,7 +23309,7 @@
 			)
 		)
 		(property "Value" "220n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -23322,7 +23322,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e19aa0e3-0135-4f9d-89d3-bd0f59bd16ba")
@@ -23333,7 +23333,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b6b7b631-eb67-49bd-87c8-b8e79e25c734")
@@ -23388,7 +23388,7 @@
 			(uuid "b5eb8a51-b07a-4c43-a2c2-bbf6dd69d11c")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "1146d7b4-1f50-471d-9d1a-11df9ddc4315")
@@ -23400,7 +23400,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -23408,7 +23408,7 @@
 			(uuid "95a8bbbf-2f71-437a-8199-a7205e02acc5")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -24395,7 +24395,7 @@
 	(footprint "Oscillator:Oscillator_SMD_SiTime_SiT9121-6Pin_3.2x2.5mm"
 		(layer "F.Cu")
 		(uuid "a0a600f7-6c8e-4ca0-a180-ab57cf50cb76")
-		(at 6.53 1423.745)
+		(at 16 -22)
 		(property "Reference" "Y2"
 			(at 0 -3 0)
 			(unlocked yes)
@@ -25438,9 +25438,9 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "a5813f56-d8af-4d27-9950-be6c5d9d93fe")
-		(at 7.3 1096.315)
+		(at 16 -36.5 90)
 		(property "Reference" "C63"
-			(at 0 -1.85 0)
+			(at 0 -1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "c31021d9-ebd5-4786-8388-3f4f3251391d")
@@ -25452,7 +25452,7 @@
 			)
 		)
 		(property "Value" "47u/4V"
-			(at 0 1.85 0)
+			(at 0 1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -25465,7 +25465,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "67065b70-00e1-4b22-8313-38319e97f183")
@@ -25476,7 +25476,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "ed4d783f-711c-4c4f-a782-e8900fce835a")
@@ -25531,7 +25531,7 @@
 			(uuid "d7d7b622-8b2d-4449-ba0f-f701f433263a")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "36a6fe66-d9fa-486e-b74c-4df756b8c626")
@@ -25543,7 +25543,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1.475001 0)
+			(at -1.475001 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -25551,7 +25551,7 @@
 			(uuid "a0a89340-5851-4769-aa68-7b35c5a1d5ce")
 		)
 		(pad "2" smd roundrect
-			(at 1.475 0)
+			(at 1.475 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -26063,9 +26063,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "ae3e3159-504b-4509-ae07-984e86a2505f")
-		(at 5.91 1187.705)
+		(at 0.4 -12 90)
 		(property "Reference" "C77"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "4353f8a9-1df3-400a-bd83-598781e66a27")
@@ -26077,7 +26077,7 @@
 			)
 		)
 		(property "Value" "220n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -26090,7 +26090,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "07259558-045e-45ad-a27b-32204d5bc141")
@@ -26101,7 +26101,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5dc41fbd-5f19-4012-8061-72416635d825")
@@ -26156,7 +26156,7 @@
 			(uuid "a679769f-dd43-4cf3-b1a6-5735faebcc46")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "a9efabdc-2361-41a2-beda-5e0582f95436")
@@ -26168,7 +26168,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -26176,7 +26176,7 @@
 			(uuid "951e8f8b-8b5c-495b-8600-915125421487")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -26869,9 +26869,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "b3c1b244-4afe-42cd-bf6e-d54a54b2c007")
-		(at 6.48 1089.435)
+		(at 19.5 -43.5 90)
 		(property "Reference" "C62"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "44a3c513-b293-4646-aa95-db6ecd001028")
@@ -26883,7 +26883,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -26896,7 +26896,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "15568a3c-9041-4dcf-ae86-d4c421afeec3")
@@ -26907,7 +26907,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "135ff910-aea4-4883-8fa9-bb2e3fe42d2a")
@@ -26962,7 +26962,7 @@
 			(uuid "d39d4e6b-d352-4df3-b52b-c84623b5ddbb")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "8b7926aa-a07f-47fc-b3b3-d793d1a08738")
@@ -26974,7 +26974,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -26982,7 +26982,7 @@
 			(uuid "e3a4a99c-8bfc-41b6-a1d2-733ce216d0ea")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -28436,9 +28436,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "bfa500fc-179d-499c-8837-cdbe87483552")
-		(at 5.91 1229.705)
+		(at 9.1 -12 90)
 		(property "Reference" "C84"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "97d2f5a3-36b9-452d-ac78-ec4b6250349e")
@@ -28450,7 +28450,7 @@
 			)
 		)
 		(property "Value" "220n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -28463,7 +28463,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "db5bed3c-52db-46d6-b51c-9e10e5e2915a")
@@ -28474,7 +28474,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "75f0113f-9242-4dcb-9b17-b4436552e4d3")
@@ -28529,7 +28529,7 @@
 			(uuid "73885cd4-9b0d-4402-a216-52b593c9a2b6")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "fd0cd8c8-35f8-4f1a-bdfd-74d043268ec7")
@@ -28541,7 +28541,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -28549,7 +28549,7 @@
 			(uuid "ed88c8d4-6faa-4be9-bb33-e714ef85209a")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -29186,9 +29186,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "c8c35185-3d1f-4fe8-87c3-c303bf2a4190")
-		(at 5.91 1205.705)
+		(at 4.099999 -12 90)
 		(property "Reference" "C80"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "788c348d-8d9a-4d49-89d8-0f5755b0e2e9")
@@ -29200,7 +29200,7 @@
 			)
 		)
 		(property "Value" "220n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -29213,7 +29213,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a5e51c45-7a33-49be-9838-6ec54f18646d")
@@ -29224,7 +29224,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e3e86ed1-c4e8-4e18-afd7-5a52735d5c68")
@@ -29279,7 +29279,7 @@
 			(uuid "fdf24cb9-5d6a-4569-8d47-a1df4856731d")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "50390024-c932-4348-9031-dbf339966b29")
@@ -29291,7 +29291,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -29299,7 +29299,7 @@
 			(uuid "23151886-f9c9-48ed-ba94-dd7ff00dcf92")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -29706,9 +29706,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "cb9dbc9e-b7cc-4d55-b805-0e6419b18a10")
-		(at 6.48 1156.555)
+		(at -10 -25.8 90)
 		(property "Reference" "C72"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "12639f57-46e5-4af0-944f-6ee729192522")
@@ -29720,7 +29720,7 @@
 			)
 		)
 		(property "Value" "4.7u/6.3V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -29733,7 +29733,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "ae84e48f-6b51-4415-a23c-dc92c742fe1f")
@@ -29744,7 +29744,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "91694077-6c04-4d17-b482-f17e633a0a4e")
@@ -29799,7 +29799,7 @@
 			(uuid "318b8bf0-cc87-42b5-abc2-d4df0298dcfc")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "efcddf54-de54-4ae9-a46b-f1481bff02d0")
@@ -29811,7 +29811,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -29819,7 +29819,7 @@
 			(uuid "319bd6d2-fddc-45c6-815a-7fcf254958c4")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -29956,9 +29956,9 @@
 	(footprint "Capacitor_SMD:C_1206_3216Metric"
 		(layer "F.Cu")
 		(uuid "cf1ba18e-87a6-4d83-82f9-4590300dbeb4")
-		(at 7.3 1103.615)
+		(at 16 -41 90)
 		(property "Reference" "C64"
-			(at 0 -1.85 0)
+			(at 0 -1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "c627cf19-f200-46d0-83c3-744633103e1e")
@@ -29970,7 +29970,7 @@
 			)
 		)
 		(property "Value" "47u/4V"
-			(at 0 1.85 0)
+			(at 0 1.85 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -29983,7 +29983,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2497b326-f6c3-4926-944e-9cb97e746275")
@@ -29994,7 +29994,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8e119802-7dfe-40c1-8f7b-7b86e5bd32af")
@@ -30049,7 +30049,7 @@
 			(uuid "d03fd199-280b-487c-a366-c4c7e8ed45e7")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "e9156e03-c197-4bd6-ad89-f87a5f138d93")
@@ -30061,7 +30061,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -1.475001 0)
+			(at -1.475001 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -30069,7 +30069,7 @@
 			(uuid "14682c95-f982-4673-98e7-5c1c94be15cc")
 		)
 		(pad "2" smd roundrect
-			(at 1.475 0)
+			(at 1.475 0 90)
 			(size 1.15 1.8)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.217391)
@@ -31047,9 +31047,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "d7d0d8f9-1349-4f5f-86fb-8ab2e7cae602")
-		(at 5.91 1253.705)
+		(at 19 -22 90)
 		(property "Reference" "C88"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "fd4264d5-853b-40a0-a38b-79e6dc539e6f")
@@ -31061,7 +31061,7 @@
 			)
 		)
 		(property "Value" "100n DNP"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -31074,7 +31074,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7bf634d2-e0fb-4e21-9d5b-2d8937e61079")
@@ -31085,7 +31085,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e0b9f045-7cc6-4f97-a3a7-51b5441a6c9a")
@@ -31140,7 +31140,7 @@
 			(uuid "ef843689-0210-453b-8ae0-af410c317e8a")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "eda435ff-4f0d-48ec-a9fb-db5bfd3fb427")
@@ -31152,7 +31152,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -31160,7 +31160,7 @@
 			(uuid "8fd9b2a4-4a8d-4c97-ac2d-b3eed1faf7b2")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -31393,9 +31393,9 @@
 	(footprint "Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D"
 		(layer "F.Cu")
 		(uuid "dc01ac68-4ad5-408c-b0c0-cacb668cd8b8")
-		(at 9.4125 983.825)
+		(at -26 -41 90)
 		(property "Reference" "C46"
-			(at 0 -3.1 0)
+			(at 0 -3.1 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "316b67fe-c57a-4721-98c5-223d522b4a14")
@@ -31407,7 +31407,7 @@
 			)
 		)
 		(property "Value" "330u/2.5V polymer"
-			(at 0 3.1 0)
+			(at 0 3.1 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -31420,7 +31420,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0369393b-9748-4952-95d7-023777284626")
@@ -31431,7 +31431,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "023e9fce-dcc6-4fbd-acca-34825a123687")
@@ -31443,6 +31443,16 @@
 		)
 		(path "/c45ac60d-0fbe-4acc-9072-322aab9c8e2e/9c806c9c-0882-4da2-93fb-07ba1ac35e1d")
 		(duplicate_pad_numbers_are_jumpers no)
+		(fp_line
+			(start 3.65 -2.26)
+			(end -4.415 -2.26)
+			(stroke
+				(width 0.12)
+				(type default)
+			)
+			(layer "F.SilkS")
+			(uuid "1cdfa172-8dd3-4163-9fc9-26f0607a6201")
+		)
 		(fp_line
 			(start -4.415 -2.26)
 			(end -4.415 2.26)
@@ -31463,16 +31473,6 @@
 			(layer "F.SilkS")
 			(uuid "1ca7eba3-02b2-4a4e-97c7-54e08296ab66")
 		)
-		(fp_line
-			(start 3.65 -2.26)
-			(end -4.415 -2.26)
-			(stroke
-				(width 0.12)
-				(type default)
-			)
-			(layer "F.SilkS")
-			(uuid "1cdfa172-8dd3-4163-9fc9-26f0607a6201")
-		)
 		(fp_rect
 			(start -4.410001 -2.4)
 			(end 4.41 2.4)
@@ -31485,24 +31485,14 @@
 			(uuid "b80cc4ea-8daa-4604-8370-dc897fbe24f7")
 		)
 		(fp_line
-			(start -3.650001 -1.15)
-			(end -3.650001 2.15)
+			(start 3.65 -2.15)
+			(end -2.650001 -2.15)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
 			(layer "F.Fab")
-			(uuid "a2ccf75d-d16b-48cb-ac67-ad14f8429e83")
-		)
-		(fp_line
-			(start -3.650001 2.15)
-			(end 3.65 2.15)
-			(stroke
-				(width 0.1)
-				(type default)
-			)
-			(layer "F.Fab")
-			(uuid "7ceb79f5-fd91-4f1c-9a50-b3544817e55e")
+			(uuid "81ebca87-6a50-4fa2-8182-a24cafa0c5b4")
 		)
 		(fp_line
 			(start -2.650001 -2.15)
@@ -31515,14 +31505,14 @@
 			(uuid "9bb268dc-51e4-47fd-8668-a7bb1de31302")
 		)
 		(fp_line
-			(start 3.65 -2.15)
-			(end -2.650001 -2.15)
+			(start -3.650001 -1.15)
+			(end -3.650001 2.15)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
 			(layer "F.Fab")
-			(uuid "81ebca87-6a50-4fa2-8182-a24cafa0c5b4")
+			(uuid "a2ccf75d-d16b-48cb-ac67-ad14f8429e83")
 		)
 		(fp_line
 			(start 3.65 2.15)
@@ -31534,8 +31524,18 @@
 			(layer "F.Fab")
 			(uuid "f82382ec-67db-4a99-a49c-736c90445d52")
 		)
+		(fp_line
+			(start -3.650001 2.15)
+			(end 3.65 2.15)
+			(stroke
+				(width 0.1)
+				(type default)
+			)
+			(layer "F.Fab")
+			(uuid "7ceb79f5-fd91-4f1c-9a50-b3544817e55e")
+		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "46a71162-eae9-41ac-971a-b64cea1a9127")
@@ -31547,7 +31547,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -3.12 0)
+			(at -3.12 0 90)
 			(size 2.069999 2.59)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.120773)
@@ -31555,7 +31555,7 @@
 			(uuid "b01dc659-e9ee-4e87-88ad-17d7782a6c8c")
 		)
 		(pad "2" smd roundrect
-			(at 3.119999 0)
+			(at 3.119999 0 90)
 			(size 2.069999 2.59)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.120773)
@@ -32009,9 +32009,9 @@
 	(footprint "Capacitor_SMD:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "e2a112fc-dff2-4b61-a310-fe30c416ae54")
-		(at 6.48 1116.955)
+		(at 19.5 -37.5 90)
 		(property "Reference" "C66"
-			(at 0 -1.43 0)
+			(at 0 -1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "9b0a13e6-8587-4286-a13b-cab68c5aac13")
@@ -32023,7 +32023,7 @@
 			)
 		)
 		(property "Value" "10u/4V"
-			(at 0 1.43 0)
+			(at 0 1.43 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -32036,7 +32036,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "678c1245-9df0-4e65-9d1a-ddb3a9a7a749")
@@ -32047,7 +32047,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "088424f8-765c-4080-9636-70691d4fa0a9")
@@ -32102,7 +32102,7 @@
 			(uuid "9b517287-7f75-42ed-900c-956e33035570")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "8bbc866f-b990-4e7d-81ab-c86ca8abd1d5")
@@ -32114,7 +32114,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.775 0)
+			(at -0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -32122,7 +32122,7 @@
 			(uuid "f02ceb6c-7d19-47af-97bd-2624d11ff6a8")
 		)
 		(pad "2" smd roundrect
-			(at 0.775 0)
+			(at 0.775 0 90)
 			(size 0.9 0.95)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -32928,9 +32928,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "ea1bb8cd-cba8-442e-9a29-d61b1f730763")
-		(at 5.91 1199.705)
+		(at 2.9 -12 90)
 		(property "Reference" "C79"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "08258479-9186-43cf-9ed2-a511d1b51fba")
@@ -32942,7 +32942,7 @@
 			)
 		)
 		(property "Value" "220n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -32955,7 +32955,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "901a7d2c-4a58-4953-9f37-c84f59cb3d24")
@@ -32966,7 +32966,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "146c53db-4061-4b14-8d6d-2c9f86595a7b")
@@ -33021,7 +33021,7 @@
 			(uuid "e85c97fc-1da1-41b6-b4c0-0300775be41a")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "43cfc055-971c-4247-a5c6-6a79cce6469c")
@@ -33033,7 +33033,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -33041,7 +33041,7 @@
 			(uuid "819480fb-3c41-4662-bf82-7725e60db227")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -34303,9 +34303,9 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "f1d465e8-7a58-46db-9335-8d11c481eda5")
-		(at 5.91 1217.705)
+		(at 6.6 -12 90)
 		(property "Reference" "C82"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "2b8aa1a3-0c9c-4853-84fa-db5a47208084")
@@ -34317,7 +34317,7 @@
 			)
 		)
 		(property "Value" "220n"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -34330,7 +34330,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1cced7d8-f644-4a2a-9c95-d18a6eeeeaba")
@@ -34341,7 +34341,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2a0a452f-aa2c-4bef-a332-e01ae52fc146")
@@ -34396,7 +34396,7 @@
 			(uuid "80b02795-eb35-4d92-be0a-2b12003a8da1")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "f5118feb-25ea-4fac-be59-95725afb6f53")
@@ -34408,7 +34408,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -34416,7 +34416,7 @@
 			(uuid "42076456-7014-4c3e-a1ba-672578a1e502")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -35120,7 +35120,7 @@
 	(footprint "LED_SMD:LED_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "ff410ede-9c20-496c-830b-55c7f5844031")
-		(at 6.4825 1271.94)
+		(at 33 -46)
 		(property "Reference" "D1"
 			(at 0 -1.43 0)
 			(unlocked yes)

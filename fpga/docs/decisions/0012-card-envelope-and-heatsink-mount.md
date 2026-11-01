@@ -93,3 +93,11 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   U14 at (0, −41.05) rotated 90° so its GTH balls face the interposer, H1–H4 at (±17.5, −52.05) / (±17.5, −30.05).
 - **Lanes need no crossing**: PCIe lanes 0–3 increase in +x at both ends, U14 RX balls at x 0.5…6.5 (y −29.55) and the
   interposer's lanes 0/1 at x 2.94 and 2/3 at x 6.25 (y −3.1…2.9). Ball-to-pad run ≈ 30 mm, inside the 5 cm budget.
+- **First placement pass 2026-11-01 (Claude's calls, review):** VCCINT bulk (C47–C51) left of U14 between nuts H1/H3;
+  the 4 mm 7343 C46 at (−26, −41), outside the heatsink's x span; +1V8 and +3V3_IO bulk (C60–C71, C87) right of U14
+  between H2/H4 on a 3 mm grid; MGT 4.7 µF (C72–C74) front-left at y −25.8, clear of the lane corridor; PCIe AC caps
+  C77–C84 in lane order at y −12 and refclk caps C85/C86 beside them; RCAL R48 at (14.3, −33); Y1, J5/U15/R49 and the
+  LEDs to the right. Copper/courtyard DRC clean for these. **Not placed yet:** the 0402s that belong under the BGA
+  (C52–C59, C75/C76, FB1/FB2) wait for the fanout plan, and the power-tree sheets' parts. DRC still flags the M2 nut
+  footprints (NPTH inside its own pad, as Würth's land pattern intends) and runs on the default 0.2 mm rules until the
+  JLC 8-layer rules are set.
