@@ -257,3 +257,10 @@
 **User:** cleanup done and saved
 **Did:**
 - Left board: dangling stubs gone; DRC 1 error (accepted SW21 0.42 mm edge), 0 unrouted, cosmetic silk/lib-path warnings only. Both keyboard boards routed.
+
+## 2026-11-01 keyboard case next steps
+**User:** whats next for the keyboard case?
+**Asked:** (1) "Switch retention: … What holds the switches?" — JLC FR4 plate 1.2 mm (Recommended) / Printed top frame / No plate → **JLC FR4 plate, 1.2 mm (Recommended)**. (2) "Case floor under the sockets: … Which?" — Pocket under sockets (Recommended) / Solid floor → **Solid floor**. (3) "Fold-flat tenting legs … Which mechanism?" — Steel-pin kickstands (Recommended) / One full-width flap / Magnetic detachable wedges → **Steel-pin kickstands (Recommended)**. (4) "Do you have the switches, keycaps and sockets in hand to measure? …" — Not yet: draft on estimates (Recommended) / Yes, I'll measure first → **Not yet: draft on estimates (Recommended)**.
+**Did:**
+- Decision record `keyboard/docs/decisions/0003-case-construction.md`: FR4 plate, solid floor (legs sit in floor cutouts + the 1.8 mm socket gap, ≤ 2.6 mm thick), steel-pin kickstands, parametric draft on estimates.
+- Plan: board STEP export → Fusion tub + bosses + port cutouts → legs → coupons → STL/STEP + KS3; FR4 plate outline via Konnect.
