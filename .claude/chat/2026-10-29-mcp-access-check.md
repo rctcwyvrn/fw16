@@ -294,3 +294,8 @@
 **Did:**
 - flake: shapely (78a56828, alone). `keyboard/layout/plate_outlines.py` reads each routed board → `keyboard/pcb/plate-{left,right}/plate.dxf`: Edge.Cuts inset 0.3, minus the hull of top-side parts taller than the 1 mm plate gap (+1 mm), tongues < 3.2 mm opened away, 21 × 13.8 mm cutouts at switch rotation, M2 holes H1-H4; min web 3.2 mm.
 - Konnect created `fw16kb-plate-{left,right}` projects; sync.sh now carries `*/plate.dxf`. Next: user imports plate.dxf onto Edge.Cuts in each plate board.
+
+## 2026-11-01 plates imported
+**User:** done / done
+**Did:**
+- Both plate boards: plate.dxf on Edge.Cuts, 26 closed loops (outline + 21 cutouts + 4 holes), no open ends, in the keyboard boards' frame; 1.2 mm; DRC 0 violations (831df879 + this commit).
