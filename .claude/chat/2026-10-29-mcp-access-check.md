@@ -247,3 +247,8 @@
 **Did:**
 - Right board: single-layer vias removed, DRC 0 errors (41fed2ca). Left J1 now (119.1,-14) rot 90, link parts 2.5 mm inward.
 - Left freerouting left 2 (same under global/hybrid): C2 SW3-SW9 hand-routed with an F.Cu hop over R0; D21-SW21 copied from SW20's route rotated -12°; GND pours both layers; DRC: only SW21 pad 0.42 mm from edge (accepted), plus single-layer vias to clean.
+
+## 2026-11-01 left cleanup
+**User:** cleanup done and saved
+**Did:**
+- Left board: single-layer vias gone; DRC 1 error (accepted SW21 edge), 0 unrouted; 4 short dangling stub chains left by the via cleanup (deleting one segment exposes the next), parity items are only empty Description/Datasheet fields.
