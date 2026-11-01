@@ -158,3 +158,10 @@
 **Did:**
 - Bypass BAR verified (Vivado all clean, BFM PASS incl. BAR2 SLOT_ID "ECHO"); committed F3's files + regsub fix (01c6a03d); 0013 numbers.
 - Driver-module VM boot with polkit on (orchestrator; denied for the worker): MODULE-CHECK PASS incl. user-inhibitor and params, GATE PASS.
+
+## 01:20 Round 3 launch + keyboard schematics
+**User:** Go
+**Did:**
+- Launched f3-gw3 (RESET stream gating), f4-sw3 (SLOT irq to projects), k-fw (QMK skeleton + outline fix).
+- keyboard/pcb/{left,right} KiCad projects + shared keyboard/pcb/lib (RP2040-Zero symbol, Choc_v1_Hotswap footprint); both schematics ERC 0 errors and netlist = pcb-spec §6 (138 / 131 pins).
+- Blocked: RP2040-Zero footprint needs Waveshare's dimension drawing (download denied as bot-check circumvention).
