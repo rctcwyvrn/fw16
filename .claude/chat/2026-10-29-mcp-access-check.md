@@ -228,3 +228,9 @@
 **Did:**
 - Right H2-H4 mirrored (-30,5.5), (-62.5,4.5), (-102,-6); mirrored H1 hit SW3's (unmirrored) socket pad, so H1 moved to (-23.5,-45.5) (socket courtyard ends at -26.2, top edge at y~-49).
 - DRC errors now only 90 unconnected + J1 shield 0.25 mm from edge (board setup edge clearance 0.5; JLC needs 0.2).
+
+## 2026-11-01 right board freerouting
+**User:** dsn exported
+**Did:**
+- Freerouting 2.5.0 headless: with Power 0.5 / clearance 0.2 the J1/U2 cluster failed (3 unrouted, 8 violations); a DSN copy with Power 0.3 / clearance 0.15 gave 1 unrouted, 0 violations; that SES copied to `C:\Users\17786\fw16-keyboard\right\fw16kb-right.ses`.
+- Lesson `freerouting-no-neckdown-at-fine-pitch`; next: close right, set both projects to clearance 0.15 / Power 0.3, reopen, import SES.
