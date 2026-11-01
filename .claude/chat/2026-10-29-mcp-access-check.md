@@ -185,3 +185,9 @@
 **Asked:** SLOT vector → **Keep polling fallback (Recommended)**; Firmware defaults → **Accept all (Recommended)**; Worker Vivado → **Orchestrator runs Vivado**.
 **Did:**
 - 0013 and keyboard 0002 amended; CLAUDE.md: workers stop before Vivado, the orchestrator runs it.
+
+## 03:10 RP2040-Zero footprint
+**User:** https://github.com/CountParadox/RP2040-Zero-Kicad
+**Did:**
+- Repo has no licence and says "DO NOT USE" for its footprint; used only its Waveshare STEP: hole geometry measured in Fusion; pin-function positions agree with the spec's tscircuit list.
+- Created fw16kb:RP2040-Zero_Castellated (1.6 × 3.2 mm pads over the holes, 1 mm past the edge); both keyboard schematics ERC 0/0. pcb-spec §9 updated; Waveshare pinout still to check on the real module.

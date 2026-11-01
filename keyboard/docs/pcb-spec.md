@@ -338,7 +338,13 @@ The SW → column and diode → row assignment per key is in `positions-b.csv` (
 
 ## 9. To verify before drawing (no answer needed, just checks)
 
-1. RP2040-Zero pad positions and edge assignment against Waveshare's drawing (§2, §6).
+1. RP2040-Zero pad positions and edge assignment against Waveshare's drawing (§2, §6). **Partly done 2026-11-01:**
+   `fw16kb:RP2040-Zero_Castellated` takes its hole positions from Waveshare's own STEP (`RP2040_ZERO_ASM`,
+   2022-01-08, shipped in github.com/CountParadox/RP2040-Zero-Kicad, which has no licence and a "DO NOT USE" note on
+   its footprint, so nothing else was copied): 9 + 5 + 9 plated Ø0.9 holes at 2.54 mm, side rows 15.24 apart, 1.39 mm
+   inside an 18.02 × 23.52 mm board, the 5-hole row at the end opposite the USB-C. The pin *functions* per position
+   agree between the tscircuit list above and that repo's symbol + footprint, but Waveshare's pinout drawing itself
+   is still unchecked: compare against the module's silkscreen when it arrives, before ordering boards.
 2. Pad pin maps of `Diode_SMD:D_SOD-123` (pad 1 = K) and of the AO3401A on `SOT-23` (G/S/D).
 3. CPG135001S30 body extent against the diode position (§6), with calipers once parts arrive.
 4. The HRO TYPE-C-31-M-12's mouth overhang relative to its footprint origin, so the mouth lands on the PCB edge.
