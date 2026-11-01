@@ -216,3 +216,9 @@
 **Did:**
 - Choc footprint graphics redrawn as polygons (fp_rect can't rotate off-axis over IPC); both boards' switches refreshed from the library and SW20/SW21 rotated by Konnect (left −12/−24, right +12/+24).
 - Right outline re-imported (outer edge +1.5 mm). DRC on both: only J1 shield 0.25 mm from edge (≥ JLC 0.2), silk and lib-path warnings.
+
+## 2026-11-01 keyboard netclasses and rules
+**User:** left project is closed
+**Did:**
+- Both keyboard `.kicad_pro`: Default 0.2 clearance / 0.25 track / 0.6/0.3 via; Power 0.5 track, 0.8/0.4 via for `/GND /+5V /LINK_VBUS` (+ `/LINK_VBUS_SW /VSRC` on the left); mins 0.15 track/clearance, via 0.5/0.3, hole-to-hole 0.25.
+- Next: right board mirrored holes, then DSN export → freerouting → SES import.
