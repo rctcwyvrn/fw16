@@ -250,6 +250,7 @@
 		(layer "F.Cu")
 		(uuid "137846e8-34ab-4e73-986f-072306e8717b")
 		(at 0 -17)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW7"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -298,43 +299,59 @@
 			)
 		)
 		(path "/56eef2dc-20c5-4664-8150-7abbd60955b8")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "70478614-5145-42fe-8bf9-a88ae481f49b")
+			(uuid "93d31a44-0257-4cb8-afb7-0817b48f1c4c")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "c01d5b22-577f-40fd-95ba-06a83260075a")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "a89c2422-b21a-4419-9a0a-b6fef22e08f8")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "b3b52409-c98b-49db-b778-3f8a9acd0fbe")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "6242bdbd-b0e3-4b61-bcbf-6846f764d12f")
+			(uuid "ad2b3cfa-5aa6-4863-8123-0937ab63f9bd")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -342,56 +359,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "ca424f90-e91c-46d9-b5ef-8515203408c6")
+			(uuid "42633c52-fe9c-4d52-808f-37fa68c0d143")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "0c533fce-7022-4cbe-89d9-5fdc25538619")
+			(uuid "4d5b2ecc-feaa-4055-8760-e36e88f53ad4")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "a77f6508-0eb1-4d0b-a2b4-32b7d2c42089")
+			(uuid "c7e07633-d4bd-4fcb-a76b-f80c2dde1b12")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "573067cd-e068-4d67-b57c-c758a442186f")
+			(uuid "1429fdce-48bf-4dc9-a125-1ee7a0953f14")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "9026c7ac-e27f-4af3-967c-a7a6c2c7618a")
+			(uuid "f53bd7e0-472d-428c-beef-9a89bb29cd19")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "ab8db3a7-17a3-46b7-a99b-d6e89d5f1a3d")
+			(uuid "c069fd5f-ea4a-4c66-8eaf-bd13229f8b8d")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C0")
-			(uuid "34c73c30-226e-42c6-93fb-a4d22620273c")
+			(uuid "d9076ac2-d94e-4d89-a2cb-158bf115137f")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D7-A)")
-			(uuid "55324843-e6f9-4bcd-a62c-5cd91a12f3a1")
+			(uuid "7c99f444-4c26-4cdf-bbff-81ad9d9b0406")
 		)
 		(embedded_fonts no)
 	)
@@ -1042,6 +1059,7 @@
 		(layer "F.Cu")
 		(uuid "3a6615e1-adb0-42f2-97ac-1549fd6fa1ea")
 		(at -36 -6)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW15"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -1090,43 +1108,59 @@
 			)
 		)
 		(path "/3a4fab8f-9263-40e5-a601-0c1a33111a82")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "dafbfeb1-2063-447c-bda0-e16d1ca0d6e1")
+			(uuid "5e0800f2-b9f0-4867-ba12-5bba705f5b69")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "e3adf175-04e3-4b7e-a32a-0d80489faee0")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "6710cb0a-b550-4c83-9dca-75e03956930c")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "ed7b5239-d6ca-4852-887b-4f63cd80e263")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "b07bcdc0-e45a-4c2b-b4e0-c5a849f3f62d")
+			(uuid "c2df5d2c-754c-4b9f-9c9b-f4b37e7e99dd")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -1134,56 +1168,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "dd47964b-6640-466f-9481-d6a830c1265c")
+			(uuid "a80cb583-cc48-4431-84fa-268ab85a0715")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "ef515637-cf52-4fc5-9193-5f9683cb2bea")
+			(uuid "b66dd57f-d16d-4e96-8b26-1697183a3389")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "c05c0d96-0915-4671-9fce-375056d5c2ad")
+			(uuid "274f296e-9a34-449a-845c-1d3039f3ef41")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "c70abff5-494c-4b5c-82b0-6cd37364512e")
+			(uuid "af522c6f-5a8a-4d8d-9264-872342dc4e62")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "517ba7c2-ecac-4523-bca1-23a1daea79ce")
+			(uuid "38f0ae42-8816-41c1-bebb-9dbc325b611c")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "a0e15d84-3848-4272-b6da-0246c8d4275b")
+			(uuid "03b76364-b604-4f22-99f8-81a0b5c9e5cb")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C2")
-			(uuid "0bd5c933-26b1-4a23-bddb-18348a6aed4b")
+			(uuid "8b5ea6b6-b180-46ec-9745-12285b342dcd")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D15-A)")
-			(uuid "018e27a7-826c-4f49-9a76-fd7682cb1822")
+			(uuid "ec6b5678-5b8a-4d08-987c-f62fb2ac4de2")
 		)
 		(embedded_fonts no)
 	)
@@ -1191,6 +1225,7 @@
 		(layer "F.Cu")
 		(uuid "453510e3-1cc9-47c6-82e3-7407516163f4")
 		(at -72 -39)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW5"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -1239,43 +1274,59 @@
 			)
 		)
 		(path "/c7c6757a-ef53-4fc3-b672-0224aea48acd")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "5947f877-1da8-4c53-b265-19006ebe7d89")
+			(uuid "e2136855-7357-47c8-91a5-3e3842a90b60")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "0c6880f1-7f8c-4869-a549-159385cff57b")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "6f7fda5f-a31f-4ede-89b0-860eee6cc173")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "54d1a66c-b5d6-4257-9f64-2d0fb2c1361e")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "1f985382-a3d2-413c-a68e-2a20aee85bd8")
+			(uuid "7eaf671e-1ee7-4783-b72c-80b5fecd1af8")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -1283,56 +1334,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "dc4a831e-2164-47ee-8e87-b52468c06e90")
+			(uuid "16282161-05a0-4a85-a673-f179ebc7279f")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "1eee124e-12a1-4f06-bf0f-aa6b4abd08ab")
+			(uuid "836331e3-b7f2-47d9-b7b7-372c6dc441dc")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "3ef60955-b989-4416-80b0-8274e61b7011")
+			(uuid "86d33ad7-de0c-481b-ae52-c31a4a4c5d10")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "5ee63e9a-aab8-45f8-af46-37fb162d7478")
+			(uuid "30631505-8d43-4ab9-a418-85425316a6b7")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "0b233ada-f634-4603-8480-a82da48dc96d")
+			(uuid "fc1dbdf9-67a6-4598-8582-c65a359d0861")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "121db589-8fa7-4beb-b9a3-d4f6b7e9e992")
+			(uuid "0fb0ced3-6e0a-44b8-804f-91f9d7997a80")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C4")
-			(uuid "011b3604-4d58-44d6-a6e9-f84a285b5800")
+			(uuid "4b2e14fb-c368-4800-8d4a-b5b15d7f60b2")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D5-A)")
-			(uuid "90df0b00-f8ad-4dac-a41e-b58c44696c5c")
+			(uuid "130eee9a-ce53-4439-ae1f-f88f69d9949d")
 		)
 		(embedded_fonts no)
 	)
@@ -1465,6 +1516,7 @@
 		(layer "F.Cu")
 		(uuid "536642cd-4d56-4068-9e6c-b32ffb1c813a")
 		(at -54 -26)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW10"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -1513,43 +1565,59 @@
 			)
 		)
 		(path "/039d594a-44fb-4968-bb6a-a6880d9c2647")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "16429973-2e68-4740-90f0-4e0bf43b7bcc")
+			(uuid "cbe768de-ff87-4377-b9a8-b2936b0b9e2e")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "40669e20-182f-468e-ac66-c7fd2b5f73f4")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "e139e3af-bf88-47de-a93a-594a0e24d61a")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "27094228-7624-4593-8854-f9539d100236")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "8630e2a5-e9e7-441b-9a38-bbc215a72d6b")
+			(uuid "d1fd9c7f-8d96-4b05-9b8c-d7525cd019fb")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -1557,56 +1625,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "4d4b0af8-a552-4eea-bf52-734ae81dd6ad")
+			(uuid "7ea6653a-0ee3-4ac0-abfd-198a74e7678a")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "07cf356b-ee24-4dcf-8256-a42b51e17988")
+			(uuid "63c28971-1b33-4d09-932a-7c8a3b0129b8")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "268f5b92-9824-4072-be21-9fc73a2da1ac")
+			(uuid "43a24cb7-0eb5-4500-8a1f-39015de08ade")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "5f76b89c-ccbd-443c-8909-f2f4b4f6375b")
+			(uuid "858017ba-67b8-42f5-aee2-96aa3366d26b")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "75b770f8-4fbf-4c5c-a99b-ccb01971b75b")
+			(uuid "e0b48781-2588-4502-928c-4ad2c64cbb0b")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "d02be776-151b-4627-b8e0-f9e99b4249b6")
+			(uuid "0ab8194f-d3dc-4cef-a3a9-43c5ab63d3b7")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C3")
-			(uuid "962cb6cf-487c-48f9-a829-29ec3ed06679")
+			(uuid "b1d31506-42d7-40eb-b09d-f2077ed947f2")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D10-A)")
-			(uuid "94688ef6-6a74-432a-9b0e-69762700f8e8")
+			(uuid "1a7e4b0d-5e7f-4719-9d00-5f4566eda5c0")
 		)
 		(embedded_fonts no)
 	)
@@ -1710,6 +1778,7 @@
 		(layer "F.Cu")
 		(uuid "6d21462a-94d0-40a6-857e-5bfb8757c31a")
 		(at 0 -34)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW1"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -1758,43 +1827,59 @@
 			)
 		)
 		(path "/997fbfcf-db63-48e4-aabb-5173fca69b2f")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "f0445923-ce79-4ff4-9774-0d78caca1fe8")
+			(uuid "a74e161f-4d32-445f-b3dc-454956c0e8a5")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "235c9048-8f73-4d61-9940-0aebf5c24c44")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "0656dfd0-6163-4c0f-adfb-38a49a764e96")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "a12f1ef1-3c06-4a07-9a6d-27114b4cd21a")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "b52bc72c-6236-4c3a-b607-655855a04c67")
+			(uuid "3fba4e0f-f88e-4c1a-b773-8cdce5f4be90")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -1802,56 +1887,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "1c05d8a7-b291-4bdf-a74e-7c0ffd9199bc")
+			(uuid "5148fc40-1cb7-48ac-837e-586dbafc4583")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "7c1d1251-3836-442b-b0dc-b06e754945ea")
+			(uuid "bf1837cd-7e11-4065-bcba-5ff78d74c1dd")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "d68215fc-757e-43b2-b49b-62aabffd11b0")
+			(uuid "083cb176-4214-4133-86e5-deb5c606b8dd")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "b981d08b-2522-4aff-b65e-7c370790d82b")
+			(uuid "33e22f0b-14c3-4193-ac4b-2e68af831a3f")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "89af0e48-0005-417d-b004-400b96277d6d")
+			(uuid "18c77bc0-7c35-4db8-a8d6-caa3e3acafbe")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "da7273f6-022c-4eb0-8e13-6c641ff623f9")
+			(uuid "3f0185f5-0bbf-41d3-b496-59753a79658b")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C0")
-			(uuid "0e5b03fa-42e3-42e6-a0a2-2eda48a1fe79")
+			(uuid "35138fcf-c605-4d51-aa2d-d11a9124442b")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D1-A)")
-			(uuid "f23bc2a1-94cc-4ed4-8946-da38b0a15247")
+			(uuid "e777dc25-c173-49d2-b40b-8f36933965d4")
 		)
 		(embedded_fonts no)
 	)
@@ -1859,6 +1944,7 @@
 		(layer "F.Cu")
 		(uuid "7379cf08-96ed-4539-9db4-f0eeae22783a")
 		(at -18 -34)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW2"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -1907,43 +1993,59 @@
 			)
 		)
 		(path "/e3eaf523-17b9-42f3-ab78-d9837783ef8c")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "cf1dedca-8c94-4193-be7e-3892a92660f8")
+			(uuid "15b1c9c5-f48e-41f4-9a50-a1dc9533a268")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "be11ab25-4e63-4cb6-a8bf-0ebddbed6aa8")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "8526adaa-0bc3-4300-a9c9-ea595a0d0c35")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "66e4ac9e-62d8-4158-89e3-1e382085111a")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "815a3b4e-4948-4606-a91f-98f6cca4a80c")
+			(uuid "b4ff4aa0-9bc8-4020-a613-252ef75b908c")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -1951,56 +2053,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "385850d8-2073-4070-90a6-f6ae99d6099c")
+			(uuid "a8905ed1-d549-4d08-a799-3a6837e23e19")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "43f7b3b4-3d47-41c5-a2e3-b0cbf8a20dd6")
+			(uuid "33892fa7-4c25-4a06-b99d-9f21d4699a9e")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "75616e57-573f-4f64-9293-1ef3aa025ae5")
+			(uuid "6980cbdb-810b-4066-9d98-720bbb8968de")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "53a9f18b-84d7-4290-9496-6fbb0b74e3ec")
+			(uuid "40f138c2-4118-4067-8231-267e8f7e61a0")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "1a822ac6-3967-4a63-bd73-dce200916520")
+			(uuid "47658894-1ff6-4fc9-a8d7-4cc9bf41e9ef")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "080865a1-9735-4790-bea6-e13b278c0b87")
+			(uuid "c2d2d8f2-91e0-43ad-869c-942eb9a2b457")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C1")
-			(uuid "4f880d37-74d6-48b5-aaf1-f5de7e1ee58a")
+			(uuid "51372df5-7af9-4b40-b9a2-f97170671867")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D2-A)")
-			(uuid "5ef1f338-f29a-4f8f-b6fe-eb9eb2b13d67")
+			(uuid "5693ceee-b107-4b2f-aad6-97887ccf24e3")
 		)
 		(embedded_fonts no)
 	)
@@ -2008,6 +2110,7 @@
 		(layer "F.Cu")
 		(uuid "79f94831-32cc-4fc0-9e07-a23b098df9b5")
 		(at -90 -3)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW18"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -2056,43 +2159,59 @@
 			)
 		)
 		(path "/37fb92ab-b9b4-4c1b-9f7f-320f62e2bd1c")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "c446033b-58c7-4ead-a3fa-0543cb95dd16")
+			(uuid "841133b1-9d3f-42bd-bb37-317eda264e81")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "4006d7a2-f8bd-4bfb-9111-a4e4873f7a9e")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "66c974a4-228f-4fd1-8b53-a02686c92f95")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "1ffca51f-b9cb-4c86-ad07-98cbd448e53b")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "ebb6faf7-2e58-43cc-894a-981c05801c1e")
+			(uuid "16341d1b-9b1f-4e67-9b47-9f0ea739070a")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -2100,56 +2219,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "b4d01e4a-4d62-4971-b2b3-9dcfbae09b12")
+			(uuid "b69492d9-5e56-4549-a576-b80e6f94987e")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "b73c3d69-036d-4f02-b0dc-1b2ff96987bf")
+			(uuid "37247040-928a-4b99-9461-a6e81487a2d9")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "30d68535-eac4-43f9-b8a7-f8c0dec890b6")
+			(uuid "9680714f-f51c-4db4-bf93-929e9d05d210")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "95233234-0e28-4a42-9f29-e0f1439d87d3")
+			(uuid "41c86118-c6a8-4233-bb98-4489fdf8352d")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "0bc2f425-2806-4cb6-b9b3-d832e08119b5")
+			(uuid "ea6ca21e-9c16-459d-80f2-c33a90dbd3a7")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "27a90d09-bd13-4aa6-ac9d-cead05c7d270")
+			(uuid "223066eb-e25b-4b22-870c-9738add16af1")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C5")
-			(uuid "d9735645-bf05-4229-b5b0-3a6310bf5878")
+			(uuid "f77c992d-ad61-4e3a-97fb-0b78e1bdc5bd")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D18-A)")
-			(uuid "09de355a-d4c3-43e7-a6d8-6db64fe8960c")
+			(uuid "bd68597d-69c2-43e5-8fa0-1efda8821c94")
 		)
 		(embedded_fonts no)
 	)
@@ -2532,6 +2651,7 @@
 		(layer "F.Cu")
 		(uuid "7c19d8f1-e7ca-4def-b36e-94a84b3a9f8a")
 		(at -90 -20)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW12"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -2580,43 +2700,59 @@
 			)
 		)
 		(path "/2a475a17-dff8-4206-9ff5-606dde9d0cd2")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "bf362879-1fe5-4b85-b029-6261acbc4f2f")
+			(uuid "b4106524-ac66-443c-a828-68bc2fba1263")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "dc994b4b-533f-4b03-badf-f9f52c531d1e")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "1c4cb294-f451-434c-b4a2-02c2d3868196")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "9a2c7d99-d628-44cc-a6a0-51c9ddf4ffaa")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "48dcc555-393e-45ee-9b4d-62d740e47ab7")
+			(uuid "3330b862-1adf-456d-bc22-29dada04614c")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -2624,56 +2760,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "c7bf1cfb-fdde-4bf6-8509-d96d149e3685")
+			(uuid "696876e4-a34d-448b-b055-d0050ff6fa4a")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "d079f6e8-1be4-42b1-afcd-25a51e84a864")
+			(uuid "475b41ad-b763-4994-8dbe-e10f2993aab7")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "54e12ea4-694c-44ed-9c9c-61e74ef438bb")
+			(uuid "899ed5de-078a-4ae1-ae8d-d77e80aeeba3")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "9dc6dad5-4096-4240-9f3c-ceba3d6f2cc0")
+			(uuid "6d6c9e59-b359-4be3-adc7-9fcedad0585c")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "44f16029-8f0e-42b6-9982-d96750dbfa1b")
+			(uuid "3d1a7a15-72a8-420a-abd2-259d788ed265")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "4db2efd0-4f24-4d86-8bc0-804e77b6c4e2")
+			(uuid "9ea7c816-4554-4950-bdaa-544cbd9a5317")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C5")
-			(uuid "4312b6a7-70ce-4ff3-b900-ba4bcf37280a")
+			(uuid "47e38c81-d7d6-4b3a-b7d6-3aa6eba64067")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D12-A)")
-			(uuid "1d634427-a8b5-4fd0-af09-0f6f6dce615c")
+			(uuid "ea8a2b16-23a2-428f-bea3-5fe8fc62b45b")
 		)
 		(embedded_fonts no)
 	)
@@ -3027,6 +3163,7 @@
 		(layer "F.Cu")
 		(uuid "8fd54303-c3d8-40eb-9157-5c5d682aed56")
 		(at -72 -22)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW11"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -3075,43 +3212,59 @@
 			)
 		)
 		(path "/68d45461-dfa0-4250-8b65-11712489588b")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "77fd49a0-7475-4db4-95cd-2037dab3b7d2")
+			(uuid "ed474885-88a9-4ad4-bcca-33a187e8c074")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "c034d8ec-1263-4e29-b24e-23a8e6e0cc88")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "33f73e3e-b4f9-4732-b347-f893c9981ae7")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "6a510685-8d14-44b6-b669-032b0997f225")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "1f8731e4-e2e1-41e8-ad82-29ac5a304d11")
+			(uuid "a6264385-23d8-4d58-b5d1-9a295ab04299")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -3119,56 +3272,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "903c5321-51a0-421e-9255-b89706eb31fa")
+			(uuid "83402668-3f01-45ee-8a51-5f984a370a80")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "44d2ac0d-f485-4b41-88aa-76816677fd0d")
+			(uuid "d9cc2922-25a8-4ba0-8951-79a9892fa742")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "7f3b56de-41da-4405-bf9f-4be69d94c180")
+			(uuid "e2155a2b-0b60-447c-a908-69f5181269d8")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "4d8e968c-a734-4cbc-a2a3-f8f0d5f1c994")
+			(uuid "b045eb13-fd69-4543-a47a-537f23e2f407")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "f651df51-037b-4961-82f3-b29efded60d9")
+			(uuid "e3726ef9-df2b-451a-9c4c-a91d05a4e48f")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "9b480d33-daa0-4d25-8591-0ad5a18b474d")
+			(uuid "f60697f1-514c-4c68-9e43-7ede1158452f")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C4")
-			(uuid "af7d10e5-06b8-4943-9c15-bd23e13461b7")
+			(uuid "2f2a0b7c-5c68-4e54-b181-0d75a6db1085")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D11-A)")
-			(uuid "0b0fbb1f-b1c6-428e-b671-2b6311070edd")
+			(uuid "77a368e4-f581-43e4-847f-1c57b1ab2121")
 		)
 		(embedded_fonts no)
 	)
@@ -3176,6 +3329,7 @@
 		(layer "F.Cu")
 		(uuid "c08dc1d3-dbdb-45d2-8c71-ff9026736caf")
 		(at 0 0)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW13"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -3224,43 +3378,59 @@
 			)
 		)
 		(path "/644a7332-9b92-4e0f-8245-86dc9ef9d387")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "cd6f092b-b4a5-40a9-a955-dcb60e9b83b8")
+			(uuid "99a84785-4d05-4ca4-83e5-437d9cf62823")
 		)
-		(fp_circle
-			(center -6.9009 -5.950001)
-			(end -6.7509 -5.950001)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "adf3cde9-a490-4c9c-8abc-5e2cf15e3043")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "01b3dd35-3bc1-41bf-b083-8520cb92a511")
 		)
-		(fp_rect
-			(start -6.6009 -7.700001)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "a3f77643-ea0b-42aa-b5e9-964b62e0b5ed")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "69f11aac-6815-424e-958c-bf4421021287")
+			(uuid "4c95f177-47e4-43d4-bdab-35ab83ca5549")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -3268,56 +3438,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "9ac5a433-db44-4b2b-b78e-aa1eef44be7d")
+			(uuid "8eebec08-bcde-4d11-88d2-5f09579458bc")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "b39b603b-79fa-4ac1-8943-6ed2eb19905e")
+			(uuid "abf0777a-1acc-4871-9ce0-5d78b9592e1f")
 		)
 		(pad "" np_thru_hole circle
-			(at 0 -5.950001)
+			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "d2369c3b-a7d9-411e-8813-6f5001ecfcbf")
+			(uuid "85a7671f-8266-48e0-824e-585d81fbeaf8")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "17c6d6f3-8887-4397-926e-5e63d93f5b7c")
+			(uuid "69a14d77-15ad-4dbb-b25c-c0bbcbbdaa3d")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "86b55d56-b128-4348-9edc-64b6b424d13f")
+			(uuid "72b4cdb1-fd5e-4685-bea9-27c70191759a")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "5e2488e4-8c9f-4034-9557-63991e680467")
+			(uuid "51fac3a8-e0f0-44e5-9c99-d02aecb39446")
 		)
 		(pad "1" smd rect
-			(at -3.275 -5.950001)
+			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C0")
-			(uuid "ad0e823a-3aea-4d3b-8428-d1cb0b9ff219")
+			(uuid "2a8faf3e-ba9b-43e3-8d27-1fb522e90451")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D13-A)")
-			(uuid "7f7a105d-e523-4e90-a6f4-8c223e7dafc4")
+			(uuid "f3397e01-0b9d-42b8-a61e-52730feafd51")
 		)
 		(embedded_fonts no)
 	)
@@ -3325,6 +3495,7 @@
 		(layer "F.Cu")
 		(uuid "c6207406-1088-4cc6-b70d-b855061b1df0")
 		(at -63 15)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW19"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -3373,43 +3544,59 @@
 			)
 		)
 		(path "/2acfc627-373b-4e71-82dd-3893b19e6ca2")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "3bb0f04b-a134-4899-8d5b-11dc0dc0923b")
+			(uuid "c4d2521a-b845-452b-a2da-0a5a68e0a451")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "0f8a22ba-a777-4120-8fa3-a411018e548a")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "4f83f52d-57ac-4a2a-9a09-2a0f9d4b556d")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "26dd136e-333d-499c-98fb-4af39fce5c6f")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "c708a0aa-79de-408a-8174-92fad42826ad")
+			(uuid "4ebfe4d0-d038-454b-8eb8-711cddc82f73")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -3417,65 +3604,66 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "d5e3ba61-0997-402d-ae03-af5e21c50523")
+			(uuid "f863dc3f-7721-4a8f-b99c-0e9bf06608f9")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "3dd67502-4e58-4b28-9278-7ff5b3348c8b")
+			(uuid "8b352807-92cf-42e2-ab34-1175274b0147")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "936e097f-555e-4190-b5e5-4ced7a8b27c7")
+			(uuid "4e7bc93d-2f40-48c7-a6c5-ae762f748327")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "bc0e6e96-31ca-4be9-b1e9-2c1664682453")
+			(uuid "8c9ebe23-aded-455b-b422-9ce1440fda29")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "a89b1d8e-b39a-4f28-83cd-7a7b06acdf51")
+			(uuid "b0c5a6fb-a0bd-4ad0-9841-3b043fd948da")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "35f23c1f-95fc-4781-93b9-dad3ea205714")
+			(uuid "5e0ffb25-0d76-4720-a0c5-faf6f29599f9")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C3")
-			(uuid "188d74e3-1c87-458a-8033-5afc448964ab")
+			(uuid "93c46535-7c82-41f9-955f-81b6d2dcfe4e")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D19-A)")
-			(uuid "2ff27c1f-da1f-49aa-9a41-af59b1797789")
+			(uuid "8db55a81-b72c-4c38-8c1e-d51aeb5e0228")
 		)
 		(embedded_fonts no)
 	)
 	(footprint "fw16kb:Choc_v1_Hotswap"
 		(layer "F.Cu")
 		(uuid "cb61d78d-8d4c-4ed3-9d1f-1e54874c6308")
-		(at -82.571 17.057)
+		(at -82.571 17.057 12)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW20"
-			(at 0 -1 0)
+			(at 0 -1 12)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "91210bde-705c-4950-8def-46da0db72bb3")
@@ -3487,7 +3675,7 @@
 			)
 		)
 		(property "Value" "Choc v1"
-			(at 0 1 0)
+			(at 0 1 12)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3500,7 +3688,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 12)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1e6fa7d6-3d2e-4049-8f10-6b7453bc565c")
@@ -3511,7 +3699,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 12)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "188ed270-7ec0-4092-8303-2c26bbd55062")
@@ -3522,43 +3710,59 @@
 			)
 		)
 		(path "/ecc3bf3b-9c95-4c98-8c2c-136784f9026b")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.500001) (xy 7.5 -7.500001) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "2a46072c-08b2-417f-801e-e4ecf09c112f")
+			(uuid "6c6d8383-fe80-4e30-9992-b6f56132a8e4")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.250001) (xy 8.75 -8.250001) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "e30c5269-2f9a-4316-a7ac-14bab19431ef")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "6b525b9d-e9fc-46e6-9333-5ca5311e40c8")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.500001) (xy 9.825 -7.500001) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "5da9c0b6-1a2f-4d56-9e8d-23c36851c01d")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.750001) (xy 7.75 -7.750001) (xy 7.750001 7.75) (xy -7.75 7.750001)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "161fb4cc-c1af-4dfb-a0ca-7c01b5cd725f")
+			(uuid "e0587cce-61e9-4ec9-b574-47a4167aa476")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.500001) (xy 7.5 -7.500001) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -3566,56 +3770,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "87f6f4f4-e675-420f-a2dc-b55783f9e184")
+			(uuid "a4ec6f2c-ce8e-4610-b1dd-0eab06abc730")
 		)
 		(pad "" np_thru_hole circle
-			(at -5.5 0)
+			(at -5.5 0 12)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "9b2b2062-ca10-4520-ad37-a888a85d2b1d")
+			(uuid "9212eb4b-cc5b-4905-99f3-0c7a75ad79d2")
 		)
 		(pad "" np_thru_hole circle
-			(at 0 -5.95)
+			(at 0 -5.95 12)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "04b038b6-f8ba-4eab-b234-611961e91149")
+			(uuid "35ff2dcf-e4a0-4849-b484-3e2cb8551047")
 		)
 		(pad "" np_thru_hole circle
-			(at 0 0)
+			(at 0 0 12)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "fd9a658a-80ab-4951-ac1c-4139e27f2cf3")
+			(uuid "d29ebfcd-7f3c-4e0c-b0d9-5c7753933a04")
 		)
 		(pad "" np_thru_hole circle
-			(at 5 -3.75)
+			(at 5 -3.750001 12)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "53d1f2ea-1ee1-478e-a662-2b55ecae8550")
+			(uuid "8427890f-46cc-4415-a700-fb509b83a241")
 		)
 		(pad "" np_thru_hole circle
-			(at 5.5 0)
+			(at 5.5 0 12)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "89676af5-bb59-43e2-9845-39a54297bbe8")
+			(uuid "f1dcbe96-7216-4a2d-9e48-920eb6ab8545")
 		)
 		(pad "1" smd rect
-			(at -3.275 -5.95)
+			(at -3.275 -5.95 12)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C4")
-			(uuid "902f0db5-b1bb-499d-a10f-dd231003e1c4")
+			(uuid "c57125c0-2204-46d9-ac0e-5ee82b403755")
 		)
 		(pad "2" smd rect
-			(at 8.275 -3.75)
+			(at 8.275001 -3.750001 12)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D20-A)")
-			(uuid "636a468e-8af7-4636-96e4-42a4d4ef39cd")
+			(uuid "c483f3da-39c9-4433-9d20-7d4558b01dfb")
 		)
 		(embedded_fonts no)
 	)
@@ -3623,6 +3827,7 @@
 		(layer "F.Cu")
 		(uuid "ccfd533d-479b-4a44-adfd-62ed239d9773")
 		(at -54 -43)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW4"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -3671,43 +3876,59 @@
 			)
 		)
 		(path "/6141e20e-322d-4bf1-9504-638dc316b7cd")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "fb6daa98-bed7-4c45-94c3-7bda256919b1")
+			(uuid "e4fb93cc-354e-4bb7-aa21-18c64d9fbf15")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "d10d4c1f-c498-4978-9c3f-72f62ce39c6c")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "5a60da76-1d4c-4282-a3c3-80b7820424d7")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "97f95d67-336a-4f08-b820-40e2622ef6e4")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "de8f9fdb-2764-495b-aede-97a6726f8047")
+			(uuid "0d0e2afe-7179-44a1-8321-34bc556cdb34")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -3715,56 +3936,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "2383de9d-32df-4b97-b194-2514275acfaa")
+			(uuid "4924cb9e-3850-426c-a848-b404e39859ac")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "130bf2be-e9a7-4aee-9847-c4d4b1a80071")
+			(uuid "86135884-0a20-4ba4-b39e-d9c3da83c275")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "21cc6a22-9460-498c-b1ba-2e049dc47e4b")
+			(uuid "b9df5111-41a7-4139-add9-5f005b6a332e")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "d98a6df2-e34d-4e44-a3ec-b74d4fa0bd99")
+			(uuid "d8254dff-d43c-4227-a4da-f19366d062c8")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "50927f48-a8d7-47db-99e5-921c02488441")
+			(uuid "f709db5f-7383-4a6f-a66f-2003f18f7044")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "4d414e02-0dc9-4ee9-b5e0-ed672f6501db")
+			(uuid "ffb584ee-5c2b-4ecb-8e5c-abc4adfd0326")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C3")
-			(uuid "6dc35b35-8e71-4641-a6f0-6bf11df5466f")
+			(uuid "b031ec8a-f6d1-4756-a1d0-71059a377fcd")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D4-A)")
-			(uuid "f094436a-04f8-463a-af41-6f8c6ae4e308")
+			(uuid "a8873bd1-6c88-485f-ad9e-de99036a5174")
 		)
 		(embedded_fonts no)
 	)
@@ -3772,6 +3993,7 @@
 		(layer "F.Cu")
 		(uuid "ce9a04a1-50aa-4afe-95a9-365e0fcf2c0f")
 		(at -36 -40)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW3"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -3820,43 +4042,59 @@
 			)
 		)
 		(path "/bc1328fa-dd39-4fe4-91cb-e8a5901bcce7")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "c999a71f-514f-4bb4-a049-7a1d412e0488")
+			(uuid "88219940-2d4d-4942-abf8-d16890399fbc")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "8b737031-79a7-453d-8ea6-a90cdc7a063c")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "5484e514-3af8-4382-8065-ec9e9f90df31")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "166ab6de-261c-4fcf-a2db-a2f453c2c0cc")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "fb726f1d-882a-404b-bf65-d06f56c1f5d9")
+			(uuid "898cb817-9fa4-4525-a69e-3563bd0fd324")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -3864,56 +4102,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "505cd638-fd40-4850-9044-942c926454a9")
+			(uuid "e2324fc2-7c78-4b71-8f52-1ddf1661f5fe")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "5f9a4a72-edc4-4511-942e-e5d9790ec5ff")
+			(uuid "63ac61db-c446-4bf8-8d33-3ff3cad595f8")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "92ed4981-2cdc-40ea-9e15-ef3012e0710e")
+			(uuid "85cb13a1-a07d-4bfd-8d12-e1d033d2c0e1")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "96aec4b2-eebd-4ae1-9e92-b11f894cd4d7")
+			(uuid "153be6b2-1c15-4798-b2aa-366fa9a4747b")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "4ca9c4d3-7b3a-4018-b0e1-7f40b9508962")
+			(uuid "4d0cba45-9c2f-4f28-8ad2-2372e72ebbff")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "a6cb8348-057c-47d1-9098-f7a0c392368c")
+			(uuid "d62aad25-48fe-4274-9389-5cd94b41fb98")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C2")
-			(uuid "70c0370f-1932-4d57-8e75-0fa9a6cafe01")
+			(uuid "944744ed-54e9-41ba-869c-d2ad270184a8")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D3-A)")
-			(uuid "fe37e526-5f4c-47b6-9a28-fc5b943e9e7b")
+			(uuid "25db0727-748a-42cc-8f15-f052d183a4a3")
 		)
 		(embedded_fonts no)
 	)
@@ -3921,6 +4159,7 @@
 		(layer "F.Cu")
 		(uuid "d26cc139-3548-4639-833d-3287e1d1eb55")
 		(at -36 -23)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW9"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -3969,43 +4208,59 @@
 			)
 		)
 		(path "/a8bc2f50-18b0-46ed-bcde-3a6e908a24ec")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "c8ff9223-eca3-48df-8015-186f5dd63977")
+			(uuid "759534cc-e62f-45f6-9e22-5849c94b835c")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "280769a2-3ac6-4360-84af-596b287ea966")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "09756c8a-8a13-4c5f-8568-8692459800e2")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "76750fbf-3e20-4a19-8199-2465259caf4f")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "01f9bcb5-9adf-4579-8430-926e7d50d079")
+			(uuid "0c3034cb-5ec6-4207-9f77-5762b7623f2f")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -4013,56 +4268,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "0d7fd110-891e-4694-8f48-2eb0dee0f81f")
+			(uuid "720fd5f9-6300-410b-bdf7-5cc1604b651b")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "c12dcfe3-3cf9-40ea-991e-2d412f89459e")
+			(uuid "35fc45dc-f57b-4920-833a-27d081b38268")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "52e6f3ff-2e5e-472a-bf90-253ac374f494")
+			(uuid "bd20d5ab-965a-4914-aa74-cf6529f80ec5")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "c5c722fd-5265-4510-857e-a5bc6606fa24")
+			(uuid "543283cf-fdd3-405a-9279-fb4059bbb290")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "ba599bcd-15e7-40eb-944e-0cec9e6fd576")
+			(uuid "434c8274-15e4-46a6-93ed-858c02d496ea")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "d26579f0-d4c0-4c64-9b23-2daf1bde37c1")
+			(uuid "0b7f0c71-8573-49b3-95d4-69463840777c")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C2")
-			(uuid "84a4c3c6-75ad-425c-96b3-67260d9747d3")
+			(uuid "b294c870-38e7-4484-ba8a-4b8074cfc6d6")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D9-A)")
-			(uuid "1a348782-ae0d-478f-808e-b700b894eb0e")
+			(uuid "d600076c-63ff-44af-9815-b9d4deb5c21a")
 		)
 		(embedded_fonts no)
 	)
@@ -4070,6 +4325,7 @@
 		(layer "F.Cu")
 		(uuid "d571a4d3-21d7-497a-b84d-9cefc228b82c")
 		(at -54 -9)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW16"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -4118,43 +4374,59 @@
 			)
 		)
 		(path "/b200d6c0-34ee-4405-98e9-9b1ed77c9922")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "f058899d-9fd2-4ac6-adb5-163dc68623fe")
+			(uuid "f4adac84-31fb-430f-ac99-40b0330e85bc")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "506f006b-451b-4c85-bb32-1e7605bcccc4")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "bbe0d5a6-c64e-499a-8d7f-a356cc04c80e")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "57ec5df5-c3f5-4bcc-8429-fbecb5328811")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "f9a2aa21-be94-4316-ad26-5fb8a4be8dc4")
+			(uuid "2fc30bb2-01da-4f3d-bbba-49dbb2606083")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -4162,56 +4434,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "924613e6-0a1e-4f73-89de-0f12fb4cb8f1")
+			(uuid "8174e1d7-e965-405b-9661-4862e4d157cf")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "99bf31c3-6c8c-4c3e-9ea1-c53e1cc93a70")
+			(uuid "6641717b-fb39-412e-ab0f-8e71587aa26b")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "4ffa126b-b2c5-4f25-9e4e-5c6ddbf70fca")
+			(uuid "c3608d73-f415-4dbc-8d7f-86f5d72900f4")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "491dc480-f60d-4bc2-a74f-211770a80ceb")
+			(uuid "29952cf8-8679-43f9-8a72-570a5061e72f")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "f168f4e8-43be-4581-bd6a-dffd2160277d")
+			(uuid "b9513c65-687e-4fdb-b51d-f018bbfae858")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "37a3c9a1-7115-4b9f-8b9b-b4d8a69e62d3")
+			(uuid "a723a1c3-b88e-4ebe-911f-b6645ffd0f00")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C3")
-			(uuid "f56c51a2-96bd-4826-8181-54d578ae4aaf")
+			(uuid "f305fcc3-8d27-4eee-ae43-bd8ff9281cbe")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D16-A)")
-			(uuid "a4373393-9914-47d3-84f8-a7d7a169061f")
+			(uuid "8de7097f-2896-4de5-bb6c-8eb0937fb31b")
 		)
 		(embedded_fonts no)
 	)
@@ -4315,6 +4587,7 @@
 		(layer "F.Cu")
 		(uuid "e0e3fbbf-7c14-46fb-b887-29cf40737728")
 		(at -18 0)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW14"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -4363,43 +4636,59 @@
 			)
 		)
 		(path "/7fe248da-97b8-4f59-a7cc-ff36b731313f")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "2b076b12-5af6-4e75-86f2-f995516e8016")
+			(uuid "352c1243-4a94-4104-a6fc-f5d0160b3285")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "92324ae6-1c8a-4a04-b7db-9907d2c782ed")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "4c910f8a-009b-405c-9d9b-6756948254f8")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "d179ccb8-45f7-43b6-93c8-648df9303c03")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "ed604778-ec4d-472a-9dbf-65f399357f44")
+			(uuid "858afbc8-afd9-40d2-bc31-c4b126b02a1e")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -4407,56 +4696,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "86828209-7285-4eb8-98eb-a930a75614a5")
+			(uuid "164e53bc-03a4-472e-bc51-e6ae7ce48b9e")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "de8d5640-6f6f-40dd-9a9f-86787062ec16")
+			(uuid "3c902dd5-83ac-4ee8-b476-1ec3662f2937")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "0e3d6d84-3c6b-4616-9702-df1e16434372")
+			(uuid "0266887b-dba4-465c-a6e1-f1a91e0e21ef")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "a98c9e3a-c280-4a82-980c-d195d8066da5")
+			(uuid "a439cc28-8fad-40e9-ba0a-de3a73203f88")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "e54dc1ba-cad9-4336-911b-c5f37a4584eb")
+			(uuid "50813d36-374a-49cb-908d-d80a1a8ebc2c")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "552a37bf-5c88-4abe-b846-2b6e73eda762")
+			(uuid "4d806855-9002-4dee-b706-9a80fd504ac1")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C1")
-			(uuid "9c6cf3cd-a9f5-49fe-9623-e79633e963b4")
+			(uuid "aaee357d-9685-40b8-a0b9-36739f92c49e")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D14-A)")
-			(uuid "e4de0d14-486c-4da1-a890-da1ac90ac9c7")
+			(uuid "29eec173-d2c2-4391-830e-0e471eaa6bec")
 		)
 		(embedded_fonts no)
 	)
@@ -4464,6 +4753,7 @@
 		(layer "F.Cu")
 		(uuid "eed5e316-115e-437e-9809-6ceb079916a0")
 		(at -72 -5)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW17"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -4512,43 +4802,59 @@
 			)
 		)
 		(path "/f9ee16a8-3243-4694-9571-8f8a8b646a81")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "2b60dfe0-f7a4-4501-a007-805ee437d2ee")
+			(uuid "4a0df71e-8499-418f-9844-7369f13b8fde")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "18f41f5e-9734-4728-9700-40945a0ddb74")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "995977b8-ef1a-450a-bf46-fb5d2cd20e59")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "a44c5ae1-bc9d-44af-a481-84dc9f58a2c3")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "69515737-574d-4887-ae61-995662b29a28")
+			(uuid "3ec26cab-4fa7-45e9-9d90-ee2113263c16")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -4556,56 +4862,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "28a1fc15-5aa9-4f2e-8a5c-2fe758b84f29")
+			(uuid "c1846537-cc04-4525-bb4c-ac991a7bfb04")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "d754e6d2-dd0c-49a4-b991-34bc8b23bc83")
+			(uuid "b621cb41-bba5-49b0-aaa1-286e4b440054")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "a366c48c-02bf-4fa3-94d7-40c8155bf48c")
+			(uuid "5491e016-426c-4df4-91cb-df9cfc09f56a")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "573e2915-58c1-4485-a7ac-37fbc442f55a")
+			(uuid "5ee5e2fb-9a7e-4b2e-acf6-e1c86fd45b84")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "61c28540-d079-4952-b6b9-8145db39f205")
+			(uuid "ba7f0e57-2951-4f87-9614-ee9428e49486")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "a89ee39f-4513-46ec-ba16-76c0f65b4c59")
+			(uuid "48f0a46d-cfd8-4ccb-a8a9-71ca1f4d9cff")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C4")
-			(uuid "4d25081d-1e65-4657-87e8-1bd578a32f5e")
+			(uuid "fef62a47-0d28-4fbf-873e-00e883a16fa6")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D17-A)")
-			(uuid "6c6a777a-1a81-4ccb-81d7-a335b1b79796")
+			(uuid "4416bb45-e55e-4759-8980-e6ed95f400ce")
 		)
 		(embedded_fonts no)
 	)
@@ -4931,9 +5237,10 @@
 	(footprint "fw16kb:Choc_v1_Hotswap"
 		(layer "F.Cu")
 		(uuid "fadb7592-94a3-4f8c-b4a8-01aca9041566")
-		(at -101.286 23.138)
+		(at -101.286 23.138 24)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW21"
-			(at 0 -1 0)
+			(at -0.000001 -1 24)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "65f2b8ca-7b4b-4cee-90fd-4bf95bcea08a")
@@ -4945,7 +5252,7 @@
 			)
 		)
 		(property "Value" "Choc v1"
-			(at 0 1 0)
+			(at 0.000001 1 24)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4958,7 +5265,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 24)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0d457df3-3c60-4f2c-8cd9-6aa690898b01")
@@ -4969,7 +5276,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 24)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5f93a8fc-4b51-4326-8bab-764a5b928a9c")
@@ -4980,43 +5287,59 @@
 			)
 		)
 		(path "/d716c4d9-f007-438e-bb14-72758d6444b9")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "5167728a-f320-4cc0-84e3-bfb858158e16")
+			(uuid "436b23ab-9960-4e97-bed6-90b93d862903")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.250001) (xy 8.75 8.25) (xy -8.75 8.250001)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "0e832a70-3a44-410e-8ed9-8e9cb43df757")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "0b24ba7c-08d4-4622-9fcd-a091a89a4eac")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "ca1dee27-ef1a-4390-a9f9-17190a55e213")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "d19df7e3-738c-45b1-89e5-e1bbbdafabdb")
+			(uuid "af9210c4-5c08-41f8-b478-a272f00f90a7")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -5024,56 +5347,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "90ba6e52-64dc-4f82-bedf-6a8a686cd146")
+			(uuid "f19ab63d-b5bc-4002-8959-69a9b0ad8e70")
 		)
 		(pad "" np_thru_hole circle
-			(at -5.5 0)
+			(at -5.5 0 24)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "5682d2f6-ae4e-420a-a9de-f12f5346f601")
+			(uuid "bfe8591e-39b3-478c-805a-6abaef4bb4a4")
 		)
 		(pad "" np_thru_hole circle
-			(at 0 -5.95)
+			(at 0 -5.95 24)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "b67b841e-8e36-485f-8603-49dadf8933c7")
+			(uuid "48125bef-e25e-478d-bcf1-558c3ef3afe1")
 		)
 		(pad "" np_thru_hole circle
-			(at 0 0)
+			(at 0 0 24)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "b5dd44a7-480e-4964-8f63-06bdab2442ce")
+			(uuid "62ef3919-ed54-4b5b-8199-de90b819cc98")
 		)
 		(pad "" np_thru_hole circle
-			(at 5 -3.75)
+			(at 5 -3.75 24)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "0fc56299-5d98-4fd5-ab34-81dfd6b6f128")
+			(uuid "e47d4164-46f6-4858-8736-c47f966df6f6")
 		)
 		(pad "" np_thru_hole circle
-			(at 5.5 0)
+			(at 5.5 0 24)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "5cc9c9bc-6c9b-49a5-a381-5e526f1a1540")
+			(uuid "55f7ab76-369b-4126-bbfa-355e96fd3911")
 		)
 		(pad "1" smd rect
-			(at -3.275 -5.95)
+			(at -3.275 -5.95 24)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C5")
-			(uuid "4d960cff-ef32-4d88-884b-cf4bf28f6bfb")
+			(uuid "d0896432-4af7-44ef-830f-e93591e4893e")
 		)
 		(pad "2" smd rect
-			(at 8.275 -3.75)
+			(at 8.275 -3.75 24)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D21-A)")
-			(uuid "980ec31b-161f-4b45-a841-b11ca733be34")
+			(uuid "9bf3a3a9-71f8-4d61-816a-6345cd2c3431")
 		)
 		(embedded_fonts no)
 	)
@@ -5206,6 +5529,7 @@
 		(layer "F.Cu")
 		(uuid "fdd8e807-6b97-4529-b98e-703fd6472f18")
 		(at -18 -17)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW8"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -5254,43 +5578,59 @@
 			)
 		)
 		(path "/3d122c48-865b-44ef-9c6e-7293348da3e2")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "560e1c72-7594-47c4-8a2e-4bf147f9db85")
+			(uuid "9b0ed0e9-6385-43bf-b7e4-6545d7d76969")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "e58f979b-edb5-4eef-8be4-a8b07ce33a84")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "99eccb74-ac68-45c4-8627-cf326d3e3eae")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "705c9d86-c622-429d-b790-39f6920cb601")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "8d1c7f23-4b96-4e7c-8fda-87a8b33bb8de")
+			(uuid "5c2a7b82-3194-41fc-8e4c-e0d1f0bfd7e7")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -5298,56 +5638,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "62081929-152c-4572-9c1f-5a7b62edf133")
+			(uuid "3509e810-c4c5-4563-8f87-46cddf50224d")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "aff44043-888a-413a-81f1-fcf2790ae16b")
+			(uuid "8e38c119-08f4-4d4b-baa3-5922a476300b")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "ec1aab65-5960-4039-a96d-7fcbcafe0995")
+			(uuid "f8f7a0bb-c88d-4bbc-8a4c-0aec7d6a4980")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "56870587-d8a5-4b45-941f-8ab48d1d562f")
+			(uuid "f2a695ae-cab6-4aad-b6a4-0e0cc35061d3")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "95fdf9eb-b993-4e2d-bb2b-cac2a72a2c32")
+			(uuid "6e638344-56af-46d8-a0b5-33fe9a27c080")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "ab2c00d6-e98f-4f94-9ed9-9338774d719c")
+			(uuid "8307aa94-be88-4485-87a7-7d0e4d9c667c")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C1")
-			(uuid "02ca1a7c-4e25-47b7-929d-95435fc97e0f")
+			(uuid "e39d7d1e-959d-430d-8660-6efacde4ebea")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D8-A)")
-			(uuid "736ce1e7-e6ad-4610-b24d-6933d1798c65")
+			(uuid "e0775aa9-545d-4a87-b210-e18a31fd7754")
 		)
 		(embedded_fonts no)
 	)
@@ -5355,6 +5695,7 @@
 		(layer "F.Cu")
 		(uuid "fdf60fac-f26e-4aa6-84f5-3eb2c2610cc5")
 		(at -90 -37)
+		(descr "Kailh Choc v1 (PG1350) in a Kailh CPG135001S30 hot-swap socket on B.Cu. Geometry from Ergogen 4.2.1's built-in choc footprint (hotswap: true, MIT). Pad 1 -> column, pad 2 -> diode anode (keyboard/docs/pcb-spec.md section 6). Check the socket body against the CPG135001S30 drawing.")
 		(property "Reference" "SW6"
 			(at 0 -1 0)
 			(unlocked yes)
@@ -5403,43 +5744,59 @@
 			)
 		)
 		(path "/4752ce70-810b-488a-948f-6ae0695af41a")
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_rect
-			(start -6.5009 -7.6)
-			(end 9.725 1.8645)
+		(fp_poly
+			(pts
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
+			)
 			(stroke
 				(width 0.12)
 				(type default)
 			)
 			(fill no)
 			(layer "F.SilkS")
-			(uuid "0dd51557-dfa0-4e71-948d-7d1e70641b22")
+			(uuid "768efb13-bdee-4b24-b78e-1c680dda1583")
 		)
-		(fp_circle
-			(center -6.9009 -5.95)
-			(end -6.7509 -5.95)
+		(fp_poly
+			(pts
+				(xy -8.75 -8.25) (xy 8.75 -8.25) (xy 8.75 8.25) (xy -8.75 8.25)
+			)
 			(stroke
 				(width 0.1)
 				(type default)
 			)
-			(fill yes)
-			(layer "F.SilkS")
-			(uuid "57dcbe3f-50e7-4556-8264-236c27d6defc")
+			(fill no)
+			(layer "Dwgs.User")
+			(uuid "4bee52ad-2c4b-42ef-8943-77e140e11883")
 		)
-		(fp_rect
-			(start -6.6009 -7.7)
-			(end 9.825 1.9645)
+		(fp_poly
+			(pts
+				(xy -4.825 -7.5) (xy 9.825 -7.5) (xy 9.825 -1.2) (xy -4.825 -1.2)
+			)
+			(stroke
+				(width 0.05)
+				(type default)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "6cc3170f-f1bf-4bcf-82e6-8403d25d7df7")
+		)
+		(fp_poly
+			(pts
+				(xy -7.75 -7.75) (xy 7.75 -7.75) (xy 7.75 7.75) (xy -7.75 7.75)
+			)
 			(stroke
 				(width 0.05)
 				(type default)
 			)
 			(fill no)
 			(layer "F.CrtYd")
-			(uuid "47fa31ba-5e2f-4fdc-9eae-5872ff6947f2")
+			(uuid "7b35ccd9-111d-4ff5-aedf-d859bf12f667")
 		)
 		(fp_poly
 			(pts
-				(xy -5.888 -9.3678) (xy -4.888 -10.3678) (xy 9.112 -10.3678) (xy 9.112 4.6322) (xy -5.888 4.6322)
+				(xy -7.5 -7.5) (xy 7.5 -7.5) (xy 7.5 7.5) (xy -7.5 7.5)
 			)
 			(stroke
 				(width 0.1)
@@ -5447,56 +5804,56 @@
 			)
 			(fill no)
 			(layer "F.Fab")
-			(uuid "73db371a-4989-49d1-9e37-60862a93fb2f")
+			(uuid "162aa6ac-44d3-43aa-a2b9-4bc4a3d8e9d1")
 		)
 		(pad "" np_thru_hole circle
 			(at -5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "7634e905-9176-4f56-b90d-20249e459d84")
+			(uuid "4e948111-38f8-4f3d-b9b1-68fdbc148bbb")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 -5.95)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "25566faf-c7e0-4351-af26-5ef99fb92f2a")
+			(uuid "0c84fef5-8fa2-4eda-8bca-8276c8d8590f")
 		)
 		(pad "" np_thru_hole circle
 			(at 0 0)
 			(size 3.429 3.429)
 			(drill 3.429)
 			(layers "*.Cu" "*.Mask")
-			(uuid "03756cd5-efa8-4315-837f-fb74418c5d4c")
+			(uuid "f9b373a4-0bf5-4d56-ae40-a81f9f818836")
 		)
 		(pad "" np_thru_hole circle
 			(at 5 -3.75)
 			(size 3 3)
 			(drill 3)
 			(layers "*.Cu" "*.Mask")
-			(uuid "9d359cc7-9b2a-453d-8caa-b283900580fc")
+			(uuid "3f033048-3b5d-49bb-ac20-5f091fdad5a6")
 		)
 		(pad "" np_thru_hole circle
 			(at 5.5 0)
 			(size 1.7018 1.7018)
 			(drill 1.7018)
 			(layers "*.Cu" "*.Mask")
-			(uuid "f6a16d33-2a8d-436c-bb07-b62e42b8ce6a")
+			(uuid "6221e3e4-7c1d-4e48-8a5b-553a79f1a2ab")
 		)
 		(pad "1" smd rect
 			(at -3.275 -5.95)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "/C5")
-			(uuid "8a013301-b4c2-4329-ae86-c81640687c75")
+			(uuid "009ea406-d1f7-470b-81d1-1e435bd4f674")
 		)
 		(pad "2" smd rect
 			(at 8.275 -3.75)
 			(size 2.6 2.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(net "Net-(D6-A)")
-			(uuid "8dcc78ff-31d3-4145-a037-b8c659bf1582")
+			(uuid "ff18c74f-d412-4c9e-972c-f796eff99401")
 		)
 		(embedded_fonts no)
 	)
@@ -11137,7 +11494,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "4b7dc3b4-ad25-448a-ab63-12776e3e7584")
+		(uuid "9632b7c9-7ccc-4be9-96c7-53ac65b32106")
 	)
 	(gr_line
 		(start -122 -5.5)
@@ -11147,7 +11504,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "5da807eb-b962-43c8-88f3-aba69e205f4d")
+		(uuid "ad698558-07bd-4dfa-a08f-eeeec36e50e2")
 	)
 	(gr_line
 		(start -121 -46.5)
@@ -11157,7 +11514,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "52ea689d-f47f-4d2c-a880-7fda72e8051e")
+		(uuid "3229eb5e-345f-494a-bbe2-8e3be455bdb9")
 	)
 	(gr_arc
 		(start -121 -4.5)
@@ -11168,7 +11525,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "d7ab0584-5010-4c4e-a79d-cfe60863330c")
+		(uuid "68305869-8be0-4113-8e98-c6dedd22f750")
 	)
 	(gr_line
 		(start -113.924448 18.751517)
@@ -11178,7 +11535,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "7682d39c-5072-45cb-824e-93c078c02b02")
+		(uuid "1ecafc58-a86e-4f96-8b6f-3a602a4ddf69")
 	)
 	(gr_arc
 		(start -113.878543 19.440134)
@@ -11189,7 +11546,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "d17e8afb-d638-4ed3-b0c9-0e2048c87015")
+		(uuid "79eeee63-a45c-4613-b654-f36eb79481e5")
 	)
 	(gr_line
 		(start -107.093306 -4.5)
@@ -11199,7 +11556,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "324aa586-80a8-4da6-b95f-8359e80ae1c0")
+		(uuid "a74ddd14-3bfe-42aa-b031-e2daea9c818b")
 	)
 	(gr_line
 		(start -106.964021 34.970407)
@@ -11209,7 +11566,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "522b9a7f-dafc-484d-a885-f0cd41fc5123")
+		(uuid "cdcc5707-0a44-4312-ab76-23f204e09d1b")
 	)
 	(gr_arc
 		(start -105.643738 35.477215)
@@ -11220,7 +11577,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "d72f018c-e601-4598-9aaa-32b0a51c704c")
+		(uuid "db4710bb-ad5c-47ca-9703-d8c84d3bc24a")
 	)
 	(gr_line
 		(start -99.082762 -46.5)
@@ -11230,7 +11587,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "efa5bfb8-8dd4-4ac7-a827-7e36aa237bfb")
+		(uuid "ac196bba-bea3-49fb-b878-ce3facd88176")
 	)
 	(gr_line
 		(start -89.344612 28.220377)
@@ -11240,7 +11597,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "50db2ea3-f791-4f67-bba3-64bb276ca1b1")
+		(uuid "117162c3-06bc-43e5-b9ea-42d71629c04f")
 	)
 	(gr_arc
 		(start -63.164399 -52.486394)
@@ -11251,7 +11608,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "2dae1b08-dc48-4a5b-9233-dc8f9cba95d7")
+		(uuid "cc853c66-40d3-4a6d-a368-2caef69f2674")
 	)
 	(gr_line
 		(start -63 -52.5)
@@ -11261,7 +11618,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "4386ba60-46aa-4f7d-b674-eb474fd4952d")
+		(uuid "2a9fe716-b2e0-4420-97ff-360814377094")
 	)
 	(gr_line
 		(start -53.895472 24.494522)
@@ -11271,7 +11628,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "5b12be8f-7a0c-4f07-ab52-b41aba96bd55")
+		(uuid "ff3e4d77-b021-4b3e-bd1c-93663674f402")
 	)
 	(gr_arc
 		(start -53.514357 24.374157)
@@ -11282,7 +11639,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "62b319cd-e14e-4958-87cd-88619bad76b5")
+		(uuid "80944cce-3c65-4bf7-9069-6088ce6b2291")
 	)
 	(gr_arc
 		(start -45 -52.5)
@@ -11293,7 +11650,7 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "6b2cde18-7f41-49d8-828e-4c9b62ef7225")
+		(uuid "64b6ffb6-3e93-4a6c-bce8-34957bf3e244")
 	)
 	(gr_line
 		(start -26.740874 9.5)
@@ -11303,73 +11660,88 @@
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "d17efabb-2628-42cc-893d-9ebee65d2f1f")
+		(uuid "6902ce42-d7b8-408a-9a3e-614438cffe92")
 	)
 	(gr_line
-		(start 9 9.5)
+		(start 10.5 9.5)
 		(end -26.740874 9.5)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "41929386-21cf-47ff-868e-b2a173558a6f")
+		(uuid "7123f0e2-dc5d-44d5-8215-3ffc58b7e96a")
 	)
 	(gr_line
-		(start 9.164399 -43.486394)
+		(start 10.664399 -43.486394)
 		(end -44.835601 -52.486394)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "fada96d5-90f7-4605-a51e-a060d0f45778")
+		(uuid "365af9d9-4df9-485f-98cf-bb9305ff96e3")
 	)
 	(gr_arc
-		(start 9.164399 -43.486394)
-		(mid 9.76302 -43.146375)
-		(end 10 -42.5)
+		(start 10.664399 -43.486394)
+		(mid 11.26302 -43.146375)
+		(end 11.5 -42.5)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "0bcbe7ba-77cd-4201-bc25-aa6eb32b7f85")
+		(uuid "4475af61-0c94-4474-8445-ab6246a022a1")
 	)
 	(gr_arc
-		(start 10 8.5)
-		(mid 9.707107 9.207107)
-		(end 9 9.5)
+		(start 11.5 8.5)
+		(mid 11.207107 9.207107)
+		(end 10.5 9.5)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "c2f5ea8c-7744-4b4c-a611-2bf82f236e86")
+		(uuid "247d8f0e-1b83-4229-99e4-79b750673481")
 	)
 	(gr_line
-		(start 10 8.5)
-		(end 10 -42.5)
+		(start 11.5 8.5)
+		(end 11.5 -42.5)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(layer "Edge.Cuts")
-		(uuid "3dcba8be-2a94-431d-b3cc-2feb7a47ad33")
+		(uuid "e055c5cd-595c-4c94-b5d0-56dc1750a1ef")
 	)
 	(group ""
-		(uuid "0804974b-9dce-4e3f-b196-49715bb97b2e")
-		(members "0bcbe7ba-77cd-4201-bc25-aa6eb32b7f85" "2dae1b08-dc48-4a5b-9233-dc8f9cba95d7"
-			"324aa586-80a8-4da6-b95f-8359e80ae1c0" "3dcba8be-2a94-431d-b3cc-2feb7a47ad33"
-			"41929386-21cf-47ff-868e-b2a173558a6f" "4386ba60-46aa-4f7d-b674-eb474fd4952d"
-			"4b7dc3b4-ad25-448a-ab63-12776e3e7584" "50db2ea3-f791-4f67-bba3-64bb276ca1b1"
-			"522b9a7f-dafc-484d-a885-f0cd41fc5123" "52ea689d-f47f-4d2c-a880-7fda72e8051e"
-			"5b12be8f-7a0c-4f07-ab52-b41aba96bd55" "5da807eb-b962-43c8-88f3-aba69e205f4d"
-			"62b319cd-e14e-4958-87cd-88619bad76b5" "6b2cde18-7f41-49d8-828e-4c9b62ef7225"
-			"7682d39c-5072-45cb-824e-93c078c02b02" "c2f5ea8c-7744-4b4c-a611-2bf82f236e86"
-			"d17e8afb-d638-4ed3-b0c9-0e2048c87015" "d17efabb-2628-42cc-893d-9ebee65d2f1f"
-			"d72f018c-e601-4598-9aaa-32b0a51c704c" "d7ab0584-5010-4c4e-a79d-cfe60863330c"
-			"efa5bfb8-8dd4-4ac7-a827-7e36aa237bfb" "fada96d5-90f7-4605-a51e-a060d0f45778"
+		(uuid "3bfd6771-f23f-4045-b0ce-75f5fb40812f")
+		(members "117162c3-06bc-43e5-b9ea-42d71629c04f" "1ecafc58-a86e-4f96-8b6f-3a602a4ddf69"
+			"247d8f0e-1b83-4229-99e4-79b750673481" "2a9fe716-b2e0-4420-97ff-360814377094"
+			"3229eb5e-345f-494a-bbe2-8e3be455bdb9" "365af9d9-4df9-485f-98cf-bb9305ff96e3"
+			"4475af61-0c94-4474-8445-ab6246a022a1" "64b6ffb6-3e93-4a6c-bce8-34957bf3e244"
+			"68305869-8be0-4113-8e98-c6dedd22f750" "6902ce42-d7b8-408a-9a3e-614438cffe92"
+			"7123f0e2-dc5d-44d5-8215-3ffc58b7e96a" "79eeee63-a45c-4613-b654-f36eb79481e5"
+			"80944cce-3c65-4bf7-9069-6088ce6b2291" "9632b7c9-7ccc-4be9-96c7-53ac65b32106"
+			"a74ddd14-3bfe-42aa-b031-e2daea9c818b" "ac196bba-bea3-49fb-b878-ce3facd88176"
+			"ad698558-07bd-4dfa-a08f-eeeec36e50e2" "cc853c66-40d3-4a6d-a368-2caef69f2674"
+			"cdcc5707-0a44-4312-ab76-23f204e09d1b" "db4710bb-ad5c-47ca-9703-d8c84d3bc24a"
+			"e055c5cd-595c-4c94-b5d0-56dc1750a1ef" "ff3e4d77-b021-4b3e-bd1c-93663674f402"
+		)
+	)
+	(group ""
+		(uuid "cd0528d6-8179-4afe-b60c-513bef4e7aad")
+		(members "057badf5-2948-4cbf-8f02-2eac748a542a" "10e901be-5255-4d5d-b9e6-6c1ba52c0334"
+			"503eb915-0fc0-4f12-bf46-6916765d4c28" "50f0f2a1-6049-4209-a49d-d881975413eb"
+			"5fa417c8-9914-4426-bc73-cfc9d6c88e4e" "78521747-235c-430a-ae65-81b013d10f50"
+			"8839553d-e547-4101-81a4-6b1b67626a41" "8f042069-8cc1-4411-ac28-13a00fddf50d"
+			"a341a40d-0416-4dab-b1f3-9104f2ba6959" "bebba52e-0de0-40fc-b416-17f780be2070"
+			"c9b32d58-f247-4291-bbd3-1254b45bf741" "ca0b60c1-1f7a-4b00-91ae-2a7f23662b0c"
+			"d156fe42-ed1d-40d0-a9cc-d3cc766f3740" "d20a8fc7-4f4b-4797-b2b2-7b1d33cceabb"
+			"ddc8deef-8ccb-4f59-b405-141fc45781e9" "e50570aa-cd63-4174-a636-5db31becc3a5"
+			"e7d85c3c-30ec-43f0-aaac-c61be4dd7b1d" "ed674142-c0d6-48f3-837e-b3bcbfad0888"
+			"f03b4f12-162d-40a3-ab92-c6afee9fd9de" "f3b4a9b9-71d5-4708-947e-3585b6e0091f"
+			"f7574db6-7728-4ec2-9e49-866fe855dbcf" "f8298bae-12da-4cac-9853-f328257c81c7"
 		)
 	)
 	(embedded_fonts no)
