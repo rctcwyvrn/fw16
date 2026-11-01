@@ -198,3 +198,9 @@
 **Did:**
 - lib_footprint_mismatch ×199 = only the 3D-model path (.step on Windows vs .stpZ in nix); JLC multilayer rules read (0.09/0.09, via 0.25/0.15).
 - fpga/bay/tools/bga_fanout.py + pcbnew_add_fanout.py → u14_fanout.csv (288 vias, 272 NC + 16 lane/refclk skipped); keyboard outline DXFs + keyboard/pcb/sync.sh, Windows copy seeded.
+
+## 08:40 Keyboard boards placed
+**User:** saved and done / done
+**Did:**
+- Left: 57 footprints from the schematic, CSV placement, diodes on B.Cu (flip mirrors rotation → re-set and pad-checked); right: 55 footprints, mirrored placement. SW20/SW21 need a GUI rotation (rounded-rect footprint); the left rotations didn't reach the saved file.
+- DRC: right outer-column socket pads 0.425 mm from the edge (asymmetric Choc socket), added to pcb-spec §9; J1 shield 0.25 mm (≥ JLC 0.2).

@@ -348,6 +348,10 @@ The SW → column and diode → row assignment per key is in `positions-b.csv` (
 2. Pad pin maps of `Diode_SMD:D_SOD-123` (pad 1 = K) and of the AO3401A on `SOT-23` (G/S/D).
 3. CPG135001S30 body extent against the diode position (§6), with calipers once parts arrive.
 4. The HRO TYPE-C-31-M-12's mouth overhang relative to its footprint origin, so the mouth lands on the PCB edge.
+5. **Right board, outer column (found 2026-11-01 by DRC):** the Choc hot-swap footprint is asymmetric and not mirrored on
+   the right board, so the socket's pad 2 (+8.275 mm) faces the board's outer edge there: SW1/SW7/SW13's pads sit
+   0.425 mm from Edge.Cuts (JLCPCB's limit is 0.2 mm). Whether the CPG135001S30 body overhangs the edge needs the
+   socket drawing or calipers; widening the right board's outer edge by ~1.5 mm in the `pcb` outline is the fallback.
 
 ## Sources
 
