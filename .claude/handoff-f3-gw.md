@@ -79,3 +79,24 @@ Deliberately left out: the alive bitstream (step 6), implementation/bitstream, p
 
 Checkpoint: stop after step 4. Out of scope: the CDC library for `slot_clk` (say what it needs), DFX, project gateware.
 Commit only `fpga/gateware/`, `fpga/host/include/` and 0013.
+
+---
+
+# Round 3 (written 2026-11-01)
+
+## State after round 2
+- Regmap v0.3 (c9949a39), slot boundary + `Slot_echo` (2ed87fcc), and the bypass BAR (01c6a03d, finished by the
+  orchestrator) are on main. Vivado `all`: 0 critical warnings, WNS +0.728 ns, BFM PASS including BAR2
+  `SLOT_ID` "ECHO". See 0013's "Verified" note.
+- **Your round-2 Vivado run died** because it ran in the background and the headless turn ended. **Run Vivado in the
+  foreground** with a timeout (`timeout 3600 fpga/gateware/vivado/run.sh all`); never as a background task.
+- Lesson: `sim_bfm.tcl` escapes `&`/`\` before its `regsub` splice (`xdma-example-tb-hierarchical-refs`).
+
+## Next steps (round 3)
+1. **`SLOT_CTL.RESET` gates the slot's streams** (0013, user 2026-11-01): AND `s_axis.tvalid` into the slot and the
+   slot's `tready` back to the shell with `~slot_clear`. Cyclesim test: with RESET held, nothing moves in either
+   direction and H2C is back-pressured; releasing RESET resumes without loss.
+2. Keep `dune build`, `dune runtest`, `dune build @regmap` green; the regmap should not change.
+3. `timeout 3600 fpga/gateware/vivado/run.sh all` in the foreground; record WNS and the BFM result in 0013.
+
+Checkpoint: stop after step 3. Commit only `fpga/gateware/` and 0013.

@@ -76,3 +76,23 @@ Deliberately left out: the reload flow (remove → reprogram → rescan) and `si
 
 Checkpoint: stop after step 3 (or at it). Still no dune. Commit only `fpga/host/`, `fpga/driver/`, `fpga/benchmarks/`,
 and `flake.nix` alone.
+
+---
+
+# Round 3 (written 2026-11-01)
+
+## State after round 2
+- Your round-2 work is on main. The orchestrator booted the VM check: **MODULE-CHECK PASS** (polkit on,
+  `user-inhibitor`, GATE PASS). `iommu_groups.sh` passes `bash -n`.
+- User decisions (0013, 2026-11-01): **RESET gates the slot's streams in the shell** (matches your mock, no change);
+  **the SLOT interrupt (bit 3) belongs to project code**. Status quo kept: BAR2 vfio-only, `--mode all` excludes `slot`,
+  udev `driver_override` binding.
+
+## Next steps (round 3)
+1. `irq::drain` / `wait_pending` leave IRQ bit 3 alone (mask it out of what they clear and wait on), and the crate
+   gains a small per-project handler surface for SLOT (e.g. `irq::slot_pending()` + `irq::clear_slot()` or a callback),
+   with mock tests: a project holding `slot_irq` high no longer makes `drain` fail, and the shell's own sources are
+   still serviced.
+2. `cargo test --workspace` and `cargo clippy --workspace --all-targets` clean.
+
+Checkpoint: stop after step 2. Commit only `fpga/host/`. No dune.
