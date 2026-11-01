@@ -75,6 +75,8 @@
           rust-analyzer
           # host/ — QEMU VM (vIOMMU + edu device) for the vfio layer's tests
           qemu_kvm
+          # keyboard/pcb — autorouting from KiCad's Specctra DSN export (GUI), session imported back in the GUI
+          freerouting
           # benchmarks/bay/ — lspci/setpci for the bay reference tests
           pciutils
           # keyboard/layout — Ergogen layouts; rsvg-convert turns the 1:1
