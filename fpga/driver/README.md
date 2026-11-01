@@ -32,3 +32,6 @@ Checked against the source of `/nix/store/c6pm40ggi8yfbs2rgd371m3fnqzbia35-linux
 ## Testing
 
 `bash driver/vm/run-check.sh` (dev shell, from `fpga/`) boots a NixOS VM with a vIOMMU and QEMU's `edu` device, with the module pointed at edu's vendor 1234 and subsystem ID (1AF4:1100, QEMU's default), VGA off so that pair is unique. `vm/module-check.sh` checks the kernel parameters, that the udev rule alone bound edu (and nothing else) to `vfio-pci`, the node's owner and mode, the group's memlock limit, runs `host/`'s `edu_check` as an unprivileged group member, and runs the bay reference scripts against edu. TCG under WSL2: minutes per boot. The real card is first seen on the FW16.
+
+VM check with the round-2 module (polkit asserted and on in the VM, `iommu=pt` without `amd_iommu=on`), booted
+2026-11-01: `MODULE-CHECK PASS`, including `user-inhibitor` as the unprivileged `tester` and `GATE PASS`.

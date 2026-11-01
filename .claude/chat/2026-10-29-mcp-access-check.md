@@ -153,3 +153,8 @@
 **Asked:** Master → **Left (Recommended)**; Boards → **Two mirrored boards (Recommended)**; Link power → **CC-gated source + Ra (Recommended)**; KB holes → **4× M2 per half (Recommended)**; Slot reset → **Shell gates streams (Recommended)**; SLOT IRQ → **Hand SLOT to project code (Recommended)**.
 **Did:**
 - keyboard decision 0002; 0013 amended. Vivado on F3's bypass BAR: synth/place clean, BFM sim failed on a Tcl regsub `&` expansion in sim_bfm.tcl → fixed, sim rerunning.
+
+## 00:45 Round 2 verification
+**Did:**
+- Bypass BAR verified (Vivado all clean, BFM PASS incl. BAR2 SLOT_ID "ECHO"); committed F3's files + regsub fix (01c6a03d); 0013 numbers.
+- Driver-module VM boot with polkit on (orchestrator; denied for the worker): MODULE-CHECK PASS incl. user-inhibitor and params, GATE PASS.
