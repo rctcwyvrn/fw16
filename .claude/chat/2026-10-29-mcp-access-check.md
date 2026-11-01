@@ -191,3 +191,10 @@
 **Did:**
 - Repo has no licence and says "DO NOT USE" for its footprint; used only its Waveshare STEP: hole geometry measured in Fusion; pin-function positions agree with the spec's tscircuit list.
 - Created fw16kb:RP2040-Zero_Castellated (1.6 × 3.2 mm pads over the holes, 1 mm past the edge); both keyboard schematics ERC 0/0. pcb-spec §9 updated; Waveshare pinout still to check on the real module.
+
+## 03:40 Card rules, fanout, keyboard board prep
+**User:** Go
+**Asked:** BGA fanout — Selective dogbone / Via-in-pad for power / Planner as-is → **Selective dogbone (Recommended)**. Fanout how (Konnect ~600 calls) — pcbnew script, you run it / Konnect ~600 calls / Defer to routing → **pcbnew script, you run it (Recommended)**.
+**Did:**
+- lib_footprint_mismatch ×199 = only the 3D-model path (.step on Windows vs .stpZ in nix); JLC multilayer rules read (0.09/0.09, via 0.25/0.15).
+- fpga/bay/tools/bga_fanout.py + pcbnew_add_fanout.py → u14_fanout.csv (288 vias, 272 NC + 16 lane/refclk skipped); keyboard outline DXFs + keyboard/pcb/sync.sh, Windows copy seeded.
