@@ -283,3 +283,8 @@
 **Did:**
 - Underside scan (socket B.CrtYd + diodes): one ≥5 mm lane under the keys (5.8 × ~32 mm), so fold-flat legs are out.
 - 0003 amended (no legs; tray halves tent; locators take tented typing load); keyboard/tray/top PLANs and PARALLEL updated; lesson `check-fold-flat-legs-against-underside-clutter`.
+
+## 2026-11-01 right case body
+**User:** (continuing "Go")
+**Did:**
+- Right case body built from the same script (SIDE right) and saved as Fusion `fw16kb-case-right`; bbox x -125..14.5, y -38.56..55.5, z 0..6.6.
