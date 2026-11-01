@@ -264,3 +264,9 @@
 **Did:**
 - Decision record `keyboard/docs/decisions/0003-case-construction.md`: FR4 plate, solid floor (legs sit in floor cutouts + the 1.8 mm socket gap, ≤ 2.6 mm thick), steel-pin kickstands, parametric draft on estimates.
 - Plan: board STEP export → Fusion tub + bosses + port cutouts → legs → coupons → STL/STEP + KS3; FR4 plate outline via Konnect.
+
+## 2026-11-01 case body v0 (left)
+**User:** Go
+**Did:**
+- `kicad-cli pcb export step` works but the boards carry no 3D models (bare board only); case built from the outline DXF instead.
+- `keyboard/case/fusion/case_body.py` (run via the Fusion MCP): parametric tub — 1.2 floor, walls on PCB+3 (inner 0.5 clearance) to plate top z 6.6, M2 insert bosses at H1-H4, open-top notches for J1 and the module USB-C; pcb_ref slab. Saved as Fusion `fw16kb-case-left` (project fw16-fpga-module); bbox 138 × 94.1 × 6.6 mm.
