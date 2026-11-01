@@ -20,7 +20,7 @@ const TIMEOUT: Duration = Duration::from_millis(100);
 /// `Ok(None)` if the first forced interrupt never arrives.
 pub fn run(t: &dyn Transport, n: u32) -> Result<Option<IrqLatency>> {
     t.write32(FW16_FPGA_IRQ_EN, 0)?;
-    t.write32(FW16_FPGA_IRQ_PENDING, !0)?;
+    t.write32(FW16_FPGA_IRQ_PENDING, irq::SHELL_SOURCES)?;
     t.write32(FW16_FPGA_IRQ_EN, FW16_FPGA_IRQ_EN_FORCE_MASK)?;
     let mut samples = Vec::with_capacity(n as usize);
     let mut result = Ok(());
@@ -41,7 +41,7 @@ pub fn run(t: &dyn Transport, n: u32) -> Result<Option<IrqLatency>> {
         }
     }
     t.write32(FW16_FPGA_IRQ_EN, 0)?;
-    t.write32(FW16_FPGA_IRQ_PENDING, !0)?;
+    t.write32(FW16_FPGA_IRQ_PENDING, irq::SHELL_SOURCES)?;
     result?;
     Ok(if samples.is_empty() {
         None
