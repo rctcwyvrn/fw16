@@ -26,6 +26,7 @@ Two independent Framework Laptop 16 builds, per the doc
 - **The card's KiCad project is edited in a Windows working copy**, `C:\Users\17786\fw16-card\` (KiCad cannot save
   on `\\wsl.localhost`). Konnect calls use those Windows paths; `fpga/bay/card/sync.sh pull` before committing, `seed`
   after pulling others' card changes, `check` before ending a turn.
+- **The keyboard boards work the same way**: `C:\Users\17786\fw16-keyboard\{left,right,lib}`, `keyboard/pcb/sync.sh`.
 - Handoffs are repo markdown: `.claude/handoff-<lane>.md` (read-first list, decisions made, state, next steps,
   judgment calls), never a Claude Doc.
 
