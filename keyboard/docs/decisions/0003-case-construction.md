@@ -24,8 +24,16 @@
   floor + gap + PCB + switch, with no extra for the legs.
 - If the measured socket or switch height pushes the stack over 13 mm, there are two fixes: pocket the floor
   (≈ −1.8 mm), or deepen the tray insert. Either reopens this record.
-- Defaults chosen by Claude (override any of them): PETG; 2 mm walls on the Ergogen `case` outline (PCB + 3 mm);
-  M2 × 3 heat-set inserts in the bosses; one design mirrored for the right half, except the right board's H1 boss,
+- Defaults chosen by Claude (override any of them): PETG; 2.5 mm walls ending at the Ergogen `case` outline
+  (PCB + 3 mm, 0.5 mm clearance to the PCB); M2 × 3 heat-set inserts in the bosses; one design mirrored for the right half, except the right board's H1 boss,
   which sits at (−23.5, −45.5) rather than the mirror of the left H1; magnet pockets as placeholder tray locators
   until tray step 4 picks magnets or clips; openings for J1 (1 mm overhang) and the RP2040-Zero USB-C at the top
   edge, plus BOOT-button access.
+
+## Amendment 2026-11-01: deepen the tray insert, keep the solid floor
+
+The first case body (`keyboard/case/fusion/case_body.py`) stacks 1.2 floor + 2.0 socket gap (1.8 + 0.2 clearance) +
+1.2 PCB + 9.0 switch and cap ≈ 13.4 mm, still on estimates. **The user chose to deepen the tray insert** rather than
+pocket the floor or drop the socket clearance. The stowed budget is now the measured stack, not 13 mm. Tray step 3
+sizes the insert from the case model's `floor_t + socket_gap + pcb_t + cap_above_pcb` once the parts are measured,
+plus its own clearance. The kit's ≈ 30 mm total grows by the same amount.

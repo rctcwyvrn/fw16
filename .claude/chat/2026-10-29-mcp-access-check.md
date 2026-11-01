@@ -270,3 +270,9 @@
 **Did:**
 - `kicad-cli pcb export step` works but the boards carry no 3D models (bare board only); case built from the outline DXF instead.
 - `keyboard/case/fusion/case_body.py` (run via the Fusion MCP): parametric tub — 1.2 floor, walls on PCB+3 (inner 0.5 clearance) to plate top z 6.6, M2 insert bosses at H1-H4, open-top notches for J1 and the module USB-C; pcb_ref slab. Saved as Fusion `fw16kb-case-left` (project fw16-fpga-module); bbox 138 × 94.1 × 6.6 mm.
+
+## 2026-11-01 deeper tray insert
+**User:** Make the tray inset deeper
+**Did:**
+- 0003 amended: keep the solid floor and 0.2 socket clearance; stowed budget = measured stack (≈ 13.4 mm on estimates), tray insert deepens to fit.
+- `keyboard/PLAN.md` acceptance and `keyboard/tray/PLAN.md` step 3 updated to size the insert from the measured stack.

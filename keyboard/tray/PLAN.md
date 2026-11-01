@@ -19,7 +19,8 @@ the doc's "print the body, machine only the latch points" weight note as a possi
    from Framework's published FW16 CAD (find which repo carries the bottom cover; if none does, this step
    waits for step 2's measurements); record them in `keyboard/tray/KEEPOUT.md` (v1, from CAD).
 2. **Measure the real laptop** once it arrives: calipers on the outline, feet height, intake areas; KEEPOUT v2.
-3. **Insert layout.** Place the keyboard's stowed envelope (keyboard step 4) and the cable path; decide what the
+3. **Insert layout.** Size the insert depth from the keyboard's measured stowed stack (≈ 13.4 mm on estimates, deeper
+   than decision 0001's 13 mm; keyboard decision 0003), place the keyboard's stowed envelope (keyboard step 4) and the cable path; decide what the
    spare space holds, and whether the tray splits for desk mode.
 4. **Latch concept.** Magnets vs clips; print test coupons against the laptop's bottom cover; check that it doesn't
    scratch and that the tray holds when carried by the laptop.
