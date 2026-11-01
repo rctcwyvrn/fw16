@@ -1,6 +1,7 @@
 // fw16_fpga_top: XDMA (Gen4 x4, 256-bit AXI-ST at 250 MHz) wired to the Hardcaml
 // shell. The shell runs entirely on XDMA's axi_aclk; its clear is the
-// active-high, synchronous inverse of axi_aresetn.
+// active-high, synchronous inverse of axi_aresetn. The shell's project slot gets
+// XDMA's BAR2 AXI4 bypass master and clk100m as its free slot_clk (decision 0013).
 //
 // The XDMA instance is named xdma_0_i, as in AMD's example design, because
 // sim_bfm.tcl renames this module to xilinx_dma_pcie_ep and drops it into the
@@ -83,6 +84,21 @@ module fw16_fpga_top (
     wire [0:0] usr_irq_req;
     wire [0:0] usr_irq_ack;
 
+    // AXI4 bypass master (BAR2, 1 MiB, addr = BAR2 offset) -> the shell's project slot
+    wire [3:0]   m_axib_awid,    m_axib_arid,    m_axib_bid,    m_axib_rid;
+    wire [63:0]  m_axib_awaddr,  m_axib_araddr;
+    wire [7:0]   m_axib_awlen,   m_axib_arlen;
+    wire [2:0]   m_axib_awsize,  m_axib_arsize,  m_axib_awprot, m_axib_arprot;
+    wire [1:0]   m_axib_awburst, m_axib_arburst, m_axib_bresp,  m_axib_rresp;
+    wire [3:0]   m_axib_awcache, m_axib_arcache;
+    wire         m_axib_awlock,  m_axib_arlock;
+    wire         m_axib_awvalid, m_axib_awready, m_axib_arvalid, m_axib_arready;
+    wire [255:0] m_axib_wdata,   m_axib_rdata;
+    wire [31:0]  m_axib_wstrb;
+    wire         m_axib_wlast,   m_axib_wvalid,  m_axib_wready;
+    wire         m_axib_bvalid,  m_axib_bready;
+    wire         m_axib_rlast,   m_axib_rvalid,  m_axib_rready;
+
     xdma_0 xdma_0_i (
         .sys_clk     (sys_clk),
         .sys_clk_gt  (sys_clk_gt),
@@ -129,7 +145,43 @@ module fw16_fpga_top (
         .s_axis_c2h_tkeep_0  (s_axis_c2h_tkeep_0),
         .s_axis_c2h_tlast_0  (s_axis_c2h_tlast_0),
         .s_axis_c2h_tvalid_0 (s_axis_c2h_tvalid_0),
-        .s_axis_c2h_tready_0 (s_axis_c2h_tready_0)
+        .s_axis_c2h_tready_0 (s_axis_c2h_tready_0),
+
+        .m_axib_awid    (m_axib_awid),
+        .m_axib_awaddr  (m_axib_awaddr),
+        .m_axib_awlen   (m_axib_awlen),
+        .m_axib_awsize  (m_axib_awsize),
+        .m_axib_awburst (m_axib_awburst),
+        .m_axib_awprot  (m_axib_awprot),
+        .m_axib_awvalid (m_axib_awvalid),
+        .m_axib_awready (m_axib_awready),
+        .m_axib_awlock  (m_axib_awlock),
+        .m_axib_awcache (m_axib_awcache),
+        .m_axib_wdata   (m_axib_wdata),
+        .m_axib_wstrb   (m_axib_wstrb),
+        .m_axib_wlast   (m_axib_wlast),
+        .m_axib_wvalid  (m_axib_wvalid),
+        .m_axib_wready  (m_axib_wready),
+        .m_axib_bid     (m_axib_bid),
+        .m_axib_bresp   (m_axib_bresp),
+        .m_axib_bvalid  (m_axib_bvalid),
+        .m_axib_bready  (m_axib_bready),
+        .m_axib_arid    (m_axib_arid),
+        .m_axib_araddr  (m_axib_araddr),
+        .m_axib_arlen   (m_axib_arlen),
+        .m_axib_arsize  (m_axib_arsize),
+        .m_axib_arburst (m_axib_arburst),
+        .m_axib_arprot  (m_axib_arprot),
+        .m_axib_arvalid (m_axib_arvalid),
+        .m_axib_arready (m_axib_arready),
+        .m_axib_arlock  (m_axib_arlock),
+        .m_axib_arcache (m_axib_arcache),
+        .m_axib_rid     (m_axib_rid),
+        .m_axib_rdata   (m_axib_rdata),
+        .m_axib_rresp   (m_axib_rresp),
+        .m_axib_rlast   (m_axib_rlast),
+        .m_axib_rvalid  (m_axib_rvalid),
+        .m_axib_rready  (m_axib_rready)
     );
 
     fw16_fpga_shell shell (
@@ -171,7 +223,45 @@ module fw16_fpga_top (
         .pwr_mw      (32'd0),  // power monitor: not on the card yet
         .usr_irq_ack (usr_irq_ack[0]),
         .pps_in      (pps_in),
-        .usr_irq_req (usr_irq_req[0])
+        .usr_irq_req (usr_irq_req[0]),
+
+        // Project slot: free clock (no shell logic on it) and the BAR2 bypass port.
+        .slot_clk       (clk100m),
+        .s_axib_awid    (m_axib_awid),
+        .s_axib_awaddr  (m_axib_awaddr),
+        .s_axib_awlen   (m_axib_awlen),
+        .s_axib_awsize  (m_axib_awsize),
+        .s_axib_awburst (m_axib_awburst),
+        .s_axib_awprot  (m_axib_awprot),
+        .s_axib_awlock  (m_axib_awlock),
+        .s_axib_awcache (m_axib_awcache),
+        .s_axib_awvalid (m_axib_awvalid),
+        .s_axib_wdata   (m_axib_wdata),
+        .s_axib_wstrb   (m_axib_wstrb),
+        .s_axib_wlast   (m_axib_wlast),
+        .s_axib_wvalid  (m_axib_wvalid),
+        .s_axib_bready  (m_axib_bready),
+        .s_axib_arid    (m_axib_arid),
+        .s_axib_araddr  (m_axib_araddr),
+        .s_axib_arlen   (m_axib_arlen),
+        .s_axib_arsize  (m_axib_arsize),
+        .s_axib_arburst (m_axib_arburst),
+        .s_axib_arprot  (m_axib_arprot),
+        .s_axib_arlock  (m_axib_arlock),
+        .s_axib_arcache (m_axib_arcache),
+        .s_axib_arvalid (m_axib_arvalid),
+        .s_axib_rready  (m_axib_rready),
+        .s_axib_awready (m_axib_awready),
+        .s_axib_wready  (m_axib_wready),
+        .s_axib_bid     (m_axib_bid),
+        .s_axib_bresp   (m_axib_bresp),
+        .s_axib_bvalid  (m_axib_bvalid),
+        .s_axib_arready (m_axib_arready),
+        .s_axib_rid     (m_axib_rid),
+        .s_axib_rdata   (m_axib_rdata),
+        .s_axib_rresp   (m_axib_rresp),
+        .s_axib_rlast   (m_axib_rlast),
+        .s_axib_rvalid  (m_axib_rvalid)
     );
 
 endmodule

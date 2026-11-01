@@ -1,6 +1,7 @@
 # sim_bfm: AMD's XDMA example design + its PCIe root-port BFM (xsim), with the
-# example's endpoint swapped for fw16_fpga_top. Passes when the link comes up and a
-# BAR0 read at offset 0 returns the shell's ID, 0x46504741 ("FPGA").
+# example's endpoint swapped for fw16_fpga_top. Passes when the link comes up, a
+# BAR0 read at offset 0 returns the shell's ID, 0x46504741 ("FPGA"), and BAR2 (the
+# slot's AXI4 bypass) reads back Slot_echo's SLOT_ID at 0x0 and SLOT_VERSION at 0x4.
 #
 # How the swap works (the example's own files are regenerated each run):
 #   1. open_example_project for xdma_0 into <build>/example.
@@ -16,6 +17,9 @@ source [file join [file dirname [info script]] settings.tcl]
 
 set fw16_fpga_exdir [file join $fw16_fpga_build example]
 set fw16_fpga_magic 32'h46504741
+# Slot_echo's SLOT_ID ("ECHO") and SLOT_VERSION (1.0) on BAR2 (shell/slot_echo.ml).
+set fw16_fpga_slot_id      32'h4543484F
+set fw16_fpga_slot_version 32'h00010000
 
 proc slurp {path} { set f [open $path r]; set s [read $f]; close $f; return $s }
 proc spit {path s} { set f [open $path w]; puts -nonewline $f $s; close $f }
@@ -60,21 +64,37 @@ if {$board ne "" && [regexp {xilinx_dma_pcie_ep[^;]*;} [slurp $board] ep_inst]} 
 # 3. The fw16-fpga test.
 set tests [lindex [get_files -quiet -of_objects [get_filesets sim_1] *sample_tests*.vh] 0]
 if {$tests eq ""} { error "sim_bfm: sample_tests.vh not found in sim_1" }
-set fw16_fpga_test [string map [list @MAGIC@ $fw16_fpga_magic] {if (1'b1) begin
+set fw16_fpga_test [string map [list @MAGIC@ $fw16_fpga_magic @SLOT_ID@ $fw16_fpga_slot_id \
+                                      @SLOT_VERSION@ $fw16_fpga_slot_version] {if (1'b1) begin : fw16_fpga_bfm
+    reg [31:0] id, slot_id, slot_version;
     board.RP.tx_usrapp.TSK_SIMULATION_TIMEOUT(10050);
     board.RP.tx_usrapp.TSK_SYSTEM_INITIALIZATION;
     $display("[%t] FW16_FPGA_BFM: link up", $realtime);
     board.RP.tx_usrapp.TSK_BAR_INIT;
     board.RP.tx_usrapp.TSK_TX_BAR_READ(3'd0, 32'h0, board.RP.tx_usrapp.DEFAULT_TAG, board.RP.tx_usrapp.DEFAULT_TC);
     board.RP.tx_usrapp.TSK_WAIT_FOR_READ_DATA;
-    $display("[%t] FW16_FPGA_BFM: BAR0[0x0] = %h", $realtime, board.RP.tx_usrapp.P_READ_DATA);
-    if (board.RP.tx_usrapp.P_READ_DATA == @MAGIC@)
+    id = board.RP.tx_usrapp.P_READ_DATA;
+    $display("[%t] FW16_FPGA_BFM: BAR0[0x0] = %h", $realtime, id);
+    board.RP.tx_usrapp.DEFAULT_TAG = board.RP.tx_usrapp.DEFAULT_TAG + 1;
+    board.RP.tx_usrapp.TSK_TX_BAR_READ(3'd2, 32'h0, board.RP.tx_usrapp.DEFAULT_TAG, board.RP.tx_usrapp.DEFAULT_TC);
+    board.RP.tx_usrapp.TSK_WAIT_FOR_READ_DATA;
+    slot_id = board.RP.tx_usrapp.P_READ_DATA;
+    $display("[%t] FW16_FPGA_BFM: BAR2[0x0] SLOT_ID = %h", $realtime, slot_id);
+    board.RP.tx_usrapp.DEFAULT_TAG = board.RP.tx_usrapp.DEFAULT_TAG + 1;
+    board.RP.tx_usrapp.TSK_TX_BAR_READ(3'd2, 32'h4, board.RP.tx_usrapp.DEFAULT_TAG, board.RP.tx_usrapp.DEFAULT_TC);
+    board.RP.tx_usrapp.TSK_WAIT_FOR_READ_DATA;
+    slot_version = board.RP.tx_usrapp.P_READ_DATA;
+    $display("[%t] FW16_FPGA_BFM: BAR2[0x4] SLOT_VERSION = %h", $realtime, slot_version);
+    if (id == @MAGIC@ && slot_id == @SLOT_ID@ && slot_version == @SLOT_VERSION@)
       $display("[%t] FW16_FPGA_BFM: PASS", $realtime);
     else
       $display("[%t] FW16_FPGA_BFM: FAIL", $realtime);
     $finish;
   end else }]
-set n [regsub {if\s*\(\s*testname\s*==} [slurp $tests] "$fw16_fpga_test&" patched]
+# In a regsub replacement, & is the matched text and \ an escape: quote both in the inserted Verilog (its && would
+# otherwise expand to copies of "if (testname =="), then append & to keep the original match after it.
+set fw16_fpga_test_sub [string map {\\ \\\\ & \\&} $fw16_fpga_test]
+set n [regsub {if\s*\(\s*testname\s*==} [slurp $tests] "${fw16_fpga_test_sub}&" patched]
 if {$n != 1} { error "sim_bfm: no 'if (testname ==' in $tests to hook the fw16-fpga test onto" }
 spit $tests $patched
 

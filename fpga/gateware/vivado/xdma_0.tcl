@@ -2,7 +2,9 @@
 #   PCIe Gen4 x4 endpoint (the link trains down to Gen3 by itself), 256-bit
 #   AXI-ST at 250 MHz, 1 H2C + 1 C2H, BAR0 = 64 KiB AXI-Lite master (the shell's
 #   register map, PCIe-to-AXI translation 0, so awaddr = BAR offset),
-#   BAR1 = DMA config, MSI-X with usr_irq width 1, subsystem 0x10EE/0x4650.
+#   BAR1 = DMA config, BAR2 = 1 MiB AXI4 bypass master into the project slot
+#   (decision 0013; 32-bit BARs, translation 0, so m_axib addr = BAR2 offset),
+#   MSI-X with usr_irq width 1, subsystem 0x10EE/0x4650.
 #   cfg_mgmt is off so the IP has no inputs the wrapper would leave floating.
 #
 # Sourced inside an open project. The CONFIG names were written without a
@@ -24,6 +26,9 @@ set xdma_config {
   axilite_master_en           true
   axilite_master_size         64
   axilite_master_scale        Kilobytes
+  axist_bypass_en             true
+  axist_bypass_size           1
+  axist_bypass_scale          Megabytes
   pf0_msi_enabled             false
   pf0_msix_enabled            true
   xdma_num_usr_irq            1

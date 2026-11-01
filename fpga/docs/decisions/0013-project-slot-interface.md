@@ -42,3 +42,10 @@ proposal gave options for the address window, clocking, stream width, routing, t
     per-project handler services it, so a project holding `slot_irq` cannot block the shell's sources.
   - Claude's calls (status quo): BAR2 stays `vfio::Card::slot_bar()` only until a `sim` transport exists;
     `fw16-fpga-loopback --mode all` excludes `slot`; vfio-pci binding stays the udev `driver_override` rule.
+- **Verified 2026-11-01.** Regmap v0.3 (c9949a39) and the slot boundary with `Slot_echo` (2ed87fcc) are from F3-gw.
+  The bypass BAR (BAR2: 32-bit, 1 MiB, AXI4 to the slot) is F3-gw's `xdma_0.tcl`/`fw16_fpga_top.v`/`sim_bfm.tcl`,
+  finished by the orchestrator after the worker's background Vivado run was killed at its turn end. A Tcl `regsub`
+  `&` expansion in the BFM test splice was fixed. Vivado `all`: 0 critical warnings, every port on its pin-plan ball,
+  setup WNS +0.728 ns, LUT 32.7 %, FF 17.0 %, BRAM 57.3 %, 2.97 W, Tj 69.0 °C. BFM: link up 187.5 µs,
+  BAR0[0x0] = 0x46504741, BAR2[0x0] SLOT_ID = 0x4543484F ("ECHO"), BAR2[0x4] SLOT_VERSION = 0x00010000, PASS.
+  Still to do (F3): the RESET stream gating above.
