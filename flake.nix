@@ -81,6 +81,11 @@
           # template SVGs into PDFs
           ergogen
           librsvg
+          # keyboard/firmware — QMK CLI and the ARM toolchain for the RP2040
+          # (qmk propagates it too; listed so the dependency is explicit). The
+          # qmk_firmware checkout itself lives in _build/, not here.
+          qmk
+          gcc-arm-embedded
         ]) ++ [ bayPythonBin oxDune ] ++ (with ox; [
           # gateware/ — compiler and editor tooling
           oxcaml
