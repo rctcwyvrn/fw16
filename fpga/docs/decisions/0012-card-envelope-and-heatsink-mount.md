@@ -101,3 +101,8 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   (C52–C59, C75/C76, FB1/FB2) wait for the fanout plan, and the power-tree sheets' parts. DRC still flags the M2 nut
   footprints (NPTH inside its own pad, as Würth's land pattern intends) and runs on the default 0.2 mm rules until the
   JLC 8-layer rules are set.
+- **U14 fanout 2026-11-01 (user: selective dogbone, applied by `fpga/bay/tools/pcbnew_add_fanout.py` in KiCad's console
+  from `bay/card/u14_fanout.csv`):** 288 through vias (0.45 / 0.2 mm) with 0.2 mm F.Cu stubs, one per inner ball that
+  carries a net (GND 173, VCCINT 40, +1V8 20, MGT rails, GNDADC, config and sense pins). None on the 272 no-connect
+  balls; the 16 PCIe lane and refclk balls are escaped by hand. DRC: no clearance, short or crossing findings; the
+  remaining via-size/drill findings are KiCad's default minimums (0.5/0.3), below JLC's multilayer 0.25/0.15.
