@@ -37,3 +37,22 @@ The first case body (`keyboard/case/fusion/case_body.py`) stacks 1.2 floor + 2.0
 pocket the floor or drop the socket clearance. The stowed budget is now the measured stack, not 13 mm. Tray step 3
 sizes the insert from the case model's `floor_t + socket_gap + pcb_t + cap_above_pcb` once the parts are measured,
 plus its own clearance. The kit's ≈ 30 mm total grows by the same amount.
+
+## Amendment 2026-11-01: no legs on the case; the tray halves are the tenting bases
+
+Fold-flat legs don't fit inside the case's stack. The half pivots on its outer edge, so a leg near the inner edge
+(≈ 125 mm from the pivot) square to the case must be ≈ 33 mm long for 15° and ≈ 72 mm for 30°. Folded, it would
+lie under the key columns. The only free height there is the 1.2 mm floor plus the 2.0 mm socket gap, and that gap
+is filled by socket bodies and diodes on a staggered grid. On the left board, the only free lane at least 5 mm wide
+is 5.8 mm wide and ≈ 32 mm long (x 86–118, y 2.9–8.7), so most of a leg would be ≤ 1.2 mm thick. A
+1.2 × 25 mm PETG strip 72 mm long buckles at a few newtons.
+
+**The user chose tray halves as the tenting bases.** The tray splits into two halves for desk mode, and each half
+carries fold-out supports that tent the keyboard half sitting on it. The tray's own depth hides the mechanism.
+
+- The case loses its legs and leg cutouts. The floor is solid apart from the locating features.
+- The case's locating features (magnets or pegs, tray step 4) now do two jobs: stowing in the tray insert, and
+  holding the half on its tray half at 15° and 30°, so they must take typing load at an angle.
+- Tenting needs the tray at the desk. The tray takes on the 15°/30° supports and the doc's tenting-rigidity risk.
+- The "two printed kickstand legs" line above is superseded.
+

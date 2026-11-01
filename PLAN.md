@@ -15,7 +15,7 @@ files, schematic, simulation, layout templates — while step 0 orders parts.
 | Track | Plan | Ends with | Gate |
 | --- | --- | --- | --- |
 | 0 · Acquire | below | laptop, bay reference parts, keyboard parts on the desk | everything in the order list received |
-| K · Split keyboard | [keyboard/PLAN.md](keyboard/PLAN.md) | two wired Choc halves on QMK, printed cases, fold-flat legs | both halves type over USB-C; 20° tent holds while typing |
+| K · Split keyboard | [keyboard/PLAN.md](keyboard/PLAN.md) | two wired Choc halves on QMK, printed cases; tray halves tent them | both halves type over USB-C; 20° tent holds while typing |
 | T · Belly tray | [keyboard/tray/PLAN.md](keyboard/tray/PLAN.md) | printed tray, then a machined one, latched under the laptop | 30-min load within 3 °C of no-tray; fits a 16" sleeve |
 | F · FPGA bay module | [fpga/PLAN.md](fpga/PLAN.md) (paths 1–4, sync S1–S6) | custom AU15P card doing sustained DMA in the bay | 1 h loopback, zero errors, Tj < 85 °C |
 | P · FPGA projects | [fpga/projects/PLAN.md](fpga/projects/PLAN.md) | logic analyzer and RISC-V soft CPU in the project slot, then the rest of the doc's list | each project's own acceptance |

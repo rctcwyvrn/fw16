@@ -57,7 +57,7 @@ FPGA keeps `fpga/PLAN.md`'s **S1–S6**; S1 is passed (branch A, KEEPOUT v1). Ne
 | --- | --- | --- |
 | **KS1 — layout frozen** | key count, positions, outline per half | K-layout → K-elec, K-case, T-tray insert, step-0 order |
 | **KS2 — matrix frozen** | MCU, GPIO map, inter-half link | K-elec → K-fw |
-| **KS3 — stowed envelope** | per-half footprint and thickness with legs folded | K-case → T-tray step 3 |
+| **KS3 — stowed envelope** | per-half footprint and stowed thickness | K-case → T-tray step 3 |
 | **KS4 — keyboard PCBs back** | boards to bring up | fab → K-fw, K-case fit check |
 | **TS1 — underside from CAD** | bottom-cover outline, feet, intakes | T-tray (W) → T-tray (O Fusion) |
 | **X1 — laptop arrives** | real hardware for all tracks | U → F4.1, F1.2, T step 2, K bring-up |
@@ -100,7 +100,7 @@ worker stops at its checkpoint; the round ends when all have reported and the us
 
 ### Round 3 — fabs out, laptop in
 - F2 layout and fab order (path 2.5–2.6); keyboard PCB fab order.
-- O · K-case and T-tray in Fusion (cases + legs → KS3; tray v1 around KS3); U prints.
+- O · K-case and T-tray in Fusion (cases → KS3; tray v1 with its tenting halves around KS3); U prints.
 - X1: F4.1 bay reference tests and IOMMU group; F1.2 calipers → KEEPOUT v2; T step 2.
 
 ### Round 4 — boards back

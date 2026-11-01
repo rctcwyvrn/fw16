@@ -276,3 +276,10 @@
 **Did:**
 - 0003 amended: keep the solid floor and 0.2 socket clearance; stowed budget = measured stack (≈ 13.4 mm on estimates), tray insert deepens to fit.
 - `keyboard/PLAN.md` acceptance and `keyboard/tray/PLAN.md` step 3 updated to size the insert from the measured stack.
+
+## 2026-11-01 legs don't fit; tray tents
+**User:** Go
+**Asked:** "Fold-flat legs don't fit within the case's own height: a 72 mm (30°) or 33 mm (15°) leg would have to be ≤1.2 mm thick under the key matrix and would buckle. How should the halves tent?" — Detachable magnetic stands (Recommended) / Tray halves as tenting bases / Leg layer under the floor / 15° only, one short leg → **Tray halves as tenting bases**.
+**Did:**
+- Underside scan (socket B.CrtYd + diodes): one ≥5 mm lane under the keys (5.8 × ~32 mm), so fold-flat legs are out.
+- 0003 amended (no legs; tray halves tent; locators take tented typing load); keyboard/tray/top PLANs and PARALLEL updated; lesson `check-fold-flat-legs-against-underside-clutter`.
