@@ -204,3 +204,9 @@
 **Did:**
 - Left: 57 footprints from the schematic, CSV placement, diodes on B.Cu (flip mirrors rotation → re-set and pad-checked); right: 55 footprints, mirrored placement. SW20/SW21 need a GUI rotation (rounded-rect footprint); the left rotations didn't reach the saved file.
 - DRC: right outer-column socket pads 0.425 mm from the edge (asymmetric Choc socket), added to pcb-spec §9; J1 shield 0.25 mm (≥ JLC 0.2).
+
+## 08:55 Right outer edge widened
+**Asked:** Right edge — Widen right outer edge / Keep, check with calipers → **Widen right outer edge (Recommended)**.
+**Did:**
+- pcb_outlines.py writes WCS lines/arcs, right outer edge +1.5 mm (x up to 11.5); both outlines closed. Removed the right board's 22 Edge.Cuts via Konnect for re-import.
+- Correction: the earlier "unmirrored arcs" claim was a misread of ezdxf OCS arcs (extrusion −Z); KiCad had imported the old right outline correctly. Lesson ezdxf-mirrored-arcs-use-ocs.
