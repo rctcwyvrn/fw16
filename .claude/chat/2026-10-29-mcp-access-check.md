@@ -165,3 +165,8 @@
 - Launched f3-gw3 (RESET stream gating), f4-sw3 (SLOT irq to projects), k-fw (QMK skeleton + outline fix).
 - keyboard/pcb/{left,right} KiCad projects + shared keyboard/pcb/lib (RP2040-Zero symbol, Choc_v1_Hotswap footprint); both schematics ERC 0 errors and netlist = pcb-spec §6 (138 / 131 pins).
 - Blocked: RP2040-Zero footprint needs Waveshare's dimension drawing (download denied as bot-check circumvention).
+
+## 01:30 f4-sw round 3 report (copied)
+**Did:**
+- irq::drain/wait_pending leave SLOT to the project, poll 1 ms while a held SLOT keeps the line high; irq::slot {slot_pending, clear_slot}; irq_latency clears only shell sources (090a472b, 2859c667); cargo test 80, clippy clean.
+- Open question for the user: SLOT on its own MSI-X vector (regmap v0.4) vs the polling fallback.
