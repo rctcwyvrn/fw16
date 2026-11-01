@@ -210,3 +210,9 @@
 **Did:**
 - pcb_outlines.py writes WCS lines/arcs, right outer edge +1.5 mm (x up to 11.5); both outlines closed. Removed the right board's 22 Edge.Cuts via Konnect for re-import.
 - Correction: the earlier "unmirrored arcs" claim was a misread of ezdxf OCS arcs (extrusion −Z); KiCad had imported the old right outline correctly. Lesson ezdxf-mirrored-arcs-use-ocs.
+
+## 09:20 Keyboard boards finished placement
+**User:** i dont see the orientation field? / saved / open
+**Did:**
+- Choc footprint graphics redrawn as polygons (fp_rect can't rotate off-axis over IPC); both boards' switches refreshed from the library and SW20/SW21 rotated by Konnect (left −12/−24, right +12/+24).
+- Right outline re-imported (outer edge +1.5 mm). DRC on both: only J1 shield 0.25 mm from edge (≥ JLC 0.2), silk and lib-path warnings.
