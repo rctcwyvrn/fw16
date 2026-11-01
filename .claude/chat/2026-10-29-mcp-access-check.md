@@ -170,3 +170,8 @@
 **Did:**
 - irq::drain/wait_pending leave SLOT to the project, poll 1 ms while a held SLOT keeps the line high; irq::slot {slot_pending, clear_slot}; irq_latency clears only shell sources (090a472b, 2859c667); cargo test 80, clippy clean.
 - Open question for the user: SLOT on its own MSI-X vector (regmap v0.4) vs the polling fallback.
+
+## 02:00 k-fw report (copied) + card placement pass
+**Did:**
+- k-fw: layout case outlines fixed (B half 138 × 94) (83ac0324); flake qmk + gcc-arm-embedded (2ca5d866); QMK skeleton fw16kb builds a 71 168-byte .uf2, lint passes (d51e49a9, 76c7777c).
+- Card PCB first placement pass around U14 (45 parts), copper/courtyard DRC clean for them (00046918); under-BGA 0402s wait for the fanout plan.
