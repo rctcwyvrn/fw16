@@ -1,7 +1,8 @@
 #!/bin/sh
-# Copy the keyboard's two KiCad projects (left/, right/) and their shared lib/ between a Windows working copy and the
-# repo. KiCad on Windows cannot save files on \\wsl.localhost (.claude/lessons/kicad-cannot-save-to-wsl-share.md), so
-# KiCad, and Konnect while KiCad has a board open, work on the Windows copy. The repo copy is the source of truth:
+# Copy the keyboard's KiCad projects (left/, right/, the switch plates plate-left/, plate-right/) and their shared
+# lib/ between a Windows working copy and the repo. KiCad on Windows cannot save files on \\wsl.localhost
+# (.claude/lessons/kicad-cannot-save-to-wsl-share.md), so KiCad, and Konnect while KiCad has a board open, work on the
+# Windows copy. The repo copy is the source of truth:
 # `pull` before committing, `seed` after pulling others' changes, `check` before ending a turn.
 #
 #   keyboard/pcb/sync.sh seed|pull|check
@@ -10,7 +11,7 @@ set -eu
 WIN="${FW16_KEYBOARD_WIN:-/mnt/c/Users/17786/fw16-keyboard}"
 REPO="$(cd "$(dirname "$0")" && pwd)"
 files() {
-  (cd "$1" && ls */*.kicad_sch */*.kicad_pro */*.kicad_pcb */sym-lib-table */fp-lib-table */outline.dxf \
+  (cd "$1" && ls */*.kicad_sch */*.kicad_pro */*.kicad_pcb */sym-lib-table */fp-lib-table */outline.dxf */plate.dxf \
      lib/*.kicad_sym lib/*.pretty/*.kicad_mod 2>/dev/null)
 }
 

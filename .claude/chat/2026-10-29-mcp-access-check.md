@@ -288,3 +288,9 @@
 **User:** (continuing "Go")
 **Did:**
 - Right case body built from the same script (SIDE right) and saved as Fusion `fw16kb-case-right`; bbox x -125..14.5, y -38.56..55.5, z 0..6.6.
+
+## 2026-11-01 switch plates
+**User:** go
+**Did:**
+- flake: shapely (78a56828, alone). `keyboard/layout/plate_outlines.py` reads each routed board → `keyboard/pcb/plate-{left,right}/plate.dxf`: Edge.Cuts inset 0.3, minus the hull of top-side parts taller than the 1 mm plate gap (+1 mm), tongues < 3.2 mm opened away, 21 × 13.8 mm cutouts at switch rotation, M2 holes H1-H4; min web 3.2 mm.
+- Konnect created `fw16kb-plate-{left,right}` projects; sync.sh now carries `*/plate.dxf`. Next: user imports plate.dxf onto Edge.Cuts in each plate board.
