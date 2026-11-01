@@ -1,5 +1,5 @@
 // Default keymap: Corne-style, four layers on LAYOUT_split_3x6_3.
-// LOWER and RAISE are the inner thumbs; holding both gives ADJUST (QMK tri_layer,
+// LOWER and RAISE are the middle thumbs; holding both gives ADJUST (QMK tri_layer,
 // whose default layer numbers 1/2/3 match the enum below). ADJUST carries QK_BOOT
 // so each half can be reflashed without its BOOT button (keyboard/docs/pcb-spec.md §4).
 #include QMK_KEYBOARD_H
