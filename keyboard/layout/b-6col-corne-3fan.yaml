@@ -63,17 +63,18 @@ outlines:
       where: matrix_inner_top
       size: [mcux, mcuy]
       adjust: {shift: [kx/2 + mcux/2, ky/2 - mcuy/2]}
+  # Ergogen 4.2.1 applies each step's `expand` to the union built so far, so _pitch gets 0
+  # and the mcu step's `wall` expands both once (expanding _pitch too gave 8 mm, not 4).
   case:
     - what: outline
       name: _pitch
-      expand: wall
+      expand: 0
     - what: outline
       name: mcu
       expand: wall
   # PCB edge (Edge.Cuts) for keyboard/docs/pcb-spec.md: 1 mm past the key pitch boxes and
-  # controller zone, inside the case's 1 mm keycap clearance + 3 mm wall. Ergogen 4.2.1
-  # applies each step's `expand` to the union so far, so the mcu step's 1 mm also expands
-  # _pitch: _pitch gets 0 here (measured: `case` above ends up 8 mm past the pitch boxes).
+  # controller zone, inside the case's 1 mm keycap clearance + 3 mm wall. Same pattern as
+  # `case`: the mcu step's 1 mm also expands _pitch.
   pcb:
     - what: outline
       name: _pitch

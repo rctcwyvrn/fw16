@@ -41,15 +41,15 @@ clearance + 3 mm wall).
 
 | Candidate | Keys/half (total) | Half outline W × D (mm) | Two halves + gap W × D | Tray inner 350 × 264: spare W × D | Fits |
 | --- | --- | --- | --- | --- | --- |
-| A | 18 (36) | 124.0 × 90.0 | 253.0 × 90.0 | 97.0 × 174.0 | yes |
-| B | 21 (42) | 142.0 × 102.1 | 289.0 × 102.1 | 61.0 × 161.9 | yes |
-| C | 19 (38) | 128.6 × 106.5 | 262.3 × 106.5 | 87.7 × 157.5 | yes |
+| A | 18 (36) | 120.0 × 82.0 | 245.0 × 82.0 | 105.0 × 182.0 | yes |
+| B | 21 (42) | 138.0 × 94.0 | 281.0 × 94.0 | 69.0 × 170.0 | yes |
+| C | 19 (38) | 120.6 × 98.5 | 246.2 × 98.5 | 103.8 × 165.5 | yes |
 
-All three fit with a lot of room to spare, so the tray does not constrain the pick. The spare depth (≥ 157 mm)
+All three fit with a lot of room to spare, so the tray does not constrain the pick. The spare depth (≥ 165 mm)
 could hold the cable caddy, a trackball, or the battery from the tray plan. Not checked yet:
 - The halves are 2-D outlines only. The 10–12 mm stowed thickness is K-case's job (KS3).
 - The tray's latch and foot pockets may eat into the inner area at the rim. KEEPOUT v1 puts the feet at Z 14–20
-  and Z 242–250, which is within 20 mm of the tray's front and rear edges, and the halves need only 90–107 of the
+  and Z 242–250, which is within 20 mm of the tray's front and rear edges, and the halves need only 82–99 of the
   264 mm depth.
 
 ## Rebuilding
@@ -72,6 +72,6 @@ outlines). The PDFs are rewritten in `templates/` and the fit table is printed t
   `../docs/pcb-spec.md`. Run it after `build.py`: `python3 keyboard/layout/positions.py > keyboard/layout/positions-b.csv`.
 
 Layout B also has a `pcb` outline (the PCB edge, 1 mm past the key pitch boxes and controller zone). Ergogen 4.2.1
-applies each outline step's `expand` to the union built so far, so in `case` the `_pitch` hull ends up 8 mm past the
-pitch boxes rather than 4 mm (measured from the DXFs). The fit table above therefore overstates each half by 8 mm in
-both directions on the key sides, which is conservative.
+applies each outline step's `expand` to the union built so far, so both `case` and `pcb` give `_pitch` `expand: 0`
+and let the `mcu` step expand the union once. Measured from layout B's DXFs, `case` sits 3 mm past `pcb` on every
+side (132 × 88 → 138 × 94). Before 2026-11-01 `case` expanded `_pitch` twice and came out 8 mm past the pitch boxes.

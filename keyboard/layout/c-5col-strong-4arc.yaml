@@ -62,10 +62,12 @@ outlines:
       where: matrix_inner_top
       size: [mcux, mcuy]
       adjust: {shift: [kx/2 + mcux/2, ky/2 - mcuy/2]}
+  # Ergogen 4.2.1 applies each step's `expand` to the union built so far, so _pitch gets 0
+  # and the mcu step's `wall` expands both once (expanding _pitch too gave 8 mm, not 4).
   case:
     - what: outline
       name: _pitch
-      expand: wall
+      expand: 0
     - what: outline
       name: mcu
       expand: wall
