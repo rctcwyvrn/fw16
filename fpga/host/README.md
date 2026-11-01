@@ -4,5 +4,5 @@ The `fw16-fpga` Rust crate (cargo workspace): a `Transport` trait with `mock`, `
 
 - `vfio:<BDF>` opens the card bound to vfio-pci: registers, pinned DMA buffers, MSI-X interrupts, and DMA through the XDMA descriptor engine (`fw16-fpga/src/xdma/`, written from PG195; not yet run on hardware). `mock:` runs the same engine against an XDMA model.
 - `include/fw16_fpga_patterns.txt` (from `gateware/shell/bin/patterns.exe`) is checked against the Rust pattern generators by `cargo test`.
-- Interrupt messages are edge-triggered on a held level: service the shell's IRQ with `fw16_fpga::irq::wait_pending` / `drain` (re-read `IRQ_PENDING` until 0), not one event per message.
+- Interrupt messages are edge-triggered on a held level: service the shell's IRQ with `fw16_fpga::irq::wait_pending` / `drain` (re-read `IRQ_PENDING` until 0), not one event per message. Both leave IRQ bit 3 `SLOT` to the project (`irq::slot::slot_pending` / `clear_slot`, decision 0013); while an enabled SLOT is held high, `wait_pending` polls, since shell sources raise no edge then.
 - VM test of the vfio layer against QEMU's `edu` device behind a vIOMMU (from the dev shell): `bash host/vm/run-edu-check.sh [--suspend]`. Output lands in `host/target/vm/`.

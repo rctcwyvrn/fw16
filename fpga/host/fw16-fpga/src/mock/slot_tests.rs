@@ -89,8 +89,8 @@ fn slot_irq_is_a_level_that_relatches_until_dropped() {
     m.write32(FW16_FPGA_IRQ_PENDING, FW16_FPGA_IRQ_PENDING_SLOT_MASK).unwrap();
     assert_eq!(m.read32(FW16_FPGA_IRQ_PENDING).unwrap(), FW16_FPGA_IRQ_PENDING_SLOT_MASK);
     assert!(m.wait_irq(0, T).is_err());
-    // The crate's drain gives up rather than spin on a held level.
-    assert!(crate::irq::drain(&m).is_err());
+    // The crate's drain leaves SLOT to the project (0013).
+    assert_eq!(crate::irq::drain(&m).unwrap(), 0);
     // Dropped: the clear sticks, and the next raise is a new edge.
     m.set_slot_irq(false);
     m.write32(FW16_FPGA_IRQ_PENDING, FW16_FPGA_IRQ_PENDING_SLOT_MASK).unwrap();

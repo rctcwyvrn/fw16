@@ -126,7 +126,7 @@ impl Mock {
 
     /// Drive the slot's `slot_irq` level (the echo project never raises it).
     #[cfg(test)]
-    fn set_slot_irq(&self, level: bool) {
+    pub(crate) fn set_slot_irq(&self, level: bool) {
         self.state().card.irq.set_slot_irq(level);
     }
 
