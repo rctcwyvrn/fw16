@@ -290,6 +290,14 @@
         "via_diameter": 0.45,
         "via_drill": 0.2,
         "wire_width": 6
+      },
+      {
+        "clearance": 0.1,
+        "name": "PCIe",
+        "priority": -1,
+        "track_width": 0.1,
+        "via_diameter": 0.45,
+        "via_drill": 0.2
       }
     ],
     "meta": {
@@ -297,7 +305,28 @@
     },
     "net_colors": {},
     "netclass_assignments": {},
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "PCIe",
+        "pattern": "PEX_TX*"
+      },
+      {
+        "netclass": "PCIe",
+        "pattern": "PEX_RX*"
+      },
+      {
+        "netclass": "PCIe",
+        "pattern": "PEX_REFCLK*"
+      },
+      {
+        "netclass": "PCIe",
+        "pattern": "/FPGA/GT_TX*"
+      },
+      {
+        "netclass": "PCIe",
+        "pattern": "/FPGA/GT_REFCLK*"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
