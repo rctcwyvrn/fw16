@@ -252,3 +252,8 @@
 **User:** cleanup done and saved
 **Did:**
 - Left board: single-layer vias gone; DRC 1 error (accepted SW21 edge), 0 unrouted; 4 short dangling stub chains left by the via cleanup (deleting one segment exposes the next), parity items are only empty Description/Datasheet fields.
+
+## 2026-11-01 left stubs cleaned
+**User:** cleanup done and saved
+**Did:**
+- Left board: dangling stubs gone; DRC 1 error (accepted SW21 0.42 mm edge), 0 unrouted, cosmetic silk/lib-path warnings only. Both keyboard boards routed.
