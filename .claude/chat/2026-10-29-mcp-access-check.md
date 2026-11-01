@@ -241,3 +241,9 @@
 **Did:**
 - KiCad closing overwrote right `.kicad_pro` rules; re-applied. J1 was reversed on both boards (pads 4 mm outside the edge): right J1 now (-119.1,-14) rot -90, link parts shifted 2.5 mm inward; left still to do (Konnect refuses closed-board edits after seeing it live).
 - Right board re-routed (freerouting, 1 left: SW3-D3, hand-routed copying SW9's path), GND pours F.Cu/B.Cu; DRC 0 errors, 57 single-layer vias left by the skipped optimizer.
+
+## 2026-11-01 right cleanup; left board fixed and routed
+**User:** cleanup done and saved / left board is open / dsn exported / ses imported and saved
+**Did:**
+- Right board: single-layer vias removed, DRC 0 errors (41fed2ca). Left J1 now (119.1,-14) rot 90, link parts 2.5 mm inward.
+- Left freerouting left 2 (same under global/hybrid): C2 SW3-SW9 hand-routed with an F.Cu hop over R0; D21-SW21 copied from SW20's route rotated -12°; GND pours both layers; DRC: only SW21 pad 0.42 mm from edge (accepted), plus single-layer vias to clean.
