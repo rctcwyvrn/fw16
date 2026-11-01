@@ -180,3 +180,8 @@
 **Did:**
 - shell_top.ml gates all four slot handshake signals with ~slot_clear; cyclesim RESET test incl. a clear-deaf pipe (04621656).
 - Vivado all: 0 critical warnings, WNS +0.728 ns, 2.95 W, BFM PASS incl. BAR2 (6087cd35). Found: Bash 600 s foreground cap kills long worker runs.
+
+## 02:50 Round 3 questions
+**Asked:** SLOT vector → **Keep polling fallback (Recommended)**; Firmware defaults → **Accept all (Recommended)**; Worker Vivado → **Orchestrator runs Vivado**.
+**Did:**
+- 0013 and keyboard 0002 amended; CLAUDE.md: workers stop before Vivado, the orchestrator runs it.

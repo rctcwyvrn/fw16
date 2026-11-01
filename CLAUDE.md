@@ -48,4 +48,6 @@ Two independent Framework Laptop 16 builds, per the doc
   run ends with its turn and kills them).
 - Max 4 workers at once: the WSL account has its own API limit. A dead worker: check
   `tail -c 600 _build/agents/<lane>.log` for `api_error_status` before assuming a crash.
-- One dune-running worker at a time in `fpga/` (shared `_build/` lock); one Vivado run at a time.
+- One dune-running worker at a time in `fpga/` (shared `_build/` lock); one Vivado run at a time. **Workers stop before
+  Vivado; the orchestrator runs it** (user, 2026-11-01): the Bash tool caps foreground commands at 600 s and a
+  backgrounded run dies with the worker's turn.

@@ -56,3 +56,7 @@ proposal gave options for the address window, clocking, stream width, routing, t
   beats arrive in order. Vivado `all`: 0 critical warnings outside placement's expected RTSTAT-13, every port on
   its pin-plan ball, setup WNS +0.728 ns, LUT 32.7 %, FF 17.0 %, BRAM 57.3 %, 2.95 W, Tj 68.9 °C. BFM: link up
   187.5 µs, BAR0[0x0] = 0x46504741, BAR2[0x0] SLOT_ID = 0x4543484F, BAR2[0x4] SLOT_VERSION = 0x00010000, PASS.
+- **Added 2026-11-01 (user, round 3):** SLOT keeps the shared vector with the crate's 1 ms polling fallback
+  (`irq::HELD_POLL`); its own MSI-X vector (regmap v0.4) only if a project needs low-latency SLOT servicing. The
+  RESET gating covers all four handshake signals (F3-gw's call, kept): `s_axis.tvalid`/`m_tready` into the slot and
+  `s_tready`/`m_axis.tvalid` out, so even a project that ignores `clear` is silent in reset.

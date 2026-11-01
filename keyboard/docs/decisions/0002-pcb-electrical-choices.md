@@ -23,3 +23,5 @@
 - KS2 is frozen except for the hole positions: K-fw can start the QMK skeleton against `pcb-spec.md` §2.
 - Before drawing, verify (spec §9): RP2040-Zero pad coordinates, the SOD-123 diode pad map, AO3401A pinout, socket body
   vs diode at +4.7 mm, J1's mouth offset.
+- **Firmware bring-up defaults (user, 2026-11-01):** Corne-style QWERTY 4-layer keymap, QMK placeholder VID/PID
+  0xFEED:0x0016, split watchdog off, the module's WS2812 off (`keyboard/firmware/`). A personal keymap comes after KS4.
