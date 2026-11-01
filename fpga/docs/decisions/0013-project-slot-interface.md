@@ -48,4 +48,11 @@ proposal gave options for the address window, clocking, stream width, routing, t
   `&` expansion in the BFM test splice was fixed. Vivado `all`: 0 critical warnings, every port on its pin-plan ball,
   setup WNS +0.728 ns, LUT 32.7 %, FF 17.0 %, BRAM 57.3 %, 2.97 W, Tj 69.0 °C. BFM: link up 187.5 µs,
   BAR0[0x0] = 0x46504741, BAR2[0x0] SLOT_ID = 0x4543484F ("ECHO"), BAR2[0x4] SLOT_VERSION = 0x00010000, PASS.
-  Still to do (F3): the RESET stream gating above.
+- **RESET stream gating verified 2026-11-01** (F3-gw, 04621656). `shell_top.ml` gates all four slot stream
+  handshake signals with `~slot_clear`, outside the `fw16_fpga_slot` boundary: `s_axis.tvalid` and `m_tready` into
+  the slot, `s_tready` and `m_axis.tvalid` out of it. The decision named two gates; the outgoing pair is added so a
+  project that ignores `clear` cannot push a beat into the ring either. Cyclesim (`test_slot.ml`, `Slot_echo` and a
+  clear-deaf one-beat pipe): with RESET held no H2C beat is taken and the slot emits nothing; after release all 8
+  beats arrive in order. Vivado `all`: 0 critical warnings outside placement's expected RTSTAT-13, every port on
+  its pin-plan ball, setup WNS +0.728 ns, LUT 32.7 %, FF 17.0 %, BRAM 57.3 %, 2.95 W, Tj 68.9 °C. BFM: link up
+  187.5 µs, BAR0[0x0] = 0x46504741, BAR2[0x0] SLOT_ID = 0x4543484F, BAR2[0x4] SLOT_VERSION = 0x00010000, PASS.
