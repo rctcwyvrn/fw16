@@ -66,7 +66,8 @@
           poppler-utils
           # Plain python3 from the main pin. Its pythonocc segfaults on the
           # PCB_REF STEP — run bay/tools scripts with bay-python instead.
-          (python3.withPackages (ps: [ ps.pythonocc-core ps.ezdxf ]))
+          # keyboard/layout — shapely offsets and cuts the switch-plate outlines
+          (python3.withPackages (ps: [ ps.pythonocc-core ps.ezdxf ps.shapely ]))
           # host/ — the fw16-fpga crate; crates themselves come from Cargo.lock
           rustc
           cargo
