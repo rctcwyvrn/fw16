@@ -1673,7 +1673,7 @@
 	(footprint "MountingHole:MountingHole_2.2mm_M2"
 		(layer "F.Cu")
 		(uuid "20e69f66-a05b-4478-a9c9-83736e268b6a")
-		(at 7.45 229.35)
+		(at 102 -6)
 		(property "Reference" "H4"
 			(at 0 -3.15 0)
 			(unlocked yes)
@@ -1894,7 +1894,7 @@
 	(footprint "MountingHole:MountingHole_2.2mm_M2"
 		(layer "F.Cu")
 		(uuid "2b349416-1d51-45c1-84c0-d03142c4e413")
-		(at 7.45 219.45)
+		(at 62.5 4.5)
 		(property "Reference" "H3"
 			(at 0 -3.15 0)
 			(unlocked yes)
@@ -3443,7 +3443,7 @@
 	(footprint "MountingHole:MountingHole_2.2mm_M2"
 		(layer "F.Cu")
 		(uuid "81c03f31-a554-416f-810b-e231ec44c819")
-		(at 7.45 209.55)
+		(at 30 5.5)
 		(property "Reference" "H2"
 			(at 0 -3.15 0)
 			(unlocked yes)
@@ -3664,7 +3664,7 @@
 	(footprint "MountingHole:MountingHole_2.2mm_M2"
 		(layer "F.Cu")
 		(uuid "9a2c659d-33fc-463b-a28b-9f8e4300a018")
-		(at 7.45 199.65)
+		(at 25.5 -45.5)
 		(property "Reference" "H1"
 			(at 0 -3.15 0)
 			(unlocked yes)
