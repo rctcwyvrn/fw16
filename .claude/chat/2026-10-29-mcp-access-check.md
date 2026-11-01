@@ -234,3 +234,10 @@
 **Did:**
 - Freerouting 2.5.0 headless: with Power 0.5 / clearance 0.2 the J1/U2 cluster failed (3 unrouted, 8 violations); a DSN copy with Power 0.3 / clearance 0.15 gave 1 unrouted, 0 violations; that SES copied to `C:\Users\17786\fw16-keyboard\right\fw16kb-right.ses`.
 - Lesson `freerouting-no-neckdown-at-fine-pitch`; next: close right, set both projects to clearance 0.15 / Power 0.3, reopen, import SES.
+
+## 2026-11-01 J1 reversed; right board routed
+**User:** make sure it saved properly, i dont think i closed it / ses imported and saved / dsn exported / ses imported and saved
+**Asked:** "J1 (USB-C link port) is rotated backwards on both boards. When I turn it around, where should its mouth sit relative to the board edge? …" — options: Overhang 1 mm (Recommended) / Flush with the edge / Max overhang ~1.8 mm. Answer: Overhang 1 mm (Recommended).
+**Did:**
+- KiCad closing overwrote right `.kicad_pro` rules; re-applied. J1 was reversed on both boards (pads 4 mm outside the edge): right J1 now (-119.1,-14) rot -90, link parts shifted 2.5 mm inward; left still to do (Konnect refuses closed-board edits after seeing it live).
+- Right board re-routed (freerouting, 1 left: SW3-D3, hand-routed copying SW9's path), GND pours F.Cu/B.Cu; DRC 0 errors, 57 single-layer vias left by the skipped optimizer.
