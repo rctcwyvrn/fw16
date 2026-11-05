@@ -378,3 +378,9 @@
 **Did:**
 - `fpga/bay/tools/card_place.py` (+ `board_copper.outline()`) planned 138 parts with courtyard/zone checks; applied via Konnect (23 flips, 37 rotations, 138 moves). DRC: only the 15 footprint-intrinsic errors.
 - Held the BGA-underside 0402s: at 1.0 mm pitch an 0402's pads land on the dogbone vias (needs filled via-in-pad or 0201 parts) — asked.
+
+## 2026-11-05 BGA-underside 0201 placement
+**User:** (continuation of "Switch to 0201")
+**Did:**
+- Placed C52–C59, C75/C76, FB1, FB2 on B.Cu under U14, square to the grid; IPC refused 45° rotation. Added 24 short B.Cu stubs to the dogbone vias; planner `fpga/bay/tools/bga_caps_place.py`.
+- DRC is still the same 15 footprint-intrinsic errors. The remaining FB1 and C54 ratsnest waits on the L5/L6 power planes. Committed a6b00564 with a 0012 note and a lesson on IPC rotating only in 90° steps.
