@@ -137,3 +137,8 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   no new errors, and all 24 lane nets are connected. **Not length-matched yet:** P runs 0.5–2.5 mm longer than N on
   every pair, mostly from the P ball's extra dogbone and diagonal at U14. That is far over a Gen4 intra-pair budget of
   about 0.13 mm.
+- **Length-matched 2026-11-05** (`bay/tools/pcie_length_tune.py`): each pair section is matched to within 0.001 mm
+  (P − N; via counts equal). The sections are the TX lanes end to end, and each RX lane on either side of its cap
+  hop. The added length is square bumps on the shorter leg in the corridor near U14 or near the cap, bumping away
+  from the partner with 0.3 mm to other nets. GT_TX0_N and GT_TX2_N had no straight L3 run long enough, so they take
+  the length as a loop on the B.Cu stub into their cap (C78, C82). DRC unchanged.

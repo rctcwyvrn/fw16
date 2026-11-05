@@ -359,3 +359,9 @@
 **Did:**
 - `fpga/bay/tools/pcie_lane_routes.py` (centerline + offsets, clearance check) → ~250 route_trace calls on In2.Cu; 4 P legs narrowed to 0.09 for a 0.249 hole-clearance miss. DRC back to the 25 known errors; all 24 lane nets connected.
 - Intra-pair skew 0.5–2.5 mm (P longer, from the U14 escape) is over the Gen4 budget; length-tuning proposed as next step. 0012 note added.
+
+## 2026-11-05 lane length tuning
+**User:** go ahead
+**Did:**
+- `fpga/bay/tools/pcie_length_tune.py` planned bumps for 10 sections plus 2 B.Cu stub loops; applied via Konnect (12 deletes, 108 segments). Every section's P−N is now ≤0.001 mm; DRC unchanged (25 known errors).
+- Next: PEX_REFCLK routing.

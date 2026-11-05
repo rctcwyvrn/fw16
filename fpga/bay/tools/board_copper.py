@@ -33,6 +33,6 @@ def vias():
     return out
 def segments():
     out=[]
-    for m in re.finditer(r'\(segment\s*\(start ([-\d.]+) ([-\d.]+)\)\s*\(end ([-\d.]+) ([-\d.]+)\)\s*\(width ([\d.]+)\)\s*\(layer "([^"]+)"\).*?\(net (?:\d+ )?"?([^")]*)"?\)',b,re.S):
-        out.append(dict(x1=float(m.group(1)),y1=float(m.group(2)),x2=float(m.group(3)),y2=float(m.group(4)),w=float(m.group(5)),layer=m.group(6),net=m.group(7)))
+    for m in re.finditer(r'\(segment\s*\(start ([-\d.]+) ([-\d.]+)\)\s*\(end ([-\d.]+) ([-\d.]+)\)\s*\(width ([\d.]+)\)\s*\(layer "([^"]+)"\).*?\(net (?:\d+ )?"?([^")]*)"?\)\s*(?:\(uuid "([^"]+)"\))?',b,re.S):
+        out.append(dict(x1=float(m.group(1)),y1=float(m.group(2)),x2=float(m.group(3)),y2=float(m.group(4)),w=float(m.group(5)),layer=m.group(6),net=m.group(7),uuid=m.group(8)))
     return out
