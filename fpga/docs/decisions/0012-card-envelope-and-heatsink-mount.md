@@ -164,3 +164,11 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
     at x −60…−45, y −23…−14.
   - The planner checks every courtyard against the outline (0.3 mm inset), the heatsink envelope, the rear-strip
     height rule and every other courtyard. DRC: no new errors.
+
+**BGA-underside decoupling, 2026-11-05.** C52–C59 (VCCINT), C75/C76 (VCCADC), FB1 (+1V8→VCCADC) and FB2 (GNDADC→GND)
+are 0201 (C_0201_0603Metric, L_0201_0603Metric) on B.Cu inside the U14 via field, per the user. KiCad's IPC rotates
+rounded-rect footprints only in 90° steps, so the parts sit square to the 1.0 mm grid at cell centres or row/column
+midpoints. Each pad joins an adjacent same-net dogbone via with a 0.1 mm B.Cu stub ≤ 0.71 mm long, except FB1, whose
+stubs run 3.2 mm to a +1V8 via and 2.1 mm to the only VCCADC via. Every pad and stub clears other-net vias by
+0.1 mm copper and 0.25 mm drill, checked by `bay/tools/bga_caps_place.py`. FB1's value BLM03AX241SN1 still needs
+confirming as an orderable part.

@@ -21936,7 +21936,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 101.6 355.6 0)
 			(hide yes)
 			(effects
@@ -21998,7 +21998,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 111.76 355.6 0)
 			(hide yes)
 			(effects
@@ -22060,7 +22060,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 121.92 355.6 0)
 			(hide yes)
 			(effects
@@ -22122,7 +22122,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 132.08 355.6 0)
 			(hide yes)
 			(effects
@@ -22184,7 +22184,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 142.24 355.6 0)
 			(hide yes)
 			(effects
@@ -22246,7 +22246,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 152.4 355.6 0)
 			(hide yes)
 			(effects
@@ -22308,7 +22308,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 162.56 355.6 0)
 			(hide yes)
 			(effects
@@ -22370,7 +22370,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 172.72 355.6 0)
 			(hide yes)
 			(effects
@@ -23352,7 +23352,7 @@
 				)
 			)
 		)
-		(property "Value" "BLM18PG221SN1"
+		(property "Value" "BLM03AX241SN1"
 			(at 44.45 431.8 90)
 			(effects
 				(font
@@ -23360,7 +23360,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
+		(property "Footprint" "Inductor_SMD:L_0201_0603Metric"
 			(at 40.64 431.8 0)
 			(hide yes)
 			(effects
@@ -23422,7 +23422,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 50.8 431.8 0)
 			(hide yes)
 			(effects
@@ -23484,7 +23484,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
 			(at 60.96 431.8 0)
 			(hide yes)
 			(effects
@@ -23536,7 +23536,7 @@
 				)
 			)
 		)
-		(property "Value" "BLM18PG221SN1"
+		(property "Value" "BLM03AX241SN1"
 			(at 74.93 431.8 90)
 			(effects
 				(font
@@ -23544,7 +23544,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
+		(property "Footprint" "Inductor_SMD:L_0201_0603Metric"
 			(at 71.12 431.8 0)
 			(hide yes)
 			(effects
