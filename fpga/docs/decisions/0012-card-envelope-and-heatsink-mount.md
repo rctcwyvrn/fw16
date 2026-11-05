@@ -131,3 +131,9 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   and enters from the right; TX2 and RX2 leave that channel rightwards through the gaps in the 4.55 column (y ≈ 0.2 and
   ≈ −1.6); RX3 comes into the top of the 5.5 column; TX3 runs down the right side of the 5.5 column. Tools:
   `bay/tools/pcie_escape_plan.py` (placement + clearance check), `copper_render.py`.
+- **Lane pairs routed 2026-11-05 (Konnect, from `bay/tools/pcie_lane_routes.py`; user: "you do it through konnect"):**
+  all 8 pairs on L3, 0.15/0.10 in the corridor and 0.10/0.10 inside the U14/J1 courtyards; four GT_TX P legs necked to
+  0.09 mm between the row-4/5 dogbone vias, where a 0.10 track left 0.249 mm to the drill against the 0.25 rule. DRC:
+  no new errors, and all 24 lane nets are connected. **Not length-matched yet:** P runs 0.5–2.5 mm longer than N on
+  every pair, mostly from the P ball's extra dogbone and diagonal at U14. That is far over a Gen4 intra-pair budget of
+  about 0.13 mm.

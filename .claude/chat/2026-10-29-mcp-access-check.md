@@ -353,3 +353,9 @@
 **Did:**
 - Konnect: TX1/TX3 drops, TX1 J1 vias, C77–C84 flipped to B.Cu (rot 180) with hop vias + B.Cu stubs; DRC (CLI refill) unchanged at 25 known errors. IPC refill keeps returning AS_BUSY.
 - Lane map recorded in 0012; routing handed to the user.
+
+## 2026-11-05 lane pairs routed via Konnect
+**User:** nevermind, you do it through konnect
+**Did:**
+- `fpga/bay/tools/pcie_lane_routes.py` (centerline + offsets, clearance check) → ~250 route_trace calls on In2.Cu; 4 P legs narrowed to 0.09 for a 0.249 hole-clearance miss. DRC back to the 25 known errors; all 24 lane nets connected.
+- Intra-pair skew 0.5–2.5 mm (P longer, from the U14 escape) is over the Gen4 budget; length-tuning proposed as next step. 0012 note added.
