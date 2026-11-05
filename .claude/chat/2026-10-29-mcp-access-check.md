@@ -317,3 +317,8 @@
 **Did:**
 - Konnect: netclass `PCIe` (0.10 track, 0.10 clearance, 0.45/0.2 via) with patterns PEX_TX*/PEX_RX*/PEX_REFCLK*/GT_TX*/GT_REFCLK* (30 nets matched); `.kicad_pro` pulled.
 - Stackup recorded in 0012; Konnect's stackup tool is read-only, so the physical stackup, layer names/types, diff-pair widths and custom rules are a Board Setup step for the user.
+
+## 2026-11-05 custom-rule syntax fix
+**User:** (pasted Custom Rules errors: missing units on 0.09/0.15/0.10/0.3; "Unknown parent of function parameters")
+**Did:**
+- Gave corrected rules (mm units, `A.isCoupledDiffPair()`); lesson `kicad-custom-rules-need-units-and-object-prefix`.
