@@ -36,3 +36,39 @@ def segments():
     for m in re.finditer(r'\(segment\s*\(start ([-\d.]+) ([-\d.]+)\)\s*\(end ([-\d.]+) ([-\d.]+)\)\s*\(width ([\d.]+)\)\s*\(layer "([^"]+)"\).*?\(net (?:\d+ )?"?([^")]*)"?\)\s*(?:\(uuid "([^"]+)"\))?',b,re.S):
         out.append(dict(x1=float(m.group(1)),y1=float(m.group(2)),x2=float(m.group(3)),y2=float(m.group(4)),w=float(m.group(5)),layer=m.group(6),net=m.group(7),uuid=m.group(8)))
     return out
+
+def outline(arc_steps=12):
+    """Every closed Edge.Cuts loop as a list of (x, y): lines and three-point arcs chained end to end (0.01 mm)."""
+    import math
+    segs = []
+    blocks = [blk for blk in re.split(r'\n\t(?=\(gr_)', b) if blk.startswith('(gr_') and '(layer "Edge.Cuts")' in blk.split('\n\t(')[0] + blk[:400]]
+    for blk in blocks:
+        m = re.match(r'\(gr_(line|arc)\s*\(start ([-\d.]+) ([-\d.]+)\)\s*(?:\(mid ([-\d.]+) ([-\d.]+)\)\s*)?\(end ([-\d.]+) ([-\d.]+)\)', blk)
+        if not m or '(layer "Edge.Cuts")' not in blk[:400]: continue
+        s = (float(m.group(2)), float(m.group(3))); e = (float(m.group(6)), float(m.group(7)))
+        if m.group(1) == 'line':
+            segs.append([s, e]); continue
+        mid = (float(m.group(4)), float(m.group(5)))
+        (ax, ay), (bx, by), (cx, cy) = s, mid, e
+        d = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by))
+        ux = ((ax*ax+ay*ay)*(by-cy)+(bx*bx+by*by)*(cy-ay)+(cx*cx+cy*cy)*(ay-by))/d
+        uy = ((ax*ax+ay*ay)*(cx-bx)+(bx*bx+by*by)*(ax-cx)+(cx*cx+cy*cy)*(bx-ax))/d
+        a0, am, a1 = (math.atan2(p[1]-uy, p[0]-ux) for p in (s, mid, e))
+        sw = (a1 - a0) % (2*math.pi)
+        if (am - a0) % (2*math.pi) > sw: sw -= 2*math.pi
+        r = math.hypot(ax-ux, ay-uy)
+        pts = [(ux + r*math.cos(a0 + sw*i/arc_steps), uy + r*math.sin(a0 + sw*i/arc_steps)) for i in range(arc_steps+1)]
+        segs.append([s] + pts[1:-1] + [e])   # exact endpoints, so chaining never meets rounding noise
+    key = lambda p: (round(p[0], 3), round(p[1], 3))
+    loops = []
+    while segs:
+        loop = segs.pop(0)
+        while key(loop[0]) != key(loop[-1]):
+            for i, sg in enumerate(segs):
+                if key(sg[0]) == key(loop[-1]): loop += sg[1:]; break
+                if key(sg[-1]) == key(loop[-1]): loop += sg[::-1][1:]; break
+            else:
+                raise SystemExit('Edge.Cuts has an open chain')
+            segs.pop(i)
+        loops.append(loop)
+    return loops   # outer board loop first? no: callers pick by area

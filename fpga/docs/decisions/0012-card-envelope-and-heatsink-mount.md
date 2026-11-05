@@ -153,3 +153,14 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   y −33.66 east of x 4.9 is GT_REFCLK0's. The pair takes the same channel on B.Cu, which costs one 0.3 mm strip of
   B.Cu under the BGA (x 3–14.5) for decoupling caps. It is matched end to end: P has 3.73 mm of bumps on B.Cu,
   because there is no room on the short F.Cu run from Y2.
+- **Placement pass 2026-11-05** (`bay/tools/card_place.py`, zones approved by the user): 138 parts.
+  - Power input and 5V0_MAIN (eFuse, INA237 + 10 mΩ shunt, LMR33630 + XAL5030) sit left of J1's VSYS pins at
+    x −40…−19, y −27…−4.
+  - The VCCINT buck (TPS566238 + XAL4020 + 4 × 22 µF) is left of U14 outside the heatsink envelope (x −35…−20,
+    y −39…−26).
+  - The 1V8/1V6 bucks, MGT LDOs and aux LDOs are right of J1 and U14 (x 21…42, y −29…−5).
+  - The config flash is at (39, −51.5) with its pull-ups at x 23…30, y −51/−53. Tag-Connect J4 is at (47.5, −20),
+    fan connectors J2/J3 at the right edge (x 50, y −49/−35), the EEPROM on the left tab, and 23 test points on B.Cu
+    at x −60…−45, y −23…−14.
+  - The planner checks every courtyard against the outline (0.3 mm inset), the heatsink envelope, the rear-strip
+    height rule and every other courtyard. DRC: no new errors.

@@ -372,3 +372,9 @@
 **Did:**
 - Bench clock (Y2 → C89/C90 → GT_REFCLK1) routed via `fpga/bay/tools/bench_clk_route.py`: caps rotated 270, F.Cu at Y2, B.Cu under the BGA (L3 channel is GT_REFCLK0's), matched end to end. DRC (CLI refill) unchanged.
 - Courtyard overlaps cleared: C72–C74 to y −24.9, C48/C60 to −45.7, C49/C63 to −36.3, R48 rotated 0 at (15.6, −33.45), Y1 to (24.8, −37.8). DRC errors 25 → 15 (nut footprints and mask apertures only).
+
+## 2026-11-05 placement pass
+**Asked:** "Where should the 150 unplaced parts go? …" — Zones as proposed (Recommended) / Power all on the right / Draft a render first. **Chose:** Zones as proposed. "The 0402 decoupling caps that go under the BGA … same pass?" — Yes, same pass (Recommended) / Later. **Chose:** Yes.
+**Did:**
+- `fpga/bay/tools/card_place.py` (+ `board_copper.outline()`) planned 138 parts with courtyard/zone checks; applied via Konnect (23 flips, 37 rotations, 138 moves). DRC: only the 15 footprint-intrinsic errors.
+- Held the BGA-underside 0402s: at 1.0 mm pitch an 0402's pads land on the dogbone vias (needs filled via-in-pad or 0201 parts) — asked.
