@@ -341,3 +341,9 @@
 **Did:**
 - Found J1 columns are back-to-back pairs (2.94|3.81, 6.25|7.11) and the 1.74 mm gap is shared by col 3.81's exits and col 6.25's entries; col B lane order needs one crossing on L3. Lesson `check-connector-pad-access-before-layer-plan`.
 - Rendered the via-column plan (x 1.85 / 4.55 / 5.5) and sent it; asked about the revised plan and who drives the pair routing.
+
+## 2026-11-05 J1/U14 escape vias placed
+**Asked:** "Revised J1 plan: … Accept it?" — Accept (Recommended) / Lanes 2/3 on B.Cu. **Chose:** Accept. "Who drives the pair routing once the vias and caps are placed?" — Me, through Konnect / You, in KiCad's router. **Answer:** "does freerouting work?"
+**Did:**
+- Answered: Freerouting 2.5 has no diff-pair support, so not for the lanes. Konnect: 38 vias + 40 stubs (J1 via columns x 1.85/4.55/5.5 incl. GND; GT_TX0–3 dogbones; TX0/TX2 drops). DRC: no new errors; new signal vias dangle until L3 routing.
+- Tools `fpga/bay/tools/{board_copper,copper_render,pcie_escape_plan}.py`. Held TX1/TX3 and the caps: found TX1 on L1 lands with P/N swapped, so proposing all TX lanes on L3.
