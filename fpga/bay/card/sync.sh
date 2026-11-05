@@ -15,7 +15,7 @@ WIN="${FW16_CARD_WIN:-/mnt/c/Users/17786/fw16-card}"
 REPO="$(cd "$(dirname "$0")" && pwd)"
 # Project truth only: .kicad_prl is per-user UI state; locks, backups and .history are KiCad's own.
 files() {
-  (cd "$1" && ls *.kicad_sch *.kicad_pro *.kicad_pcb sym-lib-table fp-lib-table \
+  (cd "$1" && ls *.kicad_sch *.kicad_pro *.kicad_pcb *.kicad_dru sym-lib-table fp-lib-table \
      lib/*.kicad_sym lib/*.pretty/*.kicad_mod 2>/dev/null)
 }
 

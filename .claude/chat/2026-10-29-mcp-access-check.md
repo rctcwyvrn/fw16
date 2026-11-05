@@ -322,3 +322,9 @@
 **User:** (pasted Custom Rules errors: missing units on 0.09/0.15/0.10/0.3; "Unknown parent of function parameters")
 **Did:**
 - Gave corrected rules (mm units, `A.isCoupledDiffPair()`); lesson `kicad-custom-rules-need-units-and-object-prefix`.
+
+## 2026-11-05 card stackup verified
+**User:** everything should be done
+**Did:**
+- Konnect read-back: thicknesses, impedance-controlled and layer types match; εr still KiCad's 4.5 on every dielectric and the layer names unset; netclass DP 0.10/0.10 and `.kicad_dru` rules saved.
+- DRC: no clearance or PCIe findings; 25 errors are the known placement/nut items, plus unconnected (no planes yet). `sync.sh` now carries `*.kicad_dru`; board, pro, dru committed.
