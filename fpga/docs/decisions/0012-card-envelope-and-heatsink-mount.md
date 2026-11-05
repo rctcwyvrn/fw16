@@ -142,3 +142,9 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   hop. The added length is square bumps on the shorter leg in the corridor near U14 or near the cap, bumping away
   from the partner with 0.3 mm to other nets. GT_TX0_N and GT_TX2_N had no straight L3 run long enough, so they take
   the length as a loop on the B.Cu stub into their cap (C78, C82). DRC unchanged.
+- **PEX_REFCLK routed 2026-11-05** (`bay/tools/pcie_refclk_route.py`, 0.10/0.10, ~100 ohm HCSL): U14 V6/V7 dogbones,
+  then L3 east along the via-free channel between via rows y −33.161 and −34.161 (0.09 mm there for drill clearance),
+  then south outside the BGA at x 13.6/13.8. A via hop goes up to C85/C86 on F.Cu. On the chip side P passes under
+  C86's via on L3 to reach the west cap, which keeps P as the upper pad at J1. From the caps the pair returns to L3 and
+  J1 column 12.85 through stub vias at x 12.0, with GND vias for S49/S52. Both halves are length-matched (bumps). The
+  bench clock (GT_REFCLK1 ← C89/C90 ← Y2) is still unrouted.

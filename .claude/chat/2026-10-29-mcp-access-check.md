@@ -365,3 +365,4 @@
 **Did:**
 - `fpga/bay/tools/pcie_length_tune.py` planned bumps for 10 sections plus 2 B.Cu stub loops; applied via Konnect (12 deletes, 108 segments). Every section's P−N is now ≤0.001 mm; DRC unchanged (25 known errors).
 - Next: PEX_REFCLK routing.
+- PEX_REFCLK routed via `fpga/bay/tools/pcie_refclk_route.py` (10 vias, ~50 segments), both halves matched; DRC unchanged. GT_REFCLK1 bench clock left for later.
