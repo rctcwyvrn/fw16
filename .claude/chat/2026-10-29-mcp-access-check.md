@@ -334,3 +334,10 @@
 **Did:**
 - Stackup read-back 0 findings (εr, layer names). Konnect: solid GND zones L2_GND/L4_GND/L7_GND (In1/In3/In6, 0.2 clearance, solid); refilled + saved via DRC sync: dangling vias 199→115, no new errors.
 - Found the AC-cap row (C77–C86 at y −12, x 0.4–13.4, ~0.7 mm gaps) blocks the L1 PEX_TX corridor; asked how to resolve before routing.
+
+## 2026-11-05 J1 escape re-plan
+**Asked:** "The row of PCIe AC caps … How should I clear it?" — options: Move caps near J1 (Recommended) / Detour L1 around caps / All lanes on L3. **Chose:** Move caps near J1.
+**Asked:** "The plan you approved can't be routed, and that's my mistake. …" — options: Vias beside J1, L3 (Recommended) / Mixed: L1 where possible / L1 fan-out in the gap. **Chose:** Vias beside J1, L3.
+**Did:**
+- Found J1 columns are back-to-back pairs (2.94|3.81, 6.25|7.11) and the 1.74 mm gap is shared by col 3.81's exits and col 6.25's entries; col B lane order needs one crossing on L3. Lesson `check-connector-pad-access-before-layer-plan`.
+- Rendered the via-column plan (x 1.85 / 4.55 / 5.5) and sent it; asked about the revised plan and who drives the pair routing.
