@@ -148,3 +148,8 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   C86's via on L3 to reach the west cap, which keeps P as the upper pad at J1. From the caps the pair returns to L3 and
   J1 column 12.85 through stub vias at x 12.0, with GND vias for S49/S52. Both halves are length-matched (bumps). The
   bench clock (GT_REFCLK1 ← C89/C90 ← Y2) is still unrouted.
+- **Bench clock routed 2026-11-05** (`bay/tools/bench_clk_route.py`): Y2 → C89/C90 (rotated 270 so their oscillator
+  pads face Y2) on F.Cu, then vias, then **B.Cu** to U14 T6/T7 (south-east dogbones). On L3 the via-free channel at
+  y −33.66 east of x 4.9 is GT_REFCLK0's. The pair takes the same channel on B.Cu, which costs one 0.3 mm strip of
+  B.Cu under the BGA (x 3–14.5) for decoupling caps. It is matched end to end: P has 3.73 mm of bumps on B.Cu,
+  because there is no room on the short F.Cu run from Y2.
