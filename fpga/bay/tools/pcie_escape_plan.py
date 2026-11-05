@@ -1,5 +1,6 @@
-"""PCIe escape placement (approved 2026-11-05): J1 via columns + L1 stubs, U14 GT_TX dogbones, TX0/TX2 drops.
-Writes ops.json and checks clearances against existing copper (shapely)."""
+"""PCIe escape placement (approved 2026-11-05). Stage 1: J1 via columns + L1 stubs, U14 GT_TX dogbones, TX0/TX2 drops.
+Stage 2 (all TX lanes on L3): TX1/TX3 drops, TX1 J1 vias, AC-cap hop vias + B.Cu stubs (caps C77-C84 on B.Cu, GT pad
+to the right). usage: pcie_escape_plan.py OUT.json [2]. Writes the chosen stage's ops and checks clearances against existing copper (shapely)."""
 import json, sys, board_copper as g
 from shapely.geometry import Point, LineString, box
 VIA=0.45; DR=0.2
@@ -25,6 +26,21 @@ via(0.5,-27.7,'PEX_TX0_N'); seg([(0.5,-28.55),(0.5,-27.7)],'PEX_TX0_N')
 via(0.0,-27.0,'PEX_TX0_P'); seg([(0.5,-29.55),(0.0,-29.05),(0.0,-27.0)],'PEX_TX0_P')
 via(4.5,-27.7,'PEX_TX2_N'); seg([(4.5,-28.55),(4.5,-27.7)],'PEX_TX2_N')
 via(5.0,-27.0,'PEX_TX2_P'); seg([(4.5,-29.55),(5.0,-29.05),(5.0,-27.0)],'PEX_TX2_P')
+STAGE2 = len(sys.argv) > 2 and sys.argv[2] == '2'
+if STAGE2:
+    vias.clear(); segs.clear()
+    for x, n in [(2.5, 'PEX_TX1'), (6.5, 'PEX_TX3')]:
+        via(x, -27.7, n + '_N'); seg([(x, -28.55), (x, -27.7)], n + '_N')
+        via(x + 0.5, -27.0, n + '_P'); seg([(x, -29.55), (x + 0.5, -29.05), (x + 0.5, -27.0)], n + '_P')
+    for y, n in [(2.27, 'PEX_TX1_N'), (2.87, 'PEX_TX1_P')]:
+        via(1.85, y, n); seg([(1.85, y), (2.945, y)], n)
+    # cap hops: (lane, cap centre x, N row y, GT via x, PEX via x); pads at xc +/- 0.48, P row = N row + 1
+    for i, xc, yn, xg, xp in [(0, -2.9, -23.0, -1.8, -4.0), (1, -0.3, -19.5, 1.4, -2.0),
+                              (2, 5.1, -23.0, 6.2, 4.0), (3, 7.8, -19.5, 9.6, 6.0)]:
+        for pol, y in [('N', yn), ('P', yn + 1.0)]:
+            gt, pex = f'/FPGA/GT_TX{i}_{pol}', f'PEX_RX{i}_{pol}'
+            via(xg, y, gt); seg([(xg, y), (xc + 0.48, y)], gt, 0.1, 'B.Cu')
+            via(xp, y, pex); seg([(xp, y), (xc - 0.48, y)], pex, 0.1, 'B.Cu')
 json.dump(dict(vias=vias,segments=segs),open(sys.argv[1] if len(sys.argv)>1 else 'ops.json','w'),indent=0)
 
 # clearance check: new items vs existing copper and vs each other (different nets)

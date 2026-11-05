@@ -347,3 +347,9 @@
 **Did:**
 - Answered: Freerouting 2.5 has no diff-pair support, so not for the lanes. Konnect: 38 vias + 40 stubs (J1 via columns x 1.85/4.55/5.5 incl. GND; GT_TX0–3 dogbones; TX0/TX2 drops). DRC: no new errors; new signal vias dangle until L3 routing.
 - Tools `fpga/bay/tools/{board_copper,copper_render,pcie_escape_plan}.py`. Held TX1/TX3 and the caps: found TX1 on L1 lands with P/N swapped, so proposing all TX lanes on L3.
+
+## 2026-11-05 escape stage 2
+**Asked:** "TX1 can't stay on L1 … Should TX1 and TX3 drop to L3 at U14 like TX0 and TX2 (4 more vias), so every lane runs on L3 and the RX cap hops on B.Cu handle the crossings?" — All TX on L3 (Recommended) / Keep TX1 on L1, swap P/N. **Chose:** All TX on L3. "Who routes the pairs on L3 …" — Me, through Konnect / You, in KiCad's router. **Chose:** You, in KiCad's router.
+**Did:**
+- Konnect: TX1/TX3 drops, TX1 J1 vias, C77–C84 flipped to B.Cu (rot 180) with hop vias + B.Cu stubs; DRC (CLI refill) unchanged at 25 known errors. IPC refill keeps returning AS_BUSY.
+- Lane map recorded in 0012; routing handed to the user.

@@ -119,3 +119,15 @@ The export is `bay/cad/card-envelope.step`, in component coordinates: X and Z ar
   `PCIe` (0.10 track, 0.10 clearance, 0.45/0.2 via) holds the 30 lane and refclk nets by pattern. Consequences: only L3
   is a full routing layer; VCCINT's feed from its buck crosses 0.5 oz copper, so it needs a wide neck and many vias;
   spin 2's DDR4 needs 10 layers or a different split.
+- **PCIe escape 2026-11-05 (user: vias beside J1, every lane on L3; the user routes the pairs with KiCad's diff-pair
+  router).** J1's lane columns are back-to-back pairs (2.94|3.81, 6.25|7.11) with 0.17–0.2 mm pad gaps, so each column is
+  reached from one side only. Via columns: x 1.85 (left lane column, entered from the left; RX1_N at 1.6 for the
+  alignment hole), x 4.55 (the 3.81 column's GND, DP_A_AUX, DP_A_AUX# and GPIO3_EC) and x 5.5 (right lane column), each
+  with an L1 stub. At U14: GT_TX0–3 dogbones at ball + (0.389, 0.389), PEX_TX0–3 dropped to L3 at (x, −27.7) N and
+  (x+0.5, −27.0) P; TX0's P leaves its ball to the left so the pair arrives right way round. AC caps C77–C84 on B.Cu
+  (GT pad to the right) with via hops: lanes 0/2 at y −23/−22, lanes 1/3 at y −19.5/−18.5. The lane-1 and lane-3 hops
+  carry RX1 over TX1 and RX3 over TX3. Final L3 order left to right: TX0, RX0, RX1, TX1, TX2, RX2, RX3, TX3. Entries:
+  TX0, RX0 and RX1 come into the 1.85 column from the left; TX1 runs down the channel between the 1.85 and 4.55 columns
+  and enters from the right; TX2 and RX2 leave that channel rightwards through the gaps in the 4.55 column (y ≈ 0.2 and
+  ≈ −1.6); RX3 comes into the top of the 5.5 column; TX3 runs down the right side of the 5.5 column. Tools:
+  `bay/tools/pcie_escape_plan.py` (placement + clearance check), `copper_render.py`.
