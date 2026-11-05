@@ -371,3 +371,4 @@
 **User:** continue
 **Did:**
 - Bench clock (Y2 → C89/C90 → GT_REFCLK1) routed via `fpga/bay/tools/bench_clk_route.py`: caps rotated 270, F.Cu at Y2, B.Cu under the BGA (L3 channel is GT_REFCLK0's), matched end to end. DRC (CLI refill) unchanged.
+- Courtyard overlaps cleared: C72–C74 to y −24.9, C48/C60 to −45.7, C49/C63 to −36.3, R48 rotated 0 at (15.6, −33.45), Y1 to (24.8, −37.8). DRC errors 25 → 15 (nut footprints and mask apertures only).
