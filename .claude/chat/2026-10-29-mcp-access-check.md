@@ -328,3 +328,9 @@
 **Did:**
 - Konnect read-back: thicknesses, impedance-controlled and layer types match; εr still KiCad's 4.5 on every dielectric and the layer names unset; netclass DP 0.10/0.10 and `.kicad_dru` rules saved.
 - DRC: no clearance or PCIe findings; 25 errors are the known placement/nut items, plus unconnected (no planes yet). `sync.sh` now carries `*.kicad_dru`; board, pro, dru committed.
+
+## 2026-11-05 GND planes
+**User:** done
+**Did:**
+- Stackup read-back 0 findings (εr, layer names). Konnect: solid GND zones L2_GND/L4_GND/L7_GND (In1/In3/In6, 0.2 clearance, solid); refilled + saved via DRC sync: dangling vias 199→115, no new errors.
+- Found the AC-cap row (C77–C86 at y −12, x 0.4–13.4, ~0.7 mm gaps) blocks the L1 PEX_TX corridor; asked how to resolve before routing.
