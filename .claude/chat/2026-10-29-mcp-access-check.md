@@ -396,3 +396,9 @@
 **Did:**
 - Planner `fpga/bay/tools/power_plane_plan.py`: 123 vias with stubs, Voronoi split inside the BGA, corridors outside. The +1V8 balls hem in the VCCINT core on L5, so I forced a west neck (about 5.5 mV at 1.92 A) and added 2 B.Cu jumpers for the cut-off +1V8 balls. Also added an A7 MGTAVTT dogbone.
 - A scratch-copy kicad-cli DRC with refill shows the same 15 errors, every plane filled in one piece, and only low-speed ties still open on the power nets. Applying through Konnect is blocked because Konnect has disconnected from the session.
+
+## 2026-11-06 power planes applied
+**User:** apply
+**Did:**
+- Applied 123 vias, 129 traces and 8 zones through Konnect. Five zones first hit AS_BUSY and went in on retry, one at a time.
+- DRC: the same 15 errors, 397 unconnected, matching the scratch run. Pulled and committed the PCB with a 0012 note.

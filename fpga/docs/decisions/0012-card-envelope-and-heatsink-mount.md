@@ -172,3 +172,17 @@ midpoints. Each pad joins an adjacent same-net dogbone via with a 0.1 mm B.Cu st
 stubs run 3.2 mm to a +1V8 via and 2.1 mm to the only VCCADC via. Every pad and stub clears other-net vias by
 0.1 mm copper and 0.25 mm drill, checked by `bay/tools/bga_caps_place.py`. FB1's value BLM03AX241SN1 still needs
 confirming as an orderable part.
+
+**Power planes 2026-11-06 (user: rails split across L5/L6, GND fills the rest).** L5 In4.Cu has three zones:
+VCCINT (priority 1) covers the left feed under U7/L2 and the bulk caps, plus the BGA core; MGTAVCC (2) runs from the BGA
+front row east to U12, with a branch to C72; +1V8 (3) covers the BGA south half, the east cap field and a corridor north
+to U8. L6 In5.Cu has two: MGTAVTT (1) runs from the BGA rows near y −33 east to U13/C44/C45, with a branch to C73;
++5V0_MAIN (2) covers the left regulator cluster, a band across the front and the right cluster. Each layer also has a
+priority-0 GND zone. Power zones use 0.1 mm clearance, so the 1 mm BGA pitch keeps 0.35 mm webs between antipads; the
+GND zones use 0.2 mm, matching L2/L4/L7. The +1V8 balls surround the VCCINT core on L5, so VCCINT gets a forced west neck
+(y −41.5…−37.7: 3.65 mm of effective copper, about 2.9 mΩ, 5.5 mV at 1.92 A). Two B.Cu jumpers (x −8.389, −5.389)
+reconnect the two +1V8 balls the neck cuts off. The alternative of moving +1V8 to L6 was not taken. There are 123 new
+vias with 0.25 mm F.Cu stubs at the regulators and bulk caps, one GND via per cap, and an A7 MGTAVTT dogbone (the
+11-01 fanout left the outer ring for surface escape). Planner: `bay/tools/power_plane_plan.py` (Voronoi split inside the
+BGA, corridors outside, connectivity check after antipads). DRC: the same 15 footprint-intrinsic errors; the open power
+links that remain are low-speed ties for the routing step. Refill zones (B) in KiCad before generating Gerbers.
