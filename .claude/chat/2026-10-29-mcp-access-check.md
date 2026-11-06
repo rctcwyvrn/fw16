@@ -390,3 +390,9 @@
 **Did:**
 - BLM03AX241SN1 confirmed by the user. The Windows copy has no unsaved-to-disk changes: no LCSC fields, schematic last written 11-05.
 - Konnect has disconnected from this session. Mapped the power nets to their U14 balls and regulators to plan the L5/L6 planes; asking the user to approve the layer assignment.
+
+## 2026-11-06 power planes planned (apply waits on Konnect)
+**Asked:** "Which rails go on L5 and L6? …" → "Split across L5/L6 (Recommended)"; "What fills the parts of L5 and L6 that no power plane uses?" → "GND fill (Recommended)"
+**Did:**
+- Planner `fpga/bay/tools/power_plane_plan.py`: 123 vias with stubs, Voronoi split inside the BGA, corridors outside. The +1V8 balls hem in the VCCINT core on L5, so I forced a west neck (about 5.5 mV at 1.92 A) and added 2 B.Cu jumpers for the cut-off +1V8 balls. Also added an A7 MGTAVTT dogbone.
+- A scratch-copy kicad-cli DRC with refill shows the same 15 errors, every plane filled in one piece, and only low-speed ties still open on the power nets. Applying through Konnect is blocked because Konnect has disconnected from the session.
