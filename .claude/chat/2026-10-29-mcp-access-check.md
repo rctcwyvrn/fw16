@@ -384,3 +384,9 @@
 **Did:**
 - Placed C52–C59, C75/C76, FB1, FB2 on B.Cu under U14, square to the grid; IPC refused 45° rotation. Added 24 short B.Cu stubs to the dogbone vias; planner `fpga/bay/tools/bga_caps_place.py`.
 - DRC is still the same 15 footprint-intrinsic errors. The remaining FB1 and C54 ratsnest waits on the L5/L6 power planes. Committed a6b00564 with a 0012 note and a lesson on IPC rotating only in 90° steps.
+
+## 2026-11-06 power-plane planning
+**User:** https://jlcpcb.com/parts/componentSearch?searchTxt=BLM03AX241SN1 confirmed and filled, continue
+**Did:**
+- BLM03AX241SN1 confirmed by the user. The Windows copy has no unsaved-to-disk changes: no LCSC fields, schematic last written 11-05.
+- Konnect has disconnected from this session. Mapped the power nets to their U14 balls and regulators to plan the L5/L6 planes; asking the user to approve the layer assignment.
